@@ -1,0 +1,584 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1871671422A76AFB001C6B41 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1871671322A76AFB001C6B41 /* AppDelegate.m */; };
+		1871671722A76AFB001C6B41 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1871671622A76AFB001C6B41 /* ViewController.m */; };
+		1871671A22A76AFB001C6B41 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1871671822A76AFB001C6B41 /* Main.storyboard */; };
+		1871671C22A76B03001C6B41 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1871671B22A76B03001C6B41 /* Assets.xcassets */; };
+		1871671F22A76B03001C6B41 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1871671D22A76B03001C6B41 /* LaunchScreen.storyboard */; };
+		1871672222A76B03001C6B41 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1871672122A76B03001C6B41 /* main.m */; };
+		1871672C22A76B03001C6B41 /* WMZDialogTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1871672B22A76B03001C6B41 /* WMZDialogTests.m */; };
+		1871673722A76B03001C6B41 /* WMZDialogUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1871673622A76B03001C6B41 /* WMZDialogUITests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1871672822A76B03001C6B41 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1871670722A76AFB001C6B41 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1871670E22A76AFB001C6B41;
+			remoteInfo = WMZDialog;
+		};
+		1871673322A76B03001C6B41 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1871670722A76AFB001C6B41 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1871670E22A76AFB001C6B41;
+			remoteInfo = WMZDialog;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1871670F22A76AFB001C6B41 /* WMZDialog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WMZDialog.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1871671222A76AFB001C6B41 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		1871671322A76AFB001C6B41 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		1871671522A76AFB001C6B41 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		1871671622A76AFB001C6B41 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		1871671922A76AFB001C6B41 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		1871671B22A76B03001C6B41 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1871671E22A76B03001C6B41 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		1871672022A76B03001C6B41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1871672122A76B03001C6B41 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		1871672722A76B03001C6B41 /* WMZDialogTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WMZDialogTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1871672B22A76B03001C6B41 /* WMZDialogTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMZDialogTests.m; sourceTree = "<group>"; };
+		1871672D22A76B03001C6B41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1871673222A76B03001C6B41 /* WMZDialogUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WMZDialogUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1871673622A76B03001C6B41 /* WMZDialogUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMZDialogUITests.m; sourceTree = "<group>"; };
+		1871673822A76B03001C6B41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1871670C22A76AFB001C6B41 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1871672422A76B03001C6B41 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1871672F22A76B03001C6B41 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1871670622A76AFB001C6B41 = {
+			isa = PBXGroup;
+			children = (
+				1871671122A76AFB001C6B41 /* WMZDialog */,
+				1871672A22A76B03001C6B41 /* WMZDialogTests */,
+				1871673522A76B03001C6B41 /* WMZDialogUITests */,
+				1871671022A76AFB001C6B41 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1871671022A76AFB001C6B41 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1871670F22A76AFB001C6B41 /* WMZDialog.app */,
+				1871672722A76B03001C6B41 /* WMZDialogTests.xctest */,
+				1871673222A76B03001C6B41 /* WMZDialogUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1871671122A76AFB001C6B41 /* WMZDialog */ = {
+			isa = PBXGroup;
+			children = (
+				1871671222A76AFB001C6B41 /* AppDelegate.h */,
+				1871671322A76AFB001C6B41 /* AppDelegate.m */,
+				1871671522A76AFB001C6B41 /* ViewController.h */,
+				1871671622A76AFB001C6B41 /* ViewController.m */,
+				1871671822A76AFB001C6B41 /* Main.storyboard */,
+				1871671B22A76B03001C6B41 /* Assets.xcassets */,
+				1871671D22A76B03001C6B41 /* LaunchScreen.storyboard */,
+				1871672022A76B03001C6B41 /* Info.plist */,
+				1871672122A76B03001C6B41 /* main.m */,
+			);
+			path = WMZDialog;
+			sourceTree = "<group>";
+		};
+		1871672A22A76B03001C6B41 /* WMZDialogTests */ = {
+			isa = PBXGroup;
+			children = (
+				1871672B22A76B03001C6B41 /* WMZDialogTests.m */,
+				1871672D22A76B03001C6B41 /* Info.plist */,
+			);
+			path = WMZDialogTests;
+			sourceTree = "<group>";
+		};
+		1871673522A76B03001C6B41 /* WMZDialogUITests */ = {
+			isa = PBXGroup;
+			children = (
+				1871673622A76B03001C6B41 /* WMZDialogUITests.m */,
+				1871673822A76B03001C6B41 /* Info.plist */,
+			);
+			path = WMZDialogUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1871670E22A76AFB001C6B41 /* WMZDialog */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1871673B22A76B03001C6B41 /* Build configuration list for PBXNativeTarget "WMZDialog" */;
+			buildPhases = (
+				1871670B22A76AFB001C6B41 /* Sources */,
+				1871670C22A76AFB001C6B41 /* Frameworks */,
+				1871670D22A76AFB001C6B41 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WMZDialog;
+			productName = WMZDialog;
+			productReference = 1871670F22A76AFB001C6B41 /* WMZDialog.app */;
+			productType = "com.apple.product-type.application";
+		};
+		1871672622A76B03001C6B41 /* WMZDialogTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1871673E22A76B03001C6B41 /* Build configuration list for PBXNativeTarget "WMZDialogTests" */;
+			buildPhases = (
+				1871672322A76B03001C6B41 /* Sources */,
+				1871672422A76B03001C6B41 /* Frameworks */,
+				1871672522A76B03001C6B41 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1871672922A76B03001C6B41 /* PBXTargetDependency */,
+			);
+			name = WMZDialogTests;
+			productName = WMZDialogTests;
+			productReference = 1871672722A76B03001C6B41 /* WMZDialogTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		1871673122A76B03001C6B41 /* WMZDialogUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1871674122A76B03001C6B41 /* Build configuration list for PBXNativeTarget "WMZDialogUITests" */;
+			buildPhases = (
+				1871672E22A76B03001C6B41 /* Sources */,
+				1871672F22A76B03001C6B41 /* Frameworks */,
+				1871673022A76B03001C6B41 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1871673422A76B03001C6B41 /* PBXTargetDependency */,
+			);
+			name = WMZDialogUITests;
+			productName = WMZDialogUITests;
+			productReference = 1871673222A76B03001C6B41 /* WMZDialogUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1871670722A76AFB001C6B41 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1000;
+				ORGANIZATIONNAME = wmz;
+				TargetAttributes = {
+					1871670E22A76AFB001C6B41 = {
+						CreatedOnToolsVersion = 10.0;
+					};
+					1871672622A76B03001C6B41 = {
+						CreatedOnToolsVersion = 10.0;
+						TestTargetID = 1871670E22A76AFB001C6B41;
+					};
+					1871673122A76B03001C6B41 = {
+						CreatedOnToolsVersion = 10.0;
+						TestTargetID = 1871670E22A76AFB001C6B41;
+					};
+				};
+			};
+			buildConfigurationList = 1871670A22A76AFB001C6B41 /* Build configuration list for PBXProject "WMZDialog" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 1871670622A76AFB001C6B41;
+			productRefGroup = 1871671022A76AFB001C6B41 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1871670E22A76AFB001C6B41 /* WMZDialog */,
+				1871672622A76B03001C6B41 /* WMZDialogTests */,
+				1871673122A76B03001C6B41 /* WMZDialogUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1871670D22A76AFB001C6B41 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1871671F22A76B03001C6B41 /* LaunchScreen.storyboard in Resources */,
+				1871671C22A76B03001C6B41 /* Assets.xcassets in Resources */,
+				1871671A22A76AFB001C6B41 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1871672522A76B03001C6B41 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1871673022A76B03001C6B41 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1871670B22A76AFB001C6B41 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1871671722A76AFB001C6B41 /* ViewController.m in Sources */,
+				1871672222A76B03001C6B41 /* main.m in Sources */,
+				1871671422A76AFB001C6B41 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1871672322A76B03001C6B41 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1871672C22A76B03001C6B41 /* WMZDialogTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1871672E22A76B03001C6B41 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1871673722A76B03001C6B41 /* WMZDialogUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1871672922A76B03001C6B41 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1871670E22A76AFB001C6B41 /* WMZDialog */;
+			targetProxy = 1871672822A76B03001C6B41 /* PBXContainerItemProxy */;
+		};
+		1871673422A76B03001C6B41 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1871670E22A76AFB001C6B41 /* WMZDialog */;
+			targetProxy = 1871673322A76B03001C6B41 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		1871671822A76AFB001C6B41 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1871671922A76AFB001C6B41 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		1871671D22A76B03001C6B41 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1871671E22A76B03001C6B41 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1871673922A76B03001C6B41 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		1871673A22A76B03001C6B41 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1871673C22A76B03001C6B41 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HR6T4LQD9T;
+				INFOPLIST_FILE = WMZDialog/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.WMZDialog;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1871673D22A76B03001C6B41 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HR6T4LQD9T;
+				INFOPLIST_FILE = WMZDialog/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.WMZDialog;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		1871673F22A76B03001C6B41 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HR6T4LQD9T;
+				INFOPLIST_FILE = WMZDialogTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.WMZDialogTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WMZDialog.app/WMZDialog";
+			};
+			name = Debug;
+		};
+		1871674022A76B03001C6B41 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HR6T4LQD9T;
+				INFOPLIST_FILE = WMZDialogTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.WMZDialogTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WMZDialog.app/WMZDialog";
+			};
+			name = Release;
+		};
+		1871674222A76B03001C6B41 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HR6T4LQD9T;
+				INFOPLIST_FILE = WMZDialogUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.WMZDialogUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = WMZDialog;
+			};
+			name = Debug;
+		};
+		1871674322A76B03001C6B41 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HR6T4LQD9T;
+				INFOPLIST_FILE = WMZDialogUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.WMZDialogUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = WMZDialog;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1871670A22A76AFB001C6B41 /* Build configuration list for PBXProject "WMZDialog" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1871673922A76B03001C6B41 /* Debug */,
+				1871673A22A76B03001C6B41 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1871673B22A76B03001C6B41 /* Build configuration list for PBXNativeTarget "WMZDialog" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1871673C22A76B03001C6B41 /* Debug */,
+				1871673D22A76B03001C6B41 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1871673E22A76B03001C6B41 /* Build configuration list for PBXNativeTarget "WMZDialogTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1871673F22A76B03001C6B41 /* Debug */,
+				1871674022A76B03001C6B41 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1871674122A76B03001C6B41 /* Build configuration list for PBXNativeTarget "WMZDialogUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1871674222A76B03001C6B41 /* Debug */,
+				1871674322A76B03001C6B41 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1871670722A76AFB001C6B41 /* Project object */;
+}
