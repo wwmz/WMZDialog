@@ -1,10 +1,10 @@
 功能样式最多的最齐全的的弹窗控件 
 控件全部采用链式编程，所有属性均可定制。
 * * *
-看下效果图
+##看下效果图
 ![dialog.gif](https://upload-images.jianshu.io/upload_images/9163368-94bf77325d6d6fdd.gif?imageMogr2/auto-orient/strip)
 
-调用枚举说明
+##调用枚举说明
 ```
 typedef enum : NSUInteger{
     默认弹窗
@@ -44,7 +44,7 @@ typedef enum : NSUInteger{
 }DialogType;
 ```
 
-使用说明
+##使用说明
 ```
 #import "WMZDialog.h"
 
@@ -52,13 +52,133 @@ typedef enum : NSUInteger{
 Dialog().wTypeSet(DialogTypeNornal).wStart();
 ```
 
-参数说明(详情使用看demo)
+##最全属性
+```
+    Dialog()
+    //自定义cell内容
+    .wMyCellSet(^UITableViewCell *(NSIndexPath *indexPath, UITableView *tableView, id model) {
+    })
+     //下拉无限级菜单选中事件
+    .wEventMenuClickSet( ^(id anyID, NSInteger section, NSInteger row) {
+        NSLog(@"菜单点击方法 当前选中值:%@ 当前选中列:%ld 当前选中行:%ld",anyID,section,row);
+    })
+    //关闭事件
+    .wEventCloseSet(^(id anyID, DialogType type) {
+        NSLog(@"关闭");
+    })
+    //点击确定事件
+    .wEventOKFinishSet(^(id anyID, DialogType type) {
+        NSLog(@"确定");
+    })
+    //点击取消事件
+    .wEventCancelFinishSet(^(id anyID, DialogType type) {
+        NSLog(@"取消");
+    })
+    //完成操作事件
+    .wEventFinishSet(^(id anyID,NSIndexPath *path, DialogType type) {
+        NSLog(@"%@",anyID);
+    })
+    //标题文本
+    .wTitleSet(@"提示")
+    //内容文本
+    .wMessageSet(@"内容")
+    //视图出现动画
+    .wStyleSet(UIModalTransitionStyleCrossDissolve)
+    //点击的视图的位置
+    .wTapViewSet(temp)
+    //数据
+    .wDataSet(data)
+    //类型
+    .wTypeSet(temp.tag)
+    //子数据
+    .wSonDataSet(@[@"农业银行",@"招商银行",@"建设银行",@"工商银行",@"中国银行",@"交通银行"])
+    //键盘类型
+    .wWirteKeyBoardTypeSet(UIKeyboardTypeDefault)
+    //宽度
+    .wWidthSet(Dialog_GetWNum(500))
+    //高度
+    .wHeightSet(Dialog_GetHNum(300))
+    //自动消失时间
+    .wDisappelSecondSet(1.5f)
+    //按钮的高度
+    .wMainBtnHeightSet(Dialog_GetHNum(60))
+    //当前控制器
+    .wParentVCSet(self)
+    //确定按钮文本
+    .wOKTitleSet(@"确定")
+    //取消按钮文本
+    .wCancelTitleSet(@"取消")
+    //确定按钮颜色
+    .wOKColorSet(DialogColor(0xFF9900))
+    //取消按钮颜色
+    .wCancelColorSet(DialogColor(0x666666))
+    //文本对齐方式
+    .wTextAlignmentSet(NSTextAlignmentCenter)
+    //主视图圆角
+    .wMainRadiusSet(15.0f)
+    //主视图背景颜色
+    .wMainBackColorSet(DialogColor(0xFFFFFF))
+    //线的颜色
+    .wLineColorSet(DialogColor(0x333333))
+    //主视图间的x轴间距
+    .wMainOffsetYSet(Dialog_GetHNum(20))
+    //主视图间的y轴间距
+    .wMainOffsetXSet(Dialog_GetWNum(15))
+    //线的透明度
+    .wLineAlphaSet(0.5f)
+    //标题的文本大小
+    .wTitleFontSet(14.0f)
+    //内容的文本大小
+    .wMessageFontSet(16.0f)
+    //确定按钮的文本大小
+    .wOKFontSet(16.0f)
+    //取消按钮的文本大小
+    .wCancelFontSet(16.0f)
+    //遮罩层的透明度
+    .wShadowAlphaSet(0.4f)
+    //遮罩层的颜色
+    .wShadowColorSet(DialogColor(0x333333))
+    //主视图距离弹出键盘的距离
+    .wKeyBoardMarginYSet(Dialog_GetHNum(80))
+    //支付密码的长度
+    .wPayNumSet(6)
+    //默认支付选择方式
+    .wDefaultSelectPayStrSet(@"农业银行")
+    //遮罩层能否点击
+    .wShadowCanTapSet(YES)
+    //遮罩层是否显示
+    .wShadowShowSet(YES)
+    //编辑框最大文字数量
+    .wWirteTextMaxNumSet(-1)
+    //编辑框最大行数
+    .wWirteTextMaxLineSet(7)
+    //气泡角度位置
+    .wPercentAngleSet(0.5f)
+    //弹出视图的位置
+    .wPercentOrginXSet(1.0f)
+    //弹出视图的方向
+    .wDirectionSet(dir)
+    //显示图片的大小
+    .wImageSizeSet(temp.tag==DialogTypeAdvertisement?CGSizeMake(Dialog_GetWNum(500), Dialog_GetWNum(500)):CGSizeMake(Dialog_GetWNum(110), Dialog_GetWNum(110)))
+    //图片地址
+    .wImageNameSet(temp.tag==DialogTypeAdvertisement?@"advise":@"down_tyx")
+    //进度条闲置的颜色
+    .wProgressTintColorSet(DialogColor(0xFF9900))
+    //进度条运动时的颜色
+    .wTrackTintColorSet(DialogColor(0xF3F4F6))
+    //自定义弹窗时是否添加底部的确定取消按钮
+    .wAddBottomViewSet(YES)
+    //开始
+    .wStart();
+```
+
+##参数说明(详情使用看demo)
 
 ![82F3FF48-BB91-4D14-8AF4-4C9263CB63B4.png](https://upload-images.jianshu.io/upload_images/9163368-06c6a744aa470486.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ![EC118098-3AD1-49ED-9602-FC273590ECB0.png](https://upload-images.jianshu.io/upload_images/9163368-491a16d720c90cfb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-说明一下其中的几个type的思路
+##说明一下其中的几个type的思路
 （1）DialogTypeMenusSelect（无限级列表）
 ```
 传入的数据格式
