@@ -7,6 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18153DAA22D432850031EE71 /* MenusSelectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18153DA922D432850031EE71 /* MenusSelectVC.m */; };
+		181DE8AE22D2DE0B005DAE59 /* WMZDialog+Advertisement.m in Sources */ = {isa = PBXBuildFile; fileRef = 181DE8AD22D2DE0B005DAE59 /* WMZDialog+Advertisement.m */; };
+		181DE8B122D323E4005DAE59 /* WMZDialog+BuyCar.m in Sources */ = {isa = PBXBuildFile; fileRef = 181DE8B022D323E4005DAE59 /* WMZDialog+BuyCar.m */; };
+		181DE8D722D326A7005DAE59 /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 181DE8B422D326A7005DAE59 /* MASCompositeConstraint.m */; };
+		181DE8D822D326A7005DAE59 /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 181DE8B722D326A7005DAE59 /* MASConstraint.m */; };
+		181DE8D922D326A7005DAE59 /* MASConstraintMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 181DE8B922D326A7005DAE59 /* MASConstraintMaker.m */; };
+		181DE8DA22D326A7005DAE59 /* MASLayoutConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 181DE8BB22D326A7005DAE59 /* MASLayoutConstraint.m */; };
+		181DE8DB22D326A7005DAE59 /* MASViewAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 181DE8BF22D326A7005DAE59 /* MASViewAttribute.m */; };
+		181DE8DC22D326A7005DAE59 /* MASViewConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 181DE8C122D326A7005DAE59 /* MASViewConstraint.m */; };
+		181DE8DD22D326A7005DAE59 /* NSArray+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 181DE8C322D326A7005DAE59 /* NSArray+MASAdditions.m */; };
+		181DE8DE22D326A7005DAE59 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 181DE8C622D326A7005DAE59 /* NSLayoutConstraint+MASDebugAdditions.m */; };
+		181DE8DF22D326A7005DAE59 /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 181DE8C822D326A7005DAE59 /* View+MASAdditions.m */; };
+		181DE8E022D326A7005DAE59 /* ViewController+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 181DE8CB22D326A7005DAE59 /* ViewController+MASAdditions.m */; };
+		181DE8E122D326A7005DAE59 /* WMZTagBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 181DE8CE22D326A7005DAE59 /* WMZTagBtn.m */; };
+		181DE8E222D326A7005DAE59 /* WMZTagCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 181DE8D022D326A7005DAE59 /* WMZTagCell.m */; };
+		181DE8E322D326A7005DAE59 /* WMZTagParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 181DE8D222D326A7005DAE59 /* WMZTagParam.m */; };
+		181DE8E422D326A7005DAE59 /* WMZTags.m in Sources */ = {isa = PBXBuildFile; fileRef = 181DE8D422D326A7005DAE59 /* WMZTags.m */; };
+		181DE8E522D326A7005DAE59 /* WMZTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 181DE8D622D326A7005DAE59 /* WMZTool.m */; };
+		181DE8E822D327D9005DAE59 /* BuyCarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 181DE8E722D327D9005DAE59 /* BuyCarVC.m */; };
+		181DE8EB22D33096005DAE59 /* tagOneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 181DE8E922D33095005DAE59 /* tagOneCell.m */; };
+		181F17FF22C0668D00B422CD /* WMZDialog+time.m in Sources */ = {isa = PBXBuildFile; fileRef = 181F17FE22C0668D00B422CD /* WMZDialog+time.m */; };
+		181F180222C06F4300B422CD /* WMZDialog+PopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 181F180122C06F4300B422CD /* WMZDialog+PopView.m */; };
+		181F180522C1CC1200B422CD /* WMZDialog+Down.m in Sources */ = {isa = PBXBuildFile; fileRef = 181F180422C1CC1200B422CD /* WMZDialog+Down.m */; };
+		181F180822C5F8BF00B422CD /* WMZDialog+MenusSelect.m in Sources */ = {isa = PBXBuildFile; fileRef = 181F180722C5F8BF00B422CD /* WMZDialog+MenusSelect.m */; };
 		1871671422A76AFB001C6B41 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1871671322A76AFB001C6B41 /* AppDelegate.m */; };
 		1871671722A76AFB001C6B41 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1871671622A76AFB001C6B41 /* ViewController.m */; };
 		1871671A22A76AFB001C6B41 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1871671822A76AFB001C6B41 /* Main.storyboard */; };
@@ -15,6 +39,19 @@
 		1871672222A76B03001C6B41 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1871672122A76B03001C6B41 /* main.m */; };
 		1871672C22A76B03001C6B41 /* WMZDialogTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1871672B22A76B03001C6B41 /* WMZDialogTests.m */; };
 		1871673722A76B03001C6B41 /* WMZDialogUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1871673622A76B03001C6B41 /* WMZDialogUITests.m */; };
+		1871674722A76C12001C6B41 /* WMZDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 1871674622A76C12001C6B41 /* WMZDialog.m */; };
+		1871674E22A76F80001C6B41 /* WMZDialogTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1871674D22A76F80001C6B41 /* WMZDialogTool.m */; };
+		1871675422A76FDE001C6B41 /* WMZDialog+AutoDisappear.m in Sources */ = {isa = PBXBuildFile; fileRef = 1871675322A76FDE001C6B41 /* WMZDialog+AutoDisappear.m */; };
+		1871675B22A7AC4C001C6B41 /* WMZDialog+Normal.m in Sources */ = {isa = PBXBuildFile; fileRef = 1871675A22A7AC4C001C6B41 /* WMZDialog+Normal.m */; };
+		1871675E22A90EC8001C6B41 /* WMZDialog+System.m in Sources */ = {isa = PBXBuildFile; fileRef = 1871675D22A90EC8001C6B41 /* WMZDialog+System.m */; };
+		1871676422A90F5E001C6B41 /* WMZDialog+SystemSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 1871676322A90F5E001C6B41 /* WMZDialog+SystemSheet.m */; };
+		1871676722A919AD001C6B41 /* WMZDialog+Pay.m in Sources */ = {isa = PBXBuildFile; fileRef = 1871676622A919AD001C6B41 /* WMZDialog+Pay.m */; };
+		18C1E04722BCBE900043FF73 /* WMZDiaLogBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C1E04622BCBE900043FF73 /* WMZDiaLogBase.m */; };
+		18E0D3DB22BA2509005C94EB /* WMZDialog+Write.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E0D3DA22BA2509005C94EB /* WMZDialog+Write.m */; };
+		18E0D3DE22BB6C10005C94EB /* WMZDialog+Select.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E0D3DD22BB6C10005C94EB /* WMZDialog+Select.m */; };
+		18E0D3E122BB8567005C94EB /* WMZDialog+PickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E0D3E022BB8567005C94EB /* WMZDialog+PickView.m */; };
+		18E0D3E422BCABF7005C94EB /* WMZDialog+Sheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E0D3E322BCABF7005C94EB /* WMZDialog+Sheet.m */; };
+		18EE45E822AE2CE7008C93E6 /* WMZDialog+Share.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE45E722AE2CE7008C93E6 /* WMZDialog+Share.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +72,59 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		18153DA822D432850031EE71 /* MenusSelectVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MenusSelectVC.h; sourceTree = "<group>"; };
+		18153DA922D432850031EE71 /* MenusSelectVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MenusSelectVC.m; sourceTree = "<group>"; };
+		181DE8AC22D2DE0B005DAE59 /* WMZDialog+Advertisement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WMZDialog+Advertisement.h"; sourceTree = "<group>"; };
+		181DE8AD22D2DE0B005DAE59 /* WMZDialog+Advertisement.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WMZDialog+Advertisement.m"; sourceTree = "<group>"; };
+		181DE8AF22D323E4005DAE59 /* WMZDialog+BuyCar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WMZDialog+BuyCar.h"; sourceTree = "<group>"; };
+		181DE8B022D323E4005DAE59 /* WMZDialog+BuyCar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WMZDialog+BuyCar.m"; sourceTree = "<group>"; };
+		181DE8B322D326A7005DAE59 /* MASCompositeConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASCompositeConstraint.h; sourceTree = "<group>"; };
+		181DE8B422D326A7005DAE59 /* MASCompositeConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASCompositeConstraint.m; sourceTree = "<group>"; };
+		181DE8B522D326A7005DAE59 /* MASConstraint+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MASConstraint+Private.h"; sourceTree = "<group>"; };
+		181DE8B622D326A7005DAE59 /* MASConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASConstraint.h; sourceTree = "<group>"; };
+		181DE8B722D326A7005DAE59 /* MASConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASConstraint.m; sourceTree = "<group>"; };
+		181DE8B822D326A7005DAE59 /* MASConstraintMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASConstraintMaker.h; sourceTree = "<group>"; };
+		181DE8B922D326A7005DAE59 /* MASConstraintMaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASConstraintMaker.m; sourceTree = "<group>"; };
+		181DE8BA22D326A7005DAE59 /* MASLayoutConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASLayoutConstraint.h; sourceTree = "<group>"; };
+		181DE8BB22D326A7005DAE59 /* MASLayoutConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASLayoutConstraint.m; sourceTree = "<group>"; };
+		181DE8BC22D326A7005DAE59 /* Masonry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Masonry.h; sourceTree = "<group>"; };
+		181DE8BD22D326A7005DAE59 /* MASUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASUtilities.h; sourceTree = "<group>"; };
+		181DE8BE22D326A7005DAE59 /* MASViewAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASViewAttribute.h; sourceTree = "<group>"; };
+		181DE8BF22D326A7005DAE59 /* MASViewAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASViewAttribute.m; sourceTree = "<group>"; };
+		181DE8C022D326A7005DAE59 /* MASViewConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASViewConstraint.h; sourceTree = "<group>"; };
+		181DE8C122D326A7005DAE59 /* MASViewConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASViewConstraint.m; sourceTree = "<group>"; };
+		181DE8C222D326A7005DAE59 /* NSArray+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+MASAdditions.h"; sourceTree = "<group>"; };
+		181DE8C322D326A7005DAE59 /* NSArray+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+MASAdditions.m"; sourceTree = "<group>"; };
+		181DE8C422D326A7005DAE59 /* NSArray+MASShorthandAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+MASShorthandAdditions.h"; sourceTree = "<group>"; };
+		181DE8C522D326A7005DAE59 /* NSLayoutConstraint+MASDebugAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+MASDebugAdditions.h"; sourceTree = "<group>"; };
+		181DE8C622D326A7005DAE59 /* NSLayoutConstraint+MASDebugAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+MASDebugAdditions.m"; sourceTree = "<group>"; };
+		181DE8C722D326A7005DAE59 /* View+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "View+MASAdditions.h"; sourceTree = "<group>"; };
+		181DE8C822D326A7005DAE59 /* View+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "View+MASAdditions.m"; sourceTree = "<group>"; };
+		181DE8C922D326A7005DAE59 /* View+MASShorthandAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "View+MASShorthandAdditions.h"; sourceTree = "<group>"; };
+		181DE8CA22D326A7005DAE59 /* ViewController+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ViewController+MASAdditions.h"; sourceTree = "<group>"; };
+		181DE8CB22D326A7005DAE59 /* ViewController+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ViewController+MASAdditions.m"; sourceTree = "<group>"; };
+		181DE8CD22D326A7005DAE59 /* WMZTagBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMZTagBtn.h; sourceTree = "<group>"; };
+		181DE8CE22D326A7005DAE59 /* WMZTagBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMZTagBtn.m; sourceTree = "<group>"; };
+		181DE8CF22D326A7005DAE59 /* WMZTagCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMZTagCell.h; sourceTree = "<group>"; };
+		181DE8D022D326A7005DAE59 /* WMZTagCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMZTagCell.m; sourceTree = "<group>"; };
+		181DE8D122D326A7005DAE59 /* WMZTagParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMZTagParam.h; sourceTree = "<group>"; };
+		181DE8D222D326A7005DAE59 /* WMZTagParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMZTagParam.m; sourceTree = "<group>"; };
+		181DE8D322D326A7005DAE59 /* WMZTags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMZTags.h; sourceTree = "<group>"; };
+		181DE8D422D326A7005DAE59 /* WMZTags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMZTags.m; sourceTree = "<group>"; };
+		181DE8D522D326A7005DAE59 /* WMZTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMZTool.h; sourceTree = "<group>"; };
+		181DE8D622D326A7005DAE59 /* WMZTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMZTool.m; sourceTree = "<group>"; };
+		181DE8E622D327D9005DAE59 /* BuyCarVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BuyCarVC.h; sourceTree = "<group>"; };
+		181DE8E722D327D9005DAE59 /* BuyCarVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BuyCarVC.m; sourceTree = "<group>"; };
+		181DE8E922D33095005DAE59 /* tagOneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tagOneCell.m; sourceTree = "<group>"; };
+		181DE8EA22D33095005DAE59 /* tagOneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tagOneCell.h; sourceTree = "<group>"; };
+		181F17FD22C0668D00B422CD /* WMZDialog+time.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WMZDialog+time.h"; sourceTree = "<group>"; };
+		181F17FE22C0668D00B422CD /* WMZDialog+time.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WMZDialog+time.m"; sourceTree = "<group>"; };
+		181F180022C06F4300B422CD /* WMZDialog+PopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WMZDialog+PopView.h"; sourceTree = "<group>"; };
+		181F180122C06F4300B422CD /* WMZDialog+PopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WMZDialog+PopView.m"; sourceTree = "<group>"; };
+		181F180322C1CC1200B422CD /* WMZDialog+Down.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WMZDialog+Down.h"; sourceTree = "<group>"; };
+		181F180422C1CC1200B422CD /* WMZDialog+Down.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WMZDialog+Down.m"; sourceTree = "<group>"; };
+		181F180622C5F8BF00B422CD /* WMZDialog+MenusSelect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WMZDialog+MenusSelect.h"; sourceTree = "<group>"; };
+		181F180722C5F8BF00B422CD /* WMZDialog+MenusSelect.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WMZDialog+MenusSelect.m"; sourceTree = "<group>"; };
 		1871670F22A76AFB001C6B41 /* WMZDialog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WMZDialog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1871671222A76AFB001C6B41 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1871671322A76AFB001C6B41 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -51,6 +141,33 @@
 		1871673222A76B03001C6B41 /* WMZDialogUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WMZDialogUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1871673622A76B03001C6B41 /* WMZDialogUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMZDialogUITests.m; sourceTree = "<group>"; };
 		1871673822A76B03001C6B41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1871674522A76C12001C6B41 /* WMZDialog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMZDialog.h; sourceTree = "<group>"; };
+		1871674622A76C12001C6B41 /* WMZDialog.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMZDialog.m; sourceTree = "<group>"; };
+		1871674B22A76D7B001C6B41 /* WMZDialogMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMZDialogMacro.h; sourceTree = "<group>"; };
+		1871674C22A76F80001C6B41 /* WMZDialogTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMZDialogTool.h; sourceTree = "<group>"; };
+		1871674D22A76F80001C6B41 /* WMZDialogTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMZDialogTool.m; sourceTree = "<group>"; };
+		1871675222A76FDE001C6B41 /* WMZDialog+AutoDisappear.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WMZDialog+AutoDisappear.h"; sourceTree = "<group>"; };
+		1871675322A76FDE001C6B41 /* WMZDialog+AutoDisappear.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WMZDialog+AutoDisappear.m"; sourceTree = "<group>"; };
+		1871675922A7AC4C001C6B41 /* WMZDialog+Normal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WMZDialog+Normal.h"; sourceTree = "<group>"; };
+		1871675A22A7AC4C001C6B41 /* WMZDialog+Normal.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WMZDialog+Normal.m"; sourceTree = "<group>"; };
+		1871675C22A90EC8001C6B41 /* WMZDialog+System.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WMZDialog+System.h"; sourceTree = "<group>"; };
+		1871675D22A90EC8001C6B41 /* WMZDialog+System.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WMZDialog+System.m"; sourceTree = "<group>"; };
+		1871676222A90F5E001C6B41 /* WMZDialog+SystemSheet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WMZDialog+SystemSheet.h"; sourceTree = "<group>"; };
+		1871676322A90F5E001C6B41 /* WMZDialog+SystemSheet.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WMZDialog+SystemSheet.m"; sourceTree = "<group>"; };
+		1871676522A919AD001C6B41 /* WMZDialog+Pay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WMZDialog+Pay.h"; sourceTree = "<group>"; };
+		1871676622A919AD001C6B41 /* WMZDialog+Pay.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WMZDialog+Pay.m"; sourceTree = "<group>"; };
+		18C1E04522BCBE900043FF73 /* WMZDiaLogBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMZDiaLogBase.h; sourceTree = "<group>"; };
+		18C1E04622BCBE900043FF73 /* WMZDiaLogBase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMZDiaLogBase.m; sourceTree = "<group>"; };
+		18E0D3D922BA2509005C94EB /* WMZDialog+Write.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WMZDialog+Write.h"; sourceTree = "<group>"; };
+		18E0D3DA22BA2509005C94EB /* WMZDialog+Write.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WMZDialog+Write.m"; sourceTree = "<group>"; };
+		18E0D3DC22BB6C10005C94EB /* WMZDialog+Select.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WMZDialog+Select.h"; sourceTree = "<group>"; };
+		18E0D3DD22BB6C10005C94EB /* WMZDialog+Select.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WMZDialog+Select.m"; sourceTree = "<group>"; };
+		18E0D3DF22BB8567005C94EB /* WMZDialog+PickView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WMZDialog+PickView.h"; sourceTree = "<group>"; };
+		18E0D3E022BB8567005C94EB /* WMZDialog+PickView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WMZDialog+PickView.m"; sourceTree = "<group>"; };
+		18E0D3E222BCABF7005C94EB /* WMZDialog+Sheet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WMZDialog+Sheet.h"; sourceTree = "<group>"; };
+		18E0D3E322BCABF7005C94EB /* WMZDialog+Sheet.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WMZDialog+Sheet.m"; sourceTree = "<group>"; };
+		18EE45E622AE2CE7008C93E6 /* WMZDialog+Share.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WMZDialog+Share.h"; sourceTree = "<group>"; };
+		18EE45E722AE2CE7008C93E6 /* WMZDialog+Share.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WMZDialog+Share.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +195,57 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		181DE8B222D326A7005DAE59 /* Masonry */ = {
+			isa = PBXGroup;
+			children = (
+				181DE8B322D326A7005DAE59 /* MASCompositeConstraint.h */,
+				181DE8B422D326A7005DAE59 /* MASCompositeConstraint.m */,
+				181DE8B522D326A7005DAE59 /* MASConstraint+Private.h */,
+				181DE8B622D326A7005DAE59 /* MASConstraint.h */,
+				181DE8B722D326A7005DAE59 /* MASConstraint.m */,
+				181DE8B822D326A7005DAE59 /* MASConstraintMaker.h */,
+				181DE8B922D326A7005DAE59 /* MASConstraintMaker.m */,
+				181DE8BA22D326A7005DAE59 /* MASLayoutConstraint.h */,
+				181DE8BB22D326A7005DAE59 /* MASLayoutConstraint.m */,
+				181DE8BC22D326A7005DAE59 /* Masonry.h */,
+				181DE8BD22D326A7005DAE59 /* MASUtilities.h */,
+				181DE8BE22D326A7005DAE59 /* MASViewAttribute.h */,
+				181DE8BF22D326A7005DAE59 /* MASViewAttribute.m */,
+				181DE8C022D326A7005DAE59 /* MASViewConstraint.h */,
+				181DE8C122D326A7005DAE59 /* MASViewConstraint.m */,
+				181DE8C222D326A7005DAE59 /* NSArray+MASAdditions.h */,
+				181DE8C322D326A7005DAE59 /* NSArray+MASAdditions.m */,
+				181DE8C422D326A7005DAE59 /* NSArray+MASShorthandAdditions.h */,
+				181DE8C522D326A7005DAE59 /* NSLayoutConstraint+MASDebugAdditions.h */,
+				181DE8C622D326A7005DAE59 /* NSLayoutConstraint+MASDebugAdditions.m */,
+				181DE8C722D326A7005DAE59 /* View+MASAdditions.h */,
+				181DE8C822D326A7005DAE59 /* View+MASAdditions.m */,
+				181DE8C922D326A7005DAE59 /* View+MASShorthandAdditions.h */,
+				181DE8CA22D326A7005DAE59 /* ViewController+MASAdditions.h */,
+				181DE8CB22D326A7005DAE59 /* ViewController+MASAdditions.m */,
+			);
+			path = Masonry;
+			sourceTree = "<group>";
+		};
+		181DE8CC22D326A7005DAE59 /* WMZTags */ = {
+			isa = PBXGroup;
+			children = (
+				181DE8EA22D33095005DAE59 /* tagOneCell.h */,
+				181DE8E922D33095005DAE59 /* tagOneCell.m */,
+				181DE8CD22D326A7005DAE59 /* WMZTagBtn.h */,
+				181DE8CE22D326A7005DAE59 /* WMZTagBtn.m */,
+				181DE8CF22D326A7005DAE59 /* WMZTagCell.h */,
+				181DE8D022D326A7005DAE59 /* WMZTagCell.m */,
+				181DE8D122D326A7005DAE59 /* WMZTagParam.h */,
+				181DE8D222D326A7005DAE59 /* WMZTagParam.m */,
+				181DE8D322D326A7005DAE59 /* WMZTags.h */,
+				181DE8D422D326A7005DAE59 /* WMZTags.m */,
+				181DE8D522D326A7005DAE59 /* WMZTool.h */,
+				181DE8D622D326A7005DAE59 /* WMZTool.m */,
+			);
+			path = WMZTags;
+			sourceTree = "<group>";
+		};
 		1871670622A76AFB001C6B41 = {
 			isa = PBXGroup;
 			children = (
@@ -101,10 +269,17 @@
 		1871671122A76AFB001C6B41 /* WMZDialog */ = {
 			isa = PBXGroup;
 			children = (
+				181DE8B222D326A7005DAE59 /* Masonry */,
+				181DE8CC22D326A7005DAE59 /* WMZTags */,
+				1871674422A76B9A001C6B41 /* WMZDialog */,
 				1871671222A76AFB001C6B41 /* AppDelegate.h */,
 				1871671322A76AFB001C6B41 /* AppDelegate.m */,
 				1871671522A76AFB001C6B41 /* ViewController.h */,
 				1871671622A76AFB001C6B41 /* ViewController.m */,
+				181DE8E622D327D9005DAE59 /* BuyCarVC.h */,
+				181DE8E722D327D9005DAE59 /* BuyCarVC.m */,
+				18153DA822D432850031EE71 /* MenusSelectVC.h */,
+				18153DA922D432850031EE71 /* MenusSelectVC.m */,
 				1871671822A76AFB001C6B41 /* Main.storyboard */,
 				1871671B22A76B03001C6B41 /* Assets.xcassets */,
 				1871671D22A76B03001C6B41 /* LaunchScreen.storyboard */,
@@ -130,6 +305,52 @@
 				1871673822A76B03001C6B41 /* Info.plist */,
 			);
 			path = WMZDialogUITests;
+			sourceTree = "<group>";
+		};
+		1871674422A76B9A001C6B41 /* WMZDialog */ = {
+			isa = PBXGroup;
+			children = (
+				1871674522A76C12001C6B41 /* WMZDialog.h */,
+				1871674622A76C12001C6B41 /* WMZDialog.m */,
+				18C1E04522BCBE900043FF73 /* WMZDiaLogBase.h */,
+				18C1E04622BCBE900043FF73 /* WMZDiaLogBase.m */,
+				1871674B22A76D7B001C6B41 /* WMZDialogMacro.h */,
+				1871674C22A76F80001C6B41 /* WMZDialogTool.h */,
+				1871674D22A76F80001C6B41 /* WMZDialogTool.m */,
+				1871675922A7AC4C001C6B41 /* WMZDialog+Normal.h */,
+				1871675A22A7AC4C001C6B41 /* WMZDialog+Normal.m */,
+				18E0D3E222BCABF7005C94EB /* WMZDialog+Sheet.h */,
+				18E0D3E322BCABF7005C94EB /* WMZDialog+Sheet.m */,
+				1871675222A76FDE001C6B41 /* WMZDialog+AutoDisappear.h */,
+				1871675322A76FDE001C6B41 /* WMZDialog+AutoDisappear.m */,
+				1871675C22A90EC8001C6B41 /* WMZDialog+System.h */,
+				1871675D22A90EC8001C6B41 /* WMZDialog+System.m */,
+				1871676222A90F5E001C6B41 /* WMZDialog+SystemSheet.h */,
+				1871676322A90F5E001C6B41 /* WMZDialog+SystemSheet.m */,
+				1871676522A919AD001C6B41 /* WMZDialog+Pay.h */,
+				1871676622A919AD001C6B41 /* WMZDialog+Pay.m */,
+				18EE45E622AE2CE7008C93E6 /* WMZDialog+Share.h */,
+				18EE45E722AE2CE7008C93E6 /* WMZDialog+Share.m */,
+				18E0D3D922BA2509005C94EB /* WMZDialog+Write.h */,
+				18E0D3DA22BA2509005C94EB /* WMZDialog+Write.m */,
+				18E0D3DC22BB6C10005C94EB /* WMZDialog+Select.h */,
+				18E0D3DD22BB6C10005C94EB /* WMZDialog+Select.m */,
+				18E0D3DF22BB8567005C94EB /* WMZDialog+PickView.h */,
+				18E0D3E022BB8567005C94EB /* WMZDialog+PickView.m */,
+				181F17FD22C0668D00B422CD /* WMZDialog+time.h */,
+				181F17FE22C0668D00B422CD /* WMZDialog+time.m */,
+				181F180022C06F4300B422CD /* WMZDialog+PopView.h */,
+				181F180122C06F4300B422CD /* WMZDialog+PopView.m */,
+				181F180322C1CC1200B422CD /* WMZDialog+Down.h */,
+				181F180422C1CC1200B422CD /* WMZDialog+Down.m */,
+				181F180622C5F8BF00B422CD /* WMZDialog+MenusSelect.h */,
+				181F180722C5F8BF00B422CD /* WMZDialog+MenusSelect.m */,
+				181DE8AC22D2DE0B005DAE59 /* WMZDialog+Advertisement.h */,
+				181DE8AD22D2DE0B005DAE59 /* WMZDialog+Advertisement.m */,
+				181DE8AF22D323E4005DAE59 /* WMZDialog+BuyCar.h */,
+				181DE8B022D323E4005DAE59 /* WMZDialog+BuyCar.m */,
+			);
+			path = WMZDialog;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,9 +483,46 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				181DE8B122D323E4005DAE59 /* WMZDialog+BuyCar.m in Sources */,
+				181DE8D722D326A7005DAE59 /* MASCompositeConstraint.m in Sources */,
+				181DE8E022D326A7005DAE59 /* ViewController+MASAdditions.m in Sources */,
+				181DE8DF22D326A7005DAE59 /* View+MASAdditions.m in Sources */,
+				18EE45E822AE2CE7008C93E6 /* WMZDialog+Share.m in Sources */,
+				181DE8E522D326A7005DAE59 /* WMZTool.m in Sources */,
+				1871674E22A76F80001C6B41 /* WMZDialogTool.m in Sources */,
+				1871674722A76C12001C6B41 /* WMZDialog.m in Sources */,
+				1871676722A919AD001C6B41 /* WMZDialog+Pay.m in Sources */,
+				181DE8DA22D326A7005DAE59 /* MASLayoutConstraint.m in Sources */,
+				181DE8E422D326A7005DAE59 /* WMZTags.m in Sources */,
+				181DE8DD22D326A7005DAE59 /* NSArray+MASAdditions.m in Sources */,
+				181DE8AE22D2DE0B005DAE59 /* WMZDialog+Advertisement.m in Sources */,
+				18E0D3E122BB8567005C94EB /* WMZDialog+PickView.m in Sources */,
+				181DE8D822D326A7005DAE59 /* MASConstraint.m in Sources */,
+				181DE8E322D326A7005DAE59 /* WMZTagParam.m in Sources */,
+				181F180222C06F4300B422CD /* WMZDialog+PopView.m in Sources */,
+				181DE8DC22D326A7005DAE59 /* MASViewConstraint.m in Sources */,
+				181DE8E822D327D9005DAE59 /* BuyCarVC.m in Sources */,
+				18E0D3DB22BA2509005C94EB /* WMZDialog+Write.m in Sources */,
+				181F180822C5F8BF00B422CD /* WMZDialog+MenusSelect.m in Sources */,
 				1871671722A76AFB001C6B41 /* ViewController.m in Sources */,
+				181DE8DB22D326A7005DAE59 /* MASViewAttribute.m in Sources */,
+				181F180522C1CC1200B422CD /* WMZDialog+Down.m in Sources */,
+				18C1E04722BCBE900043FF73 /* WMZDiaLogBase.m in Sources */,
 				1871672222A76B03001C6B41 /* main.m in Sources */,
 				1871671422A76AFB001C6B41 /* AppDelegate.m in Sources */,
+				181DE8E222D326A7005DAE59 /* WMZTagCell.m in Sources */,
+				1871675422A76FDE001C6B41 /* WMZDialog+AutoDisappear.m in Sources */,
+				1871675B22A7AC4C001C6B41 /* WMZDialog+Normal.m in Sources */,
+				181DE8DE22D326A7005DAE59 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
+				181DE8EB22D33096005DAE59 /* tagOneCell.m in Sources */,
+				1871675E22A90EC8001C6B41 /* WMZDialog+System.m in Sources */,
+				1871676422A90F5E001C6B41 /* WMZDialog+SystemSheet.m in Sources */,
+				181DE8E122D326A7005DAE59 /* WMZTagBtn.m in Sources */,
+				18153DAA22D432850031EE71 /* MenusSelectVC.m in Sources */,
+				181DE8D922D326A7005DAE59 /* MASConstraintMaker.m in Sources */,
+				181F17FF22C0668D00B422CD /* WMZDialog+time.m in Sources */,
+				18E0D3E422BCABF7005C94EB /* WMZDialog+Sheet.m in Sources */,
+				18E0D3DE22BB6C10005C94EB /* WMZDialog+Select.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -435,9 +693,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HR6T4LQD9T;
 				INFOPLIST_FILE = WMZDialog/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -445,6 +705,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.WMZDialog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				WARNING_CFLAGS = "-Wno-objc-protocol-method-implementation";
 			};
 			name = Debug;
 		};
@@ -452,9 +713,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HR6T4LQD9T;
 				INFOPLIST_FILE = WMZDialog/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -462,6 +725,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.WMZDialog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				WARNING_CFLAGS = "-Wno-objc-protocol-method-implementation";
 			};
 			name = Release;
 		};
