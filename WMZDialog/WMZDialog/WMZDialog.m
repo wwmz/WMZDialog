@@ -143,15 +143,12 @@ WMZDialogSetFuncImplementation(WMZDialog, NSTextAlignment,      wTextAlignment)
     //设置默认宽度和默认宽度和默认圆角
     if (self.wType == DialogTypeShare||self.wType == DialogTypePickSelect||self.wType == DialogTypeSheet||self.wType == DialogTypeMenusSelect||self.wType == DialogTypeBuyCar) {
         if (self.wType!= DialogTypeMenusSelect) {
-            if (self.wHeight == Dialog_GetHNum(300)) {
+            if (self.wHeight == Dialog_GetHNum(300)&&self.wType!=DialogTypePickSelect) {
                 self.wHeight = Dialog_GetHNum(200);
             }
             self.wMainToBottom = YES;
         }
         
-        if (self.wHeight == Dialog_GetHNum(300)&&self.wType == DialogTypeShare) {
-            self.wHeight = Dialog_GetHNum(200);
-        }
         
         //外部若设置该属性会生效
         if (self.wMainRadius == 15.0f) {
@@ -168,6 +165,7 @@ WMZDialogSetFuncImplementation(WMZDialog, NSTextAlignment,      wTextAlignment)
         if (self.wWidth == Dialog_GetWNum(500)) {
             self.wWidth = Dialog_GetWNum(300);
         }
+        self.wTextAlignment = NSTextAlignmentLeft;
     }
     
     //设置支付默认提示语
@@ -220,6 +218,9 @@ WMZDialogSetFuncImplementation(WMZDialog, NSTextAlignment,      wTextAlignment)
             self.tableView.estimatedSectionHeaderHeight = 0.01;
             self.tableView.estimatedRowHeight = self.wMainBtnHeight;
             self.tableView.rowHeight = self.wMainBtnHeight;
+            if (@available(iOS 11.0, *)) {
+                self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+            }
         }
 
         if (self.wType == DialogTypeBuyCar) {
@@ -460,9 +461,9 @@ WMZDialogSetFuncImplementation(WMZDialog, NSTextAlignment,      wTextAlignment)
     }else{
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DiaLogCell"];
         if (!cell) {
-            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"DiaLogCell"];
+            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"DiaLogCell"];
         }
-
+        cell.textLabel.textAlignment = self.wTextAlignment;
         cell.textLabel.font = [UIFont systemFontOfSize:self.wMessageFont];
         if ([data isKindOfClass:[WMZTree class]]) {
             cell.selectionStyle = UITableViewCellSelectionStyleNone;

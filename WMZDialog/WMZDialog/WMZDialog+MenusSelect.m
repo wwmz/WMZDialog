@@ -46,6 +46,11 @@
         ta.estimatedSectionHeaderHeight = 0.01;
         ta.rowHeight = self.wMainBtnHeight;
         ta.tag = 100+i;
+        ta.separatorStyle = UITableViewCellSeparatorStyleNone;
+        ta.estimatedRowHeight = 100.0f;
+        if (@available(iOS 11.0, *)) {
+            ta.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        }
         temp = ta;
         [self.mainView addSubview:ta];
         if (i>0) ta.hidden = YES;
