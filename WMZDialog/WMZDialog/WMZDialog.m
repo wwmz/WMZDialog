@@ -130,6 +130,7 @@ WMZDialogSetFuncImplementation(WMZDialog, NSTextAlignment,      wTextAlignment)
         _wProgressTintColor = DialogColor(0xFF9900);
         _wTrackTintColor = DialogColor(0xF3F4F6);
         _wTableViewColor = @[DialogColor(0xFFFFFF),DialogColor(0xF6F7FA),DialogColor(0xEBECF0),DialogColor(0xFFFFFF)];
+        _wTextAlignment = NSTextAlignmentCenter;
     }
     return self;
 }
