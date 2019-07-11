@@ -16,17 +16,15 @@
 
     [self.mainView addSubview:self.tableView];
     
-    if (self.wEventCancelFinish) {
-        UIView *emptyView =  [UIView new];
-        emptyView.backgroundColor = self.tableView.backgroundColor;
-        emptyView.frame = CGRectMake(0, CGRectGetMaxY(self.tableView.frame), self.wWidth, Dialog_GetHNum(20));
-        [self.mainView addSubview:emptyView];
+    UIView *emptyView =  [UIView new];
+    emptyView.backgroundColor = self.tableView.backgroundColor;
+    emptyView.frame = CGRectMake(0, CGRectGetMaxY(self.tableView.frame), self.wWidth, Dialog_GetHNum(20));
+    [self.mainView addSubview:emptyView];
         
-        [self.mainView addSubview:self.cancelBtn];
-        self.cancelBtn.frame = CGRectMake(0, CGRectGetMaxY(emptyView.frame), self.wWidth, self.wMainBtnHeight);
-        
-    }
-    [self reSetMainViewFrame:CGRectMake(0, 0, self.wWidth,CGRectGetMaxY(self.wEventCancelFinish?self.cancelBtn.frame:self.tableView.frame))];
+    [self.mainView addSubview:self.cancelBtn];
+    self.cancelBtn.frame = CGRectMake(0, CGRectGetMaxY(emptyView.frame), self.wWidth, self.wMainBtnHeight);
+    
+    [self reSetMainViewFrame:CGRectMake(0, 0, self.wWidth,CGRectGetMaxY(self.cancelBtn.frame))];
 
      return self.mainView;
 }
