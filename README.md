@@ -321,8 +321,8 @@ Dialog().wTypeSet(DialogTypeNornal).wStart();
 ##新增选择地区弹窗和日期选择弹窗
 
 (1)地区弹窗效果图
-![location1.gif](https://upload-images.jianshu.io/upload_images/9163368-5bf11bc9a6fd0d5c.gif?imageMogr2/auto-orient/strip)
 
+![location1.gif](https://upload-images.jianshu.io/upload_images/9163368-5bf11bc9a6fd0d5c.gif?imageMogr2/auto-orient/strip)
 
 使用参数说明：
 wLocationType   地区关联层级 （1/2/3）默认3
