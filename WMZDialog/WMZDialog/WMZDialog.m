@@ -356,15 +356,17 @@ WMZDialogSetFuncImplementation(WMZDialog, NSTextAlignment,      wTextAlignment)
  *开始
  */
 - (void)start:(id)alert{
-    if ([alert isKindOfClass:[UIView class]]) {
-        if (self.wShadowShow) {
-           [self.view addSubview:self.shadowView];
-           [self.view sendSubviewToBack:self.shadowView];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if ([alert isKindOfClass:[UIView class]]) {
+            if (self.wShadowShow) {
+                [self.view addSubview:self.shadowView];
+                [self.view sendSubviewToBack:self.shadowView];
+            }
+            [self.wParentVC presentViewController:self animated:YES completion:nil];
+        }else if ([alert isKindOfClass:[UIAlertController class]]){
+            [self.wParentVC presentViewController:alert animated:YES completion:nil];
         }
-        [self.wParentVC presentViewController:self animated:YES completion:nil];
-    }else if ([alert isKindOfClass:[UIAlertController class]]){
-        [self.wParentVC presentViewController:alert animated:YES completion:nil];
-    }
+    });
 }
 
 /*

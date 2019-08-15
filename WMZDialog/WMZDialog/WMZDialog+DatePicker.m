@@ -122,7 +122,7 @@
 - (NSArray*)timeMonth:(NSString*)name{
     NSMutableArray *month = [NSMutableArray new];
     for (int i = 1; i< 13;i++ ) {
-        [month addObject:[NSString stringWithFormat:@"%d%@",i,name]];
+        [month addObject:i<10?[NSString stringWithFormat:@"0%d%@",i,name]:[NSString stringWithFormat:@"%d%@",i,name]];
     }
     return [NSArray arrayWithArray:month];
 }
@@ -161,8 +161,8 @@
        NSArray *arr = self.wData[i];
        NSString *str = arr [self.wPickRepeat?[self.pickView selectedRowInComponent:i]%arr.count:[self.pickView selectedRowInComponent:i]];
        NSCharacterSet* nonDigits =[[NSCharacterSet decimalDigitCharacterSet] invertedSet];
-       int remainSecond =[[str stringByTrimmingCharactersInSet:nonDigits] intValue];
-       [mArr addObject:[NSString stringWithFormat:@"%d",remainSecond]];
+       NSString * remainSecond = [str stringByTrimmingCharactersInSet:nonDigits];
+       [mArr addObject:remainSecond];
        }
        self.wEventOKFinish(mArr, self.wType);
     }
