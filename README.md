@@ -1,5 +1,6 @@
 功能样式最多的最齐全的的弹窗控件 
-控件全部采用链式编程，所有属性均可定制。
+控件全部采用链式编程，所有属性均可定制。(新增的日期和地区弹窗说明在后面)
+
 * * *
 ##看下效果图
 ![dialog.gif](https://upload-images.jianshu.io/upload_images/9163368-94bf77325d6d6fdd.gif?imageMogr2/auto-orient/strip)
@@ -313,4 +314,45 @@ Dialog().wTypeSet(DialogTypeNornal).wStart();
          //需要返回最底部的view
          return te;
      }) .wStart();
+     
+     
+* * *
+##20190815 
+##新增选择地区弹窗和日期选择弹窗
+(1)地区弹窗效果图
+![location1.gif](https://upload-images.jianshu.io/upload_images/9163368-5bf11bc9a6fd0d5c.gif?imageMogr2/auto-orient/strip)
+
+使用参数说明：
+wLocationType   地区关联层级 （1/2/3）默认3
+wChainType       关联层级的样式（tableview/pickView）默认 ChainPickView
+使用
+```
+Dialog()
+.wEventOKFinishSet(^(id anyID, DialogType type) {
+     NSLog(@"选中 %@",anyID);
+})
+.wChainTypeSet(ChainPickView)
+.wLocationTypeSet(3)
+.wTypeSet(DialogTypeLocation)
+.wStart();
+```
+(2)日期选择效果图
+![time.gif](https://upload-images.jianshu.io/upload_images/9163368-18739f862894fb35.gif?imageMogr2/auto-orient/strip)
+
+使用参数说明：
+wDateTimeType  时间选择器样式   yyyy:MM:dd HH:mm:ss   (可带后缀例如yyyy年也可以自由拼例如yyyy:MM)
+wPickRepeat   无限循环  (默认YES)
+使用
+```
+Dialog()
+.wEventOKFinishSet(^(id anyID, DialogType type) {
+       NSLog(@"选中 %@",anyID);
+})
+.wDateTimeTypeSet(@"yyyy年MM月dd日 HH时mm分ss秒")
+.wPickRepeatSet(YES)
+.wTypeSet(DialogTypeDatePicker)
+.wMessageColorSet([UIColor redColor])
+.wMessageFontSet(18)
+.wStart();
+```
 ```
