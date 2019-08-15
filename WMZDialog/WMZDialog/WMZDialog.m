@@ -7,7 +7,6 @@
 //
 
 #import "WMZDialog.h"
-
 @interface WMZDialog ()
 /*
  *配置
@@ -77,11 +76,15 @@ WMZDialogSetFuncImplementation(WMZDialog, diaLogCellCallBlock,         wMyCell)
 WMZDialogSetFuncImplementation(WMZDialog, UIModalTransitionStyle,       wStyle)
 WMZDialogSetFuncImplementation(WMZDialog, CGSize,                   wImageSize)
 WMZDialogSetFuncImplementation(WMZDialog, NSString*,                wImageName)
+WMZDialogSetFuncImplementation(WMZDialog, BOOL,                    wPickRepeat)
+WMZDialogSetFuncImplementation(WMZDialog, NSInteger,             wLocationType)
 WMZDialogSetFuncImplementation(WMZDialog, UIColor*,         wProgressTintColor)
 WMZDialogSetFuncImplementation(WMZDialog, UIColor*,            wTrackTintColor)
 WMZDialogSetFuncImplementation(WMZDialog, diaLogMyViewCallBlock, wMyDiaLogView)
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                 wAddBottomView)
 WMZDialogSetFuncImplementation(WMZDialog, NSArray* ,           wTableViewColor)
+WMZDialogSetFuncImplementation(WMZDialog, ChainType,                wChainType)
+WMZDialogSetFuncImplementation(WMZDialog, NSString*,             wDateTimeType)
 WMZDialogSetFuncImplementation(WMZDialog, DialogClickBlock,        wEventClose)
 WMZDialogSetFuncImplementation(WMZDialog, DialogMenuClickBlock,wEventMenuClick)
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                wNavigationItem)
@@ -131,6 +134,10 @@ WMZDialogSetFuncImplementation(WMZDialog, NSTextAlignment,      wTextAlignment)
         _wTrackTintColor = DialogColor(0xF3F4F6);
         _wTableViewColor = @[DialogColor(0xFFFFFF),DialogColor(0xF6F7FA),DialogColor(0xEBECF0),DialogColor(0xFFFFFF)];
         _wTextAlignment = NSTextAlignmentCenter;
+        _wLocationType = 3;
+        _wChainType = ChainPickView;
+        _wDateTimeType = @"yyyy-MM-dd HH:mm:ss";
+        _wPickRepeat = YES;
     }
     return self;
 }
@@ -142,13 +149,19 @@ WMZDialogSetFuncImplementation(WMZDialog, NSTextAlignment,      wTextAlignment)
 - (void)start{
 
     //设置默认宽度和默认宽度和默认圆角
-    if (self.wType == DialogTypeShare||self.wType == DialogTypePickSelect||self.wType == DialogTypeSheet||self.wType == DialogTypeMenusSelect||self.wType == DialogTypeBuyCar) {
-        if (self.wType!= DialogTypeMenusSelect) {
+    if (self.wType == DialogTypeShare||self.wType == DialogTypePickSelect||self.wType == DialogTypeDatePicker||self.wType == DialogTypeSheet||self.wType == DialogTypeMenusSelect || self.wType == DialogTypeLocation||self.wType == DialogTypeBuyCar) {
+        if (self.wType!= DialogTypeMenusSelect&&self.wType!= DialogTypeLocation) {
             if (self.wHeight == Dialog_GetHNum(300)&&self.wType!=DialogTypePickSelect) {
-                self.wHeight = Dialog_GetHNum(200);
+                if(self.wType == DialogTypeDatePicker){
+                    self.wHeight = Dialog_GetHNum(350);
+                }else{
+                    self.wHeight = Dialog_GetHNum(200);
+                }
             }
-            self.wMainToBottom = YES;
         }
+        
+
+        self.wMainToBottom = YES;
         
         
         //外部若设置该属性会生效
@@ -203,7 +216,7 @@ WMZDialogSetFuncImplementation(WMZDialog, NSTextAlignment,      wTextAlignment)
          self.wMainBtnHeight+=Dialog_GetHNum(15);
     }else if (self.wType == DialogTypeSheet){
          self.wMainBtnHeight+=Dialog_GetHNum(30);
-    }else if (self.wType == DialogTypeMenusSelect){
+    }else if (self.wType == DialogTypeMenusSelect || self.wType == DialogTypeLocation || self.wType == DialogTypeLocation){
          self.wMainBtnHeight*=1.5;
     }
     
@@ -240,7 +253,11 @@ WMZDialogSetFuncImplementation(WMZDialog, NSTextAlignment,      wTextAlignment)
             self.pickView.delegate = self;
             self.pickView.dataSource = self;
         }
-        
+    }
+    
+    if (self.wType == DialogTypeLocation||self.wType == DialogTypeDatePicker) {
+        self.pickView.delegate = self;
+        self.pickView.dataSource = self;
     }
     
     [self.view addSubview:self.mainView];
@@ -287,7 +304,7 @@ WMZDialogSetFuncImplementation(WMZDialog, NSTextAlignment,      wTextAlignment)
     self.modalPresentationStyle = UIModalPresentationOverFullScreen;
     self.modalTransitionStyle = self.wStyle;
     
-    if (self.wType != DialogTypeShare&&self.wType!=DialogTypePickSelect&&self.wType != DialogTypeSheet&&self.wType!=DialogTypePop&&self.wType!=DialogTypeMenusSelect&&self.wType!=DialogTypeAdvertisement&&self.wType!=DialogTypeBuyCar) {
+    if (self.wType != DialogTypeShare&&self.wType!=DialogTypePickSelect&&self.wType!=DialogTypeDatePicker&&self.wType != DialogTypeSheet&&self.wType!=DialogTypePop&&self.wType!=DialogTypeMenusSelect&&self.wType!=DialogTypeLocation&&self.wType!=DialogTypeAdvertisement&&self.wType!=DialogTypeBuyCar) {
         self.mainView.layer.cornerRadius = self.wMainRadius;
         self.mainView.layer.masksToBounds = YES;
     }
@@ -381,7 +398,7 @@ WMZDialogSetFuncImplementation(WMZDialog, NSTextAlignment,      wTextAlignment)
         self.mainView.frame =frame;
     }
 
-    if (self.wType != DialogTypeMenusSelect) {
+    if (self.wType != DialogTypeMenusSelect || self.wType != DialogTypeLocation) {
         self.mainView.center = center;
     }
 
@@ -448,14 +465,14 @@ WMZDialogSetFuncImplementation(WMZDialog, NSTextAlignment,      wTextAlignment)
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return   self.wType ==  DialogTypeMenusSelect?[[self getMyDataArr:tableView.tag withType:0] count]:[self.wData count];
+    return   self.wType == DialogTypeMenusSelect || self.wType == DialogTypeLocation?[[self getMyDataArr:tableView.tag withType:0] count]:[self.wData count];
     
 }
 
 # pragma  mark tableView 代理
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    id data = (self.wType ==  DialogTypeMenusSelect?[self getMyDataArr:tableView.tag withType:0]:self.wData)[indexPath.row];
+    id data = (self.wType == DialogTypeMenusSelect || self.wType == DialogTypeLocation?[self getMyDataArr:tableView.tag withType:0]:self.wData)[indexPath.row];
     
     if (self.wMyCell) {
         return self.wMyCell(indexPath,self.tableView,data);
@@ -496,7 +513,7 @@ WMZDialogSetFuncImplementation(WMZDialog, NSTextAlignment,      wTextAlignment)
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (self.wType == DialogTypeMenusSelect) {
+    if (self.wType == DialogTypeMenusSelect || self.wType == DialogTypeLocation) {
         [self selectWithTableView:tableView withIndexPath:indexPath];
     }else if (self.wType == DialogTypeBuyCar) {
         return;
@@ -517,15 +534,22 @@ WMZDialogSetFuncImplementation(WMZDialog, NSTextAlignment,      wTextAlignment)
 
 # pragma  mark pickView 代理
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
-    return [self.wData count];
+     return self.tree?self.depth:[self.wData count];
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
-    return [self.wData[component] count];
+    return self.tree?[[self getMyDataArr:component+100 withType:0] count]*(self.wPickRepeat?pickViewCount:1):[self.wData[component] count]*(self.wPickRepeat?pickViewCount:1);
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
-    return self.wData[component][row];
+
+    NSArray *arr = self.tree?[self getMyDataArr:component+100 withType:0]:self.wData[component];
+    id data = arr[row%arr.count];
+    if ([data isKindOfClass:[WMZTree class]]) {
+        WMZTree *selectDic = (WMZTree*)data;
+        return selectDic.name;
+    }
+    return data;
 }
 
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
@@ -535,15 +559,86 @@ WMZDialogSetFuncImplementation(WMZDialog, NSTextAlignment,      wTextAlignment)
         pickerLabel.adjustsFontSizeToFitWidth = YES;
         [pickerLabel setTextAlignment:NSTextAlignmentCenter];
         [pickerLabel setBackgroundColor:[UIColor clearColor]];
-        pickerLabel.textColor = self.wMessageColor;
         pickerLabel.font = [UIFont systemFontOfSize:self.wMessageFont];
     }
+    pickerLabel.textColor = self.wMessageColor;
     pickerLabel.text=[self pickerView:pickerView titleForRow:row forComponent:component];
     return pickerLabel;
 }
 
 - (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component{
     return self.wMainBtnHeight;
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
+    if(self.wType == DialogTypeDatePicker){
+        NSString *name = [self.wDateTimeType containsString:@"日"]?@"日":@"";
+        NSCharacterSet* nonDigits =[[NSCharacterSet decimalDigitCharacterSet] invertedSet];
+         //符合年月日的才改变天数
+        if (component == 0) {
+            if ([self.wDateTimeType containsString:@"dd"]&&[self.wDateTimeType containsString:@"yyyy"]&&[self.wDateTimeType containsString:@"MM"]) {
+                if ([self.wData count]>2) {
+                    NSArray *yearArr = self.wData[component];
+                    int year =[[yearArr[self.wPickRepeat?row%yearArr.count:row] stringByTrimmingCharactersInSet:nonDigits] intValue];
+                    NSArray *monthArr = self.wData[component+1];
+                    NSInteger monthIndex = [self.pickView selectedRowInComponent:component+1];
+                    int month =[[monthArr[self.wPickRepeat?monthIndex%monthArr.count:monthIndex] stringByTrimmingCharactersInSet:nonDigits] intValue];
+                    self.wData[2] = [self timeDayWithArr:@[@(year),@(month)] withName:name];
+                    [self.pickView reloadComponent:2];
+                }
+            }
+        }
+        if (component == 1) {
+            if ([self.wDateTimeType containsString:@"dd"]&&[self.wDateTimeType containsString:@"yyyy"]&&[self.wDateTimeType containsString:@"MM"]) {
+                if ([self.wData count]>2) {
+                    NSArray *yearArr = self.wData[component-1];
+                    NSInteger yearIndex = [self.pickView selectedRowInComponent:component-1];
+                    int year =[[yearArr[self.wPickRepeat?yearIndex%yearArr.count:yearIndex] stringByTrimmingCharactersInSet:nonDigits] intValue];
+                    NSArray *monthArr = self.wData[component];
+                    int month =[[monthArr[self.wPickRepeat?row%monthArr.count:row] stringByTrimmingCharactersInSet:nonDigits] intValue];
+                    self.wData[2] = [self timeDayWithArr:@[@(year),@(month)] withName:name];
+                    [self.pickView reloadComponent:2];
+                }
+            }
+        }
+        return;
+    }
+    if (self.tree) {
+        NSMutableArray *dataArr = [self getMyDataArr:component+100 withType:0];
+        if (component<self.depth-1) {
+            for (int i = 0 ; i<dataArr.count; i++) {
+                WMZTree *tree = dataArr[i];
+                if (i == row%dataArr.count) {
+                    tree.isSelected = YES;
+                }else{
+                    tree.isSelected = NO;
+                }
+            }
+            WMZTree *selectTree =  dataArr[self.wPickRepeat?row%dataArr.count:row];
+            //下一级选中全变为NO
+            for (WMZTree *tree in selectTree.children) {
+                tree.isSelected = NO;
+            }
+            [self.pickView reloadComponent:component+1];
+            [pickerView selectRow:0 inComponent:component+1 animated:YES];
+            
+            if (component == 0 && self.depth >= 3 && self.wType == DialogTypeLocation) {
+                [self.pickView reloadComponent:component+2];
+                [pickerView selectRow:0 inComponent:component+2 animated:YES];
+            }
+
+        }else{
+            for (int i = 0 ; i<dataArr.count; i++) {
+                WMZTree *tree = dataArr[i];
+                if (i == self.wPickRepeat?row%dataArr.count:row) {
+                    tree.isSelected = YES;
+                }else{
+                    tree.isSelected = NO;
+                }
+            }
+            [self.pickView reloadComponent:component];
+        }
+    }
 }
 
 /*
@@ -588,6 +683,7 @@ WMZDialogSetFuncImplementation(WMZDialog, NSTextAlignment,      wTextAlignment)
 
 }
 
+
 - (NSMutableDictionary *)configDic{
     if (!_configDic) {
         NSDictionary *dic = @{
@@ -607,6 +703,8 @@ WMZDialogSetFuncImplementation(WMZDialog, NSTextAlignment,      wTextAlignment)
                                @(DialogTypeMenusSelect):@"menusSelectAction",
                                @(DialogTypeAdvertisement):@"advertisementAction",
                                @(DialogTypeBuyCar):@"bugCarAction",
+                               @(DialogTypeLocation):@"locationAction",
+                               @(DialogTypeDatePicker):@"datePickerAction"
                               };
         _configDic = [NSMutableDictionary dictionaryWithDictionary:dic];
     }

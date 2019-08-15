@@ -78,31 +78,6 @@
     }
 }
 
-
-//数据处理  type 1返回tree对象
-- (id)getMyDataArr:(NSInteger )tableViewTag withType:(NSInteger)type{
-    if (tableViewTag==100) {
-        return type?self.tree:self.tree.children;
-    }else{
-        NSInteger taNum = 100;
-        WMZTree *resultDic = nil;
-        while (taNum < tableViewTag) {
-            NSMutableArray *arr = (taNum == 100?self.tree.children:resultDic.children);
-            int selectLastIndex = 0;
-            for (int i = 0; i<arr.count; i++) {
-                WMZTree *tree = arr[i];
-                if (tree.isSelected) {
-                    selectLastIndex = i;
-                    break;
-                }
-            }
-            resultDic = arr[selectLastIndex];
-            taNum++;
-        }
-        return  type?resultDic:resultDic.children;
-    }
-}
-
 //点击处理
 - (void)selectWithTableView:(UITableView *)tableView withIndexPath:(NSIndexPath*)indexPath{
     NSMutableArray *dataArr = [self getMyDataArr:tableView.tag withType:0];
@@ -138,7 +113,7 @@
 
     
     if (self.wEventMenuClick) {
-        self.wEventMenuClick(selectTree, tableView.tag-99,indexPath.row+1);
+        self.wEventMenuClick([self getTreeSelectDataArr], tableView.tag-99,indexPath.row+1);
     }
 }
 
@@ -155,17 +130,18 @@
         WMZTree *tree = [self getMyDataArr:section+99 withType:1];
         if (data.count<=tree.children.count) {
             NSMutableArray *arr = [NSMutableArray arrayWithArray:tree.children];
-            for (int i = 0; i<tree.children.count; i++) {
+            for (int i = (int)arr.count-1; i>=0; i--) {
                 WMZTree *tempTree = arr[i];
+                if (i>=data.count) {
+                    [arr removeObject:tempTree];
+                    continue;
+                }
                 NSDictionary *dic = data[i];
                 tempTree.name = dic[@"name"];
                 tempTree.ID = dic[@"id"];
                 tempTree.isSelected = NO;
                 if (update) {
                     tempTree.children = dic[@"children"];
-                }
-                if (i>=data.count) {
-                    [arr removeObject:arr];
                 }
             }
             tree.children = arr;

@@ -83,7 +83,7 @@ static NSString *oneLineHeightKey = @"oneLineHeight"; //oneLineHeight的key
     if (line>self.wWirteTextMaxLine) {
         height = self.wWirteTextMaxLine*self.oneLineHeight.floatValue;
     }
-    NSLog(@"%f",height);
+
     if (height==0) {
         height = [WMZDialogTool heightForTextView:CGSizeMake(self.wWidth-self.wMainOffsetX*2, CGFLOAT_MAX) WithText:@"占位" WithFont:self.writeView.font.pointSize];
     }

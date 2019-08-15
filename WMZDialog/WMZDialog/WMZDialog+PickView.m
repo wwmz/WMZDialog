@@ -20,7 +20,7 @@
     self.cancelBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     
     [self.mainView addSubview:self.OKBtn];
-    [self.OKBtn removeTarget:self action:NSSelectorFromString(@"OKAction:") forControlEvents:UIControlEventTouchUpInside];
+    [self.OKBtn removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
     [self.OKBtn addTarget:self action:@selector(PickOKAction:) forControlEvents:UIControlEventTouchUpInside];
     self.OKBtn.frame = CGRectMake(self.wWidth/2, 0,self.wWidth/2-self.wMainOffsetX, self.wMainBtnHeight);
     self.OKBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
@@ -28,6 +28,13 @@
     
     self.pickView.frame =  CGRectMake(0, CGRectGetMaxY(headView.frame), self.wWidth, self.wHeight);
     [self.mainView addSubview:self.pickView];
+
+    if(self.wPickRepeat){
+        for (int i = 0; i<[self.wData count]; i++) {
+            NSArray *arr = self.wData[i];
+            [self.pickView selectRow:pickViewCount/2*arr.count inComponent:i animated:YES];
+        }
+    }
 
     
     [self reSetMainViewFrame:CGRectMake(0,0,self.wWidth, CGRectGetMaxY(self.pickView.frame))];
@@ -41,12 +48,17 @@
 - (void)PickOKAction:(UIButton*)btn{
     [self closeView];
     if (self.wEventOKFinish) {
-        NSMutableString *mStr = [NSMutableString new];
-        for (int i = 0; i<[self.wData count]; i++) {
-            NSString *str = self.wData[i][[self.pickView selectedRowInComponent:i]];
-            [mStr appendString:[NSString stringWithFormat:@"%@ ",str]];
+        if (self.tree) {
+            self.wEventOKFinish([self getTreeSelectDataArr], self.wType);
+        }else{
+            NSMutableArray *mStr = [NSMutableArray new];
+            for (int i = 0; i<[self.wData count]; i++) {
+                NSArray *arr = self.wData[i];
+                NSString *str = arr [self.wPickRepeat?[self.pickView selectedRowInComponent:i]%arr.count:[self.pickView selectedRowInComponent:i]];
+                [mStr addObject:str];
+            }
+            self.wEventOKFinish(mStr, self.wType);
         }
-        self.wEventOKFinish(mStr, self.wType);
     }
 }
 

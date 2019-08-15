@@ -18,9 +18,88 @@
 - (UIView*)addBottomView:(CGFloat)maxY{return [UIView new];}
 - (void)reSetMainViewFrame:(CGRect)frame{}
 - (void)getDepth:(NSArray*)arr withTree:(WMZTree*)treePoint withDepth:(NSInteger)depth{}
-- (id)getMyDataArr:(NSInteger )tableViewTag withType:(NSInteger)type{return @[];}
 - (void)selectWithTableView:(UITableView *)tableView withIndexPath:(NSIndexPath*)indexPath{}
 - (void)updateMenuChildrenDataWithSection:(NSInteger)section  withUpdateChildren:(BOOL)update withData:(NSArray*)data{}
+
+
+//数据处理  type 1返回tree对象
+- (id)getMyDataArr:(NSInteger )tableViewTag withType:(NSInteger)type{
+    if (tableViewTag==100) {
+        return type?self.tree:self.tree.children;
+    }else{
+        NSInteger taNum = 100;
+        WMZTree *resultDic = nil;
+        while (taNum < tableViewTag) {
+            NSMutableArray *arr = (taNum == 100?self.tree.children:resultDic.children);
+            int selectLastIndex = 0;
+            for (int i = 0; i<arr.count; i++) {
+                WMZTree *tree = arr[i];
+                if (tree.isSelected) {
+                    selectLastIndex = i;
+                    break;
+                }
+            }
+            resultDic = arr[selectLastIndex];
+            taNum++;
+        }
+        return  type?resultDic:resultDic.children;
+    }
+}
+
+//获取tree选中的数据
+- (NSArray*)getTreeSelectDataArr{
+    self.selectArr = [NSMutableArray new];
+    WMZTree *forTree = self.tree;
+    while (forTree.children.count) {
+        forTree = [self getTreeData:forTree];
+        [self.selectArr addObject:forTree];
+    }
+    
+    return self.selectArr;
+}
+
+
+- (WMZTree*)getTreeData:(WMZTree*)tree{
+    WMZTree *firstSelectTree = nil;
+    for (int i = 0; i<tree.children.count; i++) {
+        WMZTree *sonTree = tree.children[i];
+        //默认第一个
+        if (i == 0) {
+            firstSelectTree = sonTree;
+        }
+        if (sonTree.isSelected) {
+            firstSelectTree = sonTree;
+            break;
+        }
+    }
+    return firstSelectTree;
+}
+
+- (NSArray*)timeDayWithArr:(NSArray*)arr withName:(NSString*)name {
+    NSInteger day = 0 ;
+    NSMutableArray *dayArr = [NSMutableArray new];
+    if (!arr||arr.count<1) {
+        //数据不规范的当做30天处理
+        day = 30;
+    }else{
+        NSString *year = arr[0];
+        NSString *month = arr[1];
+        BOOL isLeapYear = false;
+        NSInteger yearInfo = year.integerValue;
+        if((yearInfo % 400 == 0) || ((yearInfo % 4 == 0) && (yearInfo % 100 != 0))){
+            isLeapYear = true ;
+        }
+        
+        NSArray *dayCountArr = @[@"31",isLeapYear?@"29":@"28",@"31",@"30",@"31",@"30",@"31",@"31",@"30",@"31",@"30",@"31"];
+        day = [dayCountArr[month.integerValue-1] integerValue];
+        
+    }
+    
+    for (int i = 1; i< day+1;i++ ) {
+        [dayArr addObject:[NSString stringWithFormat:@"%d%@",i,name]];
+    }
+    return [NSArray arrayWithArray:dayArr];
+}
 
 - (UILabel *)titleLabel{
     if (!_titleLabel) {
@@ -117,6 +196,10 @@
         _children = [NSMutableArray new];
     }
     return _children;
+}
+
+- (NSString *)description{
+    return self.name;
 }
 
 @end

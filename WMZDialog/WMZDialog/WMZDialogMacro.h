@@ -64,6 +64,8 @@ typedef enum : NSUInteger{
     DialogTypeMenusSelect,          //下拉无限级菜单弹窗
     DialogTypeAdvertisement,        //广告弹窗
     DialogTypeBuyCar,               //购物车弹窗
+    DialogTypeLocation,             //地区选择
+    DialogTypeDatePicker,           //日期选择
     DialogTypeMyView,               //自定义弹窗
 
 }DialogType;
@@ -78,6 +80,15 @@ typedef enum : NSUInteger{
     directionright,
     
 }DiaDirection;
+
+/*
+ * 树状数据联动的样式 tableview/pickview显示
+ */
+typedef enum : NSUInteger{
+    ChainPickView,
+    ChainTableView,
+}ChainType;
+
 
 /*
  * 点击

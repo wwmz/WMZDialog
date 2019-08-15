@@ -8,8 +8,6 @@
 
 #import "ViewController.h"
 #import "WMZDialog.h"
-#import "BuyCarVC.h"
-#import "MenusSelectVC.h"
 @interface ViewController ()
 {
     WMZDialog *alert;
@@ -38,7 +36,7 @@
     
     
     self.view.backgroundColor = [UIColor whiteColor];
-    NSArray *arr =@[@"普通弹窗",@"底部弹窗",@"自动消失弹窗",@"系统弹窗",@"系统单选弹窗",@"支付弹窗",@"分享弹窗",@"自适应编辑弹窗",@"选择弹窗",@"拾取器弹窗",@"倒计时弹窗",@"上下左右弹出列表",@"下载弹窗",@"下拉无限级菜单弹窗",@"广告弹窗",@"购物车弹窗",@"自定义弹窗"];
+    NSArray *arr =@[@"普通弹窗",@"底部弹窗",@"自动消失弹窗",@"系统弹窗",@"系统单选弹窗",@"支付弹窗",@"分享弹窗",@"自适应编辑弹窗",@"选择弹窗",@"拾取器弹窗",@"倒计时弹窗",@"上下左右弹出列表",@"下载弹窗",@"下拉无限级菜单弹窗",@"广告弹窗",@"购物车弹窗",@"地区弹窗",@"日期时间弹窗",@"自定义弹窗"];
     
     for (int i = 0; i<arr.count; i++) {
         CGFloat X = (i % 2) * ([UIScreen mainScreen].bounds.size.width/3 + 20);
@@ -122,10 +120,16 @@
         });
         dispatch_resume(timer);
     }else if(temp.tag == DialogTypeMenusSelect){
-        [self.navigationController pushViewController:[MenusSelectVC new] animated:YES];
+        [self.navigationController pushViewController:[NSClassFromString(@"MenusSelectVC") new] animated:YES];
         return;
     }else if(temp.tag == DialogTypeBuyCar){
-        [self.navigationController pushViewController:[BuyCarVC new] animated:YES];
+        [self.navigationController pushViewController:[NSClassFromString(@"BuyCarVC") new] animated:YES];
+        return;
+    }else if(temp.tag == DialogTypeLocation){
+        [self.navigationController pushViewController:[NSClassFromString(@"LocationVC") new] animated:YES];
+        return;
+    }else if(temp.tag == DialogTypeDatePicker){
+        [self.navigationController pushViewController:[NSClassFromString(@"DateTimeVC") new] animated:YES];
         return;
     }else{
         data = @[@"数据1",@"数据2",@"数据3",@"数据4",@"数据5",@"数据6",@"数据7"];
@@ -144,7 +148,7 @@
     })
     //点击确定事件
     .wEventOKFinishSet(^(id anyID, DialogType type) {
-        NSLog(@"确定");
+        NSLog(@"确定 %@",anyID);
     })
     //点击取消事件
     .wEventCancelFinishSet(^(id anyID, DialogType type) {
@@ -244,6 +248,14 @@
     .wTrackTintColorSet(DialogColor(0xF3F4F6))
     //自定义弹窗时是否添加底部的确定取消按钮
     .wAddBottomViewSet(YES)
+    //地区联动 显示的层级 支持只显示1 2 3层
+    .wLocationTypeSet(3)
+    //联动的样式  tableview列表或者pickview显示
+    .wChainTypeSet(ChainPickView)
+    //日期时间
+    .wDateTimeTypeSet(@"yyyy年MM月dd日HH时mm分ss秒")
+    //开启pickview无限循环
+    .wPickRepeatSet(NO)
     //开始
     .wStart();
 }

@@ -47,7 +47,7 @@
     })
     .wTypeSet(DialogTypeMenusSelect)
     .wDataSet(data).wStart();
-    
+
     //更新无限极菜单 外部传入数据
     [alert updateMenuChildrenDataWithSection:1 withUpdateChildren:NO  withData:@[
                                                                                  @{

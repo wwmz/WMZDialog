@@ -7,7 +7,7 @@
 //
 
 #import "WMZDiaLogBase.h"
-
+#define pickViewCount 100
 NS_ASSUME_NONNULL_BEGIN
 
 @interface WMZDialog : WMZDiaLogBase<UITableViewDataSource,UITableViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource>
@@ -67,6 +67,10 @@ WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,              
 WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, NSArray* ,                wTableViewColor)
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wNavigationItem)
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, NSTextAlignment,          wTextAlignment)
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, NSInteger,                wLocationType)
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, ChainType,                wChainType)
+WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, NSString*,                wDateTimeType)
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wPickRepeat)
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, diaLogCellCallBlock,      wMyCell)
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, diaLogMyViewCallBlock,    wMyDiaLogView)
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogClickBlock,         wEventOKFinish)
@@ -74,6 +78,7 @@ WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogClickBlock,  
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogTableClickBlock,    wEventFinish)
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogClickBlock,         wEventClose)
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogMenuClickBlock,     wEventMenuClick)
+
 /*=========================================Attributes==========================================*/
 
 /*=========================================参数说明=====================================================================
@@ -148,6 +153,12 @@ wTrackTintColor      进度条动作时候的颜色              UIColor        
 =========================================menu=============================================================================
 wTableViewColor      tableview的背景颜色              NSArray                  -             FFFFFF/F6F7FA/EBECF0/666666     -
  
+=========================================location============================================================================
+wLocationType        地区关联层级                     NSInteger              1/2/3                   3                      -
+wChainType           关联层级的样式                   ChainType        tableview/pickView      ChainPickView                 -
+=========================================datePicker==========================================================================
+wDateTimeType        时间选择器样式                   NSString  yyyy年MM月dd日HH时mm分ss秒(自由组合) yyyy:MM:dd HH:mm:ss       -
+wPickRepeat         pickView无限循环                  BOOL                   -                     yes                    -
 =========================================my===============================================================================
 wAddBottomView       是否添加底部按钮                   BOOL                   -                     NO                     -
 wMyDiaLogView        自定义弹窗View(返回最底部的view)     -                     -                     -                      -

@@ -29,6 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 
+
 @interface WMZDiaLogBase : UIViewController
 /*
  *标题
@@ -79,10 +80,17 @@ NS_ASSUME_NONNULL_BEGIN
  *转化为树形数据
  */
 @property(nonatomic,strong)WMZTree *tree;
+
+
 /*
  *树形数据深度
  */
 @property (nonatomic, assign) NSInteger depth;
+
+/*
+ *加锁
+ */
+@property(nonatomic,strong)NSConditionLock *theLock;
 /*
  *已经关闭
  */
@@ -135,6 +143,18 @@ NS_ASSUME_NONNULL_BEGIN
  *
  */
 - (void)selectWithTableView:(UITableView *)tableView withIndexPath:(NSIndexPath*)indexPath;
+
+/*
+ * 获取树形结构的选中的数据
+ *
+ */
+- (NSArray*)getTreeSelectDataArr;
+
+/*
+ * 获取年月对应的天数
+ *
+ */
+- (NSArray*)timeDayWithArr:(NSArray*)arr withName:(NSString*)name;
 @end
 
 NS_ASSUME_NONNULL_END
