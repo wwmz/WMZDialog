@@ -314,8 +314,8 @@ Dialog().wTypeSet(DialogTypeNornal).wStart();
          //需要返回最底部的view
          return te;
      }) .wStart();
-     
-     
+```
+
 * * *
 ##20190815 
 ##新增选择地区弹窗和日期选择弹窗
@@ -354,5 +354,4 @@ Dialog()
 .wMessageColorSet([UIColor redColor])
 .wMessageFontSet(18)
 .wStart();
-```
 ```
