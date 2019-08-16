@@ -73,10 +73,11 @@ static NSString *progressViewKey = @"progressView"; //progressView的key
         if (self.wEventFinish) {
             self.wEventFinish(@"下载完成",nil, self.wType);
         }
-        __weak typeof(self) weakWMZSelf = self;
+        DialogWeakSelf(self)
         Dialog()
         .wEventOKFinishSet(^(id anyID, id otherData) {
-            [weakWMZSelf closeView];
+            DialogStrongSelf(self)
+            [self closeView];
         })
         .wShadowCanTapSet(NO)
         .wMessageSet(@"下载完成").wStart();

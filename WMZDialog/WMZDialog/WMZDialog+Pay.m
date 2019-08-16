@@ -160,11 +160,12 @@ static NSString *selectPayViewKey = @"selectPayView"; //selectPayView的key
 }
 
 - (void)selectAction:(UIButton*)sender{
-    __weak typeof(self) weakWMZSelf = self;
+    DialogWeakSelf(self)
     Dialog()
     .wEventFinishSet(^(id anyID,NSIndexPath *path,DialogType type) {
+        DialogStrongSelf(self)
         if (anyID) {
-           UIButton *selectBtn = [weakWMZSelf.selectPayView viewWithTag:222];
+           UIButton *selectBtn = [self.selectPayView viewWithTag:222];
            [selectBtn setTitle:anyID forState:UIControlStateNormal];
         }
     })

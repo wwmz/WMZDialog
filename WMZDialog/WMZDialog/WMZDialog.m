@@ -343,7 +343,7 @@ WMZDialogSetFuncImplementation(WMZDialog, NSTextAlignment,      wTextAlignment)
     self.shadowView.backgroundColor = _wShadowColor;
     self.shadowView.alpha = _wShadowAlpha;
     
-    if (_wShadowCanTap) {
+    if (self.wShadowCanTap) {
         self.shadowView.userInteractionEnabled = YES;
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(closeView)];
         [self.shadowView addGestureRecognizer:tap];
@@ -377,11 +377,12 @@ WMZDialogSetFuncImplementation(WMZDialog, NSTextAlignment,      wTextAlignment)
     if (self.wType == DialogTypePay || self.wType == DialogTypeWrite) {
         [self.mainView endEditing:YES];
     }
-    [self dismissViewControllerAnimated:YES completion:nil];
-
+   
     if (self.wEventClose) {
         self.wEventClose(@"关闭", nil);
     }
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 /*
@@ -485,6 +486,7 @@ WMZDialogSetFuncImplementation(WMZDialog, NSTextAlignment,      wTextAlignment)
         }
         cell.textLabel.textAlignment = self.wTextAlignment;
         cell.textLabel.font = [UIFont systemFontOfSize:self.wMessageFont];
+        cell.selectionStyle = UITableViewCellSelectionStyleDefault;
         if ([data isKindOfClass:[WMZTree class]]) {
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             WMZTree *selectDic = (WMZTree*)data;
@@ -520,10 +522,10 @@ WMZDialogSetFuncImplementation(WMZDialog, NSTextAlignment,      wTextAlignment)
     }else if (self.wType == DialogTypeBuyCar) {
         return;
     }else{
-        [self closeView];
         if (self.wEventFinish) {
             self.wEventFinish(self.wData[indexPath.row], indexPath,self.wType);
         }
+        [self closeView];
     }
 }
 
@@ -668,21 +670,20 @@ WMZDialogSetFuncImplementation(WMZDialog, NSTextAlignment,      wTextAlignment)
  *取消
  */
 - (void)cancelAction:(UIButton*)btn{
-    [self closeView];
     if (self.wEventCancelFinish) {
         self.wEventCancelFinish(@"取消",nil);
     }
+    [self closeView];
 }
 
 /*
  *确定
  */
 - (void)OKAction:(UIButton*)btn{
-    [self closeView];
     if (self.wEventOKFinish) {
         self.wEventOKFinish(@"确定",nil);
     }
-
+    [self closeView];
 }
 
 
@@ -692,8 +693,6 @@ WMZDialogSetFuncImplementation(WMZDialog, NSTextAlignment,      wTextAlignment)
                                @(DialogTypeNornal):@"normalAction",
                                @(DialogTypeSheet):@"sheetAction",
                                @(DialogTypeAuto):@"autoDisappealAction",
-                               @(DialogTypeSystemPush):@"systemAction",
-                               @(DialogTypeSystemSheet):@"systemSheetAction",
                                @(DialogTypePay):@"payAction",
                                @(DialogTypeShare):@"shareAction",
                                @(DialogTypeWrite):@"writeAction",
@@ -714,6 +713,7 @@ WMZDialogSetFuncImplementation(WMZDialog, NSTextAlignment,      wTextAlignment)
 }
 
 - (void)dealloc{
+    NSLog(@"xiaohui");
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }

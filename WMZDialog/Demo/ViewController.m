@@ -12,6 +12,7 @@
 {
     WMZDialog *alert;
 }
+@property(nonatomic,strong)NSString *name;
 @end
 
 @implementation ViewController
@@ -36,13 +37,13 @@
     
     
     self.view.backgroundColor = [UIColor whiteColor];
-    NSArray *arr =@[@"普通弹窗",@"底部弹窗",@"自动消失弹窗",@"系统弹窗",@"系统单选弹窗",@"支付弹窗",@"分享弹窗",@"自适应编辑弹窗",@"选择弹窗",@"拾取器弹窗",@"倒计时弹窗",@"上下左右弹出列表",@"下载弹窗",@"下拉无限级菜单弹窗",@"广告弹窗",@"购物车弹窗",@"地区弹窗",@"日期时间弹窗",@"自定义弹窗"];
+    NSArray *arr =@[@"普通弹窗",@"底部弹窗",@"自动消失弹窗",@"支付弹窗",@"分享弹窗",@"自适应编辑弹窗",@"选择弹窗",@"拾取器弹窗",@"倒计时弹窗",@"上下左右弹出列表",@"下载弹窗",@"下拉无限级菜单弹窗",@"广告弹窗",@"购物车弹窗",@"地区弹窗",@"日期时间弹窗",@"自定义弹窗"];
     
     for (int i = 0; i<arr.count; i++) {
         CGFloat X = (i % 2) * ([UIScreen mainScreen].bounds.size.width/3 + 20);
         CGFloat Y = (i / 2) * (40 + 20);
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        btn.tag = i;
+        btn.tag = i+1;
         btn.titleLabel.font = [UIFont systemFontOfSize:14];
         btn.backgroundColor = [UIColor cyanColor];
         [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -67,9 +68,14 @@
                  @[@"数据31",@"数据32",@"数据33",@"数据34"],
                  @[@"数据41",@"数据42",@"数据43",@"数据44"]];
     }else if (temp.tag == DialogTypeMyView) {
+        DialogWeakSelf(self)
          Dialog()
         .wTypeSet(temp.tag)
         .wAddBottomViewSet(YES)
+        .wEventOKFinishSet( ^(id anyID, id otherData) {
+            DialogStrongSelf(self)
+            NSLog(@"%@ %@",anyID,self.name);
+        })
         .wMyDiaLogViewSet(^UIView *(UIView *mainView) {
             UILabel *la = [UILabel new];
             la.text = @"外部自定义的文本";
@@ -98,27 +104,8 @@
     }else if (temp.tag == DialogTypeTime) {
         data = @"100";
     }else if (temp.tag == DialogTypeDown){
-        data = @(0.0);
-        __block CGFloat seconds = 0;
-        dispatch_queue_t global = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-        dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, global);
-        dispatch_source_set_timer(timer, DISPATCH_TIME_NOW, 1.0 * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
-        dispatch_source_set_event_handler(timer, ^{
-            if (seconds>=1) {
-                dispatch_source_cancel(timer);
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    
-                });
-            }else{
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if(![alert updateAlertTypeDownProgress:seconds]){
-                        dispatch_source_cancel(timer);
-                    }
-                });
-            }
-            seconds+=0.2;
-        });
-        dispatch_resume(timer);
+        [self.navigationController pushViewController:[NSClassFromString(@"DownVC") new] animated:YES];
+        return;
     }else if(temp.tag == DialogTypeMenusSelect){
         [self.navigationController pushViewController:[NSClassFromString(@"MenusSelectVC") new] animated:YES];
         return;
@@ -134,7 +121,7 @@
     }else{
         data = @[@"数据1",@"数据2",@"数据3",@"数据4",@"数据5",@"数据6",@"数据7"];
     }
-    alert = Dialog()
+     Dialog()
     //自定义cell内容
 //    .wMyCellSet(^UITableViewCell *(NSIndexPath *indexPath, UITableView *tableView, id model) {
 //    })

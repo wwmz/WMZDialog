@@ -47,12 +47,13 @@ Dialog() \
 #define DialogColor(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 #define DialogK1px (1 / UIScreen.mainScreen.scale)
 
+#define DialogWeakSelf(type)  __weak typeof(type) weak##type = type;
+#define DialogStrongSelf(type) __strong typeof(type) type = weak##type;
+
 typedef enum : NSUInteger{
-    DialogTypeNornal,               //默认弹窗
+    DialogTypeNornal = 1,           //默认弹窗
     DialogTypeSheet,                //底部弹窗
     DialogTypeAuto,                 //默认弹窗自动消失
-    DialogTypeSystemPush,           //系统弹窗
-    DialogTypeSystemSheet,          //系统底部弹窗
     DialogTypePay,                  //支付密码框
     DialogTypeShare,                //带分享的弹窗
     DialogTypeWrite,                //带编辑框的弹窗

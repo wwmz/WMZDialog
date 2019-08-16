@@ -21,15 +21,32 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    __weak typeof(self) weakWMZSelf = self;
+    NSArray *arr = @[@"一级",@"二级",@"三级",@"四级"];
+    for (int i = 0; i<arr.count; i++) {
+        CGFloat X = (i % 2) * ([UIScreen mainScreen].bounds.size.width/3 + 20);
+        CGFloat Y = (i / 2) * (40 + 20);
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        btn.tag = i;
+        btn.titleLabel.font = [UIFont systemFontOfSize:14];
+        btn.backgroundColor = [UIColor cyanColor];
+        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [btn setTitle:arr[i] forState:UIControlStateNormal];
+        [btn addTarget:self action:@selector(action:) forControlEvents:UIControlEventTouchUpInside];
+        btn.frame = CGRectMake(X+50, Y+100, [UIScreen mainScreen].bounds.size.width/3, 40);
+        [self.view addSubview:btn];
+    }
+}
+
+
+- (void)action:(UIButton*)sender{
+    DialogWeakSelf(self)
     
     id data = nil;
-    NSInteger num = arc4random() % 6;
-    if (num == 0) {
+    if (sender.tag == 0) {
         data = [self getArr];
-    } else if (num == 1) {
+    } else if (sender.tag == 1) {
         data = [self getArr1];
-    }else if (num == 2) {
+    }else if (sender.tag == 2) {
         data = [self getArr2];
     }else{
         data = [self getArr3];
@@ -37,36 +54,19 @@
     alert = Dialog()
     //关闭事件
     .wEventCloseSet(^(id anyID, id otherData) {
-        [weakWMZSelf.navigationController popViewControllerAnimated:YES];;
+        //此时 需要手动置为nil 否则会持有alert导致无法销毁
+        alert = nil;
     })
     //下拉无限级菜单选中事件
     .wEventMenuClickSet( ^(id anyID, NSInteger section, NSInteger row) {
         //外部更新数据
-        [weakWMZSelf selectMenu:section withRow:row];
+        DialogStrongSelf(self)
+        [self selectMenu:section withRow:row];
         NSLog(@"菜单点击方法 当前选中值:%@ 当前选中列:%ld 当前选中行:%ld",anyID,section,row);
     })
     .wTypeSet(DialogTypeMenusSelect)
     .wDataSet(data).wStart();
-
-    //更新无限极菜单 外部传入数据
-    [alert updateMenuChildrenDataWithSection:1 withUpdateChildren:NO  withData:@[
-                                                                                 @{
-                                                                                     @"name":@"改变1",
-                                                                                     @"id":@"111",
-                                                                                     },
-                                                                                 @{
-                                                                                     @"name":@"改变2",
-                                                                                     @"id":@"112",
-                                                                                     },
-                                                                                 @{
-                                                                                     @"name":@"改变3",
-                                                                                     @"id":@"113",
-                                                                                     },
-                                                                                 @{
-                                                                                     @"name":@"改变4",
-                                                                                     @"id":@"113",
-                                                                                     }
-                                                                                 ]];
+    
 }
 
 - (void)selectMenu:(NSInteger)section withRow:(NSInteger)row{
@@ -940,5 +940,6 @@
                  },
              ];
 }
+
 
 @end

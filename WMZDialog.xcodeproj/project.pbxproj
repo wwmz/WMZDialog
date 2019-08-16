@@ -37,6 +37,7 @@
 		184C26862305439C00679FCA /* LocationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 184C267F2305439C00679FCA /* LocationVC.m */; };
 		184C26872305439C00679FCA /* MenusSelectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 184C26812305439C00679FCA /* MenusSelectVC.m */; };
 		184C26882305439C00679FCA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184C26832305439C00679FCA /* ViewController.m */; };
+		184C26CE2306691800679FCA /* DownVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 184C26CD2306691800679FCA /* DownVC.m */; };
 		1871671422A76AFB001C6B41 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1871671322A76AFB001C6B41 /* AppDelegate.m */; };
 		1871671A22A76AFB001C6B41 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1871671822A76AFB001C6B41 /* Main.storyboard */; };
 		1871671C22A76B03001C6B41 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1871671B22A76B03001C6B41 /* Assets.xcassets */; };
@@ -48,8 +49,6 @@
 		1871674E22A76F80001C6B41 /* WMZDialogTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1871674D22A76F80001C6B41 /* WMZDialogTool.m */; };
 		1871675422A76FDE001C6B41 /* WMZDialog+AutoDisappear.m in Sources */ = {isa = PBXBuildFile; fileRef = 1871675322A76FDE001C6B41 /* WMZDialog+AutoDisappear.m */; };
 		1871675B22A7AC4C001C6B41 /* WMZDialog+Normal.m in Sources */ = {isa = PBXBuildFile; fileRef = 1871675A22A7AC4C001C6B41 /* WMZDialog+Normal.m */; };
-		1871675E22A90EC8001C6B41 /* WMZDialog+System.m in Sources */ = {isa = PBXBuildFile; fileRef = 1871675D22A90EC8001C6B41 /* WMZDialog+System.m */; };
-		1871676422A90F5E001C6B41 /* WMZDialog+SystemSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 1871676322A90F5E001C6B41 /* WMZDialog+SystemSheet.m */; };
 		1871676722A919AD001C6B41 /* WMZDialog+Pay.m in Sources */ = {isa = PBXBuildFile; fileRef = 1871676622A919AD001C6B41 /* WMZDialog+Pay.m */; };
 		18C1E04722BCBE900043FF73 /* WMZDiaLogBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C1E04622BCBE900043FF73 /* WMZDiaLogBase.m */; };
 		18E0D3DB22BA2509005C94EB /* WMZDialog+Write.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E0D3DA22BA2509005C94EB /* WMZDialog+Write.m */; };
@@ -141,6 +140,8 @@
 		184C26812305439C00679FCA /* MenusSelectVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenusSelectVC.m; sourceTree = "<group>"; };
 		184C26822305439C00679FCA /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		184C26832305439C00679FCA /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		184C26CC2306691800679FCA /* DownVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DownVC.h; sourceTree = "<group>"; };
+		184C26CD2306691800679FCA /* DownVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DownVC.m; sourceTree = "<group>"; };
 		1871670F22A76AFB001C6B41 /* WMZDialog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WMZDialog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1871671222A76AFB001C6B41 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1871671322A76AFB001C6B41 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -164,10 +165,6 @@
 		1871675322A76FDE001C6B41 /* WMZDialog+AutoDisappear.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WMZDialog+AutoDisappear.m"; sourceTree = "<group>"; };
 		1871675922A7AC4C001C6B41 /* WMZDialog+Normal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WMZDialog+Normal.h"; sourceTree = "<group>"; };
 		1871675A22A7AC4C001C6B41 /* WMZDialog+Normal.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WMZDialog+Normal.m"; sourceTree = "<group>"; };
-		1871675C22A90EC8001C6B41 /* WMZDialog+System.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WMZDialog+System.h"; sourceTree = "<group>"; };
-		1871675D22A90EC8001C6B41 /* WMZDialog+System.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WMZDialog+System.m"; sourceTree = "<group>"; };
-		1871676222A90F5E001C6B41 /* WMZDialog+SystemSheet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WMZDialog+SystemSheet.h"; sourceTree = "<group>"; };
-		1871676322A90F5E001C6B41 /* WMZDialog+SystemSheet.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WMZDialog+SystemSheet.m"; sourceTree = "<group>"; };
 		1871676522A919AD001C6B41 /* WMZDialog+Pay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WMZDialog+Pay.h"; sourceTree = "<group>"; };
 		1871676622A919AD001C6B41 /* WMZDialog+Pay.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WMZDialog+Pay.m"; sourceTree = "<group>"; };
 		18C1E04522BCBE900043FF73 /* WMZDiaLogBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMZDiaLogBase.h; sourceTree = "<group>"; };
@@ -271,6 +268,8 @@
 				184C267F2305439C00679FCA /* LocationVC.m */,
 				184C26802305439C00679FCA /* MenusSelectVC.h */,
 				184C26812305439C00679FCA /* MenusSelectVC.m */,
+				184C26CC2306691800679FCA /* DownVC.h */,
+				184C26CD2306691800679FCA /* DownVC.m */,
 				184C26822305439C00679FCA /* ViewController.h */,
 				184C26832305439C00679FCA /* ViewController.m */,
 			);
@@ -349,10 +348,6 @@
 				18E0D3E322BCABF7005C94EB /* WMZDialog+Sheet.m */,
 				1871675222A76FDE001C6B41 /* WMZDialog+AutoDisappear.h */,
 				1871675322A76FDE001C6B41 /* WMZDialog+AutoDisappear.m */,
-				1871675C22A90EC8001C6B41 /* WMZDialog+System.h */,
-				1871675D22A90EC8001C6B41 /* WMZDialog+System.m */,
-				1871676222A90F5E001C6B41 /* WMZDialog+SystemSheet.h */,
-				1871676322A90F5E001C6B41 /* WMZDialog+SystemSheet.m */,
 				1871676522A919AD001C6B41 /* WMZDialog+Pay.h */,
 				1871676622A919AD001C6B41 /* WMZDialog+Pay.m */,
 				18EE45E622AE2CE7008C93E6 /* WMZDialog+Share.h */,
@@ -516,6 +511,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				181DE8B122D323E4005DAE59 /* WMZDialog+BuyCar.m in Sources */,
+				184C26CE2306691800679FCA /* DownVC.m in Sources */,
 				181DE8D722D326A7005DAE59 /* MASCompositeConstraint.m in Sources */,
 				181DE8E022D326A7005DAE59 /* ViewController+MASAdditions.m in Sources */,
 				184C26842305439C00679FCA /* BuyCarVC.m in Sources */,
@@ -552,8 +548,6 @@
 				1871675B22A7AC4C001C6B41 /* WMZDialog+Normal.m in Sources */,
 				181DE8DE22D326A7005DAE59 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				181DE8EB22D33096005DAE59 /* tagOneCell.m in Sources */,
-				1871675E22A90EC8001C6B41 /* WMZDialog+System.m in Sources */,
-				1871676422A90F5E001C6B41 /* WMZDialog+SystemSheet.m in Sources */,
 				181DE8E122D326A7005DAE59 /* WMZTagBtn.m in Sources */,
 				181DE8D922D326A7005DAE59 /* MASConstraintMaker.m in Sources */,
 				181F17FF22C0668D00B422CD /* WMZDialog+time.m in Sources */,
