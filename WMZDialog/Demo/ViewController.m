@@ -143,15 +143,15 @@
         NSLog(@"菜单点击方法 当前选中值:%@ 当前选中列:%ld 当前选中行:%ld",anyID,section,row);
     })
     //关闭事件
-    .wEventCloseSet(^(id anyID, DialogType type) {
+    .wEventCloseSet(^(id anyID, id otherData) {
         NSLog(@"关闭");
     })
     //点击确定事件
-    .wEventOKFinishSet(^(id anyID, DialogType type) {
+    .wEventOKFinishSet(^(id anyID, id otherData) {
         NSLog(@"确定 %@",anyID);
     })
     //点击取消事件
-    .wEventCancelFinishSet(^(id anyID, DialogType type) {
+    .wEventCancelFinishSet(^(id anyID, id otherData) {
         NSLog(@"取消");
     })
     //完成操作事件

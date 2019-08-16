@@ -380,7 +380,7 @@ WMZDialogSetFuncImplementation(WMZDialog, NSTextAlignment,      wTextAlignment)
     [self dismissViewControllerAnimated:YES completion:nil];
 
     if (self.wEventClose) {
-        self.wEventClose(@"关闭", self.wType);
+        self.wEventClose(@"关闭", nil);
     }
 }
 
@@ -670,7 +670,7 @@ WMZDialogSetFuncImplementation(WMZDialog, NSTextAlignment,      wTextAlignment)
 - (void)cancelAction:(UIButton*)btn{
     [self closeView];
     if (self.wEventCancelFinish) {
-        self.wEventCancelFinish(@"取消",self.wType);
+        self.wEventCancelFinish(@"取消",nil);
     }
 }
 
@@ -680,7 +680,7 @@ WMZDialogSetFuncImplementation(WMZDialog, NSTextAlignment,      wTextAlignment)
 - (void)OKAction:(UIButton*)btn{
     [self closeView];
     if (self.wEventOKFinish) {
-        self.wEventOKFinish(@"确定",self.wType);
+        self.wEventOKFinish(@"确定",nil);
     }
 
 }

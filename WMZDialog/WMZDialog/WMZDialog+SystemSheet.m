@@ -19,7 +19,7 @@
         for (NSString *str in self.wData) {
             UIAlertAction *okAction = [UIAlertAction actionWithTitle:str style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 if (weakWMZSelf.wEventOKFinish) {
-                    weakWMZSelf.wEventOKFinish(str,self.wType);
+                    weakWMZSelf.wEventOKFinish(str,nil);
                 }
             }];
             
@@ -32,7 +32,7 @@
     
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:self.wCancelTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         if (weakWMZSelf.wEventCancelFinish) {
-            weakWMZSelf.wEventCancelFinish(@"取消",self.wType);
+            weakWMZSelf.wEventCancelFinish(@"取消",nil);
         }
     }];
     [cancelAction setValue:self.wCancelColor forKey:@"_titleTextColor"];

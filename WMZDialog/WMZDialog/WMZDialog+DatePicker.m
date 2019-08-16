@@ -28,11 +28,11 @@
     
     NSDictionary *dateDic = @{
                           @"yyyy":[NSString stringWithFormat:@"%ld",[components year]],
-                          @"MM":[NSString stringWithFormat:@"%ld",[components month]],
-                          @"dd":[NSString stringWithFormat:@"%ld",[components day]],
-                          @"HH":[NSString stringWithFormat:@"%ld",[components hour]],
-                          @"mm":[NSString stringWithFormat:@"%ld",[components minute]],
-                          @"ss":[NSString stringWithFormat:@"%ld",[components second]],
+                          @"MM":[components month]<10?[NSString stringWithFormat:@"0%ld",[components month]]:[NSString stringWithFormat:@"%ld",[components month]],
+                          @"dd":[components day]<10?[NSString stringWithFormat:@"0%ld",[components day]]:[NSString stringWithFormat:@"%ld",[components day]],
+                          @"HH":[components hour]<10?[NSString stringWithFormat:@"0%ld",[components hour]]:[NSString stringWithFormat:@"%ld",[components hour]],
+                          @"mm":[components minute]<10?[NSString stringWithFormat:@"0%ld",[components minute]]:[NSString stringWithFormat:@"%ld",[components minute]],
+                          @"ss":[components second]<10?[NSString stringWithFormat:@"0%ld",[components second]]:[NSString stringWithFormat:@"%ld",[components second]],
                           };
     
     NSDictionary *formatDic = @{
@@ -47,7 +47,8 @@
     NSArray *arr = @[@"yyyy",@"MM",@"dd",@"HH",@"mm",@"ss"];
     self.selectArr = [NSMutableArray new];
     for (NSString *obj in arr) {
-        NSString *str = [NSString stringWithFormat:@"%@",dateDic[obj]];
+        NSString *str = dateDic[obj];
+        
         if ([self.wDateTimeType containsString:obj]) {
             BOOL append = false;
             if ([self.wDateTimeType containsString:formatDic[obj]]) {
@@ -98,8 +99,7 @@
         NSString *value = self.selectArr[i];
         NSInteger index = [arr indexOfObject:value];
         if (index<arr.count) {
-            index += (self.wPickRepeat?(pickViewCount/2*arr.count):0);
-            [self.pickView selectRow:index inComponent:i animated:YES];
+            [self.pickView selectRow:index+(self.wPickRepeat?(pickViewCount/2*arr.count):0) inComponent:i animated:YES];
         }
     }
     
@@ -157,14 +157,16 @@
     [self closeView];
     if (self.wEventOKFinish) {
        NSMutableArray *mArr = [NSMutableArray new];
+       NSMutableArray *orginArr = [NSMutableArray new];
        for (int i = 0; i<[self.wData count]; i++) {
        NSArray *arr = self.wData[i];
        NSString *str = arr [self.wPickRepeat?[self.pickView selectedRowInComponent:i]%arr.count:[self.pickView selectedRowInComponent:i]];
+       [orginArr addObject:str];
        NSCharacterSet* nonDigits =[[NSCharacterSet decimalDigitCharacterSet] invertedSet];
        NSString * remainSecond = [str stringByTrimmingCharactersInSet:nonDigits];
        [mArr addObject:remainSecond];
        }
-       self.wEventOKFinish(mArr, self.wType);
+       self.wEventOKFinish(mArr, orginArr);
     }
 }
 

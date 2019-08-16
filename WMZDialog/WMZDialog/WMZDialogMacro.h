@@ -93,7 +93,7 @@ typedef enum : NSUInteger{
 /*
  * 点击
  */
-typedef void (^DialogClickBlock)(id anyID,DialogType type);
+typedef void (^DialogClickBlock)(id anyID,id otherData);
 
 /*
  * 多列表点击

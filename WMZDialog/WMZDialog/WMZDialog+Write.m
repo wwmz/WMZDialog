@@ -113,7 +113,7 @@ static NSString *oneLineHeightKey = @"oneLineHeight"; //oneLineHeight的key
     [self.writeView resignFirstResponder];
     [self closeView];
     if (self.wEventOKFinish) {
-        self.wEventOKFinish(self.writeView.text,self.wType);
+        self.wEventOKFinish(self.writeView.text,nil);
     }
 }
 #pragma clang diagnostic pop

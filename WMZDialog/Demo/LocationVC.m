@@ -37,7 +37,7 @@
 
 - (void)action:(UIButton*)sender{
     Dialog()
-    .wEventOKFinishSet(^(id anyID, DialogType type) {
+    .wEventOKFinishSet(^(id anyID, id otherData) {
         NSLog(@"选中 %@",anyID);
     })
     .wChainTypeSet(sender.tag<4?ChainPickView:ChainTableView)

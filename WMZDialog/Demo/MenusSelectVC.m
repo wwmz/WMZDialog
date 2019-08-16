@@ -36,7 +36,7 @@
     }
     alert = Dialog()
     //关闭事件
-    .wEventCloseSet(^(id anyID, DialogType type) {
+    .wEventCloseSet(^(id anyID, id otherData) {
         [weakWMZSelf.navigationController popViewControllerAnimated:YES];;
     })
     //下拉无限级菜单选中事件

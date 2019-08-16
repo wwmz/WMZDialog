@@ -51,7 +51,7 @@
     .wTitleSet(@"请选择")
     .wOKColorSet([UIColor whiteColor])
     //关闭事件
-    .wEventCloseSet(^(id anyID, DialogType type) {
+    .wEventCloseSet(^(id anyID, id otherData) {
         [weakWMZSelf.navigationController popViewControllerAnimated:YES];
     })
     //完成操作事件

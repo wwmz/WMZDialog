@@ -50,7 +50,7 @@
                           @(6):@"yyyy-MM-dd HH",
                           };
     Dialog()
-    .wEventOKFinishSet(^(id anyID, DialogType type) {
+    .wEventOKFinishSet(^(id anyID, id otherData) {
         NSLog(@"选中 %@",anyID);
     })
     .wDateTimeTypeSet(mdic[@(sender.tag)])

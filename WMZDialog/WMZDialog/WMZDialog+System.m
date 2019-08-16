@@ -16,7 +16,7 @@
     
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:self.wOKTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         if (weakWMZSelf.wEventOKFinish) {
-            weakWMZSelf.wEventOKFinish(@"确定",self.wType);
+            weakWMZSelf.wEventOKFinish(@"确定",nil);
         }
     }];
     [okAction setValue:self.wOKColor forKey:@"_titleTextColor"];
@@ -25,7 +25,7 @@
 
     if (self.wEventCancelFinish) {
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:self.wCancelTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                weakWMZSelf.wEventCancelFinish(@"取消",self.wType);
+                weakWMZSelf.wEventCancelFinish(@"取消",nil);
         }];
         [cancelAction setValue:self.wCancelColor forKey:@"_titleTextColor"];
         [alert addAction:cancelAction];

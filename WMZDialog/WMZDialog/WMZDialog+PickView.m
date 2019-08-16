@@ -49,7 +49,12 @@
     [self closeView];
     if (self.wEventOKFinish) {
         if (self.tree) {
-            self.wEventOKFinish([self getTreeSelectDataArr], self.wType);
+            NSArray *arr = [self getTreeSelectDataArr];
+            NSMutableArray *nameArr = [NSMutableArray new];
+            for (WMZTree *tree in arr) {
+                [nameArr addObject:tree.name];
+            }
+            self.wEventOKFinish(arr, nameArr);
         }else{
             NSMutableArray *mStr = [NSMutableArray new];
             for (int i = 0; i<[self.wData count]; i++) {
@@ -57,7 +62,7 @@
                 NSString *str = arr [self.wPickRepeat?[self.pickView selectedRowInComponent:i]%arr.count:[self.pickView selectedRowInComponent:i]];
                 [mStr addObject:str];
             }
-            self.wEventOKFinish(mStr, self.wType);
+            self.wEventOKFinish(mStr, nil);
         }
     }
 }

@@ -107,7 +107,12 @@
 - (void)locationPickOKAction:(UIButton*)btn{
     [self closeView];
     if (self.wEventOKFinish) {
-        self.wEventOKFinish([self getTreeSelectDataArr], self.wType);
+        NSArray *arr = [self getTreeSelectDataArr];
+        NSMutableArray *nameArr = [NSMutableArray new];
+        for (WMZTree *tree in arr) {
+            [nameArr addObject:tree.name];
+        }
+        self.wEventOKFinish(arr, nameArr);
     }
 }
 

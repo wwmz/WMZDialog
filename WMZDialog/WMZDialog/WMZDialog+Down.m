@@ -75,7 +75,7 @@ static NSString *progressViewKey = @"progressView"; //progressView的key
         }
         __weak typeof(self) weakWMZSelf = self;
         Dialog()
-        .wEventOKFinishSet(^(id anyID, DialogType type) {
+        .wEventOKFinishSet(^(id anyID, id otherData) {
             [weakWMZSelf closeView];
         })
         .wShadowCanTapSet(NO)
