@@ -13,11 +13,7 @@ typedef enum : NSUInteger{
     底部弹窗               
     DialogTypeSheet,                  
     默认弹窗自动消失
-    DialogTypeAuto,             
-    系统弹窗          
-    DialogTypeSystemPush,         
-    系统底部弹窗
-    DialogTypeSystemSheet,    
+    DialogTypeAuto,              
     支付密码框    
     DialogTypePay,               
     带分享的弹窗       
