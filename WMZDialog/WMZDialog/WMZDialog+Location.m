@@ -110,6 +110,7 @@
         NSArray *arr = [self getTreeSelectDataArr];
         NSMutableArray *nameArr = [NSMutableArray new];
         for (WMZTree *tree in arr) {
+            NSLog(@"%@",tree.name);
             [nameArr addObject:tree.name];
         }
         self.wEventOKFinish(arr, nameArr);

@@ -37,6 +37,9 @@
 
 - (void)action:(UIButton*)sender{
     Dialog()
+    .wEventMenuClickSet(^(id anyID, NSInteger section, NSInteger row) {
+        NSLog(@"选中 %@",anyID);
+    })
     .wEventOKFinishSet(^(id anyID, id otherData) {
         NSLog(@"选中 %@",anyID);
     })

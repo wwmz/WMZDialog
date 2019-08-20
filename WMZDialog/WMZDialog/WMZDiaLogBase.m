@@ -50,6 +50,7 @@
 - (NSArray*)getTreeSelectDataArr{
     self.selectArr = [NSMutableArray new];
     WMZTree *forTree = self.tree;
+    
     while (forTree.children.count) {
         forTree = [self getTreeData:forTree];
         [self.selectArr addObject:forTree];

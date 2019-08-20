@@ -632,14 +632,16 @@ WMZDialogSetFuncImplementation(WMZDialog, NSTextAlignment,      wTextAlignment)
             }
 
         }else{
+            
             for (int i = 0 ; i<dataArr.count; i++) {
                 WMZTree *tree = dataArr[i];
-                if (i == self.wPickRepeat?row%dataArr.count:row) {
+                if (i == (self.wPickRepeat?row%dataArr.count:row)) {
                     tree.isSelected = YES;
                 }else{
                     tree.isSelected = NO;
                 }
             }
+            
             [self.pickView reloadComponent:component];
         }
     }
