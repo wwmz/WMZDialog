@@ -74,7 +74,7 @@
         .wAddBottomViewSet(YES)
         .wEventOKFinishSet( ^(id anyID, id otherData) {
             DialogStrongSelf(self)
-            NSLog(@"%@ %@",anyID,self.name);
+            NSLog(@"%@ %@",anyID,strongObject.name);
         })
         .wMyDiaLogViewSet(^UIView *(UIView *mainView) {
             UILabel *la = [UILabel new];

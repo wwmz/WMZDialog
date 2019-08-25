@@ -47,8 +47,9 @@ Dialog() \
 #define DialogColor(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 #define DialogK1px (1 / UIScreen.mainScreen.scale)
 
-#define DialogWeakSelf(type)  __weak typeof(type) weak##type = type;
-#define DialogStrongSelf(type) __strong typeof(type) type = weak##type;
+#define DialogWeakSelf(obj) __weak typeof(obj) weakObject = obj;
+#define DialogStrongSelf(obj) __strong typeof(obj) strongObject = weakObject;
+
 
 typedef enum : NSUInteger{
     DialogTypeNornal = 1,           //默认弹窗

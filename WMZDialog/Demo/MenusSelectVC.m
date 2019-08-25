@@ -61,7 +61,7 @@
     .wEventMenuClickSet( ^(id anyID, NSInteger section, NSInteger row) {
         //外部更新数据
         DialogStrongSelf(self)
-        [self selectMenu:section withRow:row];
+        [strongObject selectMenu:section withRow:row];
         NSLog(@"菜单点击方法 当前选中值:%@ 当前选中列:%ld 当前选中行:%ld",anyID,section,row);
     })
     .wTypeSet(DialogTypeMenusSelect)

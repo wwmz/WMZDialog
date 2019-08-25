@@ -77,7 +77,7 @@ static NSString *progressViewKey = @"progressView"; //progressView的key
         Dialog()
         .wEventOKFinishSet(^(id anyID, id otherData) {
             DialogStrongSelf(self)
-            [self closeView];
+            [strongObject closeView];
         })
         .wShadowCanTapSet(NO)
         .wMessageSet(@"下载完成").wStart();

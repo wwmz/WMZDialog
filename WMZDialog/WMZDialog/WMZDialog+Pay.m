@@ -165,7 +165,7 @@ static NSString *selectPayViewKey = @"selectPayView"; //selectPayView的key
     .wEventFinishSet(^(id anyID,NSIndexPath *path,DialogType type) {
         DialogStrongSelf(self)
         if (anyID) {
-           UIButton *selectBtn = [self.selectPayView viewWithTag:222];
+           UIButton *selectBtn = [strongObject.selectPayView viewWithTag:222];
            [selectBtn setTitle:anyID forState:UIControlStateNormal];
         }
     })
