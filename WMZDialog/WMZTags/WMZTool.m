@@ -117,7 +117,7 @@
 + (UIColor *)stringTOColor:(NSString *)str
 {
     if (!str || [str isEqualToString:@""]) {
-        return nil;
+        return [UIColor blackColor];
     }
     if (![str hasPrefix:@"#"]) {
         str = [NSString stringWithFormat:@"#%@",str];
