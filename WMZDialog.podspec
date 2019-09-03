@@ -5,7 +5,8 @@ Pod::Spec.new do |s|
   s.license      = "Copyright (c) 2019年 WMZ. All rights reserved."
   s.summary      = "功能最多样式最多的弹窗，支持自定义视图,链式编程调用"
   s.description  = <<-DESC 
-                    
+                   普通弹窗 选择弹窗 时间选择弹窗 地区选择弹窗等
+                   注：Building Settings设置CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF为NO可以消除链  式编程的警告
                    DESC
   s.homepage     = "https://github.com/wwmz/WMZDialog"
   s.license      = "MIT"
