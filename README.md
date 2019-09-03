@@ -2,10 +2,15 @@
 控件全部采用链式编程，所有属性均可定制。(新增的日期和地区弹窗说明在后面)
 
 * * *
-##看下效果图
+## 看下效果图
 ![dialog.gif](https://upload-images.jianshu.io/upload_images/9163368-94bf77325d6d6fdd.gif?imageMogr2/auto-orient/strip)
 
-##调用枚举说明
+## 引入
+pod 'WMZDialog' ~>1.0.0       或者直接拉WMZDialog文件夹进入项目
+## 注:要消除链式编程的警告 
+要在Buildding Settings 把CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF 设为NO
+
+## 调用枚举说明
 ```
 typedef enum : NSUInteger{
     默认弹窗
@@ -41,7 +46,7 @@ typedef enum : NSUInteger{
 }DialogType;
 ```
 
-##使用说明
+## 使用说明
 ```
 #import "WMZDialog.h"
 
@@ -49,7 +54,7 @@ typedef enum : NSUInteger{
 Dialog().wTypeSet(DialogTypeNornal).wStart();
 ```
 
-##最全属性
+## 最全属性
 ```
     Dialog()
     //自定义cell内容
@@ -313,8 +318,8 @@ Dialog().wTypeSet(DialogTypeNornal).wStart();
 ```
 
 * * *
-##20190815 
-##新增选择地区弹窗和日期选择弹窗
+## 20190815 
+## 新增选择地区弹窗和日期选择弹窗
 
 (1)地区弹窗效果图
 
