@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios
   s.source       = { :git => "https://github.com/wwmz/WMZDialog.git", :tag => "1.0.0" }
   s.source_files = "WMZDialog/WMZDialog/**/*.{h,m}"
-  s.resources     = "WMZDialog/WMZDialog/province_data.xml"
+  s.resources     = "WMZDialog/WMZDialog/WMZDialog.bundlel"
   s.framework = 'UIKit'
   s.user_target_xcconfig = { 'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES' }
   s.dependency 'Masonry'
