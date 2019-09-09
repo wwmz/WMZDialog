@@ -30,7 +30,6 @@
 		181F180522C1CC1200B422CD /* WMZDialog+Down.m in Sources */ = {isa = PBXBuildFile; fileRef = 181F180422C1CC1200B422CD /* WMZDialog+Down.m */; };
 		181F180822C5F8BF00B422CD /* WMZDialog+MenusSelect.m in Sources */ = {isa = PBXBuildFile; fileRef = 181F180722C5F8BF00B422CD /* WMZDialog+MenusSelect.m */; };
 		184C26662303B24100679FCA /* WMZDialog+Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 184C26652303B24100679FCA /* WMZDialog+Location.m */; };
-		184C266C2303DBC200679FCA /* province_data.xml in Resources */ = {isa = PBXBuildFile; fileRef = 184C266B2303DBC200679FCA /* province_data.xml */; };
 		184C266F23040E6E00679FCA /* WMZDialog+DatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 184C266E23040E6E00679FCA /* WMZDialog+DatePicker.m */; };
 		184C26842305439C00679FCA /* BuyCarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 184C267B2305439C00679FCA /* BuyCarVC.m */; };
 		184C26852305439C00679FCA /* DateTimeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 184C267D2305439C00679FCA /* DateTimeVC.m */; };
@@ -56,6 +55,7 @@
 		18E0D3E122BB8567005C94EB /* WMZDialog+PickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E0D3E022BB8567005C94EB /* WMZDialog+PickView.m */; };
 		18E0D3E422BCABF7005C94EB /* WMZDialog+Sheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E0D3E322BCABF7005C94EB /* WMZDialog+Sheet.m */; };
 		18EE45E822AE2CE7008C93E6 /* WMZDialog+Share.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE45E722AE2CE7008C93E6 /* WMZDialog+Share.m */; };
+		F323DF7B23263AA00023BCFD /* WMZDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F323DF7A23263AA00023BCFD /* WMZDialog.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -127,7 +127,6 @@
 		181F180722C5F8BF00B422CD /* WMZDialog+MenusSelect.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WMZDialog+MenusSelect.m"; sourceTree = "<group>"; };
 		184C26642303B24100679FCA /* WMZDialog+Location.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WMZDialog+Location.h"; sourceTree = "<group>"; };
 		184C26652303B24100679FCA /* WMZDialog+Location.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WMZDialog+Location.m"; sourceTree = "<group>"; };
-		184C266B2303DBC200679FCA /* province_data.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = province_data.xml; sourceTree = "<group>"; };
 		184C266D23040E6E00679FCA /* WMZDialog+DatePicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WMZDialog+DatePicker.h"; sourceTree = "<group>"; };
 		184C266E23040E6E00679FCA /* WMZDialog+DatePicker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WMZDialog+DatePicker.m"; sourceTree = "<group>"; };
 		184C267A2305439C00679FCA /* BuyCarVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuyCarVC.h; sourceTree = "<group>"; };
@@ -179,6 +178,7 @@
 		18E0D3E322BCABF7005C94EB /* WMZDialog+Sheet.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WMZDialog+Sheet.m"; sourceTree = "<group>"; };
 		18EE45E622AE2CE7008C93E6 /* WMZDialog+Share.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WMZDialog+Share.h"; sourceTree = "<group>"; };
 		18EE45E722AE2CE7008C93E6 /* WMZDialog+Share.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WMZDialog+Share.m"; sourceTree = "<group>"; };
+		F323DF7A23263AA00023BCFD /* WMZDialog.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WMZDialog.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -374,7 +374,7 @@
 				184C26652303B24100679FCA /* WMZDialog+Location.m */,
 				184C266D23040E6E00679FCA /* WMZDialog+DatePicker.h */,
 				184C266E23040E6E00679FCA /* WMZDialog+DatePicker.m */,
-				184C266B2303DBC200679FCA /* province_data.xml */,
+				F323DF7A23263AA00023BCFD /* WMZDialog.bundle */,
 			);
 			path = WMZDialog;
 			sourceTree = "<group>";
@@ -484,8 +484,8 @@
 			files = (
 				1871671F22A76B03001C6B41 /* LaunchScreen.storyboard in Resources */,
 				1871671C22A76B03001C6B41 /* Assets.xcassets in Resources */,
+				F323DF7B23263AA00023BCFD /* WMZDialog.bundle in Resources */,
 				1871671A22A76AFB001C6B41 /* Main.storyboard in Resources */,
-				184C266C2303DBC200679FCA /* province_data.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

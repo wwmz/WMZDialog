@@ -14,7 +14,9 @@
 - (UIView*)locationAction{
     self.tree = [WMZTree new];
     self.tree.depth = 0;
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"province_data" ofType:@"xml"];
+
+
+    NSString *path = [self.dialogBundle pathForResource:@"province_data" ofType:@"xml"];
     NSXMLParser *parser = [[NSXMLParser alloc] initWithData:[NSData dataWithContentsOfFile:path]];
     parser.delegate = self;
     

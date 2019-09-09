@@ -101,6 +101,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSMutableArray *selectArr;
 
 /*
+ *bundle
+ */
+@property (nonatomic, strong)NSBundle *dialogBundle;
+
+/*
  *关闭
  */
 - (void)closeView;

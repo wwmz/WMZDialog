@@ -102,6 +102,14 @@
     return [NSArray arrayWithArray:dayArr];
 }
 
+- (NSBundle *)dialogBundle{
+    if (!_dialogBundle) {
+        _dialogBundle = [NSBundle bundleWithPath:[[NSBundle bundleForClass:[WMZDiaLogBase class]] pathForResource:@"WMZDialog" ofType:@"bundle"]];
+        
+    }
+    return _dialogBundle;
+}
+
 - (UILabel *)titleLabel{
     if (!_titleLabel) {
         _titleLabel = [UILabel new];
