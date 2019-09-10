@@ -293,7 +293,7 @@ Dialog().wTypeSet(DialogTypeNornal).wStart();
 
 ```
 
-（3）DialogTypeMyView（自定义弹窗）该功能不支持自定义view中的点击事件 
+（3）DialogTypeMyView（自定义弹窗）
 
 ```
    Dialog()
