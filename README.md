@@ -326,9 +326,12 @@ Dialog().wTypeSet(DialogTypeNornal).wStart();
 
 ![location1.gif](https://upload-images.jianshu.io/upload_images/9163368-5bf11bc9a6fd0d5c.gif?imageMogr2/auto-orient/strip)
 
+```
 使用参数说明：
 wLocationType   地区关联层级 （1/2/3）默认3
 wChainType       关联层级的样式（tableview/pickView）默认 ChainPickView
+```
+
 使用
 ```
 Dialog()
@@ -344,10 +347,11 @@ Dialog()
 
 ![time.gif](https://upload-images.jianshu.io/upload_images/9163368-18739f862894fb35.gif?imageMogr2/auto-orient/strip)
 
-
+```
 使用参数说明：
 wDateTimeType  时间选择器样式   yyyy:MM:dd HH:mm:ss   (可带后缀例如yyyy年也可以自由拼例如yyyy:MM)
 wPickRepeat   无限循环  (默认YES)
+```
 
 使用
 ```
