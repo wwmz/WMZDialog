@@ -17,10 +17,8 @@ WMZPropSetFuncImplementation(WMZTagParam, Boolean,          wInsertaBle)
 WMZPropSetFuncImplementation(WMZTagParam, NSString*,        wInsertPlaceholder)
 WMZPropSetFuncImplementation(WMZTagParam, Boolean,          wSelectOne)
 WMZPropSetFuncImplementation(WMZTagParam, Boolean,          wSelectMore)
-WMZPropSetFuncImplementation(WMZTagParam, Boolean ,         wDisableTransitions)
+WMZPropSetFuncImplementation(WMZTagParam, TagAlign,         wTagAlign)
 WMZPropSetFuncImplementation(WMZTagParam, Boolean ,         wHit)
-WMZPropSetFuncImplementation(WMZTagParam, Boolean,          wLineaBle)
-WMZPropSetFuncImplementation(WMZTagParam, NSInteger,        wLineNum)
 WMZPropSetFuncImplementation(WMZTagParam, CGFloat,          wRadius)
 WMZPropSetFuncImplementation(WMZTagParam, CGFloat,          wBoderWidth)
 WMZPropSetFuncImplementation(WMZTagParam, UIColor*,         wBoderColor)
@@ -31,11 +29,11 @@ WMZPropSetFuncImplementation(WMZTagParam, UIColor*,         wSelectInnerColor)
 WMZPropSetFuncImplementation(WMZTagParam, UIColor*,         wSelectColor)
 WMZPropSetFuncImplementation(WMZTagParam, UIColor* ,        wBackGroundColor)
 WMZPropSetFuncImplementation(WMZTagParam, CGFloat ,         wFont)
+WMZPropSetFuncImplementation(WMZTagParam, NSArray*,         wData)
+WMZPropSetFuncImplementation(WMZTagParam, NSArray*,         wSelectIndexData)
 WMZPropSetFuncImplementation(WMZTagParam, TagSizeType ,     wSize)
-WMZPropSetFuncImplementation(WMZTagParam, UIView*,          wParentView)
 WMZPropSetFuncImplementation(WMZTagParam, CGRect,           wFrame)
 WMZPropSetFuncImplementation(WMZTagParam, TagConstraint,    wMasonry)
-WMZPropSetFuncImplementation(WMZTagParam, NSArray*,         wData)
 WMZPropSetFuncImplementation(WMZTagParam, CGFloat,          marginLeft)
 WMZPropSetFuncImplementation(WMZTagParam, CGFloat,          marginRight)
 WMZPropSetFuncImplementation(WMZTagParam, CGFloat,          marginTop)
@@ -67,7 +65,7 @@ WMZPropSetFuncImplementation(WMZTagParam, NSString*,        selectImageName)
         _wInnerColor = MInnerColor;
         _imagePosition = TagImagePositionRight;
         _wBoderColor = MBoderColor;
-        _wBackGroundColor = [WMZTool stringTOColor:@"#666666"];
+        _wBackGroundColor = [WMZTagsTool stringTOColor:@"#eeeeee"];
         _wBoderWidth = 1;
         _wRadius = 5;
         _wInsertPlaceholder = MInsertPlaceholder;
@@ -79,6 +77,19 @@ WMZPropSetFuncImplementation(WMZTagParam, NSString*,        selectImageName)
 }
 
 
+- (NSMutableArray *)selectBtnArr{
+    if (!_selectBtnArr) {
+        _selectBtnArr = [NSMutableArray new];
+    }
+    return _selectBtnArr;
+}
+
+- (NSMutableArray *)cancelSelectDefaultBtnArr{
+    if (!_cancelSelectDefaultBtnArr) {
+        _cancelSelectDefaultBtnArr = [NSMutableArray new];
+    }
+    return _cancelSelectDefaultBtnArr;
+}
 
 WMZTagParam * TagParam(void){
     return  [WMZTagParam new];

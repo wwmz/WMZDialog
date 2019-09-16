@@ -9,6 +9,7 @@
 
 #import "BuyCarVC.h"
 #import "WMZDialog.h"
+//需要导入WMZTag https://github.com/wwmz/WMZTags
 #import "tagOneCell.h"
 @interface BuyCarVC ()
 
@@ -27,7 +28,7 @@
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         btn.tag = i;
         btn.titleLabel.font = [UIFont systemFontOfSize:14];
-        btn.backgroundColor = [UIColor cyanColor];
+        btn.backgroundColor =  DialogColor(0xE6CEAC);
         [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [btn setTitle:arr[i] forState:UIControlStateNormal];
         [btn addTarget:self action:@selector(action:) forControlEvents:UIControlEventTouchUpInside];
@@ -89,12 +90,14 @@
     .wMessageSet(@"炫龙DDR3")
     .wMessageColorSet([UIColor redColor])
     .wTitleSet(@"请选择")
+    //自动布局
+    .wCellHeightSet(0)
     .wOKColorSet([UIColor whiteColor])
     //完成操作事件
     .wEventFinishSet(^(id anyID,NSIndexPath *path, DialogType type) {
         NSLog(@"%@",anyID);
     })
-    //自定义tableviewCell
+   // 自定义tableviewCell
     .wMyCellSet(^UITableViewCell *(NSIndexPath *indexPath, UITableView *tableView, id model) {
         if (indexPath.row==myData.count-1&&[model isKindOfClass:[NSString class]]) {
             moneyCell *cell = [tableView dequeueReusableCellWithIdentifier:@"moneyCell"];

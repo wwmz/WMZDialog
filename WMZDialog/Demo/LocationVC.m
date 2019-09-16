@@ -25,7 +25,7 @@
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         btn.tag = i;
         btn.titleLabel.font = [UIFont systemFontOfSize:14];
-        btn.backgroundColor = [UIColor cyanColor];
+        btn.backgroundColor =  DialogColor(0xE6CEAC);
         [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [btn setTitle:arr[i] forState:UIControlStateNormal];
         [btn addTarget:self action:@selector(action:) forControlEvents:UIControlEventTouchUpInside];
@@ -38,11 +38,13 @@
 - (void)action:(UIButton*)sender{
     Dialog()
     .wEventMenuClickSet(^(id anyID, NSInteger section, NSInteger row) {
-        NSLog(@"选中 %@",anyID);
+        NSLog(@"选中 %@ %ld %ld",anyID,section,row);
     })
     .wEventOKFinishSet(^(id anyID, id otherData) {
-        NSLog(@"选中 %@",anyID);
+        NSLog(@"选中 %@ %@",anyID,otherData);
     })
+    //分隔符
+    .wSeparatorSet(@",")
     .wChainTypeSet(sender.tag<4?ChainPickView:ChainTableView)
     .wLocationTypeSet(sender.tag<3?sender.tag+1:3)
     .wTypeSet(DialogTypeLocation)

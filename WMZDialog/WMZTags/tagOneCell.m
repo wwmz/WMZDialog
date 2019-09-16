@@ -42,12 +42,11 @@
         .wBackGroundColorSet([UIColor whiteColor])
         .wSelectOneSet(YES)
         .wSizeSet(small)
-        .wInnerColorSet([WMZTool stringTOColor:@"#eeeeee"])
+        .wInnerColorSet([WMZTagsTool stringTOColor:@"#eeeeee"])
         .wSelectInnerColorSet([UIColor redColor])
         .wColorSet([UIColor blackColor])
-        .wSelectColorSet([UIColor whiteColor])
-        .wParentViewSet(self.contentView);
-        self.myTag = [[WMZTags alloc]initConfigureWithModel:_param];
+        .wSelectColorSet([UIColor whiteColor]);
+        self.myTag = [[WMZTags alloc]initConfigureWithModel:_param withView:self.contentView];
     }
     return self;
 }

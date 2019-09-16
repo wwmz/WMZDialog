@@ -6,34 +6,9 @@
 //  Copyright © 2019年 wmz. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import "Masonry.h"
-#import "WMZTool.h"
+#import "WMZTagsTool.h"
 NS_ASSUME_NONNULL_BEGIN
 
-
-#define MColor  [WMZTool stringTOColor:@"#5297E1"]
-#define MInnerColor  [WMZTool stringTOColor:@"#CEE1F7"]
-#define MBoderColor  [WMZTool stringTOColor:@"#5297E1"]
-
-#define MSelectColor  [WMZTool stringTOColor:@"#ED4985"]
-#define MSelectInnerColor  [WMZTool stringTOColor:@"#F4C4C4"]
-#define MSelectBoderColor  [WMZTool stringTOColor:@"#ED4985"]
-
-#define MInsertPlaceholder  @"+New tag"
-
-
-#define WMZPropStatementAndPropSetFuncStatement(propertyModifier,className, propertyPointerType, propertyName)           \
-@property(nonatomic,propertyModifier)propertyPointerType  propertyName;                                                 \
-- (className * (^) (propertyPointerType propertyName)) propertyName##Set;
-
-#define WMZPropSetFuncImplementation(className, propertyPointerType, propertyName)                                       \
-- (className * (^) (propertyPointerType propertyName))propertyName##Set{                                                \
-return ^(propertyPointerType propertyName) {                                                                            \
-_##propertyName = propertyName;                                                                                         \
-return self;                                                                                                            \
-};                                                                                                                      \
-}
 /*
  * 布局
  */
@@ -98,21 +73,27 @@ typedef enum :NSInteger{
     TagImagePositionBottom   = 3,            //图片在下，文字在上
 }TagImagePosition;
 
+
+typedef enum :NSInteger{
+    TagAlignLeft     = 0,            //左对齐
+    TagAlignRight    = 1,            //右对齐
+
+}TagAlign;
+
 @interface WMZTagParam : NSObject
 
 /* =========================================Attributes==========================================
  参数                 说明              类型                      可选值                默认值        是否必传
- wParentView         父视图            UIView                      —                   -            是
  wFrame              frame布局        CGRect                       —                   -            是（和maronsy二选一）
  wMasonry            masonry布局      TagConstraint                —                   -            是（和wFrame二选一）
  wData               数据源            NSArray                     —                    -           是
+ wSelectIndexData    默认选中的数据源(传下标)NSArray                  —                    -           是
  wType               主题             TagColorType    success/info/warning/danger      —            否
  wInsertaBle         是否可增加        Boolean                     _                  false          否
  wClosable           是否可删除        Boolean                     —                  false          否
  wSelectOne          是否可单选        Boolean                     —                  false          否
  wSelectMore         是否可多选        Boolean                     —                  false          否
- wLineaBle           是否换行          Boolean                     —                  false          否
- wLineNum            换行最大行数       Boolean                    _                    0            否
+ wTagAlign           标签对齐模式       TagAlign       TagAlignLeft/TagAlignRight   TagAlignLeft     否
  wHit                是否有边框描边     Boolean                     —                  false          否
  wRadius             圆角             CGFloat                     —              5(最大为高度的一半)   否
  wBoderWidth         边框宽度          CGFloat                     _                    1            否
@@ -147,13 +128,13 @@ WMZPropStatementAndPropSetFuncStatement(assign, WMZTagParam, Boolean,           
 WMZPropStatementAndPropSetFuncStatement(copy,   WMZTagParam, NSString*,         wInsertPlaceholder)
 WMZPropStatementAndPropSetFuncStatement(assign, WMZTagParam, Boolean,           wSelectOne)
 WMZPropStatementAndPropSetFuncStatement(assign, WMZTagParam, Boolean,           wSelectMore)
-WMZPropStatementAndPropSetFuncStatement(assign, WMZTagParam, Boolean,           wDisableTransitions)
 WMZPropStatementAndPropSetFuncStatement(assign, WMZTagParam, Boolean,           wHit)
-WMZPropStatementAndPropSetFuncStatement(assign, WMZTagParam, Boolean,           wLineaBle)
-WMZPropStatementAndPropSetFuncStatement(strong, WMZTagParam, NSArray*,          wData)
+WMZPropStatementAndPropSetFuncStatement(assign, WMZTagParam, TagAlign,          wTagAlign)
 WMZPropStatementAndPropSetFuncStatement(assign, WMZTagParam, CGFloat,           wBoderWidth)
 WMZPropStatementAndPropSetFuncStatement(assign, WMZTagParam, CGFloat,           wRadius)
 WMZPropStatementAndPropSetFuncStatement(strong, WMZTagParam, UIColor*,          wBoderColor)
+WMZPropStatementAndPropSetFuncStatement(strong, WMZTagParam, NSArray*,          wData)
+WMZPropStatementAndPropSetFuncStatement(strong, WMZTagParam, NSArray*,          wSelectIndexData)
 WMZPropStatementAndPropSetFuncStatement(strong, WMZTagParam, UIColor*,          wInnerColor)
 WMZPropStatementAndPropSetFuncStatement(strong, WMZTagParam, UIColor*,          wColor)
 WMZPropStatementAndPropSetFuncStatement(strong, WMZTagParam, UIColor*,          wSelectBoderColor)
@@ -161,9 +142,7 @@ WMZPropStatementAndPropSetFuncStatement(strong, WMZTagParam, UIColor*,          
 WMZPropStatementAndPropSetFuncStatement(strong, WMZTagParam, UIColor*,          wSelectColor)
 WMZPropStatementAndPropSetFuncStatement(strong, WMZTagParam, UIColor*,          wBackGroundColor)
 WMZPropStatementAndPropSetFuncStatement(assign, WMZTagParam, CGFloat,           wFont)
-WMZPropStatementAndPropSetFuncStatement(assign, WMZTagParam, NSInteger,         wLineNum)
 WMZPropStatementAndPropSetFuncStatement(assign, WMZTagParam, TagSizeType,       wSize)
-WMZPropStatementAndPropSetFuncStatement(strong, WMZTagParam, UIView*,           wParentView)
 WMZPropStatementAndPropSetFuncStatement(assign, WMZTagParam, CGRect,            wFrame)
 WMZPropStatementAndPropSetFuncStatement(copy,   WMZTagParam, TagConstraint,     wMasonry)
 WMZPropStatementAndPropSetFuncStatement(assign, WMZTagParam, CGFloat,           marginLeft)
@@ -181,10 +160,14 @@ WMZPropStatementAndPropSetFuncStatement(copy,   WMZTagParam, NSString*,         
 WMZPropStatementAndPropSetFuncStatement(copy,   WMZTagParam, NSString*,         imageName)
 WMZPropStatementAndPropSetFuncStatement(copy,   WMZTagParam, NSString*,         selectImageName)
 
+
 /* =========================================Attributes==========================================*/
 
-
-
+/* =========================================myProperty==========================================*/
+@property(nonatomic,strong,nullable)NSMutableArray *selectBtnArr;
+@property(nonatomic,strong)NSIndexPath *path;
+@property(nonatomic,strong)NSMutableArray *cancelSelectDefaultBtnArr;
+/* =========================================myProperty==========================================*/
 
 /* =========================================Events==============================================*/
 WMZTagParam * TagParam(void);

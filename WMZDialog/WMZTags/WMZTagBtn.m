@@ -93,44 +93,41 @@
 - (void)setUI{
     [self setTitle:self.text forState:UIControlStateNormal];
     
-    if (self.param.wLineaBle) {
-        self.titleLabel.numberOfLines = self.param.wLineNum;
-    }
     
     //定制主题
     NSDictionary *typeDic= @{
                                @(success):@{
-                                       @"wBoderColor":[WMZTool stringTOColor:@"#0BE42B"],
-                                       @"wColor":[WMZTool stringTOColor:@"#0BE42B"],
-                                       @"wInnerColor":[WMZTool stringTOColor:@"#CFF7D5"],
-                                       @"wSelectBoderColor":[WMZTool stringTOColor:@"#605C5C"],
-                                       @"wSelectColor":[WMZTool stringTOColor:@"#605C5C"],
-                                       @"wSelectInnerColor":[WMZTool stringTOColor:@"#E1DCDC"]
+                                       @"wBoderColor":[WMZTagsTool stringTOColor:@"#0BE42B"],
+                                       @"wColor":[WMZTagsTool stringTOColor:@"#0BE42B"],
+                                       @"wInnerColor":[WMZTagsTool stringTOColor:@"#CFF7D5"],
+                                       @"wSelectBoderColor":[WMZTagsTool stringTOColor:@"#605C5C"],
+                                       @"wSelectColor":[WMZTagsTool stringTOColor:@"#605C5C"],
+                                       @"wSelectInnerColor":[WMZTagsTool stringTOColor:@"#E1DCDC"]
                                        
                                        },
                                @(warning):@{
-                                       @"wBoderColor":[WMZTool stringTOColor:@"#605C5C"],
-                                       @"wColor":[WMZTool stringTOColor:@"#605C5C"],
-                                       @"wInnerColor":[WMZTool stringTOColor:@"#E1DCDC"],
-                                       @"wSelectBoderColor":[WMZTool stringTOColor:@"#0BE42B"],
-                                       @"wSelectColor":[WMZTool stringTOColor:@"#0BE42B"],
-                                       @"wSelectInnerColor":[WMZTool stringTOColor:@"#CFF7D5"]
+                                       @"wBoderColor":[WMZTagsTool stringTOColor:@"#605C5C"],
+                                       @"wColor":[WMZTagsTool stringTOColor:@"#605C5C"],
+                                       @"wInnerColor":[WMZTagsTool stringTOColor:@"#E1DCDC"],
+                                       @"wSelectBoderColor":[WMZTagsTool stringTOColor:@"#0BE42B"],
+                                       @"wSelectColor":[WMZTagsTool stringTOColor:@"#0BE42B"],
+                                       @"wSelectInnerColor":[WMZTagsTool stringTOColor:@"#CFF7D5"]
                                        },
                                @(info):@{
-                                       @"wBoderColor":[WMZTool stringTOColor:@"#F9C006"],
-                                       @"wColor":[WMZTool stringTOColor:@"#F9C006"],
-                                       @"wInnerColor":[WMZTool stringTOColor:@"#F4E7BE"],
-                                       @"wSelectBoderColor":[WMZTool stringTOColor:@"#ED4985"],
-                                       @"wSelectColor":[WMZTool stringTOColor:@"#ED4985"],
-                                       @"wSelectInnerColor":[WMZTool stringTOColor:@"#F4C4C4"]
+                                       @"wBoderColor":[WMZTagsTool stringTOColor:@"#F9C006"],
+                                       @"wColor":[WMZTagsTool stringTOColor:@"#F9C006"],
+                                       @"wInnerColor":[WMZTagsTool stringTOColor:@"#F4E7BE"],
+                                       @"wSelectBoderColor":[WMZTagsTool stringTOColor:@"#ED4985"],
+                                       @"wSelectColor":[WMZTagsTool stringTOColor:@"#ED4985"],
+                                       @"wSelectInnerColor":[WMZTagsTool stringTOColor:@"#F4C4C4"]
                                        },
                               @(danger):@{
-                                       @"wBoderColor":[WMZTool stringTOColor:@"#ED4985"],
-                                       @"wColor":[WMZTool stringTOColor:@"#ED4985"],
-                                       @"wInnerColor":[WMZTool stringTOColor:@"#F4C4C4"],
-                                       @"wSelectBoderColor":[WMZTool stringTOColor:@"#5297E1"],
-                                       @"wSelectColor":[WMZTool stringTOColor:@"#5297E1"],
-                                       @"wSelectInnerColor":[WMZTool stringTOColor:@"#CEE1F7"]
+                                       @"wBoderColor":[WMZTagsTool stringTOColor:@"#ED4985"],
+                                       @"wColor":[WMZTagsTool stringTOColor:@"#ED4985"],
+                                       @"wInnerColor":[WMZTagsTool stringTOColor:@"#F4C4C4"],
+                                       @"wSelectBoderColor":[WMZTagsTool stringTOColor:@"#5297E1"],
+                                       @"wSelectColor":[WMZTagsTool stringTOColor:@"#5297E1"],
+                                       @"wSelectInnerColor":[WMZTagsTool stringTOColor:@"#CEE1F7"]
                                        },
                                };
     
@@ -161,8 +158,7 @@
     self.backgroundColor = self.param.wInnerColor;
     [self setTitleColor:self.param.wColor forState:UIControlStateNormal];
     self.titleLabel.font = [UIFont systemFontOfSize:self.param.wFont];
-    
-    
+
     if (self.param.wHit) {
         self.layer.borderWidth = self.param.wBoderWidth;
         self.layer.borderColor = self.param.wBoderColor.CGColor;
@@ -198,11 +194,11 @@
         }
         
         if (self.param.textImageName&&self.param.textImageName.length>0) {
-            image = [WMZTool imageWithString:self.param.textImageName font:[UIFont systemFontOfSize:self.param.wFont] width:3000 textAlignment:NSTextAlignmentCenter backColor:self.param.wInnerColor color:self.param.wColor];
+            image = [WMZTagsTool imageWithString:self.param.textImageName font:[UIFont systemFontOfSize:self.param.wFont] width:3000 textAlignment:NSTextAlignmentCenter backColor:self.param.wInnerColor color:self.param.wColor];
         }
         
         if (self.param.selecTextImageName&&self.param.selecTextImageName.length>0) {
-            selectImage = [WMZTool imageWithString:self.param.selecTextImageName font:[UIFont systemFontOfSize:self.param.wFont] width:3000 textAlignment:NSTextAlignmentCenter backColor:self.param.wInnerColor color:self.param.wColor];
+            selectImage = [WMZTagsTool imageWithString:self.param.selecTextImageName font:[UIFont systemFontOfSize:self.param.wFont] width:3000 textAlignment:NSTextAlignmentCenter backColor:self.param.wInnerColor color:self.param.wColor];
         }
         
         if (image) {
@@ -238,10 +234,6 @@
         [self setTitleColor:self.param.wSelectColor forState:UIControlStateNormal];
         self.layer.borderColor = self.param.wSelectBoderColor.CGColor;
     }
-}
-
-- (NSString *)description{
-    return [NSString stringWithFormat:@"%@",self.titleLabel.text];
 }
 
 @end

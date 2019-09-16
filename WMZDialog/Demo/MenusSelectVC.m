@@ -20,19 +20,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setTitle:@"下拉无限级菜单弹窗"];
     self.view.backgroundColor = [UIColor whiteColor];
-    NSArray *arr = @[@"一级",@"二级",@"三级",@"四级"];
+    NSArray *arr = @[@"一级",@"二级",@"三级(带打钩)",@"四级"];
     for (int i = 0; i<arr.count; i++) {
         CGFloat X = (i % 2) * ([UIScreen mainScreen].bounds.size.width/3 + 20);
         CGFloat Y = (i / 2) * (40 + 20);
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         btn.tag = i;
         btn.titleLabel.font = [UIFont systemFontOfSize:14];
-        btn.backgroundColor = [UIColor cyanColor];
+        btn.backgroundColor =  DialogColor(0xE6CEAC);
         [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [btn setTitle:arr[i] forState:UIControlStateNormal];
         [btn addTarget:self action:@selector(action:) forControlEvents:UIControlEventTouchUpInside];
-        btn.frame = CGRectMake(X+50, Y+100, [UIScreen mainScreen].bounds.size.width/3, 40);
+        btn.frame = CGRectMake(X+50, Y+200, [UIScreen mainScreen].bounds.size.width/3, 40);
         [self.view addSubview:btn];
     }
 }
@@ -40,7 +41,7 @@
 
 - (void)action:(UIButton*)sender{
     DialogWeakSelf(self)
-    
+    WMZDialog *alert =  Dialog();
     id data = nil;
     if (sender.tag == 0) {
         data = [self getArr];
@@ -51,12 +52,8 @@
     }else{
         data = [self getArr3];
     }
-    alert = Dialog()
-    //关闭事件
-    .wEventCloseSet(^(id anyID, id otherData) {
-        //此时 需要手动置为nil 否则会持有alert导致无法销毁
-        alert = nil;
-    })
+    
+    alert
     //下拉无限级菜单选中事件
     .wEventMenuClickSet( ^(id anyID, NSInteger section, NSInteger row) {
         //外部更新数据
@@ -65,7 +62,19 @@
         NSLog(@"菜单点击方法 当前选中值:%@ 当前选中列:%ld 当前选中行:%ld",anyID,section,row);
     })
     .wTypeSet(DialogTypeMenusSelect)
-    .wDataSet(data).wStart();
+    .wDataSet(data);
+    
+    if (sender.tag == 2) {
+        //带打钩
+        alert.wSelectShowCheckedSet(YES)
+             .wTextAlignmentSet(NSTextAlignmentLeft);
+    }
+    if (sender.tag == 1) {
+        //改变出现的位置
+        alert.wTapViewSet(sender);
+        
+    }
+    alert.wStart();
     
 }
 

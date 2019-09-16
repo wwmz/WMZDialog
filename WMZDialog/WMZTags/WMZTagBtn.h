@@ -7,7 +7,7 @@
 //
 
 #import "WMZTagParam.h"
-#import "WMZTool.h"
+#import "WMZTagsTool.h"
 NS_ASSUME_NONNULL_BEGIN
 
 /*

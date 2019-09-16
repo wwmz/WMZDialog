@@ -6,11 +6,8 @@
 //  Copyright © 2019年 wmz. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "WMZTagParam.h"
 #import "WMZTagBtn.h"
-#define TagWitdh  [UIScreen mainScreen].bounds.size.width
-#define TagHeight [UIScreen mainScreen].bounds.size.height
 NS_ASSUME_NONNULL_BEGIN
 
 
@@ -23,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  调用方法
  *
  */
-- (instancetype)initConfigureWithModel:(WMZTagParam *)param;
+- (instancetype)initConfigureWithModel:(WMZTagParam *)param withView:(UIView*)parentView;
 
 /**
  *  更新方法

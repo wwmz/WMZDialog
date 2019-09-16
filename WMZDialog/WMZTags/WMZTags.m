@@ -12,15 +12,17 @@
 }
 //按钮数组
 @property(nonatomic,strong)NSMutableArray *btnArr;
-//判断是不是tableviewCell
-@property(nonatomic,assign)BOOL tabelViewCell;
+
 @end
 @implementation WMZTags
 
-- (instancetype)initConfigureWithModel:(WMZTagParam *)param{
+- (instancetype)initConfigureWithModel:(WMZTagParam *)param withView:(UIView*)parentView{
     if (self = [super init]) {
         self.param = param;
-        [self serUp];
+        if (parentView) {
+            [parentView addSubview:self];
+            [self serUp];
+        }
     }
     return self;
 }
@@ -29,22 +31,22 @@
 
 //更新
 - (void)updateUI{
-
-    if (self.tabelViewCell&&(self.param.wClosable||self.param.wInsertaBle)) {
-        for (WMZTagBtn *btn in self.btnArr) {
-            [btn removeFromSuperview];
-        }
-        [self.btnArr removeAllObjects];
+    for (WMZTagBtn *btn in self.btnArr) {
+        [btn removeFromSuperview];
     }
+    [self.btnArr removeAllObjects];
     [self createUI];
 }
 
 - (void)serUp{
     
-    if (!self.param.wParentView) return;
     self.userInteractionEnabled = YES;
-    [self.param.wParentView addSubview:self];
     self.param.wMasonry? [self mas_makeConstraints:self.param.wMasonry]:[self setFrame:self.param.wFrame];
+    self.btnArr = [NSMutableArray new];
+    if (self.param.wMasonry) {
+        [self.superview layoutIfNeeded];
+        
+    }
     [self createUI];
     if (self.param.wBackGroundColor) self.backgroundColor = self.param.wBackGroundColor;
     
@@ -71,10 +73,10 @@
     }
 
     //没有数据
-    if (!self.param.wData.count&&![self.param.wParentView isKindOfClass:[UITableViewCell class]]) {
+    if (!self.param.wData.count) {
         if (self.param.wMasonry) {
             [self mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.bottom.mas_equalTo(0);
+                make.height.mas_equalTo(0).priorityHigh();
             }];
             
         }else{
@@ -83,10 +85,25 @@
             self.frame = rect;
         }
     }
-
-
-    if (self.param.wMasonry) {
-        [self.param.wParentView layoutIfNeeded];
+    
+    //处理默认选中的逻辑
+    if (self.param.wSelectIndexData&&self.param.selectBtnArr.count==0) {
+        NSMutableArray *temp = [NSMutableArray new];
+        for (id num in self.param.wSelectIndexData) {
+            if ([num isKindOfClass:[NSNumber class]]||[num isKindOfClass:[NSString class]]) {
+                [temp addObject:@([num integerValue]+100)];
+            }
+        }
+        if (self.param.cancelSelectDefaultBtnArr.count) {
+            for (id num in self.param.cancelSelectDefaultBtnArr) {
+                if ([num isKindOfClass:[NSNumber class]]||[num isKindOfClass:[NSString class]]) {
+                    if ([temp indexOfObject:@([num integerValue])]!=NSNotFound) {
+                        [temp removeObject:@([num integerValue])];
+                    };
+                }
+            }
+        }
+        self.param.selectBtnArr =  [NSMutableArray arrayWithArray:temp];
     }
 
     allWidth = 0;     //整体长度
@@ -96,8 +113,8 @@
     float maxWidth = self.frame.size.width- margin > TagWitdh ? TagWitdh-self.frame.origin.x-margin:self.frame.size.width- margin;
     WMZTagBtn *tempBtn = nil;
     if (!self.btnArr.count) {
-
         for (int i = 0; i<self.param.wData.count; i++) {
+            
             BOOL insertType  = (i == self.param.wData.count-1 && self.param.wInsertaBle)?YES:NO;
             WMZTagBtn *btn = [WMZTagBtn buttonWithType:UIButtonTypeCustom WithParam:self.param withTag:i + 100  withText:self.param.wData[i] BtnType:insertType?BtnInsert:BtnNormal];
             [btn addTarget:self action:@selector(btnTagAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -106,10 +123,10 @@
             tempBtn = btn;
         }
     }else{
+        
         for (int i = 0; i<self.btnArr.count; i++) {
             WMZTagBtn *btn = self.btnArr[i];
             [self setUpBtn:btn lastBtn:tempBtn  maxWidth:maxWidth  addBtnObj:NO isLast:i==self.btnArr.count-1];
-            btn.selected = btn.selected;
             tempBtn = btn;
         }
     }
@@ -131,90 +148,57 @@
         btn.maxSize = CGSizeMake(btnWidth, btn.maxSize.height);
     }
     CGFloat btnHeight = btn.maxSize.height + self.param.btnTop;
-    if (!self.param.wLineaBle) {
-        btnHeight = btn.oneLineHeight + self.param.btnTop;
-    }else{
-        if (self.param.wLineNum!=0) {
-            if (btn.lineCount>1) {
-                 btnHeight = btn.oneLineHeight * self.param.wLineNum + self.param.btnTop;
-            }
-        }
-    }
     if (add) {
         [btn setUI];
     }
     if (!tempBtn) {
          allWidth += (btnWidth + self.param.marginLeft) ;
         if (self.param.wMasonry) {
-            
-            if (add) {
-                [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+            [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+                if (self.param.wTagAlign == TagAlignRight) {
+                    make.right.mas_equalTo(-self.param.marginLeft);
+                }else{
                     make.left.mas_equalTo(self.param.marginLeft);
-                    make.top.mas_equalTo(self.param.marginTop);
-                    make.width.mas_equalTo(btnWidth);
-                    make.height.mas_equalTo(btnHeight);
-                }];
-            }else{
-                [btn mas_remakeConstraints:^(MASConstraintMaker *make) {
-                    make.left.mas_equalTo(self.param.marginLeft);
-                    make.top.mas_equalTo(self.param.marginTop);
-                    make.width.mas_equalTo(btnWidth);
-                    make.height.mas_equalTo(btnHeight);
-                }];
-            }
+                }
+                make.top.mas_equalTo(self.param.marginTop);
+                make.width.mas_equalTo(btnWidth);
+                make.height.mas_equalTo(btnHeight);
+            }];
         }else{
-            btn.frame = CGRectMake(self.param.marginLeft, self.param.marginTop, btnWidth, btnHeight);
+            btn.frame = CGRectMake(self.param.wTagAlign == TagAlignRight?(self.frame.size.width-self.param.marginLeft-btnWidth):self.param.marginLeft, self.param.marginTop, btnWidth, btnHeight);
         }
     }else{
         allWidth += (btnWidth + self.param.paddingLeft) ;
         if (allWidth > maxWidth) {
             if (self.param.wMasonry) {
-                if (add) {
-                    [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+                [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+                    if (self.param.wTagAlign == TagAlignRight) {
+                        make.right.mas_equalTo(-self.param.marginLeft);
+                    }else{
                         make.left.mas_equalTo(self.param.marginLeft);
-                        make.top.equalTo(tempBtn.mas_bottom).offset(self.param.paddingTop);
-                        make.width.mas_equalTo(btnWidth);
-                        make.height.mas_equalTo(btnHeight);
-                    }];
-                }else{
-                    [btn mas_remakeConstraints:^(MASConstraintMaker *make) {
-                        make.left.mas_equalTo(self.param.marginLeft);
-                        make.top.equalTo(tempBtn.mas_bottom).offset(self.param.paddingTop);
-                        make.width.mas_equalTo(btnWidth);
-                        make.height.mas_equalTo(btnHeight);
-                    }];
-                }
-                
+                    }
+                    make.top.equalTo(tempBtn.mas_bottom).offset(self.param.paddingTop);
+                    make.width.mas_equalTo(btnWidth);
+                    make.height.mas_equalTo(btnHeight);
+                }];
             }else{
-                btn.frame = CGRectMake(self.param.marginLeft, CGRectGetMaxY(tempBtn.frame)+ self.param.paddingTop, btnWidth, btnHeight);
+                btn.frame = CGRectMake(self.param.wTagAlign == TagAlignRight?(self.frame.size.width-self.param.marginLeft-btnWidth):self.param.marginLeft, CGRectGetMaxY(tempBtn.frame)+ self.param.paddingTop, btnWidth, btnHeight);
             }
             allWidth = (btnWidth + self.param.marginLeft);
         }else{
             if (self.param.wMasonry) {
-                [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.left.equalTo(tempBtn.mas_right).offset(self.param.paddingLeft);
+                [btn mas_remakeConstraints:^(MASConstraintMaker *make) {
+                    if (self.param.wTagAlign == TagAlignRight) {
+                        make.right.equalTo(tempBtn.mas_left).offset(-self.param.paddingLeft);
+                    }else{
+                        make.left.equalTo(tempBtn.mas_right).offset(self.param.paddingLeft);
+                    }
                     make.top.equalTo(tempBtn.mas_top);
                     make.width.mas_equalTo(btnWidth);
                     make.height.mas_equalTo(btnHeight);
                 }];
-                
-                if (add) {
-                    [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-                        make.left.equalTo(tempBtn.mas_right).offset(self.param.paddingLeft);
-                        make.top.equalTo(tempBtn.mas_top);
-                        make.width.mas_equalTo(btnWidth);
-                        make.height.mas_equalTo(btnHeight);
-                    }];
-                }else{
-                    [btn mas_remakeConstraints:^(MASConstraintMaker *make) {
-                        make.left.equalTo(tempBtn.mas_right).offset(self.param.paddingLeft);
-                        make.top.equalTo(tempBtn.mas_top);
-                        make.width.mas_equalTo(btnWidth);
-                        make.height.mas_equalTo(btnHeight);
-                    }];
-                }
             }else{
-                btn.frame = CGRectMake(CGRectGetMaxX(tempBtn.frame) +self.param.paddingLeft, tempBtn.frame.origin.y, btnWidth, btnHeight);
+                btn.frame = CGRectMake(self.param.wTagAlign == TagAlignRight?(CGRectGetMinX(tempBtn.frame) -self.param.paddingLeft-btnWidth):CGRectGetMaxX(tempBtn.frame) +self.param.paddingLeft, tempBtn.frame.origin.y, btnWidth, btnHeight);
             }
         }
     }
@@ -231,11 +215,22 @@
             self.frame = rect;
         }
     }
-
     //是否添加进按钮数组
     if (add) {
         [self.btnArr addObject:btn];
     }
+    
+    if (self.param.selectBtnArr&&self.param.selectBtnArr.count) {
+        if ([self.param.selectBtnArr indexOfObject:@(btn.tag)]!=NSNotFound) {
+            btn.selected = YES;
+            [btn setUpBtnStyle];
+        }else{
+            btn.selected = NO;
+            [btn setUpBtnStyle];
+        }
+    }
+    
+
 }
 
 
@@ -246,9 +241,11 @@
     //添加的方法
     if (self.param.wInsertaBle && sender.type == BtnInsert) {
         //外界自定义
+        __weak __typeof(self)weakSelf = self;
         if (self.param.insertClick) {
             self.param.insertClick(index, self.param.wInsertPlaceholder, ^(NSString * _Nonnull text) {
-                [self addTag:text];
+                __strong typeof(self) strongself = weakSelf;
+                [strongself addTag:text];
             });
         }else{
             UIAlertController *alerVC = [UIAlertController alertControllerWithTitle:@"增加标签" message:nil preferredStyle:UIAlertControllerStyleAlert];
@@ -257,10 +254,11 @@
                 textField.text = [NSString stringWithFormat:@"%ld",self.param.wData.count];
             }];
             [alerVC addAction:[UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDestructive) handler:^(UIAlertAction * _Nonnull action) {
+                __strong typeof(self) strongself = weakSelf;
                 UITextField *textfield1 = alerVC.textFields[0];
-                [self addTag:textfield1.text];
+                [strongself addTag:textfield1.text];
             }]];
-            [[WMZTool getCurrentVC] presentViewController:alerVC animated:YES completion:nil];
+            [[WMZTagsTool getCurrentVC] presentViewController:alerVC animated:YES completion:nil];
         }
         return;
     }
@@ -270,7 +268,6 @@
         [arr removeObject:sender.titleLabel.text];
         [self.btnArr removeObject:sender];
         [sender removeFromSuperview];
-        NSLog(@"删除后%@",self.btnArr);
         self.param.wData = [NSArray arrayWithArray:arr];
         [self createUI];
         if (self.param.closeClick) {
@@ -280,15 +277,17 @@
     }
     //单点
     if (self.param.wSelectOne) {
+        self.param.selectBtnArr = [NSMutableArray new];
         for (WMZTagBtn *btn in self.btnArr) {
             if (btn == sender) {
                 btn.selected = !btn.selected;
+                [self dealDefaultSelect:btn];
             }else{
                 btn.selected = NO;
             }
             [btn setUpBtnStyle];
-            
         }
+        
         if (self.param.tapClick) {
             self.param.tapClick(index, sender.titleLabel.text,sender.selected);
         }
@@ -297,15 +296,18 @@
     //多点
     if (self.param.wSelectMore) {
         sender.selected = !sender.selected;
-        [sender setUpBtnStyle];
         if (self.param.tagMoreClick) {
+            [self dealDefaultSelect:sender];
             NSMutableArray *indexArr = [NSMutableArray new];
             NSMutableArray *modelArr = [NSMutableArray new];
+            self.param.selectBtnArr = nil;
             for (WMZTagBtn *btn in self.btnArr) {
                 if (btn.selected == YES) {
-                    [indexArr addObject:@(btn.tag - 100)];
+                    [indexArr addObject:@(btn.tag-100)];
                     [modelArr addObject:btn.titleLabel.text];
+                    [self.param.selectBtnArr addObject:@(btn.tag)];
                 }
+                [btn setUpBtnStyle];
             }
             self.param.tagMoreClick(indexArr,modelArr);
         }
@@ -340,12 +342,22 @@
     }
 }
 
-- (BOOL)tabelViewCell{
-     _tabelViewCell = NO;
-    if ([NSStringFromClass([self.param.wParentView class]) isEqualToString:@"UITableViewCellContentView"]||[self.param.wParentView isKindOfClass:[UITableViewCell class]]) {
-        _tabelViewCell = YES;
+//处理默认选中的逻辑
+- (void)dealDefaultSelect:(WMZTagBtn*)sender{
+    if (![sender isSelected]) {
+        for (id num in self.param.wSelectIndexData) {
+            if ([num isKindOfClass:[NSNumber class]]||[num isKindOfClass:[NSString class]]) {
+                if ([self.param.cancelSelectDefaultBtnArr indexOfObject:@([num integerValue]+100)]==NSNotFound) {
+                    [self.param.cancelSelectDefaultBtnArr addObject:@([num integerValue]+100)];
+                };
+            }
+        }
+    }else{
+        [self.param.selectBtnArr addObject:@(sender.tag)];
+        if (self.param.wSelectIndexData&& [self.param.cancelSelectDefaultBtnArr indexOfObject:@(sender.tag)]!=NSNotFound) {
+            [self.param.cancelSelectDefaultBtnArr removeObject:@(sender.tag)];
+        }
     }
-    return _tabelViewCell;
 }
 
 - (NSMutableArray *)btnArr{
@@ -357,4 +369,5 @@
 
 
 @end
+
 
