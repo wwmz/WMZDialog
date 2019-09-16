@@ -1,15 +1,21 @@
-功能样式最多的最齐全的的弹窗控件 
-控件全部采用链式编程，所有属性均可定制
+# WMZDailog - 功能样式最多的最齐全的的弹窗控件 控件全部采用链式编程，所有属性均可定制
 
-* * *
-## 看下效果图
+演示
+==============
 ![dialog.gif](https://upload-images.jianshu.io/upload_images/9163368-726a77c2ce22aa32.gif?imageMogr2/auto-orient/strip)
 
-## 引入
-pod 'WMZDialog','~>1.0.0'       或者直接拉WMZDialog文件夹进入项目
-## 在使用cocoapods安装时，请先执行 pod search WMZDialog，如果搜索不到，请执行pod setup命令。
-## 注:要消除链式编程的警告 
-要在Buildding Settings 把CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF 设为NO
+
+特性
+==============
+- 链式语法 结构优雅
+- 支持单选/多选
+- 支持地区1/2/3级联动
+- 支持无限级联动
+- 支持时间选择
+- 支持支持多种动画
+- 支持所有字体颜色/字体大小的设置
+- 支持支付视图
+- 支持自定义弹窗
 
 ## 调用枚举说明
 ```
@@ -35,14 +41,6 @@ typedef enum : NSUInteger{
     DialogTypeBuyCar ,              //购物车弹窗  可自行导入WMZTags
     DialogTypeMyView,               //自定义弹窗
 }DialogType;
-```
-
-## 使用说明
-```
-#import "WMZDialog.h"
-
-//最简单调用,只带确定的普通弹窗
-Dialog().wTypeSet(DialogTypeNornal).wStart();
 ```
 
 ## 参数说明(详情使用看demo)
@@ -162,20 +160,37 @@ wMyDiaLogView        自定义弹窗View(返回最底部的view)     -          
 =========================================参数说明==========================================================================*/
 ```
 
-##说明一下其中自定义弹窗
-       例如优酷 
-       
-       
-      __weak ViewController *WEAK = self;
-       myAlert = Dialog()
-      .wTypeSet(DialogTypeMyView)
-        //关闭事件 此时要置为不然会内存泄漏
-       .wEventCloseSet(^(id anyID, id otherData) {
-           myAlert = nil;
-       })
-      .wShowAnimationSet(AninatonZoomIn)
-      .wHideAnimationSet(AninatonZoomOut)
-      .wMyDiaLogViewSet(^UIView *(UIView *mainView) {
+用法
+==============
+
+### 默认模式
+
+      Dialog().wTypeSet(DialogTypeNornal).wStart();
+    
+### 多选模式
+
+      Dialog().wTypeSet(type)
+               .wEventOKFinishSet(^(id anyID, id otherData) {
+                    NSLog(@"%@",anyID);
+                })
+                //出现动画
+                .wShowAnimationSet(AninationCombineTwo)
+                .wTitleSet(@"")
+                .wMultipleSelectionSet(YES).wSelectShowCheckedSet(YES)
+                .wDataSet(@[@"游泳",@"打篮球",@"打羽毛球",@"爬山",@"踢足球",@"乒乓球"])
+                .wStart();
+
+### 自定义弹窗(优酷) 更多自定义弹窗看demo
+	
+     myAlert = Dialog()
+    .wTypeSet(DialogTypeMyView)
+    //关闭事件 此时要置为不然会内存泄漏
+    .wEventCloseSet(^(id anyID, id otherData) {
+        myAlert = nil;
+    })
+    .wShowAnimationSet(AninatonZoomIn)
+    .wHideAnimationSet(AninatonZoomOut)
+    .wMyDiaLogViewSet(^UIView *(UIView *mainView) {
         UIImageView *image = [UIImageView new];
         image.image = [UIImage imageNamed:@"healthy"];
         image.frame = CGRectMake(0, 0, mainView.frame.size.width, 80);
@@ -210,4 +225,42 @@ wMyDiaLogView        自定义弹窗View(返回最底部的view)     -          
     })
     .wStart();
 
+### 其他模式看demo
 
+### 依赖
+无任何依赖 
+如果需要用到购物车弹窗 可自行导入WMZTags
+
+安装
+==============
+
+### CocoaPods
+1. 将 cocoapods 更新至最新版本.
+2. 在 Podfile 中添加 `pod 'WMZDialog'`。
+3. 执行 `pod install` 或 `pod update`。
+4. 导入 #import "WMZDialog.h"。
+
+### 注:要消除链式编程的警告 
+要在Buildding Settings 把CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF 设为NO
+
+### 手动安装
+
+1. 下载 WMZDialog 文件夹内的所有内容。
+2. 将 WMZDialog 内的源文件添加(拖放)到你的工程。
+3. 导入 #import "WMZDialog.h"
+
+系统要求
+==============
+该库最低支持 `iOS 9.0` 和 `Xcode 9.0`。
+
+
+
+许可证
+==============
+LEETheme 使用 MIT 许可证，详情见 [LICENSE](LICENSE) 文件。
+
+
+个人主页
+==============
+使用过程中如果有什么bug欢迎给我提issue 我看到就会解决
+[我的简书](https://www.jianshu.com/p/601ad3960353)
