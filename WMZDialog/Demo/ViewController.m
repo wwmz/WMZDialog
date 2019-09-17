@@ -254,7 +254,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSInteger type = indexPath.section + 1;
-    UITableViewCell *cell = (UITableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
     switch (indexPath.section+1) {
         case DialogTypeNornal:
         {

@@ -108,7 +108,6 @@ WMZDialogSetFuncImplementation(WMZDialog, NSString*,                wSeparator)
         _wWidth = Dialog_GetWNum(500);
         _wHeight = Dialog_GetHNum(300);
         _wAnimationDurtion = 1.0f;
-        _wAnimationDurtion = 0.5f;
         _wDisappelSecond = 1.5f;
         _wMainBtnHeight = Dialog_GetHNum(60);
         _wCellHeight = Dialog_GetHNum(80);
