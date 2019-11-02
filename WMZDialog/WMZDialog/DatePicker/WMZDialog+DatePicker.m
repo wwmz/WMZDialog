@@ -49,9 +49,9 @@
     for (NSString *obj in arr) {
         NSString *str = dateDic[obj];
         
-        if ([self.wDateTimeType containsString:obj]) {
+        if ([self.wDateTimeType rangeOfString:obj].location !=NSNotFound) {
             BOOL append = false;
-            if ([self.wDateTimeType containsString:formatDic[obj]]) {
+            if ([self.wDateTimeType rangeOfString:formatDic[obj]].location !=NSNotFound) {
                 append = YES;
                 str = [NSString stringWithFormat:@"%@%@",dateDic[obj],formatDic[obj]];
             }
