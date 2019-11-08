@@ -103,6 +103,18 @@
     return [UIColor colorWithRed:((float) r / 255.0f) green:((float) g / 255.0f) blue:((float) b / 255.0f) alpha:1.0f];
 }
 
+//获取文本size
++ (CGSize)sizeForTextView:(CGSize)constraint WithText: (NSString *) strText WithFont:(CGFloat)font{
+    if (!strText||strText.length==0) {
+        return CGSizeZero;
+    }
+    CGRect rect = [strText boundingRectWithSize:constraint
+                                        options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading)
+                                     attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:font]}
+                                        context:nil];
+    return rect.size;
+}
+
 //获取文本高度
 + (float)heightForTextView:(CGSize)constraint WithText: (NSString *) strText WithFont:(CGFloat)font{
     if (!strText||strText.length==0) {

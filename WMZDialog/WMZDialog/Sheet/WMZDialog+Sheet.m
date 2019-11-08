@@ -13,20 +13,25 @@
 - (UIView*)sheetAction{
     UIView *headView = nil;
     if (self.wMultipleSelection) {
+        
         headView = [UIView new];
         headView.backgroundColor = self.wMainBackColor;
         headView.frame = CGRectMake(0, 0, self.wWidth, self.wMainBtnHeight);
         [self.mainView addSubview:headView];
-        
-        [self.mainView addSubview:self.cancelBtn];
-        self.cancelBtn.frame = CGRectMake(self.wMainOffsetX*2, 0, self.wWidth/2-self.wMainOffsetX*2, self.wMainBtnHeight);
+              
+        [headView addSubview:self.cancelBtn];
+        self.cancelBtn.frame = CGRectMake(self.wMainOffsetX, 0, self.wMainBtnHeight, self.wMainBtnHeight);
         self.cancelBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        
-        [self.mainView addSubview:self.OKBtn];
+              
+        [headView addSubview:self.OKBtn];
         [self.OKBtn removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
         [self.OKBtn addTarget:self action:@selector(sheetSelectAction:) forControlEvents:UIControlEventTouchUpInside];
-        self.OKBtn.frame = CGRectMake(self.wWidth/2, 0,self.wWidth/2-self.wMainOffsetX, self.wMainBtnHeight);
+        self.OKBtn.frame = CGRectMake(self.wWidth-self.wMainBtnHeight-self.wMainOffsetX, 0,self.wMainBtnHeight, self.wMainBtnHeight);
         self.OKBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+              
+        [headView addSubview:self.titleLabel];
+        self.titleLabel.frame = CGRectMake(self.wMainBtnHeight+2*self.wMainOffsetX, 0, self.wWidth-2*self.wMainBtnHeight-4*self.wMainOffsetX, self.wMainBtnHeight);
+              
     }else{
         if (self.wTitle) {
             [self.mainView addSubview:self.titleLabel];

@@ -50,23 +50,11 @@
             self.mainView.center = CGPointMake(self.view.center.x, self.mainView.center.y);
     }else{
         self.wPickRepeat = NO;
-        UIView *headView = [UIView new];
-        headView.backgroundColor = self.wMainBackColor;
-        headView.frame = CGRectMake(0, 0, self.wWidth, self.wMainBtnHeight);
-        [self.mainView addSubview:headView];
-        
-        [self.mainView addSubview:self.cancelBtn];
-        self.cancelBtn.frame = CGRectMake(self.wMainOffsetX, 0, self.wWidth/2-self.wMainOffsetX, self.wMainBtnHeight);
-        self.cancelBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        
-        [self.mainView addSubview:self.OKBtn];
-        [self.OKBtn removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
+
+        self.diaLogHeadView = [self addTopView];
         [self.OKBtn addTarget:self action:@selector(locationPickOKAction:) forControlEvents:UIControlEventTouchUpInside];
-        self.OKBtn.frame = CGRectMake(self.wWidth/2, 0,self.wWidth/2-self.wMainOffsetX, self.wMainBtnHeight);
-        self.OKBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
         
-        
-        self.pickView.frame =  CGRectMake(0, CGRectGetMaxY(headView.frame), self.wWidth, self.wHeight);
+        self.pickView.frame =  CGRectMake(0, CGRectGetMaxY(self.diaLogHeadView.frame), self.wWidth, self.wHeight);
         [self.mainView addSubview:self.pickView];
         
         [self reSetMainViewFrame:CGRectMake(0,0,self.wWidth, CGRectGetMaxY(self.pickView.frame))];

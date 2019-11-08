@@ -74,23 +74,10 @@
         }
     }
     
-    UIView *headView = [UIView new];
-    headView.backgroundColor = self.wMainBackColor;
-    headView.frame = CGRectMake(0, 0, self.wWidth, self.wMainBtnHeight);
-    [self.mainView addSubview:headView];
-    
-    [self.mainView addSubview:self.cancelBtn];
-    self.cancelBtn.frame = CGRectMake(self.wMainOffsetX, 0, self.wWidth/2-self.wMainOffsetX, self.wMainBtnHeight);
-    self.cancelBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    
-    [self.mainView addSubview:self.OKBtn];
-    [self.OKBtn removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
+    self.diaLogHeadView = [self addTopView];
     [self.OKBtn addTarget:self action:@selector(PickDateOKAction:) forControlEvents:UIControlEventTouchUpInside];
-    self.OKBtn.frame = CGRectMake(self.wWidth/2, 0,self.wWidth/2-self.wMainOffsetX, self.wMainBtnHeight);
-    self.OKBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-    
-    
-    self.pickView.frame =  CGRectMake(0, CGRectGetMaxY(headView.frame), self.wWidth, self.wHeight);
+
+    self.pickView.frame =  CGRectMake(0, CGRectGetMaxY(self.diaLogHeadView.frame), self.wWidth, self.wHeight);
     [self.mainView addSubview:self.pickView];
     
     
@@ -98,6 +85,7 @@
         NSArray *arr = self.wData[i];
         NSString *value = self.selectArr[i];
         NSInteger index = [arr indexOfObject:value];
+        
         if (index<arr.count) {
             [self.pickView selectRow:index+(self.wPickRepeat?(pickViewCount/2*arr.count):0) inComponent:i animated:YES];
         }

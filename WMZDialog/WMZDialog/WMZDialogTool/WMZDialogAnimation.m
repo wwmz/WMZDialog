@@ -64,6 +64,7 @@ void zoomInAnimation (UIView *view ,NSTimeInterval duration){
     scaleAnimation.cumulative = NO;
     scaleAnimation.repeatCount = 1;
     scaleAnimation.removedOnCompletion = NO;
+    scaleAnimation.fillMode = kCAFillModeForwards;
     [scaleAnimation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault]];
     [contentLayer addAnimation: scaleAnimation forKey:@"myScale"];
     
@@ -137,6 +138,36 @@ void rotationCounterclockwiseAnimation(UIView* view,NSTimeInterval duration){
     [contentLayer addAnimation:group forKey:@"groupAnimation"];
 }
 
+//横向移动
+void landscapeMoveAnimation(UIView *view ,NSTimeInterval duration){
+    CAGradientLayer *contentLayer = (CAGradientLayer *)view.layer;
+    CABasicAnimation *moveAnimation = [CABasicAnimation animationWithKeyPath:@"position.x"];
+    moveAnimation.fromValue = @(view.center.x);
+    moveAnimation.toValue =  @(view.center.x+ [UIScreen mainScreen].bounds.size.width);
+    moveAnimation.duration = duration;
+    moveAnimation.cumulative = NO;
+    moveAnimation.repeatCount = 1;
+    moveAnimation.removedOnCompletion = NO;
+    moveAnimation.fillMode = kCAFillModeForwards;
+    [moveAnimation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault]];
+    [contentLayer addAnimation: moveAnimation forKey:@"moveAnimation"];
+}
+
+//垂直移动
+void verticalMoveAnimation (UIView *view ,NSTimeInterval duration){
+    CAGradientLayer *contentLayer = (CAGradientLayer *)view.layer;
+    CABasicAnimation *moveAnimation = [CABasicAnimation animationWithKeyPath:@"position.y"];
+    moveAnimation.fromValue = @(view.center.y);
+    moveAnimation.toValue =  @(view.center.y+ [UIScreen mainScreen].bounds.size.height);
+    moveAnimation.duration = duration;
+    moveAnimation.cumulative = NO;
+    moveAnimation.repeatCount = 1;
+    moveAnimation.removedOnCompletion = NO;
+    moveAnimation.fillMode = kCAFillModeForwards;
+    [moveAnimation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault]];
+    [contentLayer addAnimation: moveAnimation forKey:@"moveAnimation"];
+    
+}
 
 //出现组合动画 样式1
 void combineShowOneAnimation(UIView* view,NSTimeInterval duration){

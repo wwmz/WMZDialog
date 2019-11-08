@@ -13,19 +13,7 @@
 
 @implementation WMZDiaLogBase
 
-- (BOOL)updateAlertTypeDownProgress:(CGFloat)value{return YES;}
-- (void)closeView{}
-- (UIView*)addBottomView:(CGFloat)maxY{return [UIView new];}
-- (void)reSetMainViewFrame:(CGRect)frame{};
-- (void)getDepth:(NSArray*)arr withTree:(WMZTree*)treePoint withDepth:(NSInteger)depth{}
-- (void)selectWithTableView:(UITableView *)tableView withIndexPath:(NSIndexPath*)indexPath{}
-- (void)updateMenuChildrenDataWithSection:(NSInteger)section  withUpdateChildren:(BOOL)update withData:(NSArray*)data{}
-
 - (void)dealAnamtionShowWithView:(UIView*)view withType:(DialogShowAnination)type withTime:(NSTimeInterval)time{
-
-//    if (type == AninatonShaker) {
-//        shakerAnimation(view, time, 20);
-//    }else
     if (type == AninatonCurverOn) {
         curverOnAnimation(view, time);
     }else if (type == AninatonZoomIn) {
@@ -48,6 +36,10 @@
         rotationCounterclockwiseAnimation(view, time);
     }else if (type == AninationHideCombineOne) {
         combineHideOneAnimation(view, time);
+    }else if (type == AninatonHideVerticalMove) {
+        verticalMoveAnimation(view, time);
+    }else if (type == AninatonHideLandscapeMove) {
+        landscapeMoveAnimation(view, time);
     }
 }
 
@@ -129,7 +121,7 @@
     }
     
     for (int i = 1; i< day+1;i++ ) {
-        [dayArr addObject:[NSString stringWithFormat:@"%d%@",i,name]];
+        [dayArr addObject: i<10? [NSString stringWithFormat:@"0%d%@",i,name]:[NSString stringWithFormat:@"%d%@",i,name]];
     }
     return [NSArray arrayWithArray:dayArr];
 }
@@ -190,9 +182,10 @@
     return _shadowView;
 }
 
-- (UITableView *)tableView{
+- (WMZDialogTableView *)tableView{
     if (!_tableView) {
-        _tableView =  [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+        _tableView =  [[WMZDialogTableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+        _tableView.scrollsToTop = NO;
     }
     return _tableView;
 }
@@ -240,6 +233,24 @@
     }
     return _tempArr;
 }
+
+- (NSMutableArray *)dataArr{
+    if (!_dataArr) {
+        _dataArr = [NSMutableArray new];
+    }
+    return _dataArr;
+}
+
+- (BOOL)updateAlertTypeDownProgress:(CGFloat)value{return YES;}
+- (void)closeView{}
+- (UIView*)addBottomView:(CGFloat)maxY{return [UIView new];}
+- (void)reSetMainViewFrame:(CGRect)frame{};
+- (void)getDepth:(NSArray*)arr withTree:(WMZTree*)treePoint withDepth:(NSInteger)depth{}
+- (void)selectWithTableView:(UITableView *)tableView withIndexPath:(NSIndexPath*)indexPath{}
+- (void)updateMenuChildrenDataWithSection:(NSInteger)section  withUpdateChildren:(BOOL)update withData:(NSArray*)data{}
+- (UIView*)addTopView{return [UIView new];}
+- (void)scrollToToday{};
+
 
 @end
 

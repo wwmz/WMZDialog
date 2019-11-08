@@ -20,11 +20,15 @@ static NSString *oneLineHeightKey = @"oneLineHeight"; //oneLineHeight的key
     [self.mainView addSubview:self.titleLabel];
     self.titleLabel.frame = CGRectMake(self.wMainOffsetX, self.wTitle.length?self.wMainOffsetY:0, self.wWidth-self.wMainOffsetX*2, [WMZDialogTool heightForTextView:CGSizeMake(self.wWidth-self.wMainOffsetX*2, CGFLOAT_MAX) WithText:self.titleLabel.text WithFont:self.titleLabel.font.pointSize]);
     
+    [self.mainView addSubview:self.textLabel];
+    self.textLabel.frame =  CGRectMake(self.wMainOffsetX,CGRectGetMaxY(self.titleLabel.frame)+ ( self.wMessage.length?self.wMainOffsetY:0), self.wWidth-self.wMainOffsetX*2, [WMZDialogTool heightForTextView:CGSizeMake(self.wWidth-self.wMainOffsetX*2, CGFLOAT_MAX) WithText:self.textLabel.text WithFont:self.textLabel.font.pointSize]);
+    
     [self.mainView addSubview:self.writeView];
-    self.writeView.frame = CGRectMake(self.wMainOffsetX,CGRectGetMaxY(self.titleLabel.frame)+self.wMainOffsetY, self.wWidth-self.wMainOffsetX*2, [WMZDialogTool heightForTextView:CGSizeMake(self.wWidth-self.wMainOffsetX*2, CGFLOAT_MAX) WithText:@"占位" WithFont:self.writeView.font.pointSize]+22.0);
+    self.writeView.frame = CGRectMake(self.wMainOffsetX,CGRectGetMaxY(self.textLabel.frame)+self.wMainOffsetY, self.wWidth-self.wMainOffsetX*2, [WMZDialogTool heightForTextView:CGSizeMake(self.wWidth-self.wMainOffsetX*2, CGFLOAT_MAX) WithText:@"占位" WithFont:self.writeView.font.pointSize]+22.0);
+    
     self.oneLineHeight = @([self heightForTextView:CGSizeMake(self.writeView.contentSize.width , CGFLOAT_MAX) WithText:@"测试"]);
     
-    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(3, 6, self.wWidth-self.wMainOffsetX*2-6, [WMZDialogTool heightForTextView:CGSizeMake(self.wWidth-self.wMainOffsetX*2, CGFLOAT_MAX) WithText:@"占位" WithFont:self.writeView.font.pointSize]+10)];
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(3, 4, self.wWidth-self.wMainOffsetX*2-6, [WMZDialogTool heightForTextView:CGSizeMake(self.wWidth-self.wMainOffsetX*2, CGFLOAT_MAX) WithText:@"占位" WithFont:self.writeView.font.pointSize]+10)];
     label.enabled = NO;
     label.tag = 999;
     label.text = self.wPlaceholder;
@@ -55,9 +59,9 @@ static NSString *oneLineHeightKey = @"oneLineHeight"; //oneLineHeight的key
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
+    
     CGRect frame = textView.frame;
     float height;
-    
     //行数
     NSInteger line = 1;
     NSString *mainText = @"";
@@ -75,32 +79,25 @@ static NSString *oneLineHeightKey = @"oneLineHeight"; //oneLineHeight的key
     if (self.wWirteTextMaxNum!=-1&&mainText.length>self.wWirteTextMaxNum) {
         return NO;
     }
-
-    height = [WMZDialogTool heightForTextView:CGSizeMake(textView.contentSize.width , CGFLOAT_MAX) WithText:mainText WithFont:self.wMessageFont];
+    
+    float fPadding = 10;
+    CGSize constraint = CGSizeMake(textView.contentSize.width - fPadding, CGFLOAT_MAX);
+    height = [WMZDialogTool heightForTextView:constraint WithText:mainText WithFont:self.writeView.font.pointSize]+22.0;
     
     line = height/self.oneLineHeight.floatValue;
     //最大行数
     if (line>self.wWirteTextMaxLine) {
         height = self.wWirteTextMaxLine*self.oneLineHeight.floatValue;
     }
-
-    if (height==0) {
-        height = [WMZDialogTool heightForTextView:CGSizeMake(self.wWidth-self.wMainOffsetX*2, CGFLOAT_MAX) WithText:@"占位" WithFont:self.writeView.font.pointSize];
-    }
-    frame.size.height = height+22.0;
+    frame.size.height = height;
     [UIView animateWithDuration:0.3 animations:^{
         textView.frame = frame;
         UIView *view =  [self addBottomView:CGRectGetMaxY(self.writeView.frame)+self.wMainOffsetY];
         CGRect rect = self.mainView.frame;
         rect.size.height = CGRectGetMaxY(view.frame);
         rect.origin.y = Device_Dialog_Height-(self.keyBoardHeight+rect.size.height+0.5+self.wKeyBoardMarginY);
-        
         self.mainView.frame = rect;
     } completion:nil];
-    
-//    if (self.wEventFinish) {
-//        self.wEventFinish(mainText,self.wType);
-//    }
     return YES;
 }
 

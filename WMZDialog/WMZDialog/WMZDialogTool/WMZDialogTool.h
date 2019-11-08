@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIColor *)stringTOColor:(NSString *)str;
 //获取文本高度
 + (float)heightForTextView:(CGSize)constraint WithText:(NSString *)strText WithFont:(CGFloat)font;
+//获取文本size
++ (CGSize)sizeForTextView:(CGSize)constraint WithText: (NSString *) strText WithFont:(CGFloat)font;
 //设置圆角 单边
 +(void)setView:(UIView*)view Radii:(CGSize)size RoundingCorners:(UIRectCorner)rectCorner;
 //传入 秒  得到 xx:xx:xx

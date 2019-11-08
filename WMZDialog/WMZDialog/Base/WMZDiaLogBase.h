@@ -12,6 +12,10 @@
 #import <objc/runtime.h>
 #import "WMZDialogAnimation.h"
 #import "WMZDialogShareView.h"
+#import "WMZDialogTableView.h"
+#import "NSDate+WMZCalendarDate.h"
+#import "CalanderModel.h"
+
 NS_ASSUME_NONNULL_BEGIN
 //树形节点model
 @interface WMZTree:NSObject
@@ -59,11 +63,19 @@ NS_ASSUME_NONNULL_BEGIN
 /*
  *tableView
  */
-@property(nonatomic,strong)UITableView *tableView;
+@property(nonatomic,strong)WMZDialogTableView *tableView;
 /*
  *pickView
  */
-@property (nonatomic, retain) UIPickerView *pickView;
+@property (nonatomic, strong) UIPickerView *pickView;
+/*
+ *自动布局
+ */
+@property (nonatomic, strong)UICollectionViewFlowLayout *layout;
+/*
+*表格视图
+*/
+@property (nonatomic, strong)UICollectionView *collectionView;
 /*
  *阴影
  */
@@ -72,6 +84,10 @@ NS_ASSUME_NONNULL_BEGIN
  *底部
  */
 @property(nonatomic,strong)UIView *bottomView;
+/*
+ *顶部
+ */
+@property(nonatomic,strong)UIView *diaLogHeadView;
 /*
  *毛玻璃
  */
@@ -116,9 +132,19 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSMutableArray *tempArr;
 
 /*
+ *数据数组
+ */
+@property (nonatomic, strong) NSMutableArray *dataArr;
+
+/*
  *bundle
  */
 @property (nonatomic, strong)NSBundle *dialogBundle;
+
+/*
+ *初始point
+ */
+@property (nonatomic, assign)CGPoint normalPoint;
 
 
 /*
@@ -130,6 +156,11 @@ NS_ASSUME_NONNULL_BEGIN
  *添加底部
  */
 - (UIView*)addBottomView:(CGFloat)maxY;
+
+/*
+*添加顶部
+*/
+- (UIView*)addTopView;
 
 /*
  *重新设置mainView的frame 如果不是在底部默认居中
@@ -189,6 +220,12 @@ NS_ASSUME_NONNULL_BEGIN
  *
  */
 - (void)dealAnamtionHideWithView:(UIView*)view withType:(DialogHideAnination)type withTime:(NSTimeInterval)time;
+
+/*
+* 回到今天  日历外部调用方法
+*
+*/
+- (void)scrollToToday;
 @end
 
 NS_ASSUME_NONNULL_END

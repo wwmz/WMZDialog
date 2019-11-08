@@ -10,60 +10,16 @@
 @implementation WMZDialog (PickView)
 - (UIView*)pickAction{
     
-    UIView *headView = [UIView new];
-    headView.backgroundColor = self.wMainBackColor;
-    headView.frame = CGRectMake(0, 0, self.wWidth, self.wMainBtnHeight);
-    [self.mainView addSubview:headView];
-    
-    [self.mainView addSubview:self.cancelBtn];
-    self.cancelBtn.frame = CGRectMake(self.wMainOffsetX, 0, self.wWidth/2-self.wMainOffsetX, self.wMainBtnHeight);
-    self.cancelBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    
-    [self.mainView addSubview:self.OKBtn];
-    [self.OKBtn removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
+    self.diaLogHeadView = [self addTopView];
     [self.OKBtn addTarget:self action:@selector(PickOKAction:) forControlEvents:UIControlEventTouchUpInside];
-    self.OKBtn.frame = CGRectMake(self.wWidth/2, 0,self.wWidth/2-self.wMainOffsetX, self.wMainBtnHeight);
-    self.OKBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-    
-    
-    self.pickView.frame =  CGRectMake(0, CGRectGetMaxY(headView.frame), self.wWidth, self.wHeight);
+
+    self.pickView.frame =  CGRectMake(0, CGRectGetMaxY(self.diaLogHeadView.frame), self.wWidth, self.wHeight*1.2);
     [self.mainView addSubview:self.pickView];
     
-
     [self reSetMainViewFrame:CGRectMake(0,0,self.wWidth, CGRectGetMaxY(self.pickView.frame))];
     //设置只有一半圆角
     [WMZDialogTool setView:self.mainView Radii:CGSizeMake(self.wMainRadius,self.wMainRadius) RoundingCorners:UIRectCornerTopLeft |UIRectCornerTopRight];
-//    UIView *headView = [UIView new];
-//    headView.backgroundColor = self.wMainBackColor;
-//    headView.frame = CGRectMake(0, 0, self.wWidth, self.wMainBtnHeight);
-//    [self.mainView addSubview:headView];
-//
-//    [self.mainView addSubview:self.cancelBtn];
-//    self.cancelBtn.frame = CGRectMake(self.wMainOffsetX, 0, self.wWidth/2-self.wMainOffsetX, self.wMainBtnHeight);
-//    self.cancelBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-//
-//    [self.mainView addSubview:self.OKBtn];
-//    [self.OKBtn removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
-//    [self.OKBtn addTarget:self action:@selector(PickOKAction:) forControlEvents:UIControlEventTouchUpInside];
-//    self.OKBtn.frame = CGRectMake(self.wWidth/2, 0,self.wWidth/2-self.wMainOffsetX, self.wMainBtnHeight);
-//    self.OKBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-//
-//
-//    self.pickView.frame =  CGRectMake(0, CGRectGetMaxY(headView.frame), self.wWidth, self.wHeight);
-//    [self.mainView addSubview:self.pickView];
-//
-//    if(self.wPickRepeat){
-//        for (int i = 0; i<[self.wData count]; i++) {
-//            NSArray *arr = self.wData[i];
-//            [self.pickView selectRow:pickViewCount/2*arr.count inComponent:i animated:YES];
-//        }
-//    }
-//
-//
-//    [self reSetMainViewFrame:CGRectMake(0,0,self.wWidth, CGRectGetMaxY(self.pickView.frame))];
-//    //设置只有一半圆角
-//    [WMZDialogTool setView:self.mainView Radii:CGSizeMake(self.wMainRadius,self.wMainRadius) RoundingCorners:UIRectCornerTopLeft |UIRectCornerTopRight];
-    
+
     return self.mainView;
 }
 

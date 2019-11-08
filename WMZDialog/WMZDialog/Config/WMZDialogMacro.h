@@ -80,6 +80,8 @@ typedef enum : NSUInteger{
     DialogTypeNaviMenu,             //QQ顶部弹窗
     DialogTypeLoading,              //加载框
     DialogTypeBuyCar ,              //购物车弹窗  可自行导入WMZTags
+    DialogTypeCardPresent ,         //ios13 present效果
+    DialogTypeCalander,             //日历弹窗
     DialogTypeMyView,               //自定义弹窗
 
 }DialogType;
@@ -122,9 +124,11 @@ typedef enum : NSUInteger{
  * 消失动画
  */
 typedef enum : NSUInteger{
-    AninatonHideNone = 0 ,          //无
+    AninatonHideNone = 0 ,         //无
     AninatonCurverOff,             //淡出
     AninatonZoomOut,               //由大变小
+    AninatonHideVerticalMove,      //垂直移动
+    AninatonHideLandscapeMove,     //横向移动
     AninatonClockwise,             //顺时针旋转
     AninationHideCombineOne        //组合动画旋转变小
 }DialogHideAnination;
@@ -154,13 +158,28 @@ typedef void (^DialogMenuClickBlock)(id anyID,NSInteger section,NSInteger row);
 typedef void (^DialogTableClickBlock)(id anyID,NSIndexPath *path,DialogType type);
 
 /*
- * cell的block
+ * UITableViewCell的block
  */
 typedef UITableViewCell* (^diaLogCellCallBlock)(NSIndexPath *indexPath,UITableView* tableView,id model);
+
+/*
+ * collectionCell的block
+ */
+typedef UICollectionViewCell* (^DiaLogCollectionCellBlock)(NSIndexPath *indexPath,UICollectionView* collection,id model);
+
+/*
+* collectionCell的点击方法
+*/
+typedef void (^DiaLogCollectionClickBlock)(NSIndexPath *indexPath,UICollectionView* collection,id model);
 
 /*
  * 自定义弹窗
  */
 typedef UIView* (^diaLogMyViewCallBlock)(UIView* mainView);
+
+/*
+ * 自定义presrnt ios13视图
+ */
+typedef UIView* (^diaLogPresentCallBlock)(UIView* mainView,UITableView *tableView);
 
 #endif /* WMZDialogMacro_h */

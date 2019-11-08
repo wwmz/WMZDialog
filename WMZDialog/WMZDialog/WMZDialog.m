@@ -27,81 +27,95 @@ WMZDialog * Dialog(void){
          return self;
      };
 }
-
-WMZDialogSetFuncImplementation(WMZDialog, UIViewController* ,        wParentVC)
-WMZDialogSetFuncImplementation(WMZDialog, UIView* ,                   wTapView)
-WMZDialogSetFuncImplementation(WMZDialog, DialogType,                    wType)
-WMZDialogSetFuncImplementation(WMZDialog, DialogShowAnination,  wShowAnimation)
-WMZDialogSetFuncImplementation(WMZDialog, DialogHideAnination,  wHideAnimation)
-WMZDialogSetFuncImplementation(WMZDialog, NSTimeInterval,    wAnimationDurtion)
-WMZDialogSetFuncImplementation(WMZDialog, UIColor*,                wTitleColor)
-WMZDialogSetFuncImplementation(WMZDialog, UIColor*,              wMessageColor)
-WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                      wWidth)
-WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                     wHeight)
-WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                wMainOffsetY)
-WMZDialogSetFuncImplementation(WMZDialog, CGFloat,              wMainBtnHeight)
-WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                wMainOffsetX)
-WMZDialogSetFuncImplementation(WMZDialog, CGFloat,             wDisappelSecond)
-WMZDialogSetFuncImplementation(WMZDialog, UIColor*,                 wLineColor)
-WMZDialogSetFuncImplementation(WMZDialog, NSString*,                  wOKTitle)
-WMZDialogSetFuncImplementation(WMZDialog, NSString*,              wCancelTitle)
-WMZDialogSetFuncImplementation(WMZDialog, UIColor*,                   wOKColor)
-WMZDialogSetFuncImplementation(WMZDialog, UIColor*,               wCancelColor)
-WMZDialogSetFuncImplementation(WMZDialog, NSString*,                    wTitle)
-WMZDialogSetFuncImplementation(WMZDialog, NSString*,                  wMessage)
-WMZDialogSetFuncImplementation(WMZDialog, CGFloat,            wKeyBoardMarginY)
-WMZDialogSetFuncImplementation(WMZDialog, UIColor*,               wShadowColor)
-WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                     wOKFont)
-WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                 wCancelFont)
-WMZDialogSetFuncImplementation(WMZDialog, BOOL,                  wMainToBottom)
-WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                  wLineAlpha)
-WMZDialogSetFuncImplementation(WMZDialog, id,                            wData)
-WMZDialogSetFuncImplementation(WMZDialog, id,                         wSonData)
-WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                  wTitleFont)
-WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                wMessageFont)
-WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                wShadowAlpha)
-WMZDialogSetFuncImplementation(WMZDialog, NSInteger,                   wPayNum)
-WMZDialogSetFuncImplementation(WMZDialog, BOOL,                  wShadowCanTap)
-WMZDialogSetFuncImplementation(WMZDialog, BOOL,                    wShadowShow)
-WMZDialogSetFuncImplementation(WMZDialog, BOOL,                    wEffectShow)
-WMZDialogSetFuncImplementation(WMZDialog, DialogClickBlock,     wEventOKFinish)
-WMZDialogSetFuncImplementation(WMZDialog, DialogClickBlock, wEventCancelFinish)
-WMZDialogSetFuncImplementation(WMZDialog, NSString*,      wDefaultSelectPayStr)
-WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,  wEventFinish)
-WMZDialogSetFuncImplementation(WMZDialog, UIColor*,             wMainBackColor)
-WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                 wMainRadius)
-WMZDialogSetFuncImplementation(WMZDialog, NSInteger,          wWirteTextMaxNum)
-WMZDialogSetFuncImplementation(WMZDialog, NSString*,              wPlaceholder)
-WMZDialogSetFuncImplementation(WMZDialog, NSInteger,         wWirteTextMaxLine)
-WMZDialogSetFuncImplementation(WMZDialog, UIKeyboardType,   wWirteKeyBoardType)
-WMZDialogSetFuncImplementation(WMZDialog, CGFloat,               wPercentAngle)
-WMZDialogSetFuncImplementation(WMZDialog, CGFloat,              wPercentOrginX)
-WMZDialogSetFuncImplementation(WMZDialog, DiaDirection,             wDirection)
-WMZDialogSetFuncImplementation(WMZDialog, diaLogCellCallBlock,         wMyCell)
-WMZDialogSetFuncImplementation(WMZDialog, CGSize,                   wImageSize)
-WMZDialogSetFuncImplementation(WMZDialog, NSInteger,              wColumnCount)
-WMZDialogSetFuncImplementation(WMZDialog, NSInteger,                 wRowCount)
-WMZDialogSetFuncImplementation(WMZDialog, NSString*,                wImageName)
-WMZDialogSetFuncImplementation(WMZDialog, BOOL,                    wPickRepeat)
-WMZDialogSetFuncImplementation(WMZDialog, NSInteger,             wLocationType)
-WMZDialogSetFuncImplementation(WMZDialog, UIColor*,         wProgressTintColor)
-WMZDialogSetFuncImplementation(WMZDialog, UIColor*,            wTrackTintColor)
-WMZDialogSetFuncImplementation(WMZDialog, diaLogMyViewCallBlock, wMyDiaLogView)
-WMZDialogSetFuncImplementation(WMZDialog, BOOL,                 wAddBottomView)
-WMZDialogSetFuncImplementation(WMZDialog, NSArray* ,           wTableViewColor)
-WMZDialogSetFuncImplementation(WMZDialog, ChainType,                wChainType)
-WMZDialogSetFuncImplementation(WMZDialog, NSString*,             wDateTimeType)
-WMZDialogSetFuncImplementation(WMZDialog, DialogClickBlock,        wEventClose)
-WMZDialogSetFuncImplementation(WMZDialog, DialogMenuClickBlock,wEventMenuClick)
-WMZDialogSetFuncImplementation(WMZDialog, BOOL,                wNavigationItem)
-WMZDialogSetFuncImplementation(WMZDialog, NSTextAlignment,      wTextAlignment)
-WMZDialogSetFuncImplementation(WMZDialog, LoadingStyle,           wLoadingType)
-WMZDialogSetFuncImplementation(WMZDialog, CGSize,                 wLoadingSize)
-WMZDialogSetFuncImplementation(WMZDialog, UIColor*,              wLoadingColor)
-WMZDialogSetFuncImplementation(WMZDialog, BOOL,             wMultipleSelection)
-WMZDialogSetFuncImplementation(WMZDialog, BOOL,             wSelectShowChecked)
-WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                 wCellHeight)
-WMZDialogSetFuncImplementation(WMZDialog, NSString*,                wSeparator)
+WMZDialogSetFuncImplementation(WMZDialog, BOOL,                    wMultipleSelection)
+WMZDialogSetFuncImplementation(WMZDialog, BOOL,                    wSelectShowChecked)
+WMZDialogSetFuncImplementation(WMZDialog, BOOL,                      wOpenScrollClose)
+WMZDialogSetFuncImplementation(WMZDialog, BOOL,                      wLeftScrollClose)
+WMZDialogSetFuncImplementation(WMZDialog, BOOL,                         wOpenDragging)
+WMZDialogSetFuncImplementation(WMZDialog, BOOL,                        wScaleParentVC)
+WMZDialogSetFuncImplementation(WMZDialog, BOOL,                    wDirectionVertical)
+WMZDialogSetFuncImplementation(WMZDialog, BOOL,                    wCalanderCanScroll)
+WMZDialogSetFuncImplementation(WMZDialog, BOOL,                      wHideCalanderBtn)
+WMZDialogSetFuncImplementation(WMZDialog, BOOL,                      wOpenChineseDate)
+WMZDialogSetFuncImplementation(WMZDialog, BOOL,                       wNavigationItem)
+WMZDialogSetFuncImplementation(WMZDialog, BOOL,                         wShadowCanTap)
+WMZDialogSetFuncImplementation(WMZDialog, BOOL,                           wShadowShow)
+WMZDialogSetFuncImplementation(WMZDialog, BOOL,                           wEffectShow)
+WMZDialogSetFuncImplementation(WMZDialog, BOOL,                        wAddBottomView)
+WMZDialogSetFuncImplementation(WMZDialog, BOOL,                           wPickRepeat)
+WMZDialogSetFuncImplementation(WMZDialog, BOOL,                         wMainToBottom)
+WMZDialogSetFuncImplementation(WMZDialog, NSArray*,                   wDateShowCircle)
+WMZDialogSetFuncImplementation(WMZDialog, UIViewController* ,               wParentVC)
+WMZDialogSetFuncImplementation(WMZDialog, UIView* ,                          wTapView)
+WMZDialogSetFuncImplementation(WMZDialog, NSTimeInterval,           wAnimationDurtion)
+WMZDialogSetFuncImplementation(WMZDialog, UIColor*,                       wTitleColor)
+WMZDialogSetFuncImplementation(WMZDialog, UIColor*,                     wMessageColor)
+WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                             wWidth)
+WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                            wHeight)
+WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                       wMainOffsetY)
+WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                     wMainBtnHeight)
+WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                       wMainOffsetX)
+WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                    wDisappelSecond)
+WMZDialogSetFuncImplementation(WMZDialog, UIColor*,                        wLineColor)
+WMZDialogSetFuncImplementation(WMZDialog, NSString*,                         wOKTitle)
+WMZDialogSetFuncImplementation(WMZDialog, NSString*,                     wCancelTitle)
+WMZDialogSetFuncImplementation(WMZDialog, UIColor*,                          wOKColor)
+WMZDialogSetFuncImplementation(WMZDialog, UIColor*,                      wCancelColor)
+WMZDialogSetFuncImplementation(WMZDialog, NSString*,                           wTitle)
+WMZDialogSetFuncImplementation(WMZDialog, NSString*,                         wMessage)
+WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                   wKeyBoardMarginY)
+WMZDialogSetFuncImplementation(WMZDialog, UIColor*,                      wShadowColor)
+WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                            wOKFont)
+WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                        wCancelFont)
+WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                         wLineAlpha)
+WMZDialogSetFuncImplementation(WMZDialog, id,                                   wData)
+WMZDialogSetFuncImplementation(WMZDialog, id,                                wSonData)
+WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                         wTitleFont)
+WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                       wMessageFont)
+WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                       wShadowAlpha)
+WMZDialogSetFuncImplementation(WMZDialog, NSInteger,                          wPayNum)
+WMZDialogSetFuncImplementation(WMZDialog, NSString*,             wDefaultSelectPayStr)
+WMZDialogSetFuncImplementation(WMZDialog, UIColor*,                    wMainBackColor)
+WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                        wMainRadius)
+WMZDialogSetFuncImplementation(WMZDialog, NSInteger,                 wWirteTextMaxNum)
+WMZDialogSetFuncImplementation(WMZDialog, NSString*,                     wPlaceholder)
+WMZDialogSetFuncImplementation(WMZDialog, NSInteger,                wWirteTextMaxLine)
+WMZDialogSetFuncImplementation(WMZDialog, UIKeyboardType,          wWirteKeyBoardType)
+WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                      wPercentAngle)
+WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                     wPercentOrginX)
+WMZDialogSetFuncImplementation(WMZDialog, CGSize,                          wImageSize)
+WMZDialogSetFuncImplementation(WMZDialog, NSInteger,                     wColumnCount)
+WMZDialogSetFuncImplementation(WMZDialog, NSInteger,                        wRowCount)
+WMZDialogSetFuncImplementation(WMZDialog, NSString*,                       wImageName)
+WMZDialogSetFuncImplementation(WMZDialog, NSString*,           wReginerCollectionCell)
+WMZDialogSetFuncImplementation(WMZDialog, NSInteger,                    wLocationType)
+WMZDialogSetFuncImplementation(WMZDialog, UIColor*,                wProgressTintColor)
+WMZDialogSetFuncImplementation(WMZDialog, UIColor*,                   wTrackTintColor)
+WMZDialogSetFuncImplementation(WMZDialog, NSArray* ,                  wTableViewColor)
+WMZDialogSetFuncImplementation(WMZDialog, NSString*,                    wDateTimeType)
+WMZDialogSetFuncImplementation(WMZDialog, NSTextAlignment,             wTextAlignment)
+WMZDialogSetFuncImplementation(WMZDialog, CGSize,                        wLoadingSize)
+WMZDialogSetFuncImplementation(WMZDialog, UIColor*,                     wLoadingColor)
+WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                        wCellHeight)
+WMZDialogSetFuncImplementation(WMZDialog, NSString*,                       wSeparator)
+WMZDialogSetFuncImplementation(WMZDialog, DialogType,                           wType)
+WMZDialogSetFuncImplementation(WMZDialog, DialogShowAnination,         wShowAnimation)
+WMZDialogSetFuncImplementation(WMZDialog, DialogHideAnination,         wHideAnimation)
+WMZDialogSetFuncImplementation(WMZDialog, ChainType,                       wChainType)
+WMZDialogSetFuncImplementation(WMZDialog, LoadingStyle,                  wLoadingType)
+WMZDialogSetFuncImplementation(WMZDialog, DiaDirection,                    wDirection)
+WMZDialogSetFuncImplementation(WMZDialog, diaLogPresentCallBlock,     wParentHeadView)
+WMZDialogSetFuncImplementation(WMZDialog, diaLogPresentCallBlock,   wParentBottomView)
+WMZDialogSetFuncImplementation(WMZDialog, diaLogCellCallBlock,            wSelectCell)
+WMZDialogSetFuncImplementation(WMZDialog, DialogClickBlock,               wEventClose)
+WMZDialogSetFuncImplementation(WMZDialog, DialogMenuClickBlock,       wEventMenuClick)
+WMZDialogSetFuncImplementation(WMZDialog, diaLogMyViewCallBlock,        wMyDiaLogView)
+WMZDialogSetFuncImplementation(WMZDialog, diaLogCellCallBlock,                wMyCell)
+WMZDialogSetFuncImplementation(WMZDialog, DiaLogCollectionCellBlock,    wCalanderCell)
+WMZDialogSetFuncImplementation(WMZDialog, DiaLogCollectionClickBlock,wCalanderCellClick)
+WMZDialogSetFuncImplementation(WMZDialog, DialogClickBlock,            wEventOKFinish)
+WMZDialogSetFuncImplementation(WMZDialog, DialogClickBlock,        wEventCancelFinish)
+WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventFinish)
 - (instancetype)init{
     if (self = [super init]) {
         _wType = DialogTypeNornal;
@@ -143,7 +157,6 @@ WMZDialogSetFuncImplementation(WMZDialog, NSString*,                wSeparator)
         _wPercentOrginX = 1.0f;
         _wDirection = directionDowm;
         _wImageSize = CGSizeMake(Dialog_GetWNum(110), Dialog_GetWNum(110));
-        _wImageName = @"down_tyx";
         _wProgressTintColor = DialogColor(0xFF9900);
         _wTrackTintColor = DialogColor(0xF3F4F6);
         _wTableViewColor = @[DialogColor(0xFFFFFF),DialogColor(0xF6F7FA),DialogColor(0xEBECF0),DialogColor(0xFFFFFF)];
@@ -156,6 +169,13 @@ WMZDialogSetFuncImplementation(WMZDialog, NSString*,                wSeparator)
         _wLoadingSize = CGSizeMake( Dialog_GetHNum(90),  Dialog_GetHNum(90));
         _wLoadingColor = DialogColor(0x108ee9);
         _wSeparator = @",";
+        _wLeftScrollClose = YES;
+        _wOpenScrollClose = YES;
+        _wOpenDragging = YES;
+        _wScaleParentVC = YES;
+        _wCalanderCanScroll = YES;
+        _wOpenChineseDate = YES;
+        _wHideCalanderBtn = YES;
     }
     return self;
 }
@@ -173,9 +193,7 @@ WMZDialogSetFuncImplementation(WMZDialog, NSString*,                wSeparator)
  *根据type设置默认属性
  */
 - (void)setUpDefaultParam{
-
     switch (self.wType) {
-        case DialogTypeNornal:{}break;
         case DialogTypeSheet:{
             if (self.wHeight == Dialog_GetHNum(300)) {
                 self.wHeight = Dialog_GetHNum(200);
@@ -190,9 +208,6 @@ WMZDialogSetFuncImplementation(WMZDialog, NSString*,                wSeparator)
             if (self.wMainBtnHeight == Dialog_GetHNum(60)) {
                 self.wMainBtnHeight+=Dialog_GetHNum(10);
             }
-//            if (self.wMultipleSelection&&self.wSelectShowChecked) {
-//                self.wTextAlignment = NSTextAlignmentLeft;
-//            }
         }
             break;
         case DialogTypePay:{
@@ -228,12 +243,6 @@ WMZDialogSetFuncImplementation(WMZDialog, NSString*,                wSeparator)
                 self.wRowCount = 2;
             }
             self.wShowAnimation = AninatonShowNone;
-        }
-        break;
-        case DialogTypeSelect:{
-//            if (self.wMultipleSelection&&self.wSelectShowChecked) {
-//                self.wTextAlignment = NSTextAlignmentLeft;
-//            }
         }
         break;
         case DialogTypePickSelect:{
@@ -380,9 +389,45 @@ WMZDialogSetFuncImplementation(WMZDialog, NSString*,                wSeparator)
         case DialogTypeLoading:{
             self.wShadowAlpha = 0.2;
             self.wWidth = self.wLoadingSize.width*1.5;
-//            self.wShadowColor = [UIColor whiteColor];
         }
-        case DialogTypeAuto:
+             break;
+        case DialogTypeAuto:{
+            if (self.wMainRadius == 15.0f) {
+                self.wMainRadius = 8.0f;
+            }
+            if (self.wWidth == Dialog_GetWNum(500)) {
+                self.wWidth = Dialog_GetWNum(400);
+            }
+            self.wShadowShow = NO;
+            self.wMessageColor = DialogColor(0xffffff);
+            self.wMainBackColor = DialogColor(0x333333);
+        }
+            break;
+        case DialogTypeCardPresent:{
+            self.wMainToBottom = YES;
+            if (self.wWidth == Dialog_GetWNum(500)) {
+                self.wWidth = Device_Dialog_Width;
+            }
+            if (self.wHeight == Dialog_GetHNum(300)) {
+                self.wHeight = Device_Dialog_Height-NavigationBar_Dialog_Height;
+            }
+            self.wHideAnimation = AninatonHideVerticalMove;
+            if (self.wAnimationDurtion == 1.0f) {
+                self.wAnimationDurtion = 0.8;
+            }
+            if (self.wHeight> (Device_Dialog_Height - ([[UIApplication sharedApplication] statusBarFrame].size.height)) ) {
+                self.wHeight = (Device_Dialog_Height - ([[UIApplication sharedApplication] statusBarFrame].size.height));
+            }
+        }
+            break;
+        case DialogTypeCalander:{
+            if (self.wWidth == Dialog_GetWNum(500)) {
+                self.wWidth = Device_Dialog_Width;
+            }
+        }
+            break;
+        case DialogTypeNornal:
+             DialogTypeSelect:
              DialogTypeMyView:
              DialogTypeWrite:
              DialogTypeTime:
@@ -391,6 +436,12 @@ WMZDialogSetFuncImplementation(WMZDialog, NSString*,                wSeparator)
         default:
             break;
     }
+    if (self.wHeight > Device_Dialog_Height&&self.wType!=DialogTypeCardPresent) {
+        self.wHeight = Device_Dialog_Height;
+    }
+    if (self.wWidth > Device_Dialog_Width) {
+        self.wWidth = Device_Dialog_Width;
+    }
     
 }
 
@@ -398,10 +449,8 @@ WMZDialogSetFuncImplementation(WMZDialog, NSString*,                wSeparator)
  *UI赋值
  */
 - (void)setUpUI{
-    
-    self.modalPresentationStyle = UIModalPresentationOverFullScreen;
     self.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    
+    self.modalPresentationStyle = UIModalPresentationOverFullScreen;
     
     if (self.wType == DialogTypePay || self.wType == DialogTypeWrite) {
         //监听键盘出现
@@ -420,7 +469,8 @@ WMZDialogSetFuncImplementation(WMZDialog, NSString*,                wSeparator)
         self.wType != DialogTypeMenusSelect&&
         self.wType != DialogTypeLocation&&
         self.wType != DialogTypeAdvertisement&&
-        self.wType != DialogTypeBuyCar) {
+        self.wType != DialogTypeBuyCar&&
+        self.wType != DialogTypeCardPresent) {
         self.mainView.layer.cornerRadius = self.wMainRadius;
         self.mainView.layer.masksToBounds = YES;
     }
@@ -475,16 +525,22 @@ WMZDialogSetFuncImplementation(WMZDialog, NSString*,                wSeparator)
     }
     
     
-    if (self.wType == DialogTypeSelect || self.wType == DialogTypeSheet || self.wType == DialogTypePop|| self.wType == DialogTypeBuyCar) {
+    if (self.wType == DialogTypeSelect ||
+        self.wType == DialogTypeSheet ||
+        self.wType == DialogTypePop||
+        self.wType == DialogTypeBuyCar||
+        self.wType == DialogTypeCardPresent) {
         if (self.wData&&([self.wData isKindOfClass:[NSArray class]]||[self.wData isKindOfClass:[NSMutableArray class]])) {
             self.tableView.delegate = self;
             self.tableView.dataSource = self;
             self.tableView.estimatedSectionFooterHeight = 0.01;
             self.tableView.estimatedSectionHeaderHeight = 0.01;
             self.tableView.estimatedRowHeight = 100.0;
-//            self.tableView.rowHeight = self.wCellHeight;
             if (@available(iOS 11.0, *)) {
                 self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+            }
+            if (self.wType == DialogTypeCardPresent) {
+                self.tableView.wOpenScrollClose = self.wOpenScrollClose;
             }
         }
         
@@ -546,6 +602,9 @@ WMZDialogSetFuncImplementation(WMZDialog, NSString*,                wSeparator)
             [self.view insertSubview:self.shadowView  belowSubview:self.mainView];
         }
         BOOL animal = !self.wShowAnimation||self.wShowAnimation>=7;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self setParentVCView:0.9];
+        });
         [self.wParentVC presentViewController:self animated:animal completion:nil];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self dealAnamtionShowWithView:self.mainView withType:self.wShowAnimation withTime:self.wAnimationDurtion];
@@ -593,7 +652,7 @@ WMZDialogSetFuncImplementation(WMZDialog, NSString*,                wSeparator)
     }else{
         [self closeAction];
     }
-    
+    [self setParentVCView:1.0];
 }
 
 - (void)closeAction{
@@ -609,6 +668,21 @@ WMZDialogSetFuncImplementation(WMZDialog, NSString*,                wSeparator)
             [self dismissViewControllerAnimated:YES completion:nil];
         });
     }
+    
+}
+/*
+ *缩放底部控制器
+ */
+- (void)setParentVCView:(CGFloat)scale{
+    if (!self.wScaleParentVC) return;
+    if (self.wType != DialogTypeCardPresent) return;
+    [UIView animateWithDuration:0.3 animations:^{
+        if (self.wParentVC.navigationController) {
+            self.wParentVC.navigationController.view.transform = CGAffineTransformMakeScale(scale, scale);
+        }else{
+            self.wParentVC.view.transform = CGAffineTransformMakeScale(scale, scale);
+        }
+    }];
 }
 
 /*
@@ -618,10 +692,11 @@ WMZDialogSetFuncImplementation(WMZDialog, NSString*,                wSeparator)
     CGPoint center = CGPointZero;
     
     if (self.wMainToBottom) {
-        frame.origin.y = Device_Dialog_Height-frame.size.height;
+        frame.origin.y = Device_Dialog_Height- CGRectGetMaxY(frame);
+        
         if (isIphoneX) {
-            frame.origin.y -= 10;
-            frame.size.height += 10;
+            frame.origin.y -= 15;
+            frame.size.height += 15;
             UIView *view =  [UIView new];
             view.backgroundColor = self.mainView.backgroundColor;
             view.frame = CGRectMake(frame.origin.x, frame.size.height-10, frame.size.width, 10);
@@ -644,7 +719,9 @@ WMZDialogSetFuncImplementation(WMZDialog, NSString*,                wSeparator)
  */
 - (UIView*)addBottomView:(CGFloat)maxY{
     if (self.bottomView) {
-        self.bottomView.frame = CGRectMake(0, maxY, self.wWidth, CGRectGetMaxY(self.OKBtn.frame));
+        CGRect rect = self.bottomView.frame;
+        rect.origin.y = maxY;
+        self.bottomView.frame = rect;
         return self.bottomView;
     }
     
@@ -657,7 +734,6 @@ WMZDialogSetFuncImplementation(WMZDialog, NSString*,                wSeparator)
     upLine.backgroundColor = self.wLineColor;
     upLine.frame = CGRectMake(0, 0, self.wWidth, DialogK1px);
     
-    
     if (self.wEventCancelFinish) {
         [self.bottomView addSubview:self.cancelBtn];
         self.cancelBtn.frame = CGRectMake(0, CGRectGetMaxY(upLine.frame)+self.wMainOffsetX, self.wWidth/2-DialogK1px/2, self.wMainBtnHeight);
@@ -667,7 +743,6 @@ WMZDialogSetFuncImplementation(WMZDialog, NSString*,                wSeparator)
         [self.bottomView addSubview:Line];
         Line.backgroundColor = self.wLineColor;
         Line.frame = CGRectMake(CGRectGetMaxX(self.cancelBtn.frame), self.cancelBtn.frame.origin.y, DialogK1px, self.wMainBtnHeight);
-
     }
     
     [self.bottomView addSubview:self.OKBtn];
@@ -676,34 +751,53 @@ WMZDialogSetFuncImplementation(WMZDialog, NSString*,                wSeparator)
     self.bottomView.frame = CGRectMake(0, maxY, self.wWidth, CGRectGetMaxY(self.OKBtn.frame)+self.wMainOffsetX);
     return self.bottomView;
 }
+/*
+ *添加顶部
+ */
+- (UIView*)addTopView{
+    if (self.diaLogHeadView) return self.diaLogHeadView;
+    self.diaLogHeadView = [UIView new];
+    self.diaLogHeadView.backgroundColor = self.wMainBackColor;
+    self.diaLogHeadView.frame = CGRectMake(0, 0, self.wWidth, self.wMainBtnHeight);
+    [self.mainView addSubview:self.diaLogHeadView];
+          
+    [self.diaLogHeadView addSubview:self.cancelBtn];
+    self.cancelBtn.frame = CGRectMake(self.wMainOffsetX, 0, self.wMainBtnHeight, self.wMainBtnHeight);
+    self.cancelBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+          
+    [self.diaLogHeadView addSubview:self.OKBtn];
+    [self.OKBtn removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
+    self.OKBtn.frame = CGRectMake(self.wWidth-self.wMainBtnHeight-self.wMainOffsetX, 0,self.wMainBtnHeight, self.wMainBtnHeight);
+    self.OKBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+          
+    [self.diaLogHeadView addSubview:self.titleLabel];
+    self.titleLabel.frame = CGRectMake(self.wMainBtnHeight+2*self.wMainOffsetX, 0, self.wWidth-2*self.wMainBtnHeight-4*self.wMainOffsetX, self.wMainBtnHeight);
+    
+    
+    UIView *line = [UIView new];
+    line.backgroundColor = [UIColor lightGrayColor];
+    line.frame = CGRectMake(0, self.diaLogHeadView.frame.size.height, self.diaLogHeadView.frame.size.width, DialogK1px);
+    [self.diaLogHeadView addSubview:line];
+
+    return self.diaLogHeadView;
+}
 
 # pragma  mark tableView 代理
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     return nil;
 }
-
-
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     return nil;
 }
-
-
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 0.01;
 }
-
-
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return 0.01;
 }
-
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return   self.wType == DialogTypeMenusSelect || self.wType == DialogTypeLocation?[[self getMyDataArr:tableView.tag withType:0] count]:[self.wData count];
-    
 }
-
-# pragma  mark tableView 代理
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     id data = (self.wType == DialogTypeMenusSelect || self.wType == DialogTypeLocation?[self getMyDataArr:tableView.tag withType:0]:self.wData)[indexPath.row];
@@ -734,7 +828,6 @@ WMZDialogSetFuncImplementation(WMZDialog, NSString*,                wSeparator)
                 cell.accessoryType = UITableViewCellAccessoryNone;
             }
         }else if([data isKindOfClass:[NSDictionary class]]){
-            
             UIImage *icon = [UIImage imageNamed:data[@"image"]];
             cell.imageView.image = icon;
             CGSize itemSize = CGSizeMake(30, 30);
@@ -760,13 +853,10 @@ WMZDialogSetFuncImplementation(WMZDialog, NSString*,                wSeparator)
         return cell;
     }
 }
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     //为0则自动计算高度
     return  self.wCellHeight?:UITableViewAutomaticDimension;
 }
-
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (self.wType == DialogTypeMenusSelect || self.wType == DialogTypeLocation) {
         [self selectWithTableView:tableView withIndexPath:indexPath];
@@ -775,6 +865,9 @@ WMZDialogSetFuncImplementation(WMZDialog, NSString*,                wSeparator)
     }else{
         NSString *cellID = [NSString stringWithFormat:@"%ld-%ld",indexPath.section,indexPath.row];
         id any = self.wData[indexPath.row];
+        if (self.wSelectCell) {
+            self.wSelectCell(indexPath,tableView,any);return;
+        }
         if ([self.tempArr indexOfObject:cellID]==NSNotFound) {
             [self.selectArr addObject:any];
             [self.tempArr addObject:cellID];
@@ -789,7 +882,9 @@ WMZDialogSetFuncImplementation(WMZDialog, NSString*,                wSeparator)
             if (self.wEventFinish) {
                 self.wEventFinish(any, indexPath,self.wType);
             }
-            [self closeView];
+            if (self.wType != DialogTypeCardPresent) {
+                [self closeView];
+            }
         }
     
     }
@@ -799,6 +894,13 @@ WMZDialogSetFuncImplementation(WMZDialog, NSString*,                wSeparator)
 {
     if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
         [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if (self.wType != DialogTypeCardPresent || scrollView != self.tableView || !self.wOpenScrollClose) return;
+    if (self.tableView.contentOffset.y<=0) {
+        scrollView.contentOffset = CGPointMake(scrollView.contentOffset.x, 0);
     }
 }
 
@@ -846,7 +948,9 @@ WMZDialogSetFuncImplementation(WMZDialog, NSString*,                wSeparator)
         NSCharacterSet* nonDigits =[[NSCharacterSet decimalDigitCharacterSet] invertedSet];
          //符合年月日的才改变天数
         if (component == 0) {
-            if ([self.wDateTimeType containsString:@"dd"]&&[self.wDateTimeType containsString:@"yyyy"]&&[self.wDateTimeType containsString:@"MM"]) {
+            if ([self.wDateTimeType rangeOfString:@"dd"].location != NSNotFound &&
+                [self.wDateTimeType rangeOfString:@"yyyy"].location!= NSNotFound &&
+                [self.wDateTimeType rangeOfString:@"MM"].location!= NSNotFound ) {
                 if ([self.wData count]>2) {
                     NSArray *yearArr = self.wData[component];
                     int year =[[yearArr[self.wPickRepeat?row%yearArr.count:row] stringByTrimmingCharactersInSet:nonDigits] intValue];
@@ -859,7 +963,9 @@ WMZDialogSetFuncImplementation(WMZDialog, NSString*,                wSeparator)
             }
         }
         if (component == 1) {
-            if ([self.wDateTimeType containsString:@"dd"]&&[self.wDateTimeType containsString:@"yyyy"]&&[self.wDateTimeType containsString:@"MM"]) {
+            if ([self.wDateTimeType rangeOfString:@"dd"].location != NSNotFound&&
+                [self.wDateTimeType rangeOfString:@"yyyy"].location != NSNotFound&&
+                [self.wDateTimeType rangeOfString:@"MM"].location != NSNotFound) {
                 if ([self.wData count]>2) {
                     NSArray *yearArr = self.wData[component-1];
                     NSInteger yearIndex = [self.pickView selectedRowInComponent:component-1];
@@ -891,14 +997,11 @@ WMZDialogSetFuncImplementation(WMZDialog, NSString*,                wSeparator)
             }
             [self.pickView reloadComponent:component+1];
             [pickerView selectRow:0 inComponent:component+1 animated:YES];
-            
             if (component == 0 && self.depth >= 3 && self.wType == DialogTypeLocation) {
                 [self.pickView reloadComponent:component+2];
                 [pickerView selectRow:0 inComponent:component+2 animated:YES];
             }
-
         }else{
-            
             for (int i = 0 ; i<dataArr.count; i++) {
                 WMZTree *tree = dataArr[i];
                 if (i == (self.wPickRepeat?row%dataArr.count:row)) {
@@ -907,7 +1010,6 @@ WMZDialogSetFuncImplementation(WMZDialog, NSString*,                wSeparator)
                     tree.isSelected = NO;
                 }
             }
-            
             [self.pickView reloadComponent:component];
         }
     }
@@ -932,8 +1034,6 @@ WMZDialogSetFuncImplementation(WMZDialog, NSString*,                wSeparator)
     self.keyBoardHeight = 0;
     self.mainView.center = self.view.center;
 }
-
-
 /*
  *取消
  */
@@ -943,7 +1043,6 @@ WMZDialogSetFuncImplementation(WMZDialog, NSString*,                wSeparator)
     }
     [self closeView];
 }
-
 /*
  *确定
  */
@@ -953,8 +1052,6 @@ WMZDialogSetFuncImplementation(WMZDialog, NSString*,                wSeparator)
     }
     [self closeView];
 }
-
-
 - (NSMutableDictionary *)configDic{
     if (!_configDic) {
         NSDictionary *dic = @{
@@ -977,14 +1074,17 @@ WMZDialogSetFuncImplementation(WMZDialog, NSString*,                wSeparator)
                                @(DialogTypeTabbarMenu):@"tabbarMenuAction",
                                @(DialogTypeNaviMenu):@"naviMenuAction",
                                @(DialogTypeLoading):@"loadingAction",
+                               @(DialogTypeCardPresent):@"cardPresentAction",
+                               @(DialogTypeCalander):@"calanderAction",
                               };
         _configDic = [NSMutableDictionary dictionaryWithDictionary:dic];
     }
     return _configDic;
 }
 
+
+
 - (void)dealloc{
-    NSLog(@"销毁");
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 

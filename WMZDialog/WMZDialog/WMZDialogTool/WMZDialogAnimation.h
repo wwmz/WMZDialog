@@ -58,6 +58,10 @@ void rightAnimation(UIView* view,NSTimeInterval duration,UIColor *color,CGFloat 
 void errorAnimation(UIView* view,NSTimeInterval duration,UIColor *color,CGFloat width);
 //加载
 void loadingAnimation(UIView* view,NSTimeInterval duration,UIColor *color,CGFloat width);
+//垂直移动
+void verticalMoveAnimation (UIView *view ,NSTimeInterval duration);
+//横向移动
+void landscapeMoveAnimation(UIView *view ,NSTimeInterval duration);
 @end
 
 NS_ASSUME_NONNULL_END

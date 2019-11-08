@@ -18,6 +18,8 @@ WMZDialog * Dialog(void);
 @property(nonatomic,copy,readonly) WMZDialog *(^wStart)(void);
 
 /*=========================================Attributes==========================================*/
+
+/*=========================================通用=================================================*/
 //数据源 
 WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, id,                       wData)
 //弹出的vc
@@ -93,10 +95,11 @@ WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,              
 //选中是否打钩
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wSelectShowChecked)
 
+/*=========================================disappear=======================================================================*/
 //自动消失时间
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGFloat,                  wDisappelSecond)
 
-
+/*=========================================Pay=======================================================================*/
 //距离弹窗键盘的距离
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGFloat,                  wKeyBoardMarginY)
 //密码框数量
@@ -104,7 +107,7 @@ WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, NSInteger,         
 //支付方式默认文本
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, NSString*,                wDefaultSelectPayStr)
 
-
+/*=========================================write=======================================================================*/
 //提示文本
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, NSString*,                wPlaceholder)
 //编辑框最大行数 大于行数则滚动
@@ -114,7 +117,7 @@ WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, NSInteger,         
 //键盘类型
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, UIKeyboardType,           wWirteKeyBoardType)
 
-
+/*=========================================Pop=======================================================================*/
 //弹出的气泡位置
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGFloat,                  wPercentAngle)
 //弹出视图的中心X轴偏移
@@ -127,26 +130,28 @@ WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, UIView* ,          
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wNavigationItem)
 
 
+/*=========================================dowm=======================================================================*/
 //图片的size
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGSize,                   wImageSize)
 //图片的路径
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, NSString*,                wImageName)
-
 //进度条颜色
 WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, UIColor*,                 wProgressTintColor)
 //进度条运动的颜色
 WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, UIColor*,                 wTrackTintColor)
 
+/*=========================================custom=======================================================================*/
 //是否添加底部确定取消按钮
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wAddBottomView)
 
-
+/*=========================================menu=======================================================================*/
 //tableview的颜色
 WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, NSArray* ,                wTableViewColor)
 //cell文本居中样式
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, NSTextAlignment,          wTextAlignment)
 
 
+/*=========================================location=======================================================================*/
 //地区的类型 1省 2省市 3省市区
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, NSInteger,                wLocationType)
 //弹出的地区选择类型 pickview/tableview
@@ -154,13 +159,60 @@ WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, ChainType,         
 //选中数据的分割符 默认‘，’
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, NSString*,                wSeparator)
 
+/*=========================================datePicker===================================================================*/
 //时间弹窗的样式
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, NSString*,                wDateTimeType)
 //循环滚动
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wPickRepeat)
 
+/*=========================================Share/tabbarMenu/NaviMENU==================================================*/
+//WMZDialogShareView显示多少列
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, NSInteger,                wColumnCount)
+//WMZDialogShareView显示多少行
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, NSInteger,                wRowCount)
+
+/*=========================================load=======================================================================*/
+//加载框样式
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, LoadingStyle,             wLoadingType)
+//加载框大小
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGSize,                   wLoadingSize)
+//加载框线条颜色
+WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, UIColor*,                 wLoadingColor)
+
+/*=========================================cardParent==============================================================*/
+//滑动到顶部继续滑动可关闭 default YES
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wOpenScrollClose)
+//开启侧滑滑动关闭 default YES
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wLeftScrollClose)
+//开启拖动 default YES
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wOpenDragging)
+//缩放底部控制器 default YES
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wScaleParentVC)
+//自定义顶部视图
+WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, diaLogPresentCallBlock,   wParentHeadView)
+//自定义底部视图
+WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, diaLogPresentCallBlock,   wParentBottomView)
+
+/*=========================================Calander==============================================================*/
+//开启纵向滑动 default NO(横向滑动)
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wDirectionVertical)
+//开启滑动 default YES
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wCalanderCanScroll)
+//开启农历节日显示 default YES
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wOpenChineseDate)
+//隐藏日历上的按钮 default YES
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wHideCalanderBtn)
+//展示圆点的日期 携带格式为yyyy-MM-dd的日期
+WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, NSArray*,                 wDateShowCircle)
+//注册自定义的collectionViewCell
+WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, NSString*,                wReginerCollectionCell)
+/*=========================================Attributes==========================================*/
+
+/*=========================================Event================================================*/
 //自定义tableviewCell
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, diaLogCellCallBlock,      wMyCell)
+//自定义点击tableviewCell
+WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, diaLogCellCallBlock,      wSelectCell)
 //自定义弹窗视图内容
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, diaLogMyViewCallBlock,    wMyDiaLogView)
 //按钮确定点击事件
@@ -173,20 +225,12 @@ WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogTableClickBlo
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogClickBlock,         wEventClose)
 //菜单点击事件
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogMenuClickBlock,     wEventMenuClick)
+//自定义日历cell
+WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DiaLogCollectionCellBlock,wCalanderCell)
+//自定义日历点击事件
+WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DiaLogCollectionClickBlock,wCalanderCellClick)
 
-//WMZDialogShareView显示多少列
-WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, NSInteger,                wColumnCount)
-//WMZDialogShareView显示多少行
-WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, NSInteger,                wRowCount)
-
-//加载框样式
-WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, LoadingStyle,             wLoadingType)
-//加载框大小
-WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGSize,                   wLoadingSize)
-//加载框线条颜色
-WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, UIColor*,                 wLoadingColor)
-
-/*=========================================Attributes==========================================*/
+/*=========================================Event================================================*/
 
 /*=========================================参数说明=====================================================================
 
@@ -204,7 +248,6 @@ wHeight             弹窗视图的宽度                   CGFloat             
 wMainOffsetY           Y间距                       CGFloat                  -             Dialog_GetHNum(20)            -
 wMainOffsetX           X间距                       CGFloat                  -             Dialog_GetHNum(15)            -
 wMainBtnHeight        按钮高度                      CGFloat                  -             Dialog_GetHNum(60)            -
-wMyCell              自定义cell                 UITableViewCell              -                   -                       -
 wMainToBottom       视图在最底部                       BOOL                   -                  NO                       -
 wLineColor           线条的颜色                     UIColor                   -            DialogColor(0x333333)          -
 wLineAlpha          线条的透明度                     CGFLoat                  -                 0.5f                      -
@@ -230,10 +273,7 @@ wEffectShow         毛玻璃是否显示                     BOOL              
 wMultipleSelection      多选                         BOOL                   -                    NO                     -
 wSelectShowChecked    选中是否打钩                     BOOL                   -                    NO                     -
 wTextAlignment        文本对齐方式                NSTextAlignment             _                   center                  _
-wEventOKFinish        确定点击事件                DialogClickBlock            -                    -                      -
-wEventCancelFinish 取消点击事件(不传默认没有取消按钮) DialogClickBlock            -                    -                      -
-wEventFinish         所有的操作事件                DialogClickBlock            -                   -                       -
- 
+
  
 =========================================disappear=======================================================================
  
@@ -259,11 +299,11 @@ wPercentAngle       弹出的气泡位置                 CGFLoat               
 wPercentOrginX      弹出视图的中心X轴偏移           CGFLoat                  -                    1.0f(默认中间)              -
 wDirection          弹出式图的方向                DiaDirection          left/right/top/bottom   directionDowm               -
 wNavigationItem     导航栏位置                       BOOL                   NO                      _                      _
-wTapView            触发点的视图                   UIView                   -                        -                      -（pop的时候必传）
+wTapView            触发点的视图                   UIView                   -                        -                    -（pop的时候必传）
  
 =========================================down=============================================================================
 wImageSize            图片的大小                     CGSize                   -     Dialog_GetWNum(110),Dialog_GetWNum(110) -
-wImageName            图片路径名字                   NSString                 -                  down_tyx                    -
+wImageName            图片路径名字                   NSString                 -                      -                      -
 wProgressTintColor   进度条闲置时候的颜色              UIColor                  -                DialogColor(0xFF9900)        -
 wTrackTintColor      进度条动作时候的颜色              UIColor                  -                DialogColor(0xF3F4F6)        -
 
@@ -293,9 +333,27 @@ wLoadingType          加载框样式                     LoadingStyle          
 wLoadingSize          加载框size                     CGSize                  -              Dialog_GetHNum(90,90)         -
 wLoadingColor         加载框线条颜色                  UIColor                  -                  确定按钮的文本颜色           -
  
+=========================================cardPareent==========================================================================
+wOpenScrollClose      滑动到顶部继续滑动可关闭           BOOL                    -                       YES                  -
+wLeftScrollClose      测滑可关闭                       BOOL                    -                      YES                  -
+wOpenDragging         开启拖动                         BOOL                    -                      YES                  -
+wScaleParentVC        缩放底部控制器                    BOOL                    -                      YES                  -
+wParentHeadView       自定义顶部视图                    -                      -                        -                  -
+wParentBottomView     自定义底部视图                    -                      -                        -                  -
+ 
 =========================================custom===============================================================================
  
 wAddBottomView       是否添加底部按钮                   BOOL                   -                     NO                     -
+ 
+=========================================Events===============================================================================
+ 
+wEventOKFinish        确定点击事件                DialogClickBlock            -                    -                      -
+wEventCancelFinish 取消点击事件(不传默认没有取消按钮) DialogClickBlock            -                    -                      -
+wEventFinish         所有的操作事件                DialogClickBlock            -                    -                       -
+wEventClose          弹窗关闭事件                        -                     -                    -                       -
+wEventMenuClick      菜单点击事件                        -                     -                    -                       -
+wSelectCell          自定义cell点击                      -                     -                    -                       -
+wMyCell              自定义cell                  UITableViewCell             -                    -                       -
 wMyDiaLogView        自定义弹窗View(返回最底部的view)     -                     -                     -                      -
  
 =========================================参数说明==========================================================================*/
