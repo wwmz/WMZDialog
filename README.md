@@ -105,7 +105,7 @@ typedef enum : NSUInteger{
 
 
 ## 参数说明(详情使用看demo)
-###DialogTypeNornal/DialogTypeSheet/DialogTypeSelect。。。
+### DialogTypeNornal/DialogTypeSheet/DialogTypeSelect。。。
 | 可配置通用参数               | 类型      | 作用   (默认值)                                 | 
 |------------------------|-----------|-----------------------------------------------------|
 | wData                | id        | 数据源                             |
@@ -146,12 +146,12 @@ typedef enum : NSUInteger{
 | wSelectShowChecked                | BOOL        |选中是否打钩      default NO                 |
 | wTextAlignment                | NSTextAlignment| 文本对齐方式      default center                        |
 
-###DialogTypeAuto
+### DialogTypeAuto
 | DialogTypeAuto参数               | 类型      | 作用   (默认值)                                 | 
 |------------------------|-----------|-----------------------------------------------------|
 | wDisappelSecond                | CGFLoat        | 自动消失的时间   default  1.5f                            |
 
-###DialogTypePay
+### DialogTypePay
 | DialogTypePay参数               | 类型      | 作用   (默认值)                                 | 
 |------------------------|-----------|-----------------------------------------------------|
 | wSonData                | id        | 支付方式选择数据源                         |
@@ -160,7 +160,7 @@ typedef enum : NSUInteger{
 | wDefaultSelectPayStr                | NSString        | 支付方式默认文本   default  农业银行                          |
 
 
-###DialogTypeWrite
+### DialogTypeWrite
 | DialogTypeWrite参数               | 类型      | 作用   (默认值)                                 | 
 |------------------------|-----------|-----------------------------------------------------|
 | wPlaceholder                | NSString        | 提示语  default 请输入                       |
@@ -168,7 +168,7 @@ typedef enum : NSUInteger{
 | wWirteTextMaxNum                | NSInteger        |编辑框可输入的最大数字   default   -1(-1为不限制)                   |
 | wWirteKeyBoardType                | UIKeyBoardType        | 编辑框的键盘type  default  UIKeyboardTypeDefault                          |
 
-###DialogTypePop
+### DialogTypePop
 | DialogTypePop参数               | 类型      | 作用   (默认值)                                 | 
 |------------------------|-----------|-----------------------------------------------------|
 | wPercentAngle                | CGFLoat        | 弹出的气泡位置  default  0.5f                         |
@@ -177,7 +177,7 @@ typedef enum : NSUInteger{
 | wNavigationItem                | BOOL        | 导航栏位置   default  NO                          |
 | wTapView                | UIView        | 触发点的视图 default  -       必传                 |
 
-###DialogTypeDown
+### DialogTypeDown
 | DialogTypeDown参数               | 类型      | 作用   (默认值)                                 | 
 |------------------------|-----------|-----------------------------------------------------|
 | wImageSize                | CGSize        | 图片的大小  default (50,50)                         |
@@ -185,40 +185,40 @@ typedef enum : NSUInteger{
 | wProgressTintColor                | UIColor        |进度条闲置时候的颜色 default   0xFF9900                  |
 | wTrackTintColor                | UIColor        |  进度条动作时候的颜色    default  0xF3F4F6                          |
 
-###DialogTypeMenusSelect
+### DialogTypeMenusSelect
 | DialogTypeMenusSelect参数               | 类型      | 作用   (默认值)                                 | 
 |------------------------|-----------|-----------------------------------------------------|
 | wTableViewColor                | NSArray        |  tableview的背景颜色  default  FFFFFF/F6F7FA/EBECF0/666666
 
-###DialogTypeLocation
+### DialogTypeLocation
 | DialogTypeLocation参数               | 类型      | 作用   (默认值)                                 | 
 |------------------------|-----------|-----------------------------------------------------|
 | wLocationType                | NSInteger        | 地区关联层级  default  3                         |
 | wChainType                | ChainType        | 关联层级的样式    default  ChainPickView                        |
 | wSeparator                | NSString        |选中数据的分隔符 default  ,                  |
 
-###DialogTypeDatePicker
+### DialogTypeDatePicker
 | DialogTypeDatePicker参数               | 类型      | 作用   (默认值)                                 | 
 |------------------------|-----------|-----------------------------------------------------|
 | wDateTimeType                | NSString        |  时间选择器样式    yyyy年MM月dd日HH时mm分ss秒(自由组合)  default yyyy:MM:dd HH:mm:ss                       |
 | wPickRepeat                | BOOL        | pickView无限循环   default  YES                        |
 
 
-###Share/tabbarMenu/NaviMENU
+### Share/tabbarMenu/NaviMENU
 | Share/tabbarMenu/NaviMENU参数               | 类型      | 作用   (默认值)                                 | 
 |------------------------|-----------|-----------------------------------------------------|
 | wColumnCount                | NSInteger        |  列    default  -                     |
 | wRowCount                | NSInteger        | 行   default  -                        |
 | 注意如果设置了行和列 要如期显示 要设置好wHeight  |
 
-###DialogTypeLoading
+### DialogTypeLoading
 | DialogTypeLoading参数               | 类型      | 作用   (默认值)                                 | 
 |------------------------|-----------|-----------------------------------------------------|
 | wLoadingType                | LoadingStyle        | 加载框样式  default  LoadingStyleWait                         |
 | wLoadingSize                | CGSize        |  加载框size default  (90,90)                        |
 | wLoadingColor                | UIColor        |加载框线条颜色 default  确定按钮的文本颜色                  |
 
-###DialogTypeCardPresent
+### DialogTypeCardPresent
 | DialogTypeCardPresent参数               | 类型      | 作用   (默认值)                                 | 
 |------------------------|-----------|-----------------------------------------------------|
 | wOpenScrollClose                | BOOL        | 滑动到顶部继续滑动可关闭  default  YES                         |
@@ -228,7 +228,7 @@ typedef enum : NSUInteger{
 | wParentHeadView                | -        |自定义顶部视图  default  -                  |
 | wParentBottomView                | -        |自定义底部视图 default   -                  |
 
-###DialogTypeCalander
+### DialogTypeCalander
 | DialogTypeCalander参数               | 类型      | 作用   (默认值)                                 | 
 |------------------------|-----------|-----------------------------------------------------|
 | wDirectionVertical                | BOOL        | 开启纵向滑动  default  NO(横向滑动)                         |
@@ -238,12 +238,12 @@ typedef enum : NSUInteger{
 | wDateShowCircle                | NSArray        |展示圆点的日期@[[NSDate date]]  default  -                  |
 | wReginerCollectionCell                | NSString       |注册自定义的collectionViewCell default   -                  |
 
-###DialogTypeMyView
+### DialogTypeMyView
 | DialogTypeMyView参数               | 类型      | 作用   (默认值)                                 | 
 |------------------------|-----------|-----------------------------------------------------|
 | wAddBottomView                | BOOL        |是否添加底部按钮   default  NO                            |
 
-###Events
+### Events
 | Events                | 作用   (默认值)                                 | 
 |----------------------------------|-------------------------------------------|
 | wEventOKFinish       |确定点击事件                             |
