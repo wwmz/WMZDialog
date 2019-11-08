@@ -142,7 +142,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
         _wMessageFont = 16.0f;
         _wOKFont = 16.0f;
         _wCancelFont = 16.0f;
-        _wTitle = @"提示";
+        _wTitle = @"标题";
         _wMessage = @"内容";
         _wShadowAlpha = 0.4f;
         _wShadowColor = DialogColor(0x333333);

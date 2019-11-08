@@ -266,7 +266,7 @@ wTitleFont         标题文本的字体大小                  CGFLoat         
 wMessageFont       内容文本的字体大小                  CGFLoat                 -                  16.0f                    -
 wMainRadius         弹出视图的圆角                    CGFLoat                 -                  15.0f                    -
 wShadowColor        遮罩层的颜色                      UIColor                 -            DialogColor(0x333333)          -
-wShadowAlpha       遮罩层的透明度                     CGFLoat                 -                  16.0f                    -
+wShadowAlpha       遮罩层的透明度                     CGFLoat                 -                  0.4f                    -
 wShadowCanTap     遮罩层能否点击关闭                    BOOL                   -                   YES                     -
 wShadowShow         遮罩层是否显示                     BOOL                   -                   YES                     -
 wEffectShow         毛玻璃是否显示                     BOOL                   -                    NO                     -
@@ -275,25 +275,25 @@ wSelectShowChecked    选中是否打钩                     BOOL               
 wTextAlignment        文本对齐方式                NSTextAlignment             _                   center                  _
 
  
-=========================================disappear=======================================================================
+=========================================DialogTypeAuto=======================================================================
  
 wDisappelSecond     自动消失的时间                    CGFLoat                  -                   1.5f                     -
  
-=========================================pay=============================================================================
+=========================================DialogTypePay=============================================================================
  
 wSonData            支付方式选择数据源                 id                     -                    -                        -
 wKeyBoardMarginY    弹窗与键盘的距离                 CGFLoat                   -                Dialog_GetHNum(70)          -
 wPayNum               支付密码位数                  NSInteger                 -            6(若要设置位数比6大的则要保证宽度足够) -
 wDefaultSelectPayStr 支付方式默认文本                NSString                  -                   农业银行                   -
  
-=========================================write=============================================================================
+=========================================DialogTypeWrite=============================================================================
  
 wPlaceholder             提示语                     NSString                 -                    请输入                    -
 wWirteTextMaxLine   编辑框可换行的最大行数            NSInteger                 -                     7                      -
 wWirteTextMaxNum    编辑框可输入的最大数字            NSInteger                 -                  -1(-1为不限制)              -
 wWirteKeyBoardType   编辑框的键盘type              UIKeyBoardType             -               UIKeyboardTypeDefault        -
  
-=========================================pop=============================================================================
+=========================================DialogTypePop=============================================================================
  
 wPercentAngle       弹出的气泡位置                 CGFLoat                (0-1)不包含0和1          0.5f                      -
 wPercentOrginX      弹出视图的中心X轴偏移           CGFLoat                  -                    1.0f(默认中间)              -
@@ -301,23 +301,23 @@ wDirection          弹出式图的方向                DiaDirection          l
 wNavigationItem     导航栏位置                       BOOL                   NO                      _                      _
 wTapView            触发点的视图                   UIView                   -                        -                    -（pop的时候必传）
  
-=========================================down=============================================================================
+=========================================DialogTypeDown=============================================================================
 wImageSize            图片的大小                     CGSize                   -     Dialog_GetWNum(110),Dialog_GetWNum(110) -
 wImageName            图片路径名字                   NSString                 -                      -                      -
 wProgressTintColor   进度条闲置时候的颜色              UIColor                  -                DialogColor(0xFF9900)        -
 wTrackTintColor      进度条动作时候的颜色              UIColor                  -                DialogColor(0xF3F4F6)        -
 
-=========================================menu=============================================================================
+=========================================DialogTypeMenusSelect=============================================================================
  
 wTableViewColor      tableview的背景颜色              NSArray                  -             FFFFFF/F6F7FA/EBECF0/666666     -
  
-=========================================location============================================================================
+=========================================DialogTypeLocation============================================================================
  
 wLocationType        地区关联层级                     NSInteger              1/2/3                   3                      -
 wChainType           关联层级的样式                   ChainType        tableview/pickView      ChainPickView                 -
 wSeparator           选中数据的分隔符                  NSString                -                      ，                     -
  
-=========================================datePicker==========================================================================
+=========================================DialogTypeDatePicker==========================================================================
  
 wDateTimeType        时间选择器样式                   NSString  yyyy年MM月dd日HH时mm分ss秒(自由组合) yyyy:MM:dd HH:mm:ss       -
 wPickRepeat         pickView无限循环                  BOOL                   -                     yes                    -
@@ -328,20 +328,28 @@ wPickRepeat         pickView无限循环                  BOOL                  
 wColumnCount           列                            NSInteger              -                     -                       -
 wRowCount              行                            NSInteger              -                     -                       -
 
-=========================================loading===============================================================================
+=========================================DialogTypeLoading===============================================================================
 wLoadingType          加载框样式                     LoadingStyle             -                LoadingStyleWait            -
 wLoadingSize          加载框size                     CGSize                  -              Dialog_GetHNum(90,90)         -
 wLoadingColor         加载框线条颜色                  UIColor                  -                  确定按钮的文本颜色           -
  
-=========================================cardPareent==========================================================================
+=========================================DialogTypeCardPresent==========================================================================
 wOpenScrollClose      滑动到顶部继续滑动可关闭           BOOL                    -                       YES                  -
 wLeftScrollClose      测滑可关闭                       BOOL                    -                      YES                  -
 wOpenDragging         开启拖动                         BOOL                    -                      YES                  -
 wScaleParentVC        缩放底部控制器                    BOOL                    -                      YES                  -
 wParentHeadView       自定义顶部视图                    -                      -                        -                  -
 wParentBottomView     自定义底部视图                    -                      -                        -                  -
+
+=========================================DialogTypeCalander==========================================================================
+wDirectionVertical     开启纵向滑动                  BOOL                    -                       NO(横向滑动)            -
+wCalanderCanScroll     开启滑动                     BOOL                    -                       YES                    -
+wOpenChineseDate       开启农历节日显示               BOOL                    -                       YES                    -
+wHideCalanderBtn       隐藏日历上的操作按钮            BOOL                    -                       YES                    -
+wDateShowCircle        展示圆点的日期@[[NSDate date]] NSArray                 -                        -                     -
+wReginerCollectionCell 注册自定义的collectionViewCell NSString               -                         -                    -
  
-=========================================custom===============================================================================
+=========================================DialogTypeMyView===============================================================================
  
 wAddBottomView       是否添加底部按钮                   BOOL                   -                     NO                     -
  
@@ -355,7 +363,9 @@ wEventMenuClick      菜单点击事件                        -                
 wSelectCell          自定义cell点击                      -                     -                    -                       -
 wMyCell              自定义cell                  UITableViewCell             -                    -                       -
 wMyDiaLogView        自定义弹窗View(返回最底部的view)     -                     -                     -                      -
- 
+wCalanderCell        自定义日历cell                     -                     -                     -                      -
+wCalanderCellClick   自定义日历点击                      -                     -                     -                      -
+
 =========================================参数说明==========================================================================*/
 
 
