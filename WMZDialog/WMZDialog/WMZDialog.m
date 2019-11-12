@@ -758,7 +758,6 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
  */
 - (UIView*)addTopView{
     if (self.diaLogHeadView) return self.diaLogHeadView;
-    NSLog(@"%f",self.wMainBtnHeight);
     CGFloat btnWidth = 50;
     self.diaLogHeadView = [UIView new];
     self.diaLogHeadView.backgroundColor = self.wMainBackColor;
