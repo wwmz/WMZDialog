@@ -202,6 +202,7 @@ typedef enum : NSUInteger{
 |------------------------|-----------|-----------------------------------------------------|
 | wDateTimeType                | NSString        |  时间选择器样式    yyyy年MM月dd日HH时mm分ss秒(自由组合)  default yyyy:MM:dd HH:mm:ss                       |
 | wPickRepeat                | BOOL        | pickView无限循环   default  YES                        |
+| wDefaultDate                | NSDate        | 默认选中时间   default  当前时间                        |
 
 
 ### Share/tabbarMenu/NaviMENU
@@ -370,3 +371,5 @@ LEETheme 使用 MIT 许可证，详情见 [LICENSE](LICENSE) 文件。
 - 20191107 新增日历弹窗
 - 20191108 新增ios13 present弹窗
 - 20191109 cocopod 更新至 1.0.1
+- 20191112 新增wDefaultDate属性  表示默认选中时间 default 当前时间
+
