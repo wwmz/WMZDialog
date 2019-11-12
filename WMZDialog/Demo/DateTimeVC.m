@@ -22,7 +22,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
-    NSArray *arr = @[@"年月日",@"年月日时分秒",@"自由组合(年月时)",@"带后缀",@"自由带后缀",@"改字体颜色大小",@"无限循环滚动"];
+    NSArray *arr = @[@"年月日+默认时间",@"年月日时分秒",@"自由组合(年月时)",@"带后缀",@"自由带后缀",@"改字体颜色大小",@"无限循环滚动"];
     for (int i = 0; i<arr.count; i++) {
         CGFloat X = (i % 2) * ([UIScreen mainScreen].bounds.size.width/3 + 20);
         CGFloat Y = (i / 2) * (40 + 20);
@@ -47,12 +47,14 @@
                           @(3):@"yyyy年MM月dd日 HH时mm分ss秒",
                           @(4):@"yyyy年MM月dd日 HH:mm:ss",
                           @(5):@"yyyy年MMdd日 HH时mm:ss",
-                          @(6):@"yyyy-MM-dd HH",
+                          @(6):@"yyyy-MM-dd HH:mm",
                           };
     Dialog()
     .wEventOKFinishSet(^(id anyID, id otherData) {
-        NSLog(@"选中 %@",anyID);
+        NSLog(@"选中 %@ %@",anyID,otherData);
     })
+    //默认选中时间 不传默认是当前时间
+    .wDefaultDateSet(sender.tag == 0?[NSDate dateWithTimeIntervalSinceNow:24*60*60]:[NSDate date])
     .wDateTimeTypeSet(mdic[@(sender.tag)])
     .wPickRepeatSet(sender.tag == 6?YES:NO)
     .wTypeSet(DialogTypeDatePicker)

@@ -98,6 +98,7 @@ WMZDialogSetFuncImplementation(WMZDialog, CGSize,                        wLoadin
 WMZDialogSetFuncImplementation(WMZDialog, UIColor*,                     wLoadingColor)
 WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                        wCellHeight)
 WMZDialogSetFuncImplementation(WMZDialog, NSString*,                       wSeparator)
+WMZDialogSetFuncImplementation(WMZDialog, NSDate*,                       wDefaultDate)
 WMZDialogSetFuncImplementation(WMZDialog, DialogType,                           wType)
 WMZDialogSetFuncImplementation(WMZDialog, DialogShowAnination,         wShowAnimation)
 WMZDialogSetFuncImplementation(WMZDialog, DialogHideAnination,         wHideAnimation)
@@ -176,6 +177,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
         _wCalanderCanScroll = YES;
         _wOpenChineseDate = YES;
         _wHideCalanderBtn = YES;
+        _wDefaultDate = [NSDate date];
     }
     return self;
 }

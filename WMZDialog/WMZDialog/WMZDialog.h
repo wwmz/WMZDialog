@@ -164,6 +164,8 @@ WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, NSString*,         
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, NSString*,                wDateTimeType)
 //循环滚动
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wPickRepeat)
+//默认选中时间 默认此刻
+WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, NSDate*,                  wDefaultDate)
 
 /*=========================================Share/tabbarMenu/NaviMENU==================================================*/
 //WMZDialogShareView显示多少列

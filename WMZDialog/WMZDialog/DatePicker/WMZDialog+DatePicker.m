@@ -15,7 +15,7 @@
     self.wData = [NSMutableArray new];
     NSCalendar *calendar = [NSCalendar currentCalendar];
     unsigned unitFlags = NSCalendarUnitDay | NSCalendarUnitMonth |  NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
-    NSDateComponents *components = [calendar components:unitFlags fromDate:[NSDate date]];
+    NSDateComponents *components = [calendar components:unitFlags fromDate:self.wDefaultDate];
     
     NSDictionary *dic = @{
                           @"yyyy":@"timeYear:",
