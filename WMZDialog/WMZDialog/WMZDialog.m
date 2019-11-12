@@ -758,22 +758,24 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
  */
 - (UIView*)addTopView{
     if (self.diaLogHeadView) return self.diaLogHeadView;
+    NSLog(@"%f",self.wMainBtnHeight);
+    CGFloat btnWidth = 50;
     self.diaLogHeadView = [UIView new];
     self.diaLogHeadView.backgroundColor = self.wMainBackColor;
-    self.diaLogHeadView.frame = CGRectMake(0, 0, self.wWidth, self.wMainBtnHeight);
+    self.diaLogHeadView.frame = CGRectMake(0, 0, self.wWidth, self.wMainBtnHeight+self.wMainOffsetY);
     [self.mainView addSubview:self.diaLogHeadView];
           
     [self.diaLogHeadView addSubview:self.cancelBtn];
-    self.cancelBtn.frame = CGRectMake(self.wMainOffsetX, 0, self.wMainBtnHeight, self.wMainBtnHeight);
+    self.cancelBtn.frame = CGRectMake(self.wMainOffsetX, self.wMainOffsetY/2, btnWidth, self.wMainBtnHeight);
     self.cancelBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
           
     [self.diaLogHeadView addSubview:self.OKBtn];
     [self.OKBtn removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
-    self.OKBtn.frame = CGRectMake(self.wWidth-self.wMainBtnHeight-self.wMainOffsetX, 0,self.wMainBtnHeight, self.wMainBtnHeight);
+    self.OKBtn.frame = CGRectMake(self.wWidth-btnWidth-self.wMainOffsetX, self.wMainOffsetY/2,btnWidth, self.wMainBtnHeight);
     self.OKBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
           
     [self.diaLogHeadView addSubview:self.titleLabel];
-    self.titleLabel.frame = CGRectMake(self.wMainBtnHeight+2*self.wMainOffsetX, 0, self.wWidth-2*self.wMainBtnHeight-4*self.wMainOffsetX, self.wMainBtnHeight);
+    self.titleLabel.frame = CGRectMake(btnWidth+2*self.wMainOffsetX, self.wMainOffsetY/2, self.wWidth-2*btnWidth-4*self.wMainOffsetX, self.wMainBtnHeight);
     
     
     UIView *line = [UIView new];
