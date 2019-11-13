@@ -1,7 +1,8 @@
 Pod::Spec.new do |s|
 
   s.name         = "WMZDialog"
-  s.version      = "1.0.1"
+  s.version      = "1.0.2"
+  s.ios.deployment_target = "9.0" 
   s.license      = "Copyright (c) 2019年 WMZ. All rights reserved."
   s.summary      = "功能最多样式最多的弹窗，支持自定义视图,链式编程调用"
   s.description  = <<-DESC 
@@ -12,7 +13,7 @@ Pod::Spec.new do |s|
   s.license      = "MIT"
   s.author       = { "wmz" => "925457662@qq.com" }
   s.platform     = :ios
-  s.source       = { :git => "https://github.com/wwmz/WMZDialog.git", :tag => "1.0.1" }
+  s.source       = { :git => "https://github.com/wwmz/WMZDialog.git", :tag => "1.0.2" }
   s.source_files = "WMZDialog/WMZDialog/**/*.{h,m}"
   s.resources     = "WMZDialog/WMZDialog/WMZDialog.bundle"
   s.framework = 'UIKit'
