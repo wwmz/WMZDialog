@@ -337,9 +337,9 @@ typedef enum : NSUInteger{
 安装
 ==============
 
-### CocoaPods
-1. 将 cocoapods 更新至最新版本.
-2. 在 Podfile 中添加 `pod 'WMZDialog'`。
+### CocoaPods  已更新到1.0.2版本
+1. 将 cocoapods 更新至最新版本. 
+2. 在 Podfile 中添加 `pod 'WMZDialog'`。  
 3. 执行 `pod install` 或 `pod update`。
 4. 导入 #import "WMZDialog.h"。
 
