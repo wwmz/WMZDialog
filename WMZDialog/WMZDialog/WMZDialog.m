@@ -516,8 +516,6 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(closeView)];
         [self.shadowView addGestureRecognizer:tap];
     }
-    
-    
 }
 
 //设置UI代理
@@ -604,13 +602,9 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
             [self.view insertSubview:self.shadowView  belowSubview:self.mainView];
         }
         BOOL animal = !self.wShowAnimation||self.wShowAnimation>=7;
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self setParentVCView:0.9];
-        });
+        [self setParentVCView:0.9];
         [self.wParentVC presentViewController:self animated:animal completion:nil];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self dealAnamtionShowWithView:self.mainView withType:self.wShowAnimation withTime:self.wAnimationDurtion];
-        });
+        [self dealAnamtionShowWithView:self.mainView withType:self.wShowAnimation withTime:self.wAnimationDurtion];
     });
     
 }
@@ -812,6 +806,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
         if (!cell) {
             cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"DiaLogCell"];
         }
+        cell.backgroundColor = [UIColor whiteColor];
         cell.tintColor = self.wOKColor;
         cell.textLabel.textAlignment = self.wTextAlignment;
         cell.textLabel.font = [UIFont systemFontOfSize:self.wMessageFont];
@@ -840,6 +835,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
             cell.imageView.image = UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext();
             cell.textLabel.text = data[@"name"]?:@"";
+            cell.textLabel.textColor = DialogColor(0x333333);
         }else{
             NSString *cellID = [NSString stringWithFormat:@"%ld-%ld",indexPath.section,indexPath.row];
             cell.selectionStyle = self.wMultipleSelection?UITableViewCellSelectionStyleNone:UITableViewCellSelectionStyleDefault;

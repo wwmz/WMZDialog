@@ -91,8 +91,8 @@
             filePath = "WMZDialog/WMZDialog/WMZDialog.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "696"
-            endingLineNumber = "696"
+            startingLineNumber = "691"
+            endingLineNumber = "691"
             landmarkName = "-reSetMainViewFrame:"
             landmarkType = "7">
             <Locations>

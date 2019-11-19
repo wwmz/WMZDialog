@@ -46,6 +46,22 @@ Dialog() \
 .wMessageSet(str) \
 .wStart();  \
 
+//ios13暗黑模式颜色
+#define DialogDarkColor(light,dark)    \
+({\
+    UIColor *wMenuIndicator = nil; \
+    if (@available(iOS 13.0, *)) {  \
+        wMenuIndicator = [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) { \
+        if ([traitCollection userInterfaceStyle] == UIUserInterfaceStyleLight) {  \
+            return light;  \
+        }else {   \
+            return dark;  \
+        }}];  \
+    }else{  \
+        wMenuIndicator = light;  \
+    }   \
+    (wMenuIndicator); \
+})\
 
 
 #define Device_Dialog_Height [UIScreen mainScreen].bounds.size.height
