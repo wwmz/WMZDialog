@@ -1,5 +1,9 @@
 # WMZDailog - 功能样式最多的最齐全的的弹窗控件 控件全部采用链式编程，所有属性均可定制
 
+题外
+==============
+(如果有什么其他有趣的弹窗可以截图给我,我抽时间增加此样式)~ ~
+
 特性
 ==============
 - 链式语法 结构优雅
@@ -333,9 +337,9 @@ typedef enum : NSUInteger{
 安装
 ==============
 
-### CocoaPods
-1. 将 cocoapods 更新至最新版本.
-2. 在 Podfile 中添加 `pod 'WMZDialog'`。
+### CocoaPods  已更新到1.0.2版本
+1. 将 cocoapods 更新至最新版本. 
+2. 在 Podfile 中添加 `pod 'WMZDialog'`。  
 3. 执行 `pod install` 或 `pod update`。
 4. 导入 #import "WMZDialog.h"。
 
@@ -372,4 +376,5 @@ LEETheme 使用 MIT 许可证，详情见 [LICENSE](LICENSE) 文件。
 - 20191108 新增ios13 present弹窗
 - 20191109 cocopod 更新至 1.0.1
 - 20191112 新增wDefaultDate属性  表示默认选中时间 default 当前时间
+- 20191113 cocopod 更新至 1.0.2 修复pod指定ios版本的问题
 
