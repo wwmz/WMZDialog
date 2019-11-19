@@ -17,6 +17,7 @@
 - 支持ios13Persent弹窗
 - 支持日历
 - 支持菜单选择
+- 支持所有列表cell样式的自定义
 - 支持自定义弹窗
 
 ## 调用枚举说明
@@ -41,7 +42,7 @@ typedef enum : NSUInteger{
     DialogTypeNaviMenu,             //QQ顶部弹窗
     DialogTypeLoading,              //加载框
     DialogTypeBuyCar ,              //购物车弹窗  可自行导入WMZTags
-    DialogTypeCardPresent ,        //ios13 present效果
+    DialogTypeCardPresent ,         //ios13 present效果
     DialogTypeCalander,             //日历弹窗
     DialogTypeMyView,               //自定义弹窗
 }DialogType;
