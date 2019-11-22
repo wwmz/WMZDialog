@@ -13,6 +13,7 @@
 
 @implementation WMZDiaLogBase
 
+
 - (void)dealAnamtionShowWithView:(UIView*)view withType:(DialogShowAnination)type withTime:(NSTimeInterval)time{
     if (type == AninatonCurverOn) {
         curverOnAnimation(view, time);
@@ -125,6 +126,18 @@
     }
     return [NSArray arrayWithArray:dayArr];
 }
+
+- (BOOL)updateAlertTypeDownProgress:(CGFloat)value{return YES;}
+- (void)closeView{}
+- (UIView*)addBottomView:(CGFloat)maxY{return [UIView new];}
+- (void)reSetMainViewFrame:(CGRect)frame{};
+- (void)getDepth:(NSArray*)arr withTree:(WMZTree*)treePoint withDepth:(NSInteger)depth{}
+- (void)selectWithTableView:(UITableView *)tableView withIndexPath:(NSIndexPath*)indexPath{}
+- (void)updateMenuChildrenDataWithSection:(NSInteger)section  withUpdateChildren:(BOOL)update withData:(NSArray*)data{}
+- (UIView*)addTopView{return [UIView new];}
+- (void)scrollToToday{};
+
+
 
 - (NSBundle *)dialogBundle{
     if (!_dialogBundle) {
@@ -240,17 +253,6 @@
     }
     return _dataArr;
 }
-
-- (BOOL)updateAlertTypeDownProgress:(CGFloat)value{return YES;}
-- (void)closeView{}
-- (UIView*)addBottomView:(CGFloat)maxY{return [UIView new];}
-- (void)reSetMainViewFrame:(CGRect)frame{};
-- (void)getDepth:(NSArray*)arr withTree:(WMZTree*)treePoint withDepth:(NSInteger)depth{}
-- (void)selectWithTableView:(UITableView *)tableView withIndexPath:(NSIndexPath*)indexPath{}
-- (void)updateMenuChildrenDataWithSection:(NSInteger)section  withUpdateChildren:(BOOL)update withData:(NSArray*)data{}
-- (UIView*)addTopView{return [UIView new];}
-- (void)scrollToToday{};
-
 
 @end
 

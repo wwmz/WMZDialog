@@ -460,6 +460,8 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
         //监听键盘出现
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     }
+    //监听横竖屏
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(change:) name:UIDeviceOrientationDidChangeNotification object:nil];
     
     if (self.wType != DialogTypeShare&&
         self.wType != DialogTypeMyView&&
@@ -792,6 +794,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return 0.01;
 }
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return   self.wType == DialogTypeMenusSelect || self.wType == DialogTypeLocation?[[self getMyDataArr:tableView.tag withType:0] count]:[self.wData count];
 }
@@ -852,6 +855,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
         return cell;
     }
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     //为0则自动计算高度
     return  self.wCellHeight?:UITableViewAutomaticDimension;
@@ -885,7 +889,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
                 [self closeView];
             }
         }
-    
+        
     }
 }
 
@@ -905,7 +909,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
 
 # pragma  mark pickView 代理
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
-     return self.tree?self.depth:[self.wData count];
+    return self.tree?self.depth:[self.wData count];
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
@@ -913,7 +917,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
-
+    
     NSArray *arr = self.tree?[self getMyDataArr:component+100 withType:0]:self.wData[component];
     id data = arr[row%arr.count];
     if ([data isKindOfClass:[WMZTree class]]) {
@@ -945,7 +949,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
     if(self.wType == DialogTypeDatePicker){
         NSString *name = [self.wDateTimeType containsString:@"日"]?@"日":@"";
         NSCharacterSet* nonDigits =[[NSCharacterSet decimalDigitCharacterSet] invertedSet];
-         //符合年月日的才改变天数
+        //符合年月日的才改变天数
         if (component == 0) {
             if ([self.wDateTimeType rangeOfString:@"dd"].location != NSNotFound &&
                 [self.wDateTimeType rangeOfString:@"yyyy"].location!= NSNotFound &&
@@ -1051,31 +1055,50 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
     }
     [self closeView];
 }
+
+/*
+ *横竖屏通知
+ */
+-(void)change:(NSNotification*)notification
+{
+    CGFloat width=[UIScreen mainScreen].bounds.size.width;
+    CGFloat height=[UIScreen mainScreen].bounds.size.height;
+    if(width/height<1.0)
+    {
+      //  NSLog(@"竖屏");
+        
+    }else
+    {
+       // NSLog(@"横屏");
+        
+    }
+}
+
 - (NSMutableDictionary *)configDic{
     if (!_configDic) {
         NSDictionary *dic = @{
-                               @(DialogTypeNornal):@"normalAction",
-                               @(DialogTypeSheet):@"sheetAction",
-                               @(DialogTypeAuto):@"autoDisappealAction",
-                               @(DialogTypePay):@"payAction",
-                               @(DialogTypeShare):@"shareAction",
-                               @(DialogTypeWrite):@"writeAction",
-                               @(DialogTypeTime):@"timeAction",
-                               @(DialogTypeSelect):@"selectAction",
-                               @(DialogTypeDown):@"downAction",
-                               @(DialogTypePop):@"popViewAction",
-                               @(DialogTypePickSelect):@"pickAction",
-                               @(DialogTypeMenusSelect):@"menusSelectAction",
-                               @(DialogTypeAdvertisement):@"advertisementAction",
-                               @(DialogTypeBuyCar):@"bugCarAction",
-                               @(DialogTypeLocation):@"locationAction",
-                               @(DialogTypeDatePicker):@"datePickerAction",
-                               @(DialogTypeTabbarMenu):@"tabbarMenuAction",
-                               @(DialogTypeNaviMenu):@"naviMenuAction",
-                               @(DialogTypeLoading):@"loadingAction",
-                               @(DialogTypeCardPresent):@"cardPresentAction",
-                               @(DialogTypeCalander):@"calanderAction",
-                              };
+            @(DialogTypeNornal):@"normalAction",
+            @(DialogTypeSheet):@"sheetAction",
+            @(DialogTypeAuto):@"autoDisappealAction",
+            @(DialogTypePay):@"payAction",
+            @(DialogTypeShare):@"shareAction",
+            @(DialogTypeWrite):@"writeAction",
+            @(DialogTypeTime):@"timeAction",
+            @(DialogTypeSelect):@"selectAction",
+            @(DialogTypeDown):@"downAction",
+            @(DialogTypePop):@"popViewAction",
+            @(DialogTypePickSelect):@"pickAction",
+            @(DialogTypeMenusSelect):@"menusSelectAction",
+            @(DialogTypeAdvertisement):@"advertisementAction",
+            @(DialogTypeBuyCar):@"bugCarAction",
+            @(DialogTypeLocation):@"locationAction",
+            @(DialogTypeDatePicker):@"datePickerAction",
+            @(DialogTypeTabbarMenu):@"tabbarMenuAction",
+            @(DialogTypeNaviMenu):@"naviMenuAction",
+            @(DialogTypeLoading):@"loadingAction",
+            @(DialogTypeCardPresent):@"cardPresentAction",
+            @(DialogTypeCalander):@"calanderAction",
+        };
         _configDic = [NSMutableDictionary dictionaryWithDictionary:dic];
     }
     return _configDic;
@@ -1086,5 +1109,4 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
 @end

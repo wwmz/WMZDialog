@@ -127,7 +127,7 @@ typedef enum : NSUInteger{
  */
 typedef enum : NSUInteger{
     AninatonShowNone = 0 ,         //无
-//    AninatonShaker ,               //抖动
+//    AninatonShaker ,             //抖动
     AninatonCurverOn,              //淡入
     AninatonZoomIn,                //由小变大
     AninatonCounterclockwise,      //逆时针旋转

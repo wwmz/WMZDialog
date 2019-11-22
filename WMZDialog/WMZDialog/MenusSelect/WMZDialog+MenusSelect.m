@@ -33,24 +33,6 @@
     }
     
     UIView *headView = nil;
-//    if (self.wMultipleSelection) {
-//        headView = [UIView new];
-//        headView.backgroundColor = self.wMainBackColor;
-//        headView.frame = CGRectMake(0, 0, self.wWidth, self.wMainBtnHeight);
-//        [self.mainView addSubview:headView];
-//
-//        [self.mainView addSubview:self.cancelBtn];
-//        self.cancelBtn.frame = CGRectMake(self.wMainOffsetX*2, 0, self.wWidth/2-self.wMainOffsetX*2, self.wMainBtnHeight);
-//        self.cancelBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-//
-//        [self.mainView addSubview:self.OKBtn];
-//        [self.OKBtn removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
-//        [self.OKBtn addTarget:self action:@selector(menusSelectAction:) forControlEvents:UIControlEventTouchUpInside];
-//        self.OKBtn.frame = CGRectMake(self.wWidth/2, 0,self.wWidth/2-self.wMainOffsetX, self.wMainBtnHeight);
-//        self.OKBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-//
-//    }
-    
     //添加UI
     UITableView *temp = nil;
     
@@ -84,10 +66,6 @@
     }
     
     
-//    if (self.wTapView) {
-//        //设置只有一半圆角
-//        [WMZDialogTool setView:self.mainView Radii:CGSizeMake(self.wMainRadius,self.wMainRadius) RoundingCorners:UIRectCornerTopLeft |UIRectCornerTopRight];
-//    }
     [WMZDialogTool setView:self.mainView Radii:CGSizeMake(self.wMainRadius,self.wMainRadius) RoundingCorners:UIRectCornerTopLeft |UIRectCornerTopRight];
     return self.mainView;
 }

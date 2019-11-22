@@ -49,6 +49,8 @@
     
     [self reSetMainViewFrame:CGRectMake(0,0,self.wWidth,CGRectGetMaxY(self.titleLabel.frame))];
     
+    
+    
     return self.mainView;
 }
 @end
