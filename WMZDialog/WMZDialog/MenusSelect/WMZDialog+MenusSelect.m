@@ -74,7 +74,9 @@
 //获取深度
 - (void)getDepth:(NSArray*)arr withTree:(WMZTree*)treePoint withDepth:(NSInteger)depth{
     if (arr&&([arr isKindOfClass:[NSArray class]]||[arr isKindOfClass:[NSMutableArray class]])&&[arr count]){
-        self.depth = depth+1;
+        if (self.depth<depth+1) {
+            self.depth = depth+1;
+        }
         for (NSDictionary *dic in arr) {
             WMZTree *tree = [[WMZTree alloc]initWithDetpth:depth+1 withName:dic[@"name"]?:@"" withID:dic[@"id"]?:@""];
             [treePoint.children addObject:tree];
