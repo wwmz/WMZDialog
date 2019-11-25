@@ -1,4 +1,4 @@
-# WMZDailog - 功能样式最多的最齐全的的弹窗控件 控件全部采用链式编程，所有属性均可定制
+# WMZDailog - 功能样式最多的最齐全的的弹窗控件 控件全部采用链式编程，所有属性均可定制（pod 1.0.3）
 
 题外
 ==============
@@ -338,7 +338,7 @@ typedef enum : NSUInteger{
 安装
 ==============
 
-### CocoaPods  已更新到1.0.2版本
+### CocoaPods  已更新到1.0.3版本
 1. 将 cocoapods 更新至最新版本. 
 2. 在 Podfile 中添加 `pod 'WMZDialog'`。  
 3. 执行 `pod install` 或 `pod update`。
