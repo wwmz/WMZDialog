@@ -378,4 +378,4 @@ LEETheme 使用 MIT 许可证，详情见 [LICENSE](LICENSE) 文件。
 - 20191109 cocopod 更新至 1.0.1
 - 20191112 新增wDefaultDate属性  表示默认选中时间 default 当前时间
 - 20191113 cocopod 更新至 1.0.2 修复pod指定ios版本的问题
-
+- 20191124 cocopod 更新至 1.0.3 修复pod 版本过低导致出现weak的问题
