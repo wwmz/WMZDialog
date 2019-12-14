@@ -20,11 +20,11 @@ static NSString *selectPayViewKey = @"selectPayView"; //selectPayView的key
 
 
     UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [closeBtn addTarget:self action:@selector(closeView) forControlEvents:UIControlEventTouchUpInside];
     [closeBtn setTitle:@"X" forState:UIControlStateNormal];
     [closeBtn setTitleColor:self.wCancelColor forState:UIControlStateNormal];
     closeBtn.backgroundColor = self.wMainBackColor;
-    closeBtn.frame = CGRectMake(self.wMainOffsetX, self.wMainOffsetY, self.wMainOffsetX*2, Dialog_GetHNum(50));
+    closeBtn.frame = CGRectMake(self.wMainOffsetX, self.wMainOffsetY, self.wMainOffsetX*3, Dialog_GetHNum(50));
+    [closeBtn addTarget:self action:@selector(closeBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [self.mainView addSubview:closeBtn];
 
     self.titleLabel.text = self.wTitle;
@@ -160,10 +160,11 @@ static NSString *selectPayViewKey = @"selectPayView"; //selectPayView的key
 }
 
 - (void)selectAction:(UIButton*)sender{
+    if (!self.wCanSelectPay) return;
     DialogWeakSelf(self)
     Dialog()
     .wEventFinishSet(^(id anyID,NSIndexPath *path,DialogType type) {
-        DialogStrongSelf(self)
+        DialogStrongSelf(weakObject)
         if (anyID) {
            UIButton *selectBtn = [strongObject.selectPayView viewWithTag:222];
            [selectBtn setTitle:anyID forState:UIControlStateNormal];
@@ -175,6 +176,9 @@ static NSString *selectPayViewKey = @"selectPayView"; //selectPayView的key
     .wStart();
 }
 
+- (void)closeBtnAction{
+    [self closeView];
+}
 
 - (void)setPassView:(UIView *)passView{
      objc_setAssociatedObject(self, &passViewKey, passView, OBJC_ASSOCIATION_RETAIN);
@@ -201,5 +205,6 @@ static NSString *selectPayViewKey = @"selectPayView"; //selectPayView的key
 - (UITextField *)payField{
      return objc_getAssociatedObject(self, &passViewKey);
 }
+
 
 @end

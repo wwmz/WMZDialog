@@ -7,11 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		184C26842305439C00679FCA /* BuyCarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 184C267B2305439C00679FCA /* BuyCarVC.m */; };
-		184C26852305439C00679FCA /* DateTimeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 184C267D2305439C00679FCA /* DateTimeVC.m */; };
-		184C26862305439C00679FCA /* LocationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 184C267F2305439C00679FCA /* LocationVC.m */; };
-		184C26872305439C00679FCA /* MenusSelectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 184C26812305439C00679FCA /* MenusSelectVC.m */; };
-		184C26882305439C00679FCA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184C26832305439C00679FCA /* ViewController.m */; };
 		1871671422A76AFB001C6B41 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1871671322A76AFB001C6B41 /* AppDelegate.m */; };
 		1871671A22A76AFB001C6B41 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1871671822A76AFB001C6B41 /* Main.storyboard */; };
 		1871671C22A76B03001C6B41 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1871671B22A76B03001C6B41 /* Assets.xcassets */; };
@@ -19,9 +14,7 @@
 		1871672222A76B03001C6B41 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1871672122A76B03001C6B41 /* main.m */; };
 		1871672C22A76B03001C6B41 /* WMZDialogTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1871672B22A76B03001C6B41 /* WMZDialogTests.m */; };
 		1871673722A76B03001C6B41 /* WMZDialogUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1871673622A76B03001C6B41 /* WMZDialogUITests.m */; };
-		F3199A1B2375663700C674C0 /* CalanderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F3199A1A2375663700C674C0 /* CalanderVC.m */; };
 		F3199A1E23756C4600C674C0 /* CalanderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F3199A1D23756C4600C674C0 /* CalanderModel.m */; };
-		F33A9D38232F84BB00745897 /* PopVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F33A9D37232F84BB00745897 /* PopVC.m */; };
 		F35480CC23714BDD00605C77 /* WMZDialog+CardPresent.m in Sources */ = {isa = PBXBuildFile; fileRef = F35480CB23714BDD00605C77 /* WMZDialog+CardPresent.m */; };
 		F36E079A2373B0A8007C1E6A /* WMZDialog+Calander.m in Sources */ = {isa = PBXBuildFile; fileRef = F36E07992373B0A8007C1E6A /* WMZDialog+Calander.m */; };
 		F36E07A02373B354007C1E6A /* NSDate+WMZCalendarDate.m in Sources */ = {isa = PBXBuildFile; fileRef = F36E079F2373B354007C1E6A /* NSDate+WMZCalendarDate.m */; };
@@ -41,6 +34,13 @@
 		F395FE26232ABC020020CFB5 /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = F395FE15232ABC010020CFB5 /* MASConstraint.m */; };
 		F395FE27232ABC020020CFB5 /* MASViewConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = F395FE17232ABC010020CFB5 /* MASViewConstraint.m */; };
 		F395FE28232ABC020020CFB5 /* MASViewAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = F395FE18232ABC010020CFB5 /* MASViewAttribute.m */; };
+		F3AEACB723A4B5C30052A9F1 /* CalanderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AEACA423A4B5C30052A9F1 /* CalanderVC.m */; };
+		F3AEACB823A4B5C30052A9F1 /* DateTimeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AEACA623A4B5C30052A9F1 /* DateTimeVC.m */; };
+		F3AEACB923A4B5C30052A9F1 /* BuyCarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AEACAA23A4B5C30052A9F1 /* BuyCarVC.m */; };
+		F3AEACBA23A4B5C30052A9F1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AEACAC23A4B5C30052A9F1 /* ViewController.m */; };
+		F3AEACBB23A4B5C30052A9F1 /* MenusSelectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AEACB023A4B5C30052A9F1 /* MenusSelectVC.m */; };
+		F3AEACBC23A4B5C30052A9F1 /* PopVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AEACB323A4B5C30052A9F1 /* PopVC.m */; };
+		F3AEACBD23A4B5C30052A9F1 /* LocationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AEACB623A4B5C30052A9F1 /* LocationVC.m */; };
 		F3CEDD3223729B780073E457 /* WMZDialogTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F3CEDD3123729B780073E457 /* WMZDialogTableView.m */; };
 		F3F4A78A232B3FC9008C70B2 /* WMZDialog+Write.m in Sources */ = {isa = PBXBuildFile; fileRef = F3F4A744232B3FC9008C70B2 /* WMZDialog+Write.m */; };
 		F3F4A78B232B3FC9008C70B2 /* WMZDialog+NaviMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = F3F4A747232B3FC9008C70B2 /* WMZDialog+NaviMenu.m */; };
@@ -87,16 +87,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		184C267A2305439C00679FCA /* BuyCarVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuyCarVC.h; sourceTree = "<group>"; };
-		184C267B2305439C00679FCA /* BuyCarVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuyCarVC.m; sourceTree = "<group>"; };
-		184C267C2305439C00679FCA /* DateTimeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateTimeVC.h; sourceTree = "<group>"; };
-		184C267D2305439C00679FCA /* DateTimeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateTimeVC.m; sourceTree = "<group>"; };
-		184C267E2305439C00679FCA /* LocationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationVC.h; sourceTree = "<group>"; };
-		184C267F2305439C00679FCA /* LocationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationVC.m; sourceTree = "<group>"; };
-		184C26802305439C00679FCA /* MenusSelectVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenusSelectVC.h; sourceTree = "<group>"; };
-		184C26812305439C00679FCA /* MenusSelectVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenusSelectVC.m; sourceTree = "<group>"; };
-		184C26822305439C00679FCA /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		184C26832305439C00679FCA /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		1871670F22A76AFB001C6B41 /* WMZDialog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WMZDialog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1871671222A76AFB001C6B41 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1871671322A76AFB001C6B41 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -111,12 +101,8 @@
 		1871673222A76B03001C6B41 /* WMZDialogUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WMZDialogUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1871673622A76B03001C6B41 /* WMZDialogUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMZDialogUITests.m; sourceTree = "<group>"; };
 		1871673822A76B03001C6B41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F3199A192375663700C674C0 /* CalanderVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalanderVC.h; sourceTree = "<group>"; };
-		F3199A1A2375663700C674C0 /* CalanderVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CalanderVC.m; sourceTree = "<group>"; };
 		F3199A1C23756C4600C674C0 /* CalanderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalanderModel.h; sourceTree = "<group>"; };
 		F3199A1D23756C4600C674C0 /* CalanderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CalanderModel.m; sourceTree = "<group>"; };
-		F33A9D36232F84BB00745897 /* PopVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PopVC.h; sourceTree = "<group>"; };
-		F33A9D37232F84BB00745897 /* PopVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PopVC.m; sourceTree = "<group>"; };
 		F35480CA23714BDD00605C77 /* WMZDialog+CardPresent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WMZDialog+CardPresent.h"; sourceTree = "<group>"; };
 		F35480CB23714BDD00605C77 /* WMZDialog+CardPresent.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WMZDialog+CardPresent.m"; sourceTree = "<group>"; };
 		F36E07982373B0A8007C1E6A /* WMZDialog+Calander.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WMZDialog+Calander.h"; sourceTree = "<group>"; };
@@ -161,6 +147,20 @@
 		F395FE16232ABC010020CFB5 /* ViewController+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ViewController+MASAdditions.h"; sourceTree = "<group>"; };
 		F395FE17232ABC010020CFB5 /* MASViewConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASViewConstraint.m; sourceTree = "<group>"; };
 		F395FE18232ABC010020CFB5 /* MASViewAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASViewAttribute.m; sourceTree = "<group>"; };
+		F3AEACA323A4B5C30052A9F1 /* CalanderVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalanderVC.h; sourceTree = "<group>"; };
+		F3AEACA423A4B5C30052A9F1 /* CalanderVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalanderVC.m; sourceTree = "<group>"; };
+		F3AEACA623A4B5C30052A9F1 /* DateTimeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateTimeVC.m; sourceTree = "<group>"; };
+		F3AEACA723A4B5C30052A9F1 /* DateTimeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateTimeVC.h; sourceTree = "<group>"; };
+		F3AEACA923A4B5C30052A9F1 /* BuyCarVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuyCarVC.h; sourceTree = "<group>"; };
+		F3AEACAA23A4B5C30052A9F1 /* BuyCarVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuyCarVC.m; sourceTree = "<group>"; };
+		F3AEACAC23A4B5C30052A9F1 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		F3AEACAD23A4B5C30052A9F1 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		F3AEACAF23A4B5C30052A9F1 /* MenusSelectVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenusSelectVC.h; sourceTree = "<group>"; };
+		F3AEACB023A4B5C30052A9F1 /* MenusSelectVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenusSelectVC.m; sourceTree = "<group>"; };
+		F3AEACB223A4B5C30052A9F1 /* PopVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopVC.h; sourceTree = "<group>"; };
+		F3AEACB323A4B5C30052A9F1 /* PopVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopVC.m; sourceTree = "<group>"; };
+		F3AEACB523A4B5C30052A9F1 /* LocationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationVC.h; sourceTree = "<group>"; };
+		F3AEACB623A4B5C30052A9F1 /* LocationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationVC.m; sourceTree = "<group>"; };
 		F3CEDD3023729B780073E457 /* WMZDialogTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMZDialogTableView.h; sourceTree = "<group>"; };
 		F3CEDD3123729B780073E457 /* WMZDialogTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMZDialogTableView.m; sourceTree = "<group>"; };
 		F3F4A743232B3FC9008C70B2 /* WMZDialog+Write.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WMZDialog+Write.h"; sourceTree = "<group>"; };
@@ -243,20 +243,13 @@
 		184C26792305439C00679FCA /* Demo */ = {
 			isa = PBXGroup;
 			children = (
-				184C267A2305439C00679FCA /* BuyCarVC.h */,
-				184C267B2305439C00679FCA /* BuyCarVC.m */,
-				184C267C2305439C00679FCA /* DateTimeVC.h */,
-				184C267D2305439C00679FCA /* DateTimeVC.m */,
-				184C267E2305439C00679FCA /* LocationVC.h */,
-				184C267F2305439C00679FCA /* LocationVC.m */,
-				184C26802305439C00679FCA /* MenusSelectVC.h */,
-				184C26812305439C00679FCA /* MenusSelectVC.m */,
-				F33A9D36232F84BB00745897 /* PopVC.h */,
-				F33A9D37232F84BB00745897 /* PopVC.m */,
-				184C26822305439C00679FCA /* ViewController.h */,
-				184C26832305439C00679FCA /* ViewController.m */,
-				F3199A192375663700C674C0 /* CalanderVC.h */,
-				F3199A1A2375663700C674C0 /* CalanderVC.m */,
+				F3AEACB423A4B5C30052A9F1 /* 地区选择 */,
+				F3AEACA823A4B5C30052A9F1 /* 购物车 */,
+				F3AEACB123A4B5C30052A9F1 /* 任意位置弹窗popType */,
+				F3AEACA223A4B5C30052A9F1 /* 日历 */,
+				F3AEACA523A4B5C30052A9F1 /* 时间选择器 */,
+				F3AEACAB23A4B5C30052A9F1 /* 首页demo */,
+				F3AEACAE23A4B5C30052A9F1 /* 无限级列表MenusSelect */,
 			);
 			path = Demo;
 			sourceTree = "<group>";
@@ -387,6 +380,69 @@
 				F395FE18232ABC010020CFB5 /* MASViewAttribute.m */,
 			);
 			path = Masonry;
+			sourceTree = "<group>";
+		};
+		F3AEACA223A4B5C30052A9F1 /* 日历 */ = {
+			isa = PBXGroup;
+			children = (
+				F3AEACA323A4B5C30052A9F1 /* CalanderVC.h */,
+				F3AEACA423A4B5C30052A9F1 /* CalanderVC.m */,
+			);
+			path = "日历";
+			sourceTree = "<group>";
+		};
+		F3AEACA523A4B5C30052A9F1 /* 时间选择器 */ = {
+			isa = PBXGroup;
+			children = (
+				F3AEACA623A4B5C30052A9F1 /* DateTimeVC.m */,
+				F3AEACA723A4B5C30052A9F1 /* DateTimeVC.h */,
+			);
+			path = "时间选择器";
+			sourceTree = "<group>";
+		};
+		F3AEACA823A4B5C30052A9F1 /* 购物车 */ = {
+			isa = PBXGroup;
+			children = (
+				F3AEACA923A4B5C30052A9F1 /* BuyCarVC.h */,
+				F3AEACAA23A4B5C30052A9F1 /* BuyCarVC.m */,
+			);
+			path = "购物车";
+			sourceTree = "<group>";
+		};
+		F3AEACAB23A4B5C30052A9F1 /* 首页demo */ = {
+			isa = PBXGroup;
+			children = (
+				F3AEACAC23A4B5C30052A9F1 /* ViewController.m */,
+				F3AEACAD23A4B5C30052A9F1 /* ViewController.h */,
+			);
+			path = "首页demo";
+			sourceTree = "<group>";
+		};
+		F3AEACAE23A4B5C30052A9F1 /* 无限级列表MenusSelect */ = {
+			isa = PBXGroup;
+			children = (
+				F3AEACAF23A4B5C30052A9F1 /* MenusSelectVC.h */,
+				F3AEACB023A4B5C30052A9F1 /* MenusSelectVC.m */,
+			);
+			path = "无限级列表MenusSelect";
+			sourceTree = "<group>";
+		};
+		F3AEACB123A4B5C30052A9F1 /* 任意位置弹窗popType */ = {
+			isa = PBXGroup;
+			children = (
+				F3AEACB223A4B5C30052A9F1 /* PopVC.h */,
+				F3AEACB323A4B5C30052A9F1 /* PopVC.m */,
+			);
+			path = "任意位置弹窗popType";
+			sourceTree = "<group>";
+		};
+		F3AEACB423A4B5C30052A9F1 /* 地区选择 */ = {
+			isa = PBXGroup;
+			children = (
+				F3AEACB523A4B5C30052A9F1 /* LocationVC.h */,
+				F3AEACB623A4B5C30052A9F1 /* LocationVC.m */,
+			);
+			path = "地区选择";
 			sourceTree = "<group>";
 		};
 		F3F4A741232B3FC9008C70B2 /* WMZDialog */ = {
@@ -759,6 +815,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3AEACBA23A4B5C30052A9F1 /* ViewController.m in Sources */,
 				F3F4A7A0232B3FC9008C70B2 /* WMZDialog+Sheet.m in Sources */,
 				F3F4A78A232B3FC9008C70B2 /* WMZDialog+Write.m in Sources */,
 				F3F4A7A1232B3FC9008C70B2 /* WMZDiaLogBase.m in Sources */,
@@ -767,11 +824,9 @@
 				F395FE19232ABC020020CFB5 /* WMZTagsTool.m in Sources */,
 				F3F4A79F232B3FC9008C70B2 /* WMZDialog+Select.m in Sources */,
 				F395FE21232ABC020020CFB5 /* MASCompositeConstraint.m in Sources */,
-				184C26842305439C00679FCA /* BuyCarVC.m in Sources */,
 				F3F4A78D232B3FC9008C70B2 /* WMZDialog+Loading.m in Sources */,
 				F3F4A78B232B3FC9008C70B2 /* WMZDialog+NaviMenu.m in Sources */,
 				F3F4A799232B3FC9008C70B2 /* WMZDialogShareView.m in Sources */,
-				184C26852305439C00679FCA /* DateTimeVC.m in Sources */,
 				F395FE26232ABC020020CFB5 /* MASConstraint.m in Sources */,
 				F3F4A790232B3FC9008C70B2 /* WMZDialog+Down.m in Sources */,
 				F395FE25232ABC020020CFB5 /* View+MASAdditions.m in Sources */,
@@ -787,15 +842,17 @@
 				F395FE24232ABC020020CFB5 /* NSArray+MASAdditions.m in Sources */,
 				F35480CC23714BDD00605C77 /* WMZDialog+CardPresent.m in Sources */,
 				F3F4A79C232B3FC9008C70B2 /* WMZDialog+BuyCar.m in Sources */,
-				184C26872305439C00679FCA /* MenusSelectVC.m in Sources */,
+				F3AEACBB23A4B5C30052A9F1 /* MenusSelectVC.m in Sources */,
+				F3AEACB723A4B5C30052A9F1 /* CalanderVC.m in Sources */,
 				F3F4A79A232B3FC9008C70B2 /* WMZDialogTool.m in Sources */,
 				F3F4A78C232B3FC9008C70B2 /* WMZDialog.m in Sources */,
-				184C26882305439C00679FCA /* ViewController.m in Sources */,
 				F3F4A792232B3FC9008C70B2 /* WMZDialog+DatePicker.m in Sources */,
 				F3F4A796232B3FC9008C70B2 /* WMZDialog+MenusSelect.m in Sources */,
 				F395FE28232ABC020020CFB5 /* MASViewAttribute.m in Sources */,
 				F3F4A78E232B3FC9008C70B2 /* WMZDialog+TabbarMenu.m in Sources */,
 				1871672222A76B03001C6B41 /* main.m in Sources */,
+				F3AEACB923A4B5C30052A9F1 /* BuyCarVC.m in Sources */,
+				F3AEACBD23A4B5C30052A9F1 /* LocationVC.m in Sources */,
 				1871671422A76AFB001C6B41 /* AppDelegate.m in Sources */,
 				F395FE20232ABC020020CFB5 /* ViewController+MASAdditions.m in Sources */,
 				F3F4A793232B3FC9008C70B2 /* WMZDialog+PopView.m in Sources */,
@@ -804,15 +861,14 @@
 				F3F4A79E232B3FC9008C70B2 /* WMZDialog+Advertisement.m in Sources */,
 				F3F4A7A2232B3FC9008C70B2 /* WMZDialog+Share.m in Sources */,
 				F3F4A798232B3FC9008C70B2 /* WMZDialog+PickView.m in Sources */,
+				F3AEACBC23A4B5C30052A9F1 /* PopVC.m in Sources */,
 				F395FE1B232ABC020020CFB5 /* WMZTagBtn.m in Sources */,
-				F33A9D38232F84BB00745897 /* PopVC.m in Sources */,
-				184C26862305439C00679FCA /* LocationVC.m in Sources */,
 				F395FE22232ABC020020CFB5 /* MASConstraintMaker.m in Sources */,
 				F3199A1E23756C4600C674C0 /* CalanderModel.m in Sources */,
+				F3AEACB823A4B5C30052A9F1 /* DateTimeVC.m in Sources */,
 				F395FE23232ABC020020CFB5 /* MASLayoutConstraint.m in Sources */,
 				F395FE1D232ABC020020CFB5 /* WMZTags.m in Sources */,
 				F3F4A79D232B3FC9008C70B2 /* WMZDialog+Normal.m in Sources */,
-				F3199A1B2375663700C674C0 /* CalanderVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -993,7 +1049,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.WMZDialo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.WMZDial;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1015,7 +1071,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.WMZDialo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.WMZDial;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";

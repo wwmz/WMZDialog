@@ -25,14 +25,12 @@
     
     self.arr =@[@"普通弹窗",@"底部弹窗",@"自动消失弹窗",@"支付弹窗",@"分享弹窗",@"自适应编辑弹窗",@"选择弹窗",@"拾取器弹窗",@"倒计时弹窗",@"上下左右弹出列表",@"下载弹窗",@"下拉无限级菜单弹窗",@"广告弹窗",@"地区弹窗",@"日期时间弹窗",@"底部菜单弹窗",@"顶部菜单弹窗",@"加载框",@"购物车弹窗",@"ios13Present弹窗",@"日历弹窗",@"自定义弹窗"];
     
-    self.dataArr =@[@[@"普通弹窗",@"普通弹窗(+取消按钮+改变字体颜色)"],@[@"底部单选弹窗",@"底部多选弹窗"],@[@"自动消失弹窗",@"自动消失弹窗带图片"],@[@"支付弹窗(密码4位)",@"支付弹窗(密码6位)"],@[@"分享弹窗(2行4列)",@"分享弹窗(3行2列,翻页,毛玻璃)"],@[@"自适应编辑弹窗"],@[@"选择弹窗",@"选择弹窗(多选)"],@[@"拾取器弹窗"],@[@"倒计时弹窗"],@[@"上下左右弹出列表"],@[@"下载弹窗"],@[@"下拉无限级菜单弹窗"],@[@"广告弹窗"],@[@"地区弹窗"],@[@"日期时间弹窗"],@[@"底部菜单弹窗"],@[@"顶部菜单弹窗"],@[@"加载框(等待)",@"加载框(正确)",@"加载框(错误)"],@[@"购物车弹窗"],@[@"ios13Present弹窗",@"自定义ios13Present弹窗1",@"自定义ios13Present弹窗2"],@[@"日历弹窗"],@[@"自定义弹窗(优酷)",@"自定义弹窗(哔哩哔哩)",@"自定义弹窗(饿了么升级)"]];
+    self.dataArr =@[@[@"普通弹窗",@"普通弹窗(+取消按钮+改变字体颜色)",@"普通弹窗(确定/取消按钮文字多的情况)"],@[@"底部单选弹窗",@"底部多选弹窗"],@[@"自动消失弹窗",@"自动消失弹窗带图片"],@[@"支付弹窗(密码4位)",@"支付弹窗(密码6位)"],@[@"分享弹窗(2行4列)",@"分享弹窗(3行2列,翻页,毛玻璃)"],@[@"自适应编辑弹窗"],@[@"选择弹窗",@"选择弹窗(多选)"],@[@"拾取器弹窗"],@[@"倒计时弹窗"],@[@"上下左右弹出列表"],@[@"下载弹窗"],@[@"下拉无限级菜单弹窗"],@[@"广告弹窗"],@[@"地区弹窗"],@[@"日期时间弹窗"],@[@"底部菜单弹窗"],@[@"顶部菜单弹窗"],@[@"加载框(等待)",@"加载框(正确)",@"加载框(错误)"],@[@"购物车弹窗"],@[@"ios13Present弹窗",@"自定义ios13Present弹窗1",@"自定义ios13Present弹窗2"],@[@"日历弹窗"],@[@"自定义弹窗(优酷)",@"自定义弹窗(哔哩哔哩)",@"自定义弹窗(饿了么升级)"]];
     
     
     self.tableView =  [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tableView.estimatedSectionFooterHeight = 0.01;
-    self.tableView.estimatedSectionHeaderHeight = 0.01;
     self.tableView.estimatedRowHeight = 50;
     self.tableView.rowHeight = 50;
     [self.view addSubview:self.tableView];
@@ -259,7 +257,7 @@
         {
             if (indexPath.row == 0) {
                  Dialog().wTypeSet(type).wStart();
-            }else{
+            }else if (indexPath.row == 1) {
                  Dialog()
                 //出现动画
                 .wShowAnimationSet(AninatonZoomIn)
@@ -276,6 +274,20 @@
                 .wCancelColorSet([UIColor redColor])
                 .wTitleFontSet(15)
                 .wTypeSet(type).wStart();
+            }else{
+                 Dialog()
+                //出现动画
+                .wShowAnimationSet(AninatonCurverOn)
+                //消失动画
+                .wHideAnimationSet(AninatonCurverOff)
+                .wEventCancelFinishSet(^(id anyID, id otherData) {})
+                .wMessageSet(@"这是一条内容\n这是一条内容")
+                .wTitleSet(@"这是一条标题\n这是一条标题")
+                .wOKTitleSet(@"这是一个长的确定按钮这是一个长的确定按钮")
+                .wCancelTitleSet(@"这是一个长的取消按钮这是一个长的取消按钮这是一个长的取消按钮这是一个长的取消按钮")
+                .wOKColorSet([UIColor orangeColor])
+                .wCancelColorSet([UIColor redColor])
+                .wStart();
             }
         }
             break;
@@ -290,6 +302,8 @@
                 .wStart();
             }else{
                  Dialog().wTypeSet(type)
+                //如果需要多选底部也显示 取消 加入此事件
+                .wEventCancelFinishSet(^(id anyID, id otherData) {})
                 //点击确定事件
                 .wEventOKFinishSet(^(id anyID, id otherData) {
                     NSLog(@"确定 %@",anyID);
@@ -405,7 +419,9 @@
                 .wEventFinishSet(^(id anyID, NSIndexPath *path, DialogType type) {
                     NSLog(@"%@ %@",anyID,path);
                 })
-                .wTitleSet(@"选择爱好").wTitleColorSet([UIColor redColor]).wTitleFontSet(16.0)
+                .wTitleSet(@"选择爱好")
+                .wTitleColorSet([UIColor redColor]).wTitleFontSet(16.0)
+                .wMessageSet(@"请选择")
                 .wDataSet(@[@"游泳",@"打篮球",@"打羽毛球",@"爬山",@"踢足球",@"乒乓球"])
                 .wStart();
             }else{
@@ -416,6 +432,7 @@
                 //出现动画
                 .wShowAnimationSet(AninationCombineTwo)
                 .wTitleSet(@"")
+                .wMessageSet(@"")
                 .wMultipleSelectionSet(YES).wSelectShowCheckedSet(YES)
                 .wDataSet(@[@"游泳",@"打篮球",@"打羽毛球",@"爬山",@"踢足球",@"乒乓球"])
                 .wStart();

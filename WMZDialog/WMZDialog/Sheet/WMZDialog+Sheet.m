@@ -12,6 +12,7 @@
 @implementation WMZDialog (Sheet)
 - (UIView*)sheetAction{
     UIView *headView = nil;
+    BOOL hadBottomCancel = NO;
     if (self.wMultipleSelection) {
         
         headView = [UIView new];
@@ -44,7 +45,7 @@
     
     [self.mainView addSubview:self.tableView];
     
-    if (!headView) {
+    if (!headView||self.wEventCancelFinish) {
         UIView *emptyView =  [UIView new];
         emptyView.backgroundColor = self.tableView.backgroundColor;
         emptyView.frame = CGRectMake(0, CGRectGetMaxY(self.tableView.frame), self.wWidth, Dialog_GetHNum(20));
@@ -52,8 +53,10 @@
         
         [self.mainView addSubview:self.cancelBtn];
         self.cancelBtn.frame = CGRectMake(0, CGRectGetMaxY(emptyView.frame), self.wWidth, self.wMainBtnHeight);
+        self.cancelBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+        hadBottomCancel = YES;
     }
-    [self reSetMainViewFrame:CGRectMake(0, 0, self.wWidth, headView?CGRectGetMaxY(self.tableView.frame):CGRectGetMaxY(self.cancelBtn.frame))];
+    [self reSetMainViewFrame:CGRectMake(0, 0, self.wWidth, !hadBottomCancel?CGRectGetMaxY(self.tableView.frame):CGRectGetMaxY(self.cancelBtn.frame))];
     //设置只有一半圆角
     [WMZDialogTool setView:self.mainView Radii:CGSizeMake(self.wMainRadius,self.wMainRadius) RoundingCorners:UIRectCornerTopLeft |UIRectCornerTopRight];
      return self.mainView;

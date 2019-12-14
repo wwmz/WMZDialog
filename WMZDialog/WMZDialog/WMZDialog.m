@@ -44,6 +44,7 @@ WMZDialogSetFuncImplementation(WMZDialog, BOOL,                           wEffec
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                        wAddBottomView)
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                           wPickRepeat)
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                         wMainToBottom)
+WMZDialogSetFuncImplementation(WMZDialog, BOOL,                         wCanSelectPay)
 WMZDialogSetFuncImplementation(WMZDialog, NSArray*,                   wDateShowCircle)
 WMZDialogSetFuncImplementation(WMZDialog, UIViewController* ,               wParentVC)
 WMZDialogSetFuncImplementation(WMZDialog, UIView* ,                          wTapView)
@@ -178,6 +179,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
         _wOpenChineseDate = YES;
         _wHideCalanderBtn = YES;
         _wDefaultDate = [NSDate date];
+        _wCanSelectPay = YES;
     }
     return self;
 }
@@ -535,8 +537,6 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
         if (self.wData&&([self.wData isKindOfClass:[NSArray class]]||[self.wData isKindOfClass:[NSMutableArray class]])) {
             self.tableView.delegate = self;
             self.tableView.dataSource = self;
-            self.tableView.estimatedSectionFooterHeight = 0.01;
-            self.tableView.estimatedSectionHeaderHeight = 0.01;
             self.tableView.estimatedRowHeight = 100.0;
             if (@available(iOS 11.0, *)) {
                 self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
@@ -738,6 +738,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
         
         UIView *Line = [UIView new];
         Line.alpha = self.wLineAlpha;
+        Line.tag = 11111;
         [self.bottomView addSubview:Line];
         Line.backgroundColor = self.wLineColor;
         Line.frame = CGRectMake(CGRectGetMaxX(self.cancelBtn.frame), self.cancelBtn.frame.origin.y, DialogK1px, self.wMainBtnHeight);
@@ -745,6 +746,27 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
     
     [self.bottomView addSubview:self.OKBtn];
     self.OKBtn.frame = CGRectMake(self.wEventCancelFinish?CGRectGetMaxX(self.cancelBtn.frame)+DialogK1px:0, CGRectGetMaxY(upLine.frame)+self.wMainOffsetX,self.wEventCancelFinish?self.wWidth/2-DialogK1px/2:self.wWidth, self.wMainBtnHeight);
+    
+    CGSize OKSize = [WMZDialogTool sizeForTextView:CGSizeMake(self.wWidth - self.wMainOffsetX, CGFLOAT_MAX) WithText:self.wOKTitle WithFont:self.wOKFont];
+    CGSize cancelSize ;
+    if (self.wEventCancelFinish) {
+        cancelSize = [WMZDialogTool sizeForTextView:CGSizeMake(self.wWidth - self.wMainOffsetX, CGFLOAT_MAX) WithText:self.wCancelTitle WithFont:self.wCancelFont];
+    }
+    if (OKSize.width >self.OKBtn.frame.size.width - self.wMainOffsetX||
+        cancelSize.width >self.OKBtn.frame.size.width - self.wMainOffsetX) {
+        UIView *line = [self.bottomView viewWithTag:11111];
+        if (self.wEventCancelFinish) {
+            self.cancelBtn.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+            self.cancelBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+            self.cancelBtn.frame = CGRectMake(self.wMainOffsetX, CGRectGetMaxY(upLine.frame)+self.wMainOffsetX, self.wWidth  - self.wMainOffsetX*2, cancelSize.height);
+            if (line) {
+                line.frame = CGRectMake(0, CGRectGetMaxY(self.cancelBtn.frame)+self.wMainOffsetX, self.wWidth, DialogK1px);
+            }
+        }
+        self.OKBtn.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        self.OKBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+        self.OKBtn.frame = CGRectMake(self.wMainOffsetX, self.wEventCancelFinish?(CGRectGetMaxY(line.frame)+self.wMainOffsetX): (CGRectGetMaxY(upLine.frame)+self.wMainOffsetX),self.wWidth - self.wMainOffsetX*2, OKSize.height);
+    }
     
     self.bottomView.frame = CGRectMake(0, maxY, self.wWidth, CGRectGetMaxY(self.OKBtn.frame)+self.wMainOffsetX);
     return self.bottomView;
@@ -1103,8 +1125,6 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
     }
     return _configDic;
 }
-
-
 
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
