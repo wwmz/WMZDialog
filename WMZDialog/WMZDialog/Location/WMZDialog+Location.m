@@ -32,14 +32,14 @@
                 }
                 ta.delegate = self;
                 ta.dataSource = self;
-                ta.estimatedSectionFooterHeight = 0.01;
-                ta.estimatedSectionHeaderHeight = 0.01;
                 ta.rowHeight = self.wMainBtnHeight;
                 ta.tag = 100+i;
                 ta.separatorStyle = UITableViewCellSeparatorStyleNone;
-                ta.estimatedRowHeight = 100.0f;
                 if (@available(iOS 11.0, *)) {
                     ta.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+                    ta.estimatedRowHeight = 100;
+                    ta.estimatedSectionFooterHeight = 0.01;
+                    ta.estimatedSectionHeaderHeight = 0.01;
                 }
                 temp = ta;
                 [self.mainView addSubview:ta];

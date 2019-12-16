@@ -537,8 +537,8 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
         if (self.wData&&([self.wData isKindOfClass:[NSArray class]]||[self.wData isKindOfClass:[NSMutableArray class]])) {
             self.tableView.delegate = self;
             self.tableView.dataSource = self;
-            self.tableView.estimatedRowHeight = 100.0;
             if (@available(iOS 11.0, *)) {
+                self.tableView.estimatedRowHeight = 100;
                 self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
             }
             if (self.wType == DialogTypeCardPresent) {

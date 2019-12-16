@@ -31,7 +31,9 @@
     self.tableView =  [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tableView.estimatedRowHeight = 50;
+    if (@available(iOS 11.0, *)) {
+        self.tableView.estimatedRowHeight = 50;
+    }
     self.tableView.rowHeight = 50;
     [self.view addSubview:self.tableView];
     
