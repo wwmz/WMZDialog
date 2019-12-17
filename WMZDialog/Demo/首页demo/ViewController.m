@@ -33,6 +33,8 @@
     self.tableView.dataSource = self;
     if (@available(iOS 11.0, *)) {
         self.tableView.estimatedRowHeight = 50;
+    }else{
+        self.automaticallyAdjustsScrollViewInsets = NO;
     }
     self.tableView.rowHeight = 50;
     [self.view addSubview:self.tableView];
@@ -42,13 +44,14 @@
     [btn setTitleColor:DialogColor(0xF4606C) forState:UIControlStateNormal];
     [btn setTitle:@"导航弹窗" forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(onBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-    
+    [btn sizeToFit];
     UIBarButtonItem *barItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
     self.navigationItem.leftBarButtonItem = barItem;
     UIButton *btn1 = [UIButton buttonWithType:UIButtonTypeCustom];
     [btn1 setTitleColor:DialogColor(0xF4606C) forState:UIControlStateNormal];
     [btn1 setTitle:@"导航弹窗" forState:UIControlStateNormal];
     [btn1 addTarget:self action:@selector(onBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    [btn1 sizeToFit];
     UIBarButtonItem *barItem1 = [[UIBarButtonItem alloc] initWithCustomView:btn1];
     self.navigationItem.rightBarButtonItem = barItem1;
     

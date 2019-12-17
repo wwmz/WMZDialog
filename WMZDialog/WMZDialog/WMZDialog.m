@@ -540,6 +540,8 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
             if (@available(iOS 11.0, *)) {
                 self.tableView.estimatedRowHeight = 100;
                 self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+            }else{
+                self.automaticallyAdjustsScrollViewInsets = NO;
             }
             if (self.wType == DialogTypeCardPresent) {
                 self.tableView.wOpenScrollClose = self.wOpenScrollClose;

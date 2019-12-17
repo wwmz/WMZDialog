@@ -40,6 +40,8 @@
                     ta.estimatedRowHeight = 100;
                     ta.estimatedSectionFooterHeight = 0.01;
                     ta.estimatedSectionHeaderHeight = 0.01;
+                }else{
+                    self.automaticallyAdjustsScrollViewInsets = NO;
                 }
                 temp = ta;
                 [self.mainView addSubview:ta];
