@@ -1,5 +1,4 @@
 # WMZDailog - 功能样式最多的最齐全的的弹窗控件 控件全部采用链式编程，所有属性均可定制（pod 更新至 1.0.5）
-![](https://img.shields.io/cocoapods/v/WMZDialog.svg?style=flat)
 
 题外
 ==============
