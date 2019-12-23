@@ -7,6 +7,7 @@
 特性
 ==============
 - 链式语法 结构优雅
+- 支持任意位置视图的弹窗(包括滚动视图)
 - 支持单选/多选
 - 支持地区1/2/3级联动
 - 支持无限级联动
@@ -76,7 +77,7 @@ typedef enum : NSUInteger{
 ![DialogTypeTime.gif](https://upload-images.jianshu.io/upload_images/9163368-7b0b668ed45f6372.gif?imageMogr2/auto-orient/strip)
 
 ### 下拉列表选择弹窗
-![DialogTypePop.gif](https://upload-images.jianshu.io/upload_images/9163368-9e7f9620e7e6a4a3.gif?imageMogr2/auto-orient/strip)
+![pop.gif](https://upload-images.jianshu.io/upload_images/9163368-dd7cc8e43b0a5569.gif?imageMogr2/auto-orient/strip)
 
 ### 带下载的弹窗
 ![DialogTypeDown.gif](https://upload-images.jianshu.io/upload_images/9163368-be659b25966e2929.gif?imageMogr2/auto-orient/strip)
@@ -181,6 +182,13 @@ typedef enum : NSUInteger{
 | wDirection                | DiaDirection        |弹出视图的方向 default   directionDowm                  |
 | wNavigationItem                | BOOL        | 导航栏位置   default  NO                          |
 | wTapView                | UIView        | 触发点的视图 default  -       必传                 |
+| wTapRect                | CGRect        |  如果弹出视图的frame不准确 可以自行调节   |
+| wTapViewType                | DiaPopInView        | 所在父视图的类型    default normal                |
+| wTapViewTableViewFoot                | BOOL        |父视图的tableviewHead还是tableviewFoot default Head           |
+| wTableViewSectionHead                | NSInteger        | 在tableViewHead上的按钮所在的headViewSection的index default 0             |
+| wPopViewBorderWidth                | CGFloat        | 弹窗视图的borderWidth default 0             |
+| wPopViewBorderColor                | UIColor        | 弹窗视图的borderColor default 主题颜色        |
+| wPopViewRectCorner                | DialogRectCorner        | 弹窗视图的圆角 可单独设置或者全部设置  默认无 和UIRectCorner用法相同 多了一个none            |
 
 ### DialogTypeDown
 | DialogTypeDown参数               | 类型      | 作用   (默认值)                                 | 
@@ -381,3 +389,4 @@ LEETheme 使用 MIT 许可证，详情见 [LICENSE](LICENSE) 文件。
 - 20191124 cocopod 更新至 1.0.3 修复pod 版本过低导致出现weak的问题
 - 20191214 cocopod 更新至 1.0.4 修复ios9.0某个type闪退问题和增加normalType确定或取消文字过多自动换行
 - 20191216 cocopod 更新至 1.0.5 修复ios10崩溃问题
+- 20191223 优化pop弹窗类型 支持圆角的定制 支持tableview等滚动视图的弹出
