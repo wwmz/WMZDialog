@@ -5,128 +5,46 @@
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "5206B86C-47D1-4C03-9AA2-9AF26E8615F9"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WMZDialog/WMZDialog/WMZDiaLogBase.m"
-            timestampString = "590004048.168233"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
-            landmarkName = "-dealAnamtionShowWithView:withType:withTime:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "265C5B63-3671-40F6-8211-8F5C7DDF6F58"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WMZDialog/WMZDialog/WMZDialog+TabbarMenu.m"
-            timestampString = "590004048.168649"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "13"
-            endingLineNumber = "13"
-            landmarkName = "-tabbarMenuAction"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
          <BreakpointContent
-            uuid = "D7C4BB58-4CBD-485D-93A4-F49CF67E1103"
+            uuid = "75F6265D-0778-4434-B609-4F24039BE75F"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            scope = "0"
+            scope = "1"
             stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "7D25E4BD-95AD-4F31-B0C1-9295673999F7"
+            uuid = "40D48C02-0C84-4FB3-8A6C-AA1684FDC5EA"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "WMZDialog/WMZDialog/DatePicker/WMZDialog+DatePicker.m"
+            filePath = "WMZDialog/WMZDialog/WMZDialogTool/WMZDialogTool.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
-            landmarkName = "-datePickerAction"
+            startingLineNumber = "190"
+            endingLineNumber = "190"
+            landmarkName = "-addArrowBorderAt:offset:rectCorner:width:height:cornerRadius:borderWidth:borderColor:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "532E2187-2FA7-4E66-9627-14F854B71104"
+            uuid = "ABF2C7B4-D325-43F5-A31B-B6F573A92BC7"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "WMZDialog/WMZDialog/DatePicker/WMZDialog+DatePicker.m"
+            filePath = "WMZDialog/WMZDialog/WMZDialogTool/WMZDialogTool.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
-            landmarkName = "-datePickerAction"
+            startingLineNumber = "250"
+            endingLineNumber = "250"
+            landmarkName = "-addArrowBorderAt:offset:rectCorner:width:height:cornerRadius:borderWidth:borderColor:"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "A110FA31-9DB0-452D-991D-62133AF24A71"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WMZDialog/WMZDialog/WMZDialog.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "692"
-            endingLineNumber = "692"
-            landmarkName = "-reSetMainViewFrame:"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "A110FA31-9DB0-452D-991D-62133AF24A71 - dbe11a518b283b6a"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[WMZDialog reSetMainViewFrame:]"
-                  moduleName = "WMZDialog"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/wmz/Desktop/wmz/demo/WMZDialog/WMZDialog/WMZDialog/WMZDialog.m"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "654"
-                  endingLineNumber = "654"
-                  offsetFromSymbolStart = "305">
-               </Location>
-               <Location
-                  uuid = "A110FA31-9DB0-452D-991D-62133AF24A71 - dbe11a518b283b6a"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[WMZDialog reSetMainViewFrame:]"
-                  moduleName = "WMZDialog"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/wmz/Desktop/wmz/demo/WMZDialog/WMZDialog/WMZDialog/WMZDialog.m"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "654"
-                  endingLineNumber = "654"
-                  offsetFromSymbolStart = "622">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

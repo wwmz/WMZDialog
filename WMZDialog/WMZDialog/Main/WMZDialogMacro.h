@@ -102,16 +102,18 @@ typedef enum : NSUInteger{
 
 }DialogType;
 
+
 /*
- * type为pop的方向
+ * pop的视图
  */
 typedef enum : NSUInteger{
-    directionUp,
-    directionLeft,
-    directionDowm,
-    directionright,
-    
-}DiaDirection;
+    DiaPopInViewNormal,              //普通视图 默认
+    DiaPopInViewNavi,                //导航栏上
+    DiaPopInViewTableView,           //tableview上
+    DiaPopInViewCollectionView,      //collectionView上
+    DiaPopInViewScrollView,          //scrollview上
+}DiaPopInView;
+
 
 /*
  * 树状数据联动的样式 tableview/pickview显示

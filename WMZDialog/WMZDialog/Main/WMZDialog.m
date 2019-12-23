@@ -45,6 +45,9 @@ WMZDialogSetFuncImplementation(WMZDialog, BOOL,                        wAddBotto
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                           wPickRepeat)
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                         wMainToBottom)
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                         wCanSelectPay)
+WMZDialogSetFuncImplementation(WMZDialog, BOOL,                 wTapViewTableViewFoot)
+WMZDialogSetFuncImplementation(WMZDialog, DiaPopInView,                  wTapViewType)
+WMZDialogSetFuncImplementation(WMZDialog, NSInteger,            wTableViewSectionHead)
 WMZDialogSetFuncImplementation(WMZDialog, NSArray*,                   wDateShowCircle)
 WMZDialogSetFuncImplementation(WMZDialog, UIViewController* ,               wParentVC)
 WMZDialogSetFuncImplementation(WMZDialog, UIView* ,                          wTapView)
@@ -54,6 +57,7 @@ WMZDialogSetFuncImplementation(WMZDialog, UIColor*,                     wMessage
 WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                             wWidth)
 WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                            wHeight)
 WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                       wMainOffsetY)
+WMZDialogSetFuncImplementation(WMZDialog, CGRect,                            wTapRect)
 WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                     wMainBtnHeight)
 WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                       wMainOffsetX)
 WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                    wDisappelSecond)
@@ -100,6 +104,9 @@ WMZDialogSetFuncImplementation(WMZDialog, UIColor*,                     wLoading
 WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                        wCellHeight)
 WMZDialogSetFuncImplementation(WMZDialog, NSString*,                       wSeparator)
 WMZDialogSetFuncImplementation(WMZDialog, NSDate*,                       wDefaultDate)
+WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                wPopViewBorderWidth)
+WMZDialogSetFuncImplementation(WMZDialog, UIColor*,               wPopViewBorderColor)
+WMZDialogSetFuncImplementation(WMZDialog, DialogRectCorner,        wPopViewRectCorner)
 WMZDialogSetFuncImplementation(WMZDialog, DialogType,                           wType)
 WMZDialogSetFuncImplementation(WMZDialog, DialogShowAnination,         wShowAnimation)
 WMZDialogSetFuncImplementation(WMZDialog, DialogHideAnination,         wHideAnimation)
@@ -180,6 +187,9 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
         _wHideCalanderBtn = YES;
         _wDefaultDate = [NSDate date];
         _wCanSelectPay = YES;
+        _wPopViewBorderColor = _wMainBackColor;
+        _wTapRect = CGRectZero;
+        _wPopViewRectCorner = DialogRectCornerNone;
     }
     return self;
 }
@@ -578,6 +588,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
         UIView *bottomView = self.wMyDiaLogView(self.mainView);
         if (self.wAddBottomView) {
             UIView *addBottomView  = [self addBottomView:CGRectGetMaxY(bottomView.frame)+self.wMainOffsetY];
+            [addBottomView layoutIfNeeded];
             [self reSetMainViewFrame:CGRectMake(0, 0, self.wWidth, CGRectGetMaxY(addBottomView.frame)+self.wMainOffsetY)];
         }else{
             [self reSetMainViewFrame:CGRectMake(0, 0, self.wWidth, CGRectGetMaxY(bottomView.frame)+self.wMainOffsetY)];
@@ -605,6 +616,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
         if (self.wShadowShow) {
             [self.view insertSubview:self.shadowView  belowSubview:self.mainView];
         }
+        [self.view bringSubviewToFront:self.mainView];
         BOOL animal = !self.wShowAnimation||self.wShowAnimation>=7;
         [self setParentVCView:0.9];
         [self.wParentVC presentViewController:self animated:animal completion:nil];
@@ -676,13 +688,15 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
 - (void)setParentVCView:(CGFloat)scale{
     if (!self.wScaleParentVC) return;
     if (self.wType != DialogTypeCardPresent) return;
-    [UIView animateWithDuration:0.3 animations:^{
-        if (self.wParentVC.navigationController) {
-            self.wParentVC.navigationController.view.transform = CGAffineTransformMakeScale(scale, scale);
-        }else{
-            self.wParentVC.view.transform = CGAffineTransformMakeScale(scale, scale);
-        }
-    }];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+         [UIView animateWithDuration:0.3 animations:^{
+            if (self.wParentVC.navigationController) {
+                self.wParentVC.navigationController.view.transform = CGAffineTransformMakeScale(scale, scale);
+            }else{
+                self.wParentVC.view.transform = CGAffineTransformMakeScale(scale, scale);
+            }
+        }];
+    });
 }
 
 /*

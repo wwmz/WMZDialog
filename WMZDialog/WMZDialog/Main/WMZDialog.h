@@ -128,10 +128,22 @@ WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGFloat,           
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, DiaDirection,             wDirection)
 //弹出视图的位置 必传
 WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, UIView* ,                 wTapView)
+//如果弹出视图的frame不准确 可以自行调节
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGRect,                   wTapRect)
 //是否是导航栏的按钮点击弹窗
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wNavigationItem)
-
-
+//所在父视图的类型
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, DiaPopInView,             wTapViewType)
+//父视图的tableviewHead还是tableviewFoot default Head
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wTapViewTableViewFoot)
+//在tableViewHead上的按钮所在的headViewSection的index default 0
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, NSInteger,                wTableViewSectionHead)
+//弹窗视图的borderWidth default 0
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGFloat,                  wPopViewBorderWidth)
+//弹窗视图的borderColor default 主题颜色
+WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, UIColor*,                 wPopViewBorderColor)
+//弹窗视图的圆角 可单独设置或者全部设置  默认无 和UIRectCorner用法相同 多了一个none
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, DialogRectCorner,         wPopViewRectCorner)
 /*=========================================dowm=======================================================================*/
 //图片的size
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGSize,                   wImageSize)

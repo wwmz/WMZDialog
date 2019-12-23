@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "WMZDialogMacro.h"
 #import "WMZDialogTool.h"
-#import <objc/runtime.h>
 #import "WMZDialogAnimation.h"
 #import "WMZDialogShareView.h"
 #import "WMZDialogTableView.h"
@@ -146,6 +145,14 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, assign)CGPoint normalPoint;
 
+/*
+ *在可滑动视图上
+ */
+@property(nonatomic,strong)UIScrollView *popInScrollView;
+/*
+*pop点击的frame 如果pop位置不准确可以改变此
+*/
+@property(nonatomic,assign)CGRect tapRect;
 
 /*
  *关闭
