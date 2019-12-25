@@ -420,10 +420,12 @@
         case DialogTypeSelect:
         {
             if (indexPath.row == 0) {
-                Dialog().wTypeSet(type)
+                Dialog()
+                .wTypeSet(type)
                 .wEventFinishSet(^(id anyID, NSIndexPath *path, DialogType type) {
                     NSLog(@"%@ %@",anyID,path);
                 })
+                
                 .wTitleSet(@"选择爱好")
                 .wTitleColorSet([UIColor redColor]).wTitleFontSet(16.0)
                 .wMessageSet(@"请选择")

@@ -180,6 +180,10 @@ WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, NSString*,         
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wPickRepeat)
 //默认选中时间 默认此刻
 WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, NSDate*,                  wDefaultDate)
+//最大时间 default nil
+WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, NSDate*,                  wMaxDate)
+//最小时间 default nil
+WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, NSDate*,                  wMinDate)
 
 /*=========================================Share/tabbarMenu/NaviMENU==================================================*/
 //WMZDialogShareView显示多少列

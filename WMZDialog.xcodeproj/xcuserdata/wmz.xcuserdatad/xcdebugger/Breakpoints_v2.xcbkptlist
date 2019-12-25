@@ -7,7 +7,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
          <BreakpointContent
-            uuid = "75F6265D-0778-4434-B609-4F24039BE75F"
+            uuid = "A7B27D95-67E7-44B5-9E2E-0E088FDC5B2D"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -18,32 +18,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "40D48C02-0C84-4FB3-8A6C-AA1684FDC5EA"
-            shouldBeEnabled = "No"
+            uuid = "F2DD389B-712E-4391-9B53-DE810F219F29"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "WMZDialog/WMZDialog/WMZDialogTool/WMZDialogTool.m"
+            filePath = "WMZDialog/WMZDialog/Main/WMZDialog.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "190"
-            endingLineNumber = "190"
-            landmarkName = "-addArrowBorderAt:offset:rectCorner:width:height:cornerRadius:borderWidth:borderColor:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "ABF2C7B4-D325-43F5-A31B-B6F573A92BC7"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WMZDialog/WMZDialog/WMZDialogTool/WMZDialogTool.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "250"
-            endingLineNumber = "250"
-            landmarkName = "-addArrowBorderAt:offset:rectCorner:width:height:cornerRadius:borderWidth:borderColor:"
+            startingLineNumber = "679"
+            endingLineNumber = "679"
+            landmarkName = "-closeAction"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

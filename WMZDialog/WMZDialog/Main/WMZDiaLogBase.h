@@ -155,6 +155,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)CGRect tapRect;
 
 /*
+*最小时间
+*/
+@property(nonatomic,strong)NSMutableDictionary *minDate;
+/*
+*最大时间
+*/
+@property(nonatomic,strong)NSMutableDictionary *maxDate;
+/*
  *关闭
  */
 - (void)closeView;
@@ -209,12 +217,6 @@ NS_ASSUME_NONNULL_BEGIN
  *
  */
 - (NSArray*)getTreeSelectDataArr:(BOOL)first;
-
-/*
- * 获取年月对应的天数
- *
- */
-- (NSArray*)timeDayWithArr:(NSArray*)arr withName:(NSString*)name;
 
 /*
  * 显示动画处理

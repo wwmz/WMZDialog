@@ -104,6 +104,8 @@ WMZDialogSetFuncImplementation(WMZDialog, UIColor*,                     wLoading
 WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                        wCellHeight)
 WMZDialogSetFuncImplementation(WMZDialog, NSString*,                       wSeparator)
 WMZDialogSetFuncImplementation(WMZDialog, NSDate*,                       wDefaultDate)
+WMZDialogSetFuncImplementation(WMZDialog, NSDate*,                           wMaxDate)
+WMZDialogSetFuncImplementation(WMZDialog, NSDate*,                           wMinDate)
 WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                wPopViewBorderWidth)
 WMZDialogSetFuncImplementation(WMZDialog, UIColor*,               wPopViewBorderColor)
 WMZDialogSetFuncImplementation(WMZDialog, DialogRectCorner,        wPopViewRectCorner)
@@ -586,9 +588,9 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
     if (self.wMyDiaLogView) {
         [self start:self.mainView];
         UIView *bottomView = self.wMyDiaLogView(self.mainView);
+        [bottomView layoutIfNeeded];
         if (self.wAddBottomView) {
             UIView *addBottomView  = [self addBottomView:CGRectGetMaxY(bottomView.frame)+self.wMainOffsetY];
-            [addBottomView layoutIfNeeded];
             [self reSetMainViewFrame:CGRectMake(0, 0, self.wWidth, CGRectGetMaxY(addBottomView.frame)+self.wMainOffsetY)];
         }else{
             [self reSetMainViewFrame:CGRectMake(0, 0, self.wWidth, CGRectGetMaxY(bottomView.frame)+self.wMainOffsetY)];
@@ -634,10 +636,6 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
         [self.mainView endEditing:YES];
     }
    
-    if (self.wEventClose) {
-        self.wEventClose(@"关闭", nil);
-    }
-
     __weak WMZDialog *weak = self;
     if (self.wType == DialogTypeShare||self.wType == DialogTypeTabbarMenu||self.wType == DialogTypeNaviMenu) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.00 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -658,6 +656,9 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
             }
             springHideAnimation(sc, self.wAnimationDurtion, [sc subviews], ^{
                 [weak dismissViewControllerAnimated:NO completion:nil];
+                if (weak.wEventClose) {
+                    weak.wEventClose(@"关闭", nil);
+                }
             });
             curverOffAnimation(self.mainView,self.wAnimationDurtion);
         });
@@ -674,10 +675,20 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
         [self dealAnamtionHideWithView:self.mainView withType:self.wHideAnimation withTime:self.wAnimationDurtion];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(self.wAnimationDurtion * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self dismissViewControllerAnimated:NO completion:nil];
+            if (self.wEventClose) {
+                self.wEventClose(@"关闭", nil);
+            }
         });
     }else{
+        __weak WMZDialog *weak = self;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.00 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self dismissViewControllerAnimated:YES completion:nil];
+            [self dismissViewControllerAnimated:YES completion:^{
+                if (weak.wEventClose) {
+                      weak.wEventClose(@"关闭", nil);
+                }
+            }];
+
         });
     }
     
@@ -985,7 +996,6 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
     if(self.wType == DialogTypeDatePicker){
-        NSString *name = [self.wDateTimeType containsString:@"日"]?@"日":@"";
         NSCharacterSet* nonDigits =[[NSCharacterSet decimalDigitCharacterSet] invertedSet];
         //符合年月日的才改变天数
         if (component == 0) {
@@ -998,7 +1008,10 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
                     NSArray *monthArr = self.wData[component+1];
                     NSInteger monthIndex = [self.pickView selectedRowInComponent:component+1];
                     int month =[[monthArr[self.wPickRepeat?monthIndex%monthArr.count:monthIndex] stringByTrimmingCharactersInSet:nonDigits] intValue];
-                    self.wData[2] = [self timeDayWithArr:@[@(year),@(month)] withName:name];
+                    NSArray *arr = @[@(year),@(month)];
+                    SuppressPerformSelectorLeakWarning(
+                        self.wData[2] = [self performSelector:NSSelectorFromString(@"timeDayWithArr:Data:") withObject:arr withObject:@{}];
+                    );
                     [self.pickView reloadComponent:2];
                 }
             }
@@ -1013,11 +1026,18 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
                     int year =[[yearArr[self.wPickRepeat?yearIndex%yearArr.count:yearIndex] stringByTrimmingCharactersInSet:nonDigits] intValue];
                     NSArray *monthArr = self.wData[component];
                     int month =[[monthArr[self.wPickRepeat?row%monthArr.count:row] stringByTrimmingCharactersInSet:nonDigits] intValue];
-                    self.wData[2] = [self timeDayWithArr:@[@(year),@(month)] withName:name];
+                    NSArray *arr = @[@(year),@(month)];
+                    SuppressPerformSelectorLeakWarning(
+                        self.wData[2] = [self performSelector:NSSelectorFromString(@"timeDayWithArr:Data:") withObject:arr withObject:@{}];
+                    );
                     [self.pickView reloadComponent:2];
                 }
             }
         }
+        SuppressPerformSelectorLeakWarning(
+             [self performSelector:NSSelectorFromString(@"updateTime:component:") withObject:@(row) withObject:@(component)];
+        );
+        
         return;
     }
     if (self.tree) {
@@ -1103,12 +1123,15 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
     CGFloat height=[UIScreen mainScreen].bounds.size.height;
     if(width/height<1.0)
     {
-      //  NSLog(@"竖屏");
+//        [self dismissViewControllerAnimated:NO completion:nil];
+//        self.close = YES;
+//        [self start];
         
     }else
     {
-       // NSLog(@"横屏");
-        
+//        [self dismissViewControllerAnimated:NO completion:nil];
+//        self.close = YES;
+//        [self start];
     }
 }
 

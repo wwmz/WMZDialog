@@ -100,33 +100,6 @@
     }
     return firstSelectTree;
 }
-
-- (NSArray*)timeDayWithArr:(NSArray*)arr withName:(NSString*)name {
-    NSInteger day = 0 ;
-    NSMutableArray *dayArr = [NSMutableArray new];
-    if (!arr||arr.count<1) {
-        //数据不规范的当做30天处理
-        day = 30;
-    }else{
-        NSString *year = arr[0];
-        NSString *month = arr[1];
-        BOOL isLeapYear = false;
-        NSInteger yearInfo = year.integerValue;
-        if((yearInfo % 400 == 0) || ((yearInfo % 4 == 0) && (yearInfo % 100 != 0))){
-            isLeapYear = true ;
-        }
-        
-        NSArray *dayCountArr = @[@"31",isLeapYear?@"29":@"28",@"31",@"30",@"31",@"30",@"31",@"31",@"30",@"31",@"30",@"31"];
-        day = [dayCountArr[month.integerValue-1] integerValue];
-        
-    }
-    
-    for (int i = 1; i< day+1;i++ ) {
-        [dayArr addObject: i<10? [NSString stringWithFormat:@"0%d%@",i,name]:[NSString stringWithFormat:@"%d%@",i,name]];
-    }
-    return [NSArray arrayWithArray:dayArr];
-}
-
 - (BOOL)updateAlertTypeDownProgress:(CGFloat)value{return YES;}
 - (void)closeView{}
 - (UIView*)addBottomView:(CGFloat)maxY{return [UIView new];}

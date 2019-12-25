@@ -26,7 +26,6 @@
              self.wNavigationItem) {
               self.tapRect = [self.wParentVC.navigationController.view convertRect:self.wTapView.frame fromView:self.wTapView.superview];
          }
-            NSLog(@"%@",NSStringFromCGRect(self.tapRect));
          if (self.wTapViewType == DiaPopInViewTableView ||
              self.wTapViewType == DiaPopInViewCollectionView ||
              self.wTapViewType == DiaPopInViewScrollView) {
@@ -208,7 +207,6 @@
     
     if (self.wNavigationItem||
         self.wTapViewType == DiaPopInViewNavi) {
-        NSLog(@"%@",NSStringFromCGRect(self.mainView.frame));
         if (CGRectGetMaxX(self.mainView.frame)>Device_Dialog_Width) {
             CGRect myRect = self.mainView.frame;
             myRect.origin.x = CGRectGetMaxX(self.tapRect)-self.mainView.frame.size.width;

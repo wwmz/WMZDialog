@@ -9,17 +9,17 @@
 #import "WMZDialog+Calander.h"
 #define NumberMounthes 12
 #define allCount 42
-static NSString *currentYearKey = @"currentYearKey";
-static NSString *currenMonthKey = @"currenMonthKey";
-static NSString *currenDayKey = @"currenDayKey";
-static NSString *currenModelKey = @"currentModelKey";
-static NSString *currentIndexKey = @"currentIndexKey";
-static NSString *todayKey = @"todayKey";
+static  const void *currentYearKey = "currentYearKey";
+static  const void *currenMonthKey = @"currenMonthKey";
+static  const void *currenDayKey = @"currenDayKey";
+static  const void *currenModelKey = @"currentModelKey";
+static  const void *currentIndexKey = @"currentIndexKey";
+static  const void *todayKey = @"todayKey";
 @interface WMZDialog()<UICollectionViewDelegate,UICollectionViewDataSource>
 @property(nonatomic,assign)NSInteger currentYear;
 @property(nonatomic,assign)NSInteger currentMonth;
 @property(nonatomic,assign)NSInteger currentDay;
-@property(nonatomic,strong)NSString *today;
+@property(nonatomic,copy)NSString *today;
 @property(nonatomic,strong)CalanderModel *selecctCalanderModel;
 @property(nonatomic,assign)NSInteger currentIndex;
 @end
@@ -488,55 +488,54 @@ static NSString *todayKey = @"todayKey";
 
 
 - (NSInteger)currentYear{
-    return  [objc_getAssociatedObject(self, &currentYearKey) integerValue];
+    return  [objc_getAssociatedObject(self, currentYearKey) integerValue];
 }
 
 - (void)setCurrentYear:(NSInteger)currentYear{
-    objc_setAssociatedObject(self, &currentYearKey, @(currentYear), OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(self, currentYearKey, @(currentYear), OBJC_ASSOCIATION_ASSIGN);
     self.textLabel.text = [NSString stringWithFormat:@"%ld年%ld月",currentYear,self.currentMonth];
-    
 }
 
 - (NSInteger)currentMonth{
-    return  [objc_getAssociatedObject(self, &currenMonthKey) integerValue];
+    return  [objc_getAssociatedObject(self, currenMonthKey) integerValue];
 }
 
 - (void)setCurrentMonth:(NSInteger)currentMonth{
-    objc_setAssociatedObject(self, &currenMonthKey, @(currentMonth), OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(self, currenMonthKey, @(currentMonth), OBJC_ASSOCIATION_ASSIGN);
     self.textLabel.text = [NSString stringWithFormat:@"%ld年%ld月",self.currentYear,currentMonth];
     
 }
 
 - (NSInteger)currentDay{
-    return  [objc_getAssociatedObject(self, &currenDayKey) integerValue];
+    return  [objc_getAssociatedObject(self, currenDayKey) integerValue];
 }
 
 - (void)setCurrentDay:(NSInteger)currentDay{
-    objc_setAssociatedObject(self, &currenDayKey, @(currentDay), OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(self, currenDayKey, @(currentDay), OBJC_ASSOCIATION_ASSIGN);
 }
 
 - (NSInteger)currentIndex{
-     return  [objc_getAssociatedObject(self, &currentIndexKey) integerValue];
+     return  [objc_getAssociatedObject(self, currentIndexKey) integerValue];
 }
 
 - (void)setCurrentIndex:(NSInteger)currentIndex{
-     objc_setAssociatedObject(self, &currentIndexKey, @(currentIndex), OBJC_ASSOCIATION_ASSIGN);
+     objc_setAssociatedObject(self, currentIndexKey, @(currentIndex), OBJC_ASSOCIATION_ASSIGN);
 }
 
 - (CalanderModel *)selecctCalanderModel{
-    return objc_getAssociatedObject(self, &currenModelKey);
+    return objc_getAssociatedObject(self, currenModelKey);
 }
 
 - (void)setSelecctCalanderModel:(CalanderModel *)selecctCalanderModel{
-    objc_setAssociatedObject(self, &currenModelKey, selecctCalanderModel, OBJC_ASSOCIATION_RETAIN);
+    objc_setAssociatedObject(self, currenModelKey, selecctCalanderModel, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (NSString *)today{
-    return objc_getAssociatedObject(self, &todayKey);
+    return objc_getAssociatedObject(self, todayKey);
 }
 
 - (void)setToday:(NSString *)today{
-    objc_setAssociatedObject(self, &todayKey, today, OBJC_ASSOCIATION_RETAIN);
+    objc_setAssociatedObject(self, todayKey, today, OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
 
 @end
