@@ -1,4 +1,4 @@
-# WMZDailog - 功能样式最多的最齐全的的弹窗控件 控件全部采用链式编程，所有属性均可定制（pod 更新至 1.0.5）
+# WMZDailog - 功能样式最多的最齐全的的弹窗控件 控件全部采用链式编程，所有属性均可定制（pod 更新至 1.0.6建议更新）
 
 题外
 ==============
@@ -346,7 +346,7 @@ typedef enum : NSUInteger{
 安装
 ==============
 
-### CocoaPods  已更新到1.0.3版本
+### CocoaPods  已更新到1.0.6版本
 1. 将 cocoapods 更新至最新版本. 
 2. 在 Podfile 中添加 `pod 'WMZDialog'`。  
 3. 执行 `pod install` 或 `pod update`。
@@ -390,3 +390,4 @@ LEETheme 使用 MIT 许可证，详情见 [LICENSE](LICENSE) 文件。
 - 20191214 cocopod 更新至 1.0.4 修复ios9.0某个type闪退问题和增加normalType确定或取消文字过多自动换行
 - 20191216 cocopod 更新至 1.0.5 修复ios10崩溃问题
 - 20191223 优化pop弹窗类型 支持圆角的定制 支持tableview等滚动视图的弹出
+- 20191225 优化日期选择弹窗类型 1 新增最大和最小时间支持超出隐藏 2新增日期选择格式化输出 3修复弹窗嵌套的bug  4cocopod更新至1.0.6(建议更新)
