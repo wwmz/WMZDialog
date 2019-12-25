@@ -18,16 +18,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F2DD389B-712E-4391-9B53-DE810F219F29"
-            shouldBeEnabled = "Yes"
+            uuid = "5603A4FC-A81C-4595-AA0F-6908EE28C9B2"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "WMZDialog/WMZDialog/Main/WMZDialog.m"
+            filePath = "WMZDialog/WMZDialog/PopView/WMZDialog+PopView.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "679"
-            endingLineNumber = "679"
-            landmarkName = "-closeAction"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
+            landmarkName = "-popViewAction"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

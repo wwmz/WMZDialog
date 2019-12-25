@@ -262,9 +262,6 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
         }
         break;
         case DialogTypePickSelect:{
-            if (self.wHeight == Dialog_GetHNum(300)) {
-                self.wHeight = Dialog_GetHNum(200);
-            }
             self.wMainToBottom = YES;
             if (self.wMainRadius == 15.0f) {
                 self.wMainRadius = 10.0f;
@@ -324,9 +321,6 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
             break;
         case DialogTypeDatePicker:
         {
-            if (self.wHeight == Dialog_GetHNum(300)) {
-                self.wHeight = Dialog_GetHNum(250);
-            }
             self.wMainToBottom = YES;
             if (self.wMainRadius == 15.0f) {
                 self.wMainRadius = 10.0f;
@@ -559,7 +553,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
                 self.tableView.wOpenScrollClose = self.wOpenScrollClose;
             }
         }
-        
+
         if (self.wType == DialogTypeBuyCar) {
             self.tableView.scrollEnabled = YES;
         }else{

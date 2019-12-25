@@ -14,6 +14,7 @@
 #import "WMZDialog+PopView.h"
 @implementation WMZDialog (PopView)
 - (UIView*)popViewAction{
+    
      [self.wTapView setNeedsLayout];
      [self.wTapView layoutIfNeeded];
      self.tapRect = self.wTapView.frame;
@@ -72,9 +73,9 @@
                         NSIndexPath *indexPath = [(UITableView*)self.popInScrollView indexPathForCell:(UITableViewCell*)otherView];
                          rectInTableView = [(UITableView*)self.popInScrollView rectForRowAtIndexPath:indexPath];
                          if (![self.wTapView isKindOfClass:[UITableViewCell class]]) {
-                             rectInTableView.origin.x = self.wTapView.frame.origin.x;
-                             rectInTableView.origin.y += self.wTapView.frame.origin.y;
-                             rectInTableView.size = self.wTapView.frame.size;
+                             rectInTableView.origin.x = self.tapRect.origin.x;
+                             rectInTableView.origin.y += self.tapRect.origin.y;
+                             rectInTableView.size = self.tapRect.size;
                          }
                     }else if([self.wTapView.superview isKindOfClass:[UITableView class]]){
                          rectInTableView = self.tapRect;
@@ -86,9 +87,9 @@
                          }
                                           
                          if (![self.wTapView.superview isKindOfClass:[UITableView class]]) {
-                             rectInTableView.origin.x = self.wTapView.frame.origin.x;
-                             rectInTableView.origin.y += self.wTapView.frame.origin.y;
-                             rectInTableView.size = self.wTapView.frame.size;
+                             rectInTableView.origin.x = self.tapRect.origin.x;
+                             rectInTableView.origin.y += self.tapRect.origin.y;
+                             rectInTableView.size = self.tapRect.size;
                          }
                     }
                      rect = [self.popInScrollView convertRect:rectInTableView toView:[self.popInScrollView superview]];
@@ -100,18 +101,18 @@
                          rectInTableView = attributes.frame;
                          
                          if (![self.wTapView isKindOfClass:[UICollectionViewCell class]]) {
-                             rectInTableView.origin.x += self.wTapView.frame.origin.x;
-                             rectInTableView.origin.y += self.wTapView.frame.origin.y;
-                             rectInTableView.size = self.wTapView.frame.size;
+                             rectInTableView.origin.x += self.tapRect.origin.x;
+                             rectInTableView.origin.y += self.tapRect.origin.y;
+                             rectInTableView.size = self.tapRect.size;
                          }
                      }else if([self.wTapView.superview isKindOfClass:[UICollectionView class]]){
                          rectInTableView = self.tapRect;
                      }else{
                          rectInTableView = otherView.frame;
                          if (![self.wTapView.superview isKindOfClass:[UICollectionView class]]) {
-                             rectInTableView.origin.x = self.wTapView.frame.origin.x;
-                             rectInTableView.origin.y += self.wTapView.frame.origin.y;
-                             rectInTableView.size = self.wTapView.frame.size;
+                             rectInTableView.origin.x = self.tapRect.origin.x;
+                             rectInTableView.origin.y += self.tapRect.origin.y;
+                             rectInTableView.size = self.tapRect.size;
                          }
                      }
                      rect = [self.popInScrollView convertRect:rectInTableView toView:[self.popInScrollView superview]];
@@ -131,7 +132,7 @@
         self.tapRect = self.wTapRect;
     }
     [self.mainView addSubview:self.titleLabel];
-  
+    self.tableView.separatorStyle =  UITableViewCellSeparatorStyleNone;
     self.tableView.frame = CGRectMake(0, 0, self.wWidth, self.wCellHeight*([self.wData count]>8?8:[self.wData count]));
     if (self.tableView.frame.size.height == 0 &&[self.wData count]) {
         CGRect rect = self.tableView.frame;
@@ -297,6 +298,7 @@
                 y += obj.frame.origin.y;
                 x += obj.frame.origin.x;
             }];
+            
             CGRect rect = self.tapRect;
             rect.origin.y += y;
             rect.origin.x += x;

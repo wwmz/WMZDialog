@@ -27,8 +27,9 @@
     if (@available(iOS 11.0, *)) {
         ta.estimatedRowHeight = 0.01;
         ta.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }else{
+        self.automaticallyAdjustsScrollViewInsets = NO;
     }
-    ta.estimatedRowHeight = 0.01;
     [ta registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:@"UITableViewHeaderView"];
     [ta registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:@"UITableViewFooterView"];
     ta.dataSource = self;
@@ -101,7 +102,7 @@
 - (void)cellBtnTap:(UIButton*)sender{
     Dialog()
     .wTypeSet(DialogTypePop)
-    .wDirectionSet(directionright)
+//    .wDirectionSet(directionright)
     .wTapViewTypeSet(DiaPopInViewTableView)
     .wShowAnimationSet(AninatonZoomIn)
     .wHideAnimationSet(AninatonZoomOut)

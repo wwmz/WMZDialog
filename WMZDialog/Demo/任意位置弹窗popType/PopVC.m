@@ -86,6 +86,12 @@
     .wEventFinishSet(^(id anyID, NSIndexPath *path, DialogType type) {
         NSLog(@"%@ %@",anyID,path);
     })
+    //cell高度
+//    .wCellHeightSet(100)
+    //自定义cell
+//    .wMyCellSet(^UITableViewCell *(NSIndexPath *indexPath, UITableView *tableView, id model) {
+//        return [UITableViewCell new];
+//    })
     //弹出动画
     .wShowAnimationSet(AninatonZoomIn)
     //消失动画
