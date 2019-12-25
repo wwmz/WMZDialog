@@ -11,7 +11,7 @@
 - 支持单选/多选
 - 支持地区1/2/3级联动
 - 支持无限级联动
-- 支持时间选择
+- 支持时间选择(年月日时分秒自由组合+最大最小时间限制)
 - 支持支持多种动画
 - 支持所有字体颜色/字体大小的设置
 - 支持支付视图
@@ -89,7 +89,7 @@ typedef enum : NSUInteger{
 ![DialogTypeLocation.gif](https://upload-images.jianshu.io/upload_images/9163368-cd3a1c604259186a.gif?imageMogr2/auto-orient/strip)
 
 ### 日期选择弹窗
-![DialogTypeDatePicker.gif](https://upload-images.jianshu.io/upload_images/9163368-c947f2b9d7430fde.gif?imageMogr2/auto-orient/strip)
+![DialogTypeDatePicker.gif](https://upload-images.jianshu.io/upload_images/9163368-1371de72725b52da.gif?imageMogr2/auto-orient/strip)
 
 ### 顶部和底部弹窗
 ![DialogTypeTabbarMenu+DialogTypeNaviMenu.gif](https://upload-images.jianshu.io/upload_images/9163368-abb4ffbaa54f97d5.gif?imageMogr2/auto-orient/strip)
