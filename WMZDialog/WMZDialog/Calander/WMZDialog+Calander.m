@@ -26,6 +26,7 @@ static  const void *todayKey = @"todayKey";
 @implementation WMZDialog (Calander)
 
 - (UIView*)calanderAction{
+    
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     
@@ -212,6 +213,7 @@ static  const void *todayKey = @"todayKey";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     CalanderModel *model = self.dataArr[indexPath.section][indexPath.row];
+    if (![self checkModel:model]) return;
     if (self.wCalanderCellClick) {
         self.wCalanderCellClick(indexPath,collectionView,model);
     }
@@ -240,6 +242,25 @@ static  const void *todayKey = @"todayKey";
     }];
     NSLog(@"%ld %ld %ld %@",model.wYear,model.wMonth,model.wDay,model.wDetailChineseDate);
 }
+
+//检测model是否在最大最小范围内
+- (BOOL)checkModel:(CalanderModel*)model{
+    int result = YES;
+    if (self.wMaxDate) {
+       int maxResult = [NSDate compareOneDay:model.wDate withAnotherDay:self.wMaxDate];
+        if (maxResult == 1) {
+            result = NO;
+        }
+    }
+     if (self.wMinDate) {
+        int minResult = [NSDate compareOneDay:model.wDate withAnotherDay:self.wMinDate];
+        if (minResult == -1) {
+            result = NO;
+        }
+    }
+    return result;
+}
+
 
 //手动拖动
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{

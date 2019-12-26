@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSDictionary*)getChineseCalendarWithDate:(NSDate*)dateTemp Year:(NSInteger)myYear Month:(NSInteger)myMonth Day:(NSInteger)myDay;
 #pragma mark -- 是否属于同一天判断
 + (BOOL)isInSameDay:(NSDate*)date1 time2:(NSDate*)date2;
+#pragma mark -- 比较两个时间的大小
++ (int)compareOneDay:(NSDate *)oneDay withAnotherDay:(NSDate *)anotherDay;
 @end
 
 NS_ASSUME_NONNULL_END

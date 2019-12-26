@@ -17,7 +17,7 @@
 - (void)viewDidLoad {
     self.view.backgroundColor = [UIColor whiteColor];
     [super viewDidLoad];
-    NSArray *arr = @[@"普通日历",@"纵向滚动",@"显示操作",@"隐藏农历",@"显示圆点",@"显示自定义颜色圆点",@"多选",@"显示在底部",@"自定义日历内容"];
+    NSArray *arr = @[@"普通日历",@"纵向滚动",@"显示操作",@"隐藏农历",@"显示圆点",@"显示自定义颜色圆点",@"多选",@"显示在底部",@"自定义日历内容",@"最大值最小值"];
     for (int i = 0; i<arr.count; i++) {
         CGFloat X = (i % 2) * ([UIScreen mainScreen].bounds.size.width/3 + 20);
         CGFloat Y = (i / 2) * (40 + 20);
@@ -34,6 +34,24 @@
 }
 
 - (void)action:(UIButton*)sender{
+    
+    //最大值最小值
+    if (sender.tag == 9) {
+        
+        NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+        NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+        [dateComponents setMonth:-1];
+        NSDate *minDate = [gregorian dateByAddingComponents:dateComponents toDate:[NSDate date] options:0];
+        
+        Dialog()
+        .wMaxDateSet([NSDate date])
+        .wMinDateSet(minDate)
+        .wTypeSet(DialogTypeCalander)
+        .wHideCalanderBtnSet(NO)
+        .wStart();
+        return;
+    }
+    
     
     WMZDialog *alert =
     Dialog()

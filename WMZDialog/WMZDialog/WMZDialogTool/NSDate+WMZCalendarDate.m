@@ -359,6 +359,26 @@ static int32_t gLunarHolDay[]=
     return daysInLastMonth.length;
 }
 
+#pragma mark -- 比较两个时间的大小
++ (int)compareOneDay:(NSDate *)oneDay withAnotherDay:(NSDate *)anotherDay
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"dd-MM-yyyy"];
+    NSString *oneDayStr = [dateFormatter stringFromDate:oneDay];
+    NSString *anotherDayStr = [dateFormatter stringFromDate:anotherDay];
+    NSDate *dateA = [dateFormatter dateFromString:oneDayStr];
+    NSDate *dateB = [dateFormatter dateFromString:anotherDayStr];
+    NSComparisonResult result = [dateA compare:dateB];
+    if (result == NSOrderedDescending) {
+        return 1;
+    }
+    else if (result == NSOrderedAscending){
+        return -1;
+    }
+    //NSLog(@"Both dates are the same");
+    return 0;
+}
+
 
 #pragma mark -- 获取date农历信息
 + (NSDictionary*)getChineseCalendarWithDate:(NSDate*)dateTemp Year:(NSInteger)myYear Month:(NSInteger)myMonth Day:(NSInteger)myDay{
