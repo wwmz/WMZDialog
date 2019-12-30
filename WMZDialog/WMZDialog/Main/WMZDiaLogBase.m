@@ -62,7 +62,9 @@
                     break;
                 }
             }
-            resultDic = arr[selectLastIndex];
+            if (arr.count) {
+                resultDic = arr[selectLastIndex];
+            }
             taNum++;
         }
         return  type?resultDic:resultDic.children;
