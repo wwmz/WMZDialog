@@ -37,23 +37,23 @@
              while (arr.count) {
                UIView *view = arr.lastObject;
                [arr removeLastObject];
-               if ([view isKindOfClass:[UITableViewCell class]]) {
+               if ([view isKindOfClass:[UITableViewCell class]]&&!otherView) {
                    otherView = (UITableViewCell*)view;
                }
-               if ([view isKindOfClass:[UICollectionViewCell class]]) {
+               if ([view isKindOfClass:[UICollectionViewCell class]]&&!otherView) {
                    otherView = (UICollectionViewCell*)view;
                }
-               if ([view isKindOfClass:[UICollectionReusableView class]]) {
+               if ([view isKindOfClass:[UICollectionReusableView class]]&&!otherView) {
                    otherView = (UICollectionReusableView*)view;
                }
-               if ([view isKindOfClass:[UITableView class]]) {
+               if ([view isKindOfClass:[UITableView class]]&&!ta) {
                   ta = (UITableView*)view;
                }
-               if ([view isKindOfClass:[UICollectionView class]]) {
+               if ([view isKindOfClass:[UICollectionView class]]&&!ta) {
                   ta = (UICollectionView*)view;
                }
-               if ([view isKindOfClass:[UIScrollView class]]) {
-                  ta = (UICollectionView*)view;
+               if ([view isKindOfClass:[UIScrollView class]]&&!ta) {
+                  ta = (UIScrollView*)view;
                }
                if (view.superview) {
                    [arr addObject:view.superview];
@@ -121,6 +121,9 @@
                      rectInTableView = self.tapRect;
                      rect = [self.popInScrollView convertRect:rectInTableView toView:[self.popInScrollView superview]];
                      
+                 }
+                 if (self.popInScrollView.superview.frame.origin.y!=0) {
+                     rect.origin.y+=self.popInScrollView.superview.frame.origin.y;
                  }
                  self.tapRect = rect;
             }
@@ -265,6 +268,7 @@
         headType = directionLeft;
         offset = self.mainView.frame.size.height*self.wPercentAngle;
     }
+    
     [self.mainView addArrowBorderAt:headType offset:offset rectCorner:self.wPopViewRectCorner width:15 height:10 cornerRadius:self.wMainRadius borderWidth:self.wPopViewBorderWidth borderColor:self.wPopViewBorderColor];
 
     return self.mainView;
