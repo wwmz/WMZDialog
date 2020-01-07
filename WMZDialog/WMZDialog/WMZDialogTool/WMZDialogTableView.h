@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WMZDialogTableView : UITableView
 @property(nonatomic,assign)BOOL  wOpenScrollClose;
+@property(nonatomic,assign)BOOL  wCardPresent;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -551,6 +551,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
             }
             if (self.wType == DialogTypeCardPresent) {
                 self.tableView.wOpenScrollClose = self.wOpenScrollClose;
+                self.tableView.wCardPresent = (self.wType == DialogTypeCardPresent);
             }
         }
 
