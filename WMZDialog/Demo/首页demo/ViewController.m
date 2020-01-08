@@ -25,7 +25,7 @@
     
     self.arr =@[@"普通弹窗",@"底部弹窗",@"自动消失弹窗",@"支付弹窗",@"分享弹窗",@"自适应编辑弹窗",@"选择弹窗",@"拾取器弹窗",@"倒计时弹窗",@"上下左右弹出列表",@"下载弹窗",@"下拉无限级菜单弹窗",@"广告弹窗",@"地区弹窗",@"日期时间弹窗",@"底部菜单弹窗",@"顶部菜单弹窗",@"加载框",@"购物车弹窗",@"ios13Present弹窗",@"日历弹窗",@"自定义弹窗"];
     
-    self.dataArr =@[@[@"普通弹窗",@"普通弹窗(+取消按钮+改变字体颜色)",@"普通弹窗(确定/取消按钮文字多的情况)"],@[@"底部单选弹窗",@"底部多选弹窗"],@[@"自动消失弹窗",@"自动消失弹窗带图片"],@[@"支付弹窗(密码4位)",@"支付弹窗(密码6位)"],@[@"分享弹窗(2行4列)",@"分享弹窗(3行2列,翻页,毛玻璃)"],@[@"自适应编辑弹窗"],@[@"选择弹窗",@"选择弹窗(多选)"],@[@"拾取器弹窗"],@[@"倒计时弹窗"],@[@"任意位置pop弹出列表"],@[@"下载弹窗"],@[@"下拉无限级菜单弹窗"],@[@"广告弹窗"],@[@"地区弹窗"],@[@"日期时间弹窗"],@[@"底部菜单弹窗"],@[@"顶部菜单弹窗"],@[@"加载框(等待)",@"加载框(正确)",@"加载框(错误)"],@[@"购物车弹窗"],@[@"ios13Present弹窗",@"自定义ios13Present弹窗1",@"自定义ios13Present弹窗2"],@[@"日历弹窗"],@[@"自定义弹窗(优酷)",@"自定义弹窗(哔哩哔哩)",@"自定义弹窗(饿了么升级)"]];
+    self.dataArr =@[@[@"普通弹窗",@"普通弹窗(+取消按钮+改变字体颜色)",@"普通弹窗(确定/取消按钮文字多的情况)"],@[@"底部单选弹窗",@"底部多选弹窗"],@[@"自动消失弹窗",@"自动消失弹窗带图片"],@[@"支付弹窗(密码4位)",@"支付弹窗(密码6位)"],@[@"分享弹窗(2行4列)",@"分享弹窗(3行2列,翻页,毛玻璃)"],@[@"单行编辑弹窗",@"自适应编辑弹窗"],@[@"选择弹窗",@"选择弹窗(多选)"],@[@"拾取器弹窗"],@[@"倒计时弹窗"],@[@"任意位置pop弹出列表"],@[@"下载弹窗"],@[@"下拉无限级菜单弹窗"],@[@"广告弹窗"],@[@"地区弹窗"],@[@"日期时间弹窗"],@[@"底部菜单弹窗"],@[@"顶部菜单弹窗"],@[@"加载框(等待)",@"加载框(正确)",@"加载框(错误)"],@[@"购物车弹窗"],@[@"ios13Present弹窗",@"自定义ios13Present弹窗1",@"自定义ios13Present弹窗2"],@[@"日历弹窗"],@[@"自定义弹窗(优酷)",@"自定义弹窗(哔哩哔哩)",@"自定义弹窗(饿了么升级)"]];
     
     
     self.tableView =  [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
@@ -402,21 +402,39 @@
             break;
         case DialogTypeWrite:
         {
-            Dialog().wTypeSet(type)
-            .wEventOKFinishSet(^(id anyID, id otherData) {
-                NSLog(@"%@",anyID);
-            })
-            //默认内容
-            .wWriteDefaultTextSet(@"默认内容")
-            //提示文本
-            .wPlaceholderSet(@"请输入内容")
-            //编辑框最大行数 大于行数则滚动
-            .wWirteTextMaxLineSet(7)
-            //编辑框可输入的文本最大文本长度
-            .wWirteTextMaxNumSet(200)
-            //键盘类型
-            .wWirteKeyBoardTypeSet(UIKeyboardTypeDefault)
-            .wStart();
+            if (indexPath.row == 0) {
+                Dialog().wTypeSet(type)
+                .wEventOKFinishSet(^(id anyID, id otherData) {
+                    NSLog(@"%@",anyID);
+                })
+                //默认内容
+                .wWriteDefaultTextSet(@"默认内容")
+                //提示文本
+                .wPlaceholderSet(@"请输入内容")
+                //编辑框最大行数 大于行数则滚动
+                .wWirteTextMaxLineSet(1)
+                //编辑框可输入的文本最大文本长度
+                .wWirteTextMaxNumSet(200)
+                //键盘类型
+                .wWirteKeyBoardTypeSet(UIKeyboardTypeDefault)
+                .wStart();
+            } else {
+                Dialog().wTypeSet(type)
+                .wEventOKFinishSet(^(id anyID, id otherData) {
+                    NSLog(@"%@",anyID);
+                })
+                //默认内容
+                .wWriteDefaultTextSet(@"默认内容")
+                //提示文本
+                .wPlaceholderSet(@"请输入内容")
+                //编辑框最大行数 大于行数则滚动
+                .wWirteTextMaxLineSet(7)
+                //编辑框可输入的文本最大文本长度
+                .wWirteTextMaxNumSet(200)
+                //键盘类型
+                .wWirteKeyBoardTypeSet(UIKeyboardTypeDefault)
+                .wStart();
+            }
         }
             break;
         case DialogTypeSelect:
