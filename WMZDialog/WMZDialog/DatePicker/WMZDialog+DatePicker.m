@@ -100,6 +100,7 @@
             if(data){
                 [self.wData addObject:data];
                 [self.selectArr addObject:str];
+                
             }
         }
     }
@@ -118,6 +119,9 @@
         
         if (index<arr.count) {
             [self.pickView selectRow:index+(self.wPickRepeat?(pickViewCount/2*arr.count):0) inComponent:i animated:YES];
+            if (i == 0&& (self.wMinDate||self.wMaxDate)) {
+                [self updateTime:@(index) component:@(1)];
+            }
         }
     }
     

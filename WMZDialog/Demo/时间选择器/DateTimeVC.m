@@ -52,7 +52,6 @@
         NSDateComponents *dateComponents1 = [[NSDateComponents alloc] init];
         [dateComponents1 setYear:-20];
         NSDate *minDate = [gregorian dateByAddingComponents:dateComponents1 toDate:[NSDate date] options:0];
-        
         Dialog()
         .wEventOKFinishSet(^(id anyID, id otherData) {
             NSLog(@"选中 %@ %@",anyID,otherData);
