@@ -17,6 +17,9 @@ static NSString *oneLineHeightKey = @"oneLineHeight"; //oneLineHeight的key
 @implementation WMZDialog (Write)
 - (UIView*)writeAction{
     
+    if (self.wWirteTextMaxLine<=0) {
+        self.wWirteTextMaxLine = 7;
+    }
     [self.mainView addSubview:self.titleLabel];
     self.titleLabel.frame = CGRectMake(self.wMainOffsetX, self.wTitle.length?self.wMainOffsetY:0, self.wWidth-self.wMainOffsetX*2, [WMZDialogTool heightForTextView:CGSizeMake(self.wWidth-self.wMainOffsetX*2, CGFLOAT_MAX) WithText:self.titleLabel.text WithFont:self.titleLabel.font.pointSize]);
     
@@ -32,6 +35,7 @@ static NSString *oneLineHeightKey = @"oneLineHeight"; //oneLineHeight的key
     
     self.oneLineHeight = @([self heightForTextView:CGSizeMake(self.writeView.contentSize.width , CGFLOAT_MAX) WithText:@"测试"]);
     
+    
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(3, 4, self.wWidth-self.wMainOffsetX*2-6, [WMZDialogTool heightForTextView:CGSizeMake(self.wWidth-self.wMainOffsetX*2, CGFLOAT_MAX) WithText:@"占位" WithFont:self.writeView.font.pointSize]+10)];
     label.enabled = NO;
     label.tag = 999;
@@ -45,8 +49,6 @@ static NSString *oneLineHeightKey = @"oneLineHeight"; //oneLineHeight的key
     [self.OKBtn removeTarget:self action:NSSelectorFromString(@"OKAction:") forControlEvents:UIControlEventTouchUpInside];
     [self.OKBtn addTarget:self action:@selector(writeOKAction:) forControlEvents:UIControlEventTouchUpInside];
     [self reSetMainViewFrame:CGRectMake(0, 0, self.wWidth, CGRectGetMaxY(view.frame))];
-    
-    
     
     return self.mainView;
 }
@@ -88,14 +90,17 @@ static NSString *oneLineHeightKey = @"oneLineHeight"; //oneLineHeight的key
     float fPadding = 10;
     CGSize constraint = CGSizeMake(textView.contentSize.width - fPadding, CGFLOAT_MAX);
     height = [WMZDialogTool heightForTextView:constraint WithText:mainText WithFont:self.writeView.font.pointSize]+22.0;
+    
     if (!mainText.length) {
         height =  [WMZDialogTool heightForTextView:CGSizeMake(self.wWidth-self.wMainOffsetX*2, CGFLOAT_MAX) WithText:@"占位" WithFont:self.writeView.font.pointSize]+22.0;
     }
-    line = height/self.oneLineHeight.floatValue;
+    
+    line = (height-22.0)/self.oneLineHeight.floatValue;
     //最大行数
     if (line>self.wWirteTextMaxLine) {
-        height = self.wWirteTextMaxLine*self.oneLineHeight.floatValue;
+        height = self.wWirteTextMaxLine*self.oneLineHeight.floatValue+22.0;
     }
+    
     frame.size.height = height;
     [UIView animateWithDuration:0.3 animations:^{
         textView.frame = frame;
