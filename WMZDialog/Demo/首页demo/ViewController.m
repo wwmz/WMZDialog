@@ -407,7 +407,7 @@
                 NSLog(@"%@",anyID);
             })
             //默认内容
-            .wWriteDefaultTextSet(@"默认内容\n默认内容\n默认内容\n默认内容\n")
+            .wWriteDefaultTextSet(@"默认内容")
             //提示文本
             .wPlaceholderSet(@"请输入内容")
             //编辑框最大行数 大于行数则滚动
