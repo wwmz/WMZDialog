@@ -72,6 +72,14 @@ static NSString *oneLineHeightKey = @"oneLineHeight"; //oneLineHeight的key
     //行数
     NSInteger line = 1;
     NSString *mainText = @"";
+    
+    if (self.wWirteTextMaxLine == 1) {
+        if ([text isEqualToString:@"\n"]) {
+            [textView resignFirstResponder];
+            return NO;
+        }
+    }
+    
     if ([text isEqual:@""]) {
         if (![textView.text isEqualToString:@""]) {
             mainText = [textView.text substringToIndex:[textView.text length] - 1];
@@ -113,6 +121,15 @@ static NSString *oneLineHeightKey = @"oneLineHeight"; //oneLineHeight的key
     return YES;
 }
 
+//点击Return键键盘退出
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    if (textView == self.writeView) {
+        if (self.wWirteTextMaxLine == 1) {
+            [self writeOKAction:nil];
+        }
+    }
+}
+
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wobjc-protocol-method-implementation"
 /*
@@ -150,6 +167,11 @@ static NSString *oneLineHeightKey = @"oneLineHeight"; //oneLineHeight的key
         writeView.layer.borderWidth = 1.0f;
         writeView.layer.cornerRadius = 5;
         writeView.keyboardType = self.wWirteKeyBoardType;
+        if (self.wWirteTextMaxLine == 1) {
+            writeView.returnKeyType = UIReturnKeyDone;
+        } else {
+            writeView.returnKeyType = UIReturnKeyDefault;
+        }
         writeView.layer.masksToBounds = YES;
         [writeView becomeFirstResponder];
         writeView.font = [UIFont systemFontOfSize:self.wMessageFont];
