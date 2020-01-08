@@ -406,14 +406,16 @@
             .wEventOKFinishSet(^(id anyID, id otherData) {
                 NSLog(@"%@",anyID);
             })
+            //默认内容
+            .wWriteDefaultTextSet(@"默认内容\n默认内容\n默认内容\n默认内容\n")
             //提示文本
-           .wPlaceholderSet(@"请输入内容")
+            .wPlaceholderSet(@"请输入内容")
             //编辑框最大行数 大于行数则滚动
-           .wWirteTextMaxLineSet(7)
+            .wWirteTextMaxLineSet(7)
             //编辑框可输入的文本最大文本长度
-           .wWirteTextMaxNumSet(200)
+            .wWirteTextMaxNumSet(200)
             //键盘类型
-           .wWirteKeyBoardTypeSet(UIKeyboardTypeDefault)
+            .wWirteKeyBoardTypeSet(UIKeyboardTypeDefault)
             .wStart();
         }
             break;

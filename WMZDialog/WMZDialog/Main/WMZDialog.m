@@ -90,6 +90,7 @@ WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                      wPercent
 WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                     wPercentOrginX)
 WMZDialogSetFuncImplementation(WMZDialog, CGSize,                          wImageSize)
 WMZDialogSetFuncImplementation(WMZDialog, NSInteger,                     wColumnCount)
+WMZDialogSetFuncImplementation(WMZDialog, NSString*,                wWriteDefaultText)
 WMZDialogSetFuncImplementation(WMZDialog, NSInteger,                        wRowCount)
 WMZDialogSetFuncImplementation(WMZDialog, NSString*,                       wImageName)
 WMZDialogSetFuncImplementation(WMZDialog, NSString*,           wReginerCollectionCell)

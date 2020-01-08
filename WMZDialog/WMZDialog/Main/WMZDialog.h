@@ -112,6 +112,8 @@ WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,              
 /*=========================================write=======================================================================*/
 //提示文本
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, NSString*,                wPlaceholder)
+//默认文本 
+WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, NSString*,                wWriteDefaultText)
 //编辑框最大行数 大于行数则滚动
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, NSInteger,                wWirteTextMaxLine)
 //编辑框可输入的文本最大文本长度
