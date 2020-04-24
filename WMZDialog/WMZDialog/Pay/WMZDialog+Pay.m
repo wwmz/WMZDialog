@@ -170,6 +170,8 @@ static NSString *selectPayViewKey = @"selectPayView"; //selectPayView的key
            [selectBtn setTitle:anyID forState:UIControlStateNormal];
         }
     })
+    .wMessageSet(@"")
+    .wTitleSet(@"")
     .wDataSet(self.wSonData)
     .wParentVCSet(self)
     .wTypeSet(DialogTypeSelect)

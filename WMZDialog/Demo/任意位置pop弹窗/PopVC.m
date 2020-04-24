@@ -7,7 +7,6 @@
 //
 
 #import "PopVC.h"
-#import "WMZDialog.h"
 @interface PopVC ()
 
 @end
@@ -19,28 +18,16 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-      btn.tag = 111;
-      [btn setTitleColor:DialogColor(0xF4606C) forState:UIControlStateNormal];
-      [btn setTitle:@"导航弹窗" forState:UIControlStateNormal];
-      [btn addTarget:self action:@selector(onBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-      [btn sizeToFit];
-      UIBarButtonItem *barItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
-      self.navigationItem.rightBarButtonItem = barItem;
+    btn.tag = 111;
+    [btn setTitleColor:DialogColor(0xF4606C) forState:UIControlStateNormal];
+    [btn setTitle:@"导航弹窗" forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(onBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    [btn sizeToFit];
+    UIBarButtonItem *barItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
+    self.navigationItem.rightBarButtonItem = barItem;
     
-    NSArray *arr = @[@"上",@"左",@"下",@"tableview",@"右",@"collectionView",@"scrollView",@"嵌套视图"];
-    for (int i = 0; i<arr.count; i++) {
-        CGFloat X = (i % 2) * ([UIScreen mainScreen].bounds.size.width/3 + 20);
-        CGFloat Y = (i / 2) * (40 + 20);
-        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        btn.tag = i;
-        btn.titleLabel.font = [UIFont systemFontOfSize:14];
-        btn.backgroundColor =  DialogColor(0xE6CEAC);
-        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [btn setTitle:arr[i] forState:UIControlStateNormal];
-        [btn addTarget:self action:@selector(action:) forControlEvents:UIControlEventTouchUpInside];
-        btn.frame = CGRectMake(X+50, Y+Device_Dialog_Height/3, [UIScreen mainScreen].bounds.size.width/3, 40);
-        [self.view addSubview:btn];
-    }
+
+    self.dataArr = @[@"上",@"左",@"下",@"tableview",@"右",@"collectionView",@"scrollView",@"嵌套视图"];
 }
 
 //导航栏点击

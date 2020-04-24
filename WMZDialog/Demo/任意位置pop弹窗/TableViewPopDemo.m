@@ -107,6 +107,7 @@
     .wShowAnimationSet(AninatonZoomIn)
     .wHideAnimationSet(AninatonZoomOut)
     .wTapViewSet(sender)
+    .wMainBackColorSet([UIColor redColor])
     .wDataSet(@[
        @{@"name":@"微信",@"image":@"wallet"},
        @{@"name":@"支付宝",@"image":@"aaa"},

@@ -15,22 +15,8 @@
 @implementation CalanderVC
 
 - (void)viewDidLoad {
-    self.view.backgroundColor = [UIColor whiteColor];
     [super viewDidLoad];
-    NSArray *arr = @[@"普通日历",@"纵向滚动",@"显示操作",@"隐藏农历",@"显示圆点",@"显示自定义颜色圆点",@"多选",@"显示在底部",@"自定义日历内容",@"最大值最小值"];
-    for (int i = 0; i<arr.count; i++) {
-        CGFloat X = (i % 2) * ([UIScreen mainScreen].bounds.size.width/3 + 20);
-        CGFloat Y = (i / 2) * (40 + 20);
-        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        btn.tag = i;
-        btn.titleLabel.font = [UIFont systemFontOfSize:14];
-        btn.backgroundColor =  DialogColor(0xE6CEAC);
-        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [btn setTitle:arr[i] forState:UIControlStateNormal];
-        [btn addTarget:self action:@selector(action:) forControlEvents:UIControlEventTouchUpInside];
-        btn.frame = CGRectMake(X+50, Y+Device_Dialog_Height/3, [UIScreen mainScreen].bounds.size.width/3, 40);
-        [self.view addSubview:btn];
-    }
+    self.dataArr = @[@"普通日历",@"纵向滚动",@"显示操作",@"隐藏农历",@"显示圆点",@"显示自定义颜色圆点",@"多选",@"显示在底部",@"自定义(设置不可选)",@"最大值最小值"];
 }
 
 - (void)action:(UIButton*)sender{
@@ -80,7 +66,7 @@
     }else if (sender.tag ==8) { //显示在底部
         alert
         //自定义宽度
-        .wWidthSet(Device_Dialog_Width*0.8)
+        .wWidthSet(320)
         //注册cell
         .wReginerCollectionCellSet(@"MyCalanderCell")
         //自定义cell
@@ -98,10 +84,15 @@
                 }
                 cell.dateLable.textColor = DialogColor(0x333333);
             }
+            int maxResult = [NSDate compareOneDay:model.wDate withAnotherDay:[NSDate date]];
+            if (maxResult == 1) {
+                cell.dateLable.textColor = [UIColor lightGrayColor];
+            }
             return cell;
         })
         //自定义点击方法
         .wCalanderCellClickSet(^(NSIndexPath *indexPath, UICollectionView *collection, id model) {})
+        .wMaxDateSet([NSDate date])
         .wStart();
         return;
     }

@@ -6,11 +6,10 @@
 //  Copyright © 2019 wmz. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
+#import "BaseVC.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PopVC : UIViewController
+@interface PopVC :BaseVC
 
 @end
 

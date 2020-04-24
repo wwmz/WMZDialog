@@ -276,15 +276,17 @@ static  const void *todayKey = @"todayKey";
 - (void)loadDataScrollView:(UIScrollView*)scrollView{
     if (scrollView != self.collectionView) return;
     int index = self.wDirectionVertical?(scrollView.contentOffset.y/scrollView.frame.size.height):(scrollView.contentOffset.x/scrollView.frame.size.width);
+    NSLog(@"%f %f",scrollView.contentOffset.x,scrollView.frame.size.width);
     if (index<0||index>self.dataArr.count-1) return;
     NSMutableArray *arr = self.dataArr[index];
     self.currentIndex = index;
+    
     for (CalanderModel *model in arr) {
         if (!model.wLastMonth&&!model.wNextMonth){
             self.currentYear = model.wYear;
             self.currentMonth = model.wMonth;
             self.currentDay = model.wDay;
-            break;
+//            break;
         }
     }
     //首个或者最后一个 预加载上个和下个
