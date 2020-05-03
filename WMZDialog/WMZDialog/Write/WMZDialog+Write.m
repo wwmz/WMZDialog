@@ -125,7 +125,8 @@ static NSString *oneLineHeightKey = @"oneLineHeight"; //oneLineHeight的key
 - (void)textViewDidEndEditing:(UITextView *)textView {
     if (textView == self.writeView) {
         if (self.wWirteTextMaxLine == 1) {
-            [self writeOKAction:nil];
+            [self.writeView resignFirstResponder];
+            [self closeView];
         }
     }
 }

@@ -26,7 +26,7 @@
 
 - (void)action:(UIButton*)sender{
     DialogWeakSelf(self)
-    WMZDialog *alert =  Dialog();
+    alert =  Dialog();
     id data = nil;
     if (sender.tag == 0) {
         data = [self getArr];
@@ -66,9 +66,10 @@
 - (void)selectMenu:(NSInteger)section withRow:(NSInteger)row{
     //刷新下一列显示的数据 用于从外部传入数据
     if (section == 1) {
+        
         [alert updateMenuChildrenDataWithSection:section+1 withUpdateChildren:NO withData:@[
                                                                                             @{
-                                                                                                @"name":[NSString stringWithFormat:@"%ld_%ld",section+1,row],
+                                                                                                @"name":[NSString stringWithFormat:@"好借好还就1111%ld_%ld",section+1,row],
                                                                                                 @"id":@"111",
                                                                                                 },
                                                                                             @{
