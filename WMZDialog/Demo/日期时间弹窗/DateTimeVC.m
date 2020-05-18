@@ -65,9 +65,10 @@
                           @(5):@"yyyy年MMdd日 HH时mm:ss",
                           @(6):@"yyyy-MM-dd HH:mm",
                           };
-    Dialog()
+     Dialog()
     .wEventOKFinishSet(^(id anyID, id otherData) {
         NSLog(@"选中 %@ %@",anyID,otherData);
+        Alert(@"选择");
     })
     //默认选中时间 不传默认是当前时间
     .wDefaultDateSet(sender.tag == 0?[NSDate dateWithTimeIntervalSinceNow:24*60*60]:[NSDate date])
@@ -77,6 +78,15 @@
     .wMessageColorSet(sender.tag == 5?[UIColor redColor]:[UIColor blackColor])
     .wMessageFontSet(sender.tag == 5?18:16)
     .wStart();
+    
+    //修改间隔线的颜色
+//    for(UIView *speartorView in alert.pickView.subviews)
+//    {
+//        if (speartorView.frame.size.height < 1)
+//        {
+//            speartorView.backgroundColor = [UIColor redColor];
+//        }
+//    }
 }
 
 

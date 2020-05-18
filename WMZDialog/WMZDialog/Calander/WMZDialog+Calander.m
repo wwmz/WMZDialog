@@ -240,7 +240,6 @@ static  const void *todayKey = @"todayKey";
         NSIndexSet *reloadSet = [NSIndexSet indexSetWithIndex:indexPath.section];
         [self.collectionView reloadSections:reloadSet];
     }];
-    NSLog(@"%ld %ld %ld %@",model.wYear,model.wMonth,model.wDay,model.wDetailChineseDate);
 }
 
 //检测model是否在最大最小范围内
@@ -276,7 +275,6 @@ static  const void *todayKey = @"todayKey";
 - (void)loadDataScrollView:(UIScrollView*)scrollView{
     if (scrollView != self.collectionView) return;
     int index = self.wDirectionVertical?(scrollView.contentOffset.y/scrollView.frame.size.height):(scrollView.contentOffset.x/scrollView.frame.size.width);
-    NSLog(@"%f %f",scrollView.contentOffset.x,scrollView.frame.size.width);
     if (index<0||index>self.dataArr.count-1) return;
     NSMutableArray *arr = self.dataArr[index];
     self.currentIndex = index;
@@ -308,10 +306,13 @@ static  const void *todayKey = @"todayKey";
 
 //确定
 - (void)calanderOKAction{
-    [self closeView];
-    if (self.wMultipleSelection) {
-        NSLog(@"%@",self.selectArr);
-    }
+    DialogWeakSelf(self)
+    [self closeView:^{
+        [weakObject action];
+    }];
+}
+
+- (void)action{
     if (self.wEventOKFinish) {
         if (self.wMultipleSelection) {
             if (self.selectArr.count) {

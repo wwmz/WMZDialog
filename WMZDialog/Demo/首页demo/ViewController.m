@@ -21,9 +21,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.arr =@[@"普通弹窗",@"底部弹窗",@"自动消失弹窗",@"支付弹窗",@"分享弹窗",@"自适应编辑弹窗",@"选择弹窗",@"拾取器弹窗",@"倒计时弹窗",@"上下左右弹出列表",@"下载弹窗",@"下拉无限级菜单弹窗",@"广告弹窗",@"地区弹窗",@"日期时间弹窗",@"底部菜单弹窗",@"顶部菜单弹窗",@"加载框",@"购物车弹窗",@"ios13Present弹窗",@"日历弹窗",@"自定义弹窗"];
+    self.arr =@[@"普通弹窗",@"底部弹窗",@"自动消失弹窗",@"支付弹窗",@"分享弹窗",@"自适应编辑弹窗",@"选择弹窗",@"拾取器弹窗",@"倒计时弹窗",@"上下左右弹出列表",@"下载弹窗",@"下拉无限级菜单弹窗",@"广告弹窗",@"地区弹窗",@"日期时间弹窗",@"底部菜单弹窗",@"顶部菜单弹窗",@"加载框",@"ios13Present弹窗",@"日历弹窗",@"自定义弹窗"];
 
-    self.vcArr = @[@"NormalVC",@"SheetVC",@"AutoDisappealVC",@"PayVC",@"ShareVC",@"WriteVC",@"SelectVC",@"PickVC",@"TimeVC",@"PopVC",@"DownVC",@"MenusSelectVC",@"AdvertisementVC",@"LocationVC",@"DateTimeVC",@"TabbarMenuVC",@"NaviMenuVC",@"LoadingVC",@"BuyCarVC",@"PresentVC",@"CalanderVC",@"CustomVC"];
+    self.vcArr = @[@"NormalVC",@"SheetVC",@"AutoDisappealVC",@"PayVC",@"ShareVC",@"WriteVC",@"SelectVC",@"PickVC",@"TimeVC",@"PopVC",@"DownVC",@"MenusSelectVC",@"AdvertisementVC",@"LocationVC",@"DateTimeVC",@"TabbarMenuVC",@"NaviMenuVC",@"LoadingVC",@"PresentVC",@"CalanderVC",@"CustomVC"];
 
     self.tableView =  [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
@@ -94,8 +94,6 @@
     .wDisappelSecondSet(1.5f)
     //按钮的高度
     .wMainBtnHeightSet(Dialog_GetHNum(60))
-    //当前控制器
-    .wParentVCSet(self)
     //确定按钮文本
     .wOKTitleSet(@"确定")
     //取消按钮文本

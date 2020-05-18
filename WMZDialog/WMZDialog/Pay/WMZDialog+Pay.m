@@ -7,11 +7,9 @@
 //
 
 #import "WMZDialog+Pay.h"
-static NSString *payFieldKey = @"payField"; //payField的key
 static NSString *passViewKey = @"passView"; //passView的key
 static NSString *selectPayViewKey = @"selectPayView"; //selectPayView的key
 @interface WMZDialog ()<UITextFieldDelegate>
-@property (nonatomic, retain) UITextField *payField;
 @property (nonatomic, retain) UIView *passView;
 @property (nonatomic, retain) UIView *selectPayView;
 @end
@@ -93,7 +91,6 @@ static NSString *selectPayViewKey = @"selectPayView"; //selectPayView的key
     }
     
     [self reSetMainViewFrame:CGRectMake(0, 0, self.wWidth, CGRectGetMaxY(self.passView.frame)+self.wMainOffsetY)];
-    
     return self.mainView;
 }
 
@@ -104,7 +101,6 @@ static NSString *selectPayViewKey = @"selectPayView"; //selectPayView的key
     self.selectPayView = [UIView new];
     self.selectPayView.frame = CGRectMake(self.wMainOffsetX, maxY , self.wWidth - self.wMainOffsetX*2, height);
     CGFloat maxWidth = self.selectPayView.frame.size.width;
-    
     UILabel *la = [UILabel new];
     la.tag = 111;
     la.font = [UIFont systemFontOfSize:self.wTitleFont-2];
@@ -141,7 +137,7 @@ static NSString *selectPayViewKey = @"selectPayView"; //selectPayView的key
 }
 
 -(void)textField1TextChange:(UITextField *)textField{
-    
+    DialogWeakSelf(self)
     for (int i = 0; i<[self.passView subviews].count; i++) {
         UILabel *la = [self.passView subviews][i];
         la.text = @"";
@@ -152,15 +148,17 @@ static NSString *selectPayViewKey = @"selectPayView"; //selectPayView的key
     }
     if (textField.text.length==self.wPayNum) {
         [self.payField resignFirstResponder];
-        [self closeView];
-        if (self.wEventFinish) {
-            self.wEventFinish(textField.text,nil,self.wType);
-        }
+        [self closeView:^{
+            if (weakObject.wEventFinish) {
+                weakObject.wEventFinish(textField.text,nil,weakObject.wType);
+            }
+        }];
     }
 }
 
 - (void)selectAction:(UIButton*)sender{
     if (!self.wCanSelectPay) return;
+    [self.payField resignFirstResponder];
     DialogWeakSelf(self)
     Dialog()
     .wEventFinishSet(^(id anyID,NSIndexPath *path,DialogType type) {
@@ -169,11 +167,11 @@ static NSString *selectPayViewKey = @"selectPayView"; //selectPayView的key
            UIButton *selectBtn = [strongObject.selectPayView viewWithTag:222];
            [selectBtn setTitle:anyID forState:UIControlStateNormal];
         }
+        [weakObject.payField becomeFirstResponder];
     })
     .wMessageSet(@"")
     .wTitleSet(@"")
     .wDataSet(self.wSonData)
-    .wParentVCSet(self)
     .wTypeSet(DialogTypeSelect)
     .wStart();
 }
@@ -198,15 +196,5 @@ static NSString *selectPayViewKey = @"selectPayView"; //selectPayView的key
 - (UIView *)selectPayView{
     return objc_getAssociatedObject(self, &selectPayViewKey);
 }
-
-
-- (void)setPayField:(UITextField *)payField{
-     objc_setAssociatedObject(self, &passViewKey, payField, OBJC_ASSOCIATION_RETAIN);
-}
-
-- (UITextField *)payField{
-     return objc_getAssociatedObject(self, &passViewKey);
-}
-
 
 @end

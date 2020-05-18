@@ -375,7 +375,6 @@ static int32_t gLunarHolDay[]=
     else if (result == NSOrderedAscending){
         return -1;
     }
-    //NSLog(@"Both dates are the same");
     return 0;
 }
 

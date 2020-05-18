@@ -35,14 +35,12 @@
 }
 
 - (void)mySelectAction:(UIButton*)btn{
-    if (!self.selectArr.count) {
-        Alert(@"请选择至少一个");
-        return;
-    }
-    if (self.wEventOKFinish) {
-        self.wEventOKFinish(self.selectArr, self.pathArr);
-    }
-    [self closeView];
+    DialogWeakSelf(self)
+    [self closeView:^{
+        if (weakObject.wEventOKFinish) {
+            weakObject.wEventOKFinish(weakObject.selectArr, weakObject.pathArr);
+        }
+    }];
 }
 
 @end

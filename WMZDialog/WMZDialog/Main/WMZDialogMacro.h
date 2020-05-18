@@ -95,7 +95,6 @@ typedef enum : NSUInteger{
     DialogTypeTabbarMenu,           //闲鱼 微博+号底部弹窗
     DialogTypeNaviMenu,             //QQ顶部弹窗
     DialogTypeLoading,              //加载框
-    DialogTypeBuyCar ,              //购物车弹窗  可自行导入WMZTags
     DialogTypeCardPresent ,         //ios13 present效果
     DialogTypeCalander,             //日历弹窗
     DialogTypeMyView,               //自定义弹窗
@@ -129,10 +128,13 @@ typedef enum : NSUInteger{
  */
 typedef enum : NSUInteger{
     AninatonShowNone = 0 ,         //无
-//    AninatonShaker ,             //抖动
     AninatonCurverOn,              //淡入
     AninatonZoomIn,                //由小变大
     AninatonCounterclockwise,      //逆时针旋转
+    AninatonShowTop,               //由下往上
+    AninatonShowBottom,            //由上往下
+    AninatonShowLeft,              //由右往左
+    AninatonShowRight,             //由左往右
     AninationCombineOne,           //组合动画缩小变大
     AninationCombineTwo,           //组合动画旋转
     
@@ -145,9 +147,11 @@ typedef enum : NSUInteger{
     AninatonHideNone = 0 ,         //无
     AninatonCurverOff,             //淡出
     AninatonZoomOut,               //由大变小
-    AninatonHideVerticalMove,      //垂直移动
-    AninatonHideLandscapeMove,     //横向移动
     AninatonClockwise,             //顺时针旋转
+    AninatonHideTop,               //由往上
+    AninatonHideBottom,            //由往下
+    AninatonHideLeft,              //往左
+    AninatonHideRight,             //往右
     AninationHideCombineOne        //组合动画旋转变小
 }DialogHideAnination;
 

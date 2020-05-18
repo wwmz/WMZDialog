@@ -25,7 +25,13 @@
 
 //重设确定的方法
 - (void)PickOKAction:(UIButton*)btn{
-    [self closeView];
+    DialogWeakSelf(self)
+    [self closeView:^{
+        [weakObject action];
+    }];
+}
+
+- (void)action{
     if (self.wEventOKFinish) {
         if (self.tree) {
             NSArray *arr = [self getTreeSelectDataArr:YES];
@@ -45,7 +51,6 @@
         }
     }
 }
-
 
 
 @end

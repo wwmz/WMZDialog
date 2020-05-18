@@ -7,24 +7,13 @@
 //
 
 #import "WMZDialogAnimation.h"
-
+@interface WMZDialogAnimation()<CAAnimationDelegate>
+@end
 @implementation WMZDialogAnimation
 
-//抖动
-void shakerAnimation (UIView *view ,NSTimeInterval duration,float height){
-    
-    CAKeyframeAnimation * animation = [CAKeyframeAnimation animationWithKeyPath:@"transform.translation.y"];
-    CGFloat currentTx = view.transform.ty;
-    animation.duration = duration;
-    animation.values = @[@(currentTx), @(currentTx + height), @(currentTx-height/3*2), @(currentTx + height/3*2), @(currentTx -height/3), @(currentTx + height/3), @(currentTx)];
-    animation.keyTimes = @[ @(0), @(0.225), @(0.425), @(0.6), @(0.75), @(0.875), @(1) ];
-    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    animation.removedOnCompletion = NO;
-    [view.layer addAnimation:animation forKey:@"kViewShakerAnimationKey"];
-}
 
 //淡入
-void curverOnAnimation (UIView *view ,NSTimeInterval duration )
+-(void)curverOnAnimationWithView:(UIView*)view duration:(NSTimeInterval)duration
 {
     CAGradientLayer *contentLayer = (CAGradientLayer *)view.layer;
     CABasicAnimation *showViewAnn = [CABasicAnimation animationWithKeyPath:@"opacity"];
@@ -34,12 +23,13 @@ void curverOnAnimation (UIView *view ,NSTimeInterval duration )
     showViewAnn.fillMode = kCAFillModeForwards;
     showViewAnn.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     showViewAnn.removedOnCompletion = NO;
+    showViewAnn.delegate = self;
     [contentLayer addAnimation:showViewAnn forKey:@"myShow"];
 }
 
 
 //淡出
-void curverOffAnimation (UIView *view ,NSTimeInterval duration)
+-(void)curverOffAnimationWithView:(UIView*)view duration:(NSTimeInterval)duration
 {
     CAGradientLayer *contentLayer = (CAGradientLayer *)view.layer;
     CABasicAnimation *showViewAnn = [CABasicAnimation animationWithKeyPath:@"opacity"];
@@ -49,18 +39,19 @@ void curverOffAnimation (UIView *view ,NSTimeInterval duration)
     showViewAnn.fillMode = kCAFillModeForwards;
     showViewAnn.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     showViewAnn.removedOnCompletion = NO;
+    showViewAnn.delegate = self;
     [contentLayer addAnimation:showViewAnn forKey:@"myShow"];
 }
 
 
 //由小变大
-void zoomInAnimation (UIView *view ,NSTimeInterval duration){
+-(void)zoomInAnimationWithView:(UIView*)view duration:(NSTimeInterval)duration{
     CAGradientLayer *contentLayer = (CAGradientLayer *)view.layer;
     CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform"];
     scaleAnimation.fromValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(0, 0, 1)];
     scaleAnimation.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(1, 1, 1)];
-    
     scaleAnimation.duration = duration;
+    scaleAnimation.delegate = self;
     scaleAnimation.cumulative = NO;
     scaleAnimation.repeatCount = 1;
     scaleAnimation.removedOnCompletion = NO;
@@ -71,7 +62,7 @@ void zoomInAnimation (UIView *view ,NSTimeInterval duration){
 }
 
 //由大变小
-void zoomOutAnimation (UIView *view ,NSTimeInterval duration)
+-(void)zoomOutAnimationWithView:(UIView*)view duration:(NSTimeInterval)duration
 {
     CAGradientLayer *contentLayer = (CAGradientLayer *)view.layer;
     CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform"];
@@ -81,13 +72,14 @@ void zoomOutAnimation (UIView *view ,NSTimeInterval duration)
     scaleAnimation.repeatCount = 1;
     scaleAnimation.removedOnCompletion = NO;
     scaleAnimation.fillMode = kCAFillModeForwards;
+    scaleAnimation.delegate = self;
     [scaleAnimation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault]];
     [contentLayer addAnimation: scaleAnimation forKey:@"myScale"];
 }
 
 
 //逆时针
-void rotationClockwiseAnimation(UIView* view,NSTimeInterval duration){
+-(void)rotationClockwiseAnimationWithView:(UIView*)view duration:(NSTimeInterval)duration{
     CAGradientLayer *contentLayer = (CAGradientLayer *)view.layer;
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
     animation.fromValue = [NSNumber numberWithFloat:M_PI];
@@ -104,13 +96,13 @@ void rotationClockwiseAnimation(UIView* view,NSTimeInterval duration){
     group.removedOnCompletion = NO;
     [group setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault]];
     [group setAnimations:@[animation,showViewAnn]];
-    
+    group.delegate = self;
     [contentLayer addAnimation:group forKey:@"groupAnimation"];
 }
 
 
 //顺时针
-void rotationCounterclockwiseAnimation(UIView* view,NSTimeInterval duration){
+-(void)rotationCounterclockwiseAnimationWithView:(UIView*)view duration:(NSTimeInterval)duration{
     CAGradientLayer *contentLayer = (CAGradientLayer *)view.layer;
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
     animation.duration = duration; // 持续时间
@@ -134,43 +126,14 @@ void rotationCounterclockwiseAnimation(UIView* view,NSTimeInterval duration){
     group.repeatCount = 1;
     group.fillMode = kCAFillModeForwards;
     [group setAnimations:@[animation,scaleAnimation]];
-    
+    group.delegate = self;
     [contentLayer addAnimation:group forKey:@"groupAnimation"];
 }
 
-//横向移动
-void landscapeMoveAnimation(UIView *view ,NSTimeInterval duration){
-    CAGradientLayer *contentLayer = (CAGradientLayer *)view.layer;
-    CABasicAnimation *moveAnimation = [CABasicAnimation animationWithKeyPath:@"position.x"];
-    moveAnimation.fromValue = @(view.center.x);
-    moveAnimation.toValue =  @(view.center.x+ [UIScreen mainScreen].bounds.size.width);
-    moveAnimation.duration = duration;
-    moveAnimation.cumulative = NO;
-    moveAnimation.repeatCount = 1;
-    moveAnimation.removedOnCompletion = NO;
-    moveAnimation.fillMode = kCAFillModeForwards;
-    [moveAnimation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault]];
-    [contentLayer addAnimation: moveAnimation forKey:@"moveAnimation"];
-}
 
-//垂直移动
-void verticalMoveAnimation (UIView *view ,NSTimeInterval duration){
-    CAGradientLayer *contentLayer = (CAGradientLayer *)view.layer;
-    CABasicAnimation *moveAnimation = [CABasicAnimation animationWithKeyPath:@"position.y"];
-    moveAnimation.fromValue = @(view.center.y);
-    moveAnimation.toValue =  @(view.center.y+ [UIScreen mainScreen].bounds.size.height);
-    moveAnimation.duration = duration;
-    moveAnimation.cumulative = NO;
-    moveAnimation.repeatCount = 1;
-    moveAnimation.removedOnCompletion = NO;
-    moveAnimation.fillMode = kCAFillModeForwards;
-    [moveAnimation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault]];
-    [contentLayer addAnimation: moveAnimation forKey:@"moveAnimation"];
-    
-}
 
 //出现组合动画 样式1
-void combineShowOneAnimation(UIView* view,NSTimeInterval duration){
+-(void)combineShowOneAnimationWithView:(UIView*)view duration:(NSTimeInterval)duration{
     // 动画组合
     CABasicAnimation *positionAnima = [CABasicAnimation animationWithKeyPath:@"position.y"];
     positionAnima.duration = duration/2;
@@ -200,10 +163,17 @@ void combineShowOneAnimation(UIView* view,NSTimeInterval duration){
     [view.layer addAnimation:animation forKey:@"scale-layer"];
     
     
+    CAAnimationGroup *group = [CAAnimationGroup animation];
+    group.animations = @[animation,positionAnima];
+    group.delegate = self;
+    [view.layer addAnimation:group forKey:nil];
+    
+    
+    
 }
 
 //出现组合动画 样式2
-void combineShowTwoAnimation(UIView* view,NSTimeInterval duration){
+-(void)combineShowTwoAnimationWithView:(UIView*)view duration:(NSTimeInterval)duration{
     // 1.创建旋转动画对象
     CABasicAnimation *rotate = [CABasicAnimation animation];
     rotate.keyPath = @"transform.rotation";
@@ -226,13 +196,13 @@ void combineShowTwoAnimation(UIView* view,NSTimeInterval duration){
     group.duration = duration;
     group.removedOnCompletion = NO;
     group.fillMode = kCAFillModeForwards;
-    
+    group.delegate = self;
     [view.layer addAnimation:group forKey:nil];
     
 }
 
 //消失组合动画 样式1
-void combineHideOneAnimation(UIView* view,NSTimeInterval duration){
+-(void)combineHideOneAnimationWithView:(UIView*)view duration:(NSTimeInterval)duration{
     CABasicAnimation *rotate = [CABasicAnimation animation];
     rotate.keyPath = @"transform.rotation";
     rotate.toValue = @(M_PI);
@@ -250,7 +220,7 @@ void combineHideOneAnimation(UIView* view,NSTimeInterval duration){
     group.duration = duration;
     group.removedOnCompletion = NO;
     group.fillMode = kCAFillModeForwards;
-    
+    group.delegate = self;
     [view.layer addAnimation:group forKey:nil];
 }
 
@@ -464,5 +434,57 @@ void loadingAnimation(UIView* view,NSTimeInterval duration,UIColor *color,CGFloa
     anima3.repeatCount = MAXFLOAT;
     [view.layer addAnimation:anima3 forKey:@"rotaionAniamtion"];
 }
+//垂直移动出现
+-(void) verticalMoveShowAnimationWithView:(UIView*)view duration:(NSTimeInterval)duration top:(BOOL)top{
+    CGRect rect = view.frame;
+    view.frame = CGRectMake(rect.origin.x, top?[UIScreen mainScreen].bounds.size.height:(-rect.size.height) , rect.size.width, rect.size.height);
+    [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+        view.frame = rect;
+    } completion:^(BOOL finished) {
+         if (self.block) {
+            self.block();
+        }
+    }];
+}
+//垂直移移动消失
+-(void) verticalMoveHideAnimationWithView:(UIView*)view duration:(NSTimeInterval)duration top:(BOOL)top{
+    CGRect rect = view.frame;
+    [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+        view.frame = CGRectMake(rect.origin.x, top?[UIScreen mainScreen].bounds.size.height:(-rect.size.height) , rect.size.width, rect.size.height);
+    } completion:^(BOOL finished) {
+        if (self.block) {
+            self.block();
+        }
+    }];
+}
+//横向移动
+-(void)landscapeMoveShowAnimationWithView:(UIView*)view duration:(NSTimeInterval)duration right:(BOOL)right{
+    CGRect rect = view.frame;
+    view.frame = CGRectMake( right?[UIScreen mainScreen].bounds.size.width:-(rect.size.width),rect.origin.y , rect.size.width, rect.size.height);
+    [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+        view.frame = rect;
+    } completion:^(BOOL finished) {
+         if (self.block) {
+            self.block();
+        }
+    }];
+}
+//横向移动消失
+-(void) landscapeMoveHideAnimationWithView:(UIView*)view duration:(NSTimeInterval)duration right:(BOOL)right{
+    CGRect rect = view.frame;
+    [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+        view.frame = CGRectMake(right?[UIScreen mainScreen].bounds.size.width:-(rect.size.width), rect.origin.y , rect.size.width, rect.size.height);
+    } completion:^(BOOL finished) {
+        if (self.block) {
+            self.block();
+        }
+    }];
+}
 
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
+{
+    if (self.block) {
+        self.block();
+    }
+}
 @end

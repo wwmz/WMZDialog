@@ -343,34 +343,36 @@
  *确定事件
  */
 - (void)PickDateOKAction:(UIButton*)btn{
-    [self closeView];
-    if (self.wEventOKFinish) {
-       NSMutableArray *mArr = [NSMutableArray new];
-       NSMutableArray *orginArr = [NSMutableArray new];
-       NSMutableString *dateStr = [NSMutableString stringWithString:self.wDateTimeType];
-       for (int i = 0; i<[self.wData count]; i++) {
-       NSArray *arr = self.wData[i];
-       NSString *str = arr [self.wPickRepeat?[self.pickView selectedRowInComponent:i]%arr.count:[self.pickView selectedRowInComponent:i]];
-       [orginArr addObject:str];
-       NSCharacterSet* nonDigits =[[NSCharacterSet decimalDigitCharacterSet] invertedSet];
-       NSString * remainSecond = [str stringByTrimmingCharactersInSet:nonDigits];
-       [mArr addObject:remainSecond];
-       }
-        
-       NSMutableArray *containArr = [NSMutableArray new];
-        for (NSString *str in DateCongigMarr) {
-            if ([self.wDateTimeType rangeOfString:str].location!=NSNotFound) {
-                [containArr addObject:str];
+    DialogWeakSelf(self)
+    [self closeView:^{
+        if (weakObject.wEventOKFinish) {
+           NSMutableArray *mArr = [NSMutableArray new];
+           NSMutableArray *orginArr = [NSMutableArray new];
+           NSMutableString *dateStr = [NSMutableString stringWithString:weakObject.wDateTimeType];
+           for (int i = 0; i<[weakObject.wData count]; i++) {
+           NSArray *arr = weakObject.wData[i];
+           NSString *str = arr [weakObject.wPickRepeat?[weakObject.pickView selectedRowInComponent:i]%arr.count:[weakObject.pickView selectedRowInComponent:i]];
+           [orginArr addObject:str];
+           NSCharacterSet* nonDigits =[[NSCharacterSet decimalDigitCharacterSet] invertedSet];
+           NSString * remainSecond = [str stringByTrimmingCharactersInSet:nonDigits];
+           [mArr addObject:remainSecond];
+           }
+            
+           NSMutableArray *containArr = [NSMutableArray new];
+            for (NSString *str in DateCongigMarr) {
+                if ([weakObject.wDateTimeType rangeOfString:str].location!=NSNotFound) {
+                    [containArr addObject:str];
+                }
             }
+            for (int i = 0; i<containArr.count; i++) {
+                NSString *containStr = containArr[i];
+                NSString *value = mArr[i];
+                [dateStr replaceCharactersInRange:[dateStr rangeOfString:containStr] withString:value];
+            }
+         
+           weakObject.wEventOKFinish(mArr, dateStr);
         }
-        for (int i = 0; i<containArr.count; i++) {
-            NSString *containStr = containArr[i];
-            NSString *value = mArr[i];
-            [dateStr replaceCharactersInRange:[dateStr rangeOfString:containStr] withString:value];
-        }
-     
-       self.wEventOKFinish(mArr, dateStr);
-    }
+    }];
 }
 
 @end

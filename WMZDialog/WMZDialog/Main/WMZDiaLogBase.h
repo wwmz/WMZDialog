@@ -34,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 
-@interface WMZDiaLogBase : UIViewController
+@interface WMZDiaLogBase : UIView
 /*
  *标题
  */
@@ -139,7 +139,10 @@ NS_ASSUME_NONNULL_BEGIN
  *bundle
  */
 @property (nonatomic, strong)NSBundle *dialogBundle;
-
+/*
+*最大时间
+*/
+@property(nonatomic,strong)UITextField *payField;
 /*
  *初始point
  */
@@ -166,7 +169,7 @@ NS_ASSUME_NONNULL_BEGIN
  *关闭
  */
 - (void)closeView;
-
+- (void)closeView:(nullable animalBlock)block;
 /*
  *添加底部
  */
@@ -222,13 +225,13 @@ NS_ASSUME_NONNULL_BEGIN
  * 显示动画处理
  *
  */
-- (void)dealAnamtionShowWithView:(UIView*)view withType:(DialogShowAnination)type withTime:(NSTimeInterval)time;
+- (void)dealAnamtionShowWithView:(UIView*)view withType:(DialogShowAnination)type withTime:(NSTimeInterval)time block:(animalBlock)block;
 
 /*
  * 隐藏动画处理
  *
  */
-- (void)dealAnamtionHideWithView:(UIView*)view withType:(DialogHideAnination)type withTime:(NSTimeInterval)time;
+- (void)dealAnamtionHideWithView:(UIView*)view withType:(DialogHideAnination)type withTime:(NSTimeInterval)time block:(animalBlock)block;
 
 /*
 * 回到今天  日历外部调用方法

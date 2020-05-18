@@ -40,8 +40,6 @@
                     ta.estimatedRowHeight = 100;
                     ta.estimatedSectionFooterHeight = 0.01;
                     ta.estimatedSectionHeaderHeight = 0.01;
-                }else{
-                    self.automaticallyAdjustsScrollViewInsets = NO;
                 }
                 temp = ta;
                 [self.mainView addSubview:ta];
@@ -49,7 +47,7 @@
             }
         
             [self reSetMainViewFrame:CGRectMake(0,self.wTapView?CGRectGetMaxY(self.wTapView.frame):0,self.wWidth, CGRectGetMaxY(temp.frame))];
-            self.mainView.center = CGPointMake(self.view.center.x, self.mainView.center.y);
+            self.mainView.center = CGPointMake(self.center.x, self.center.y);
     }else{
         self.wPickRepeat = NO;
 
@@ -97,19 +95,21 @@
 
 //重设确定的方法
 - (void)locationPickOKAction:(UIButton*)btn{
-    [self closeView];
-    if (self.wEventOKFinish) {
-        NSArray *arr = [self getTreeSelectDataArr:(self.wChainType == ChainTableView)?NO:YES];
-        NSMutableString *string = [NSMutableString stringWithString:@""];
-        for (WMZTree *tree in arr) {
-            if (!string.length) {
-                [string appendString:tree.name];
-            }else{
-                [string appendFormat:@"%@", [NSString stringWithFormat:@"%@%@",self.wSeparator,tree.name]];
+    DialogWeakSelf(self)
+    [weakObject closeView:^{
+        if (weakObject.wEventOKFinish) {
+            NSArray *arr = [weakObject getTreeSelectDataArr:(weakObject.wChainType == ChainTableView)?NO:YES];
+            NSMutableString *string = [NSMutableString stringWithString:@""];
+            for (WMZTree *tree in arr) {
+                if (!string.length) {
+                    [string appendString:tree.name];
+                }else{
+                    [string appendFormat:@"%@", [NSString stringWithFormat:@"%@%@",weakObject.wSeparator,tree.name]];
+                }
             }
+           weakObject.wEventOKFinish(arr, string);
         }
-       self.wEventOKFinish(arr, string);
-    }
+    }];
 }
 
 @end

@@ -83,7 +83,7 @@
                     alpha = 0;
                 }
                 if (center.y>=self.normalPoint.y+self.mainView.frame.size.height/2) {
-                    self.wHideAnimation = AninatonHideVerticalMove;
+                    self.wHideAnimation = AninatonHideTop;
                     [self closeView]; return;
                 }
             }
@@ -95,7 +95,7 @@
                     center = self.normalPoint;
                     }
                 if (center.x>=self.normalPoint.x+self.mainView.frame.size.width/2) {
-                     self.wHideAnimation = AninatonHideLandscapeMove;
+                     self.wHideAnimation = AninatonHideRight;
                     [self closeView]; return;
                 }
             }
@@ -136,10 +136,11 @@
         self.mainView.center = center;
         self.shadowView.alpha = self.wShadowAlpha - alpha;
         if (self.wScaleParentVC) {
-            if (self.wParentVC.navigationController) {
-                self.wParentVC.navigationController.view.transform = CGAffineTransformMakeScale(0.9+scale, 0.9+scale);
+            UIViewController *VC = [WMZDialogTool getCurrentVC];
+            if (VC.navigationController) {
+                VC.navigationController.view.transform = CGAffineTransformMakeScale(0.9+scale, 0.9+scale);
             }else{
-                self.wParentVC.view.transform = CGAffineTransformMakeScale(0.9+scale, 0.9+scale);
+                VC.view.transform = CGAffineTransformMakeScale(0.9+scale, 0.9+scale);
             }
         }
     }];

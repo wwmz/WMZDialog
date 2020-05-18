@@ -15,26 +15,35 @@ typedef void (^animalBlock)(void);
 NS_ASSUME_NONNULL_BEGIN
 
 @interface WMZDialogAnimation : NSObject
-//抖动
-void shakerAnimation (UIView *view ,NSTimeInterval duration,float height);
+@property(nonatomic,copy)animalBlock block;
 //淡入
-void curverOnAnimation (UIView *view ,NSTimeInterval duration);
+-(void)curverOnAnimationWithView:(UIView*)view duration:(NSTimeInterval)duration;
 //淡出
-void curverOffAnimation (UIView *view ,NSTimeInterval duration);
+-(void)curverOffAnimationWithView:(UIView*)view duration:(NSTimeInterval)duration;
 //由小变大
-void zoomInAnimation (UIView *view ,NSTimeInterval duration);
+-(void)zoomInAnimationWithView:(UIView*)view duration:(NSTimeInterval)duration;
 //由大变小
-void zoomOutAnimation (UIView *view ,NSTimeInterval duration);
+-(void)zoomOutAnimationWithView:(UIView*)view duration:(NSTimeInterval)duration;
 //逆时针
-void rotationClockwiseAnimation(UIView* view,NSTimeInterval duration);
+-(void)rotationClockwiseAnimationWithView:(UIView*)view duration:(NSTimeInterval)duration;
 //顺时针
-void rotationCounterclockwiseAnimation(UIView* view,NSTimeInterval duration);
+-(void)rotationCounterclockwiseAnimationWithView:(UIView*)view duration:(NSTimeInterval)duration;
 //出现组合动画 样式1
-void combineShowOneAnimation(UIView* view,NSTimeInterval duration);
+-(void)combineShowOneAnimationWithView:(UIView*)view duration:(NSTimeInterval)duration;
 //出现组合动画 样式2
-void combineShowTwoAnimation(UIView* view,NSTimeInterval duration);
+-(void)combineShowTwoAnimationWithView:(UIView*)view duration:(NSTimeInterval)duration;
 //消失组合动画 样式1
-void combineHideOneAnimation(UIView* view,NSTimeInterval duration);
+-(void)combineHideOneAnimationWithView:(UIView*)view duration:(NSTimeInterval)duration;
+//垂直移动出现
+-(void)verticalMoveShowAnimationWithView:(UIView*)view duration:(NSTimeInterval)duration top:(BOOL)top;
+//垂直移移动消失
+-(void)verticalMoveHideAnimationWithView:(UIView*)view duration:(NSTimeInterval)duration top:(BOOL)top;
+//横向移动
+-(void)landscapeMoveShowAnimationWithView:(UIView*)view duration:(NSTimeInterval)duration right:(BOOL)right;
+//横向移动消失
+-(void)landscapeMoveHideAnimationWithView:(UIView*)view duration:(NSTimeInterval)duration right:(BOOL)right;
+
+
 /*
  *阻尼动画 出现的弹簧运动
  @prarm subView 带有子视图的数组
@@ -58,10 +67,10 @@ void rightAnimation(UIView* view,NSTimeInterval duration,UIColor *color,CGFloat 
 void errorAnimation(UIView* view,NSTimeInterval duration,UIColor *color,CGFloat width);
 //加载
 void loadingAnimation(UIView* view,NSTimeInterval duration,UIColor *color,CGFloat width);
-//垂直移动
-void verticalMoveAnimation (UIView *view ,NSTimeInterval duration);
-//横向移动
-void landscapeMoveAnimation(UIView *view ,NSTimeInterval duration);
+
+
+
+
 @end
 
 NS_ASSUME_NONNULL_END

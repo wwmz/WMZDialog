@@ -55,6 +55,8 @@
             })
             .wDataSet(@[@"男",@"女",@"保密"])
             .wMultipleSelectionSet(YES)
+            .wShowAnimationSet(AninatonShowTop)
+            .wHideAnimationSet(AninatonHideTop)
             .wStart();
         }
             break;

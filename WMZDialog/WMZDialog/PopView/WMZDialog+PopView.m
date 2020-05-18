@@ -25,7 +25,7 @@
          //获取导航栏的真实frame
          if (self.wTapViewType == DiaPopInViewNavi||
              self.wNavigationItem) {
-              self.tapRect = [self.wParentVC.navigationController.view convertRect:self.wTapView.frame fromView:self.wTapView.superview];
+              self.tapRect = [[WMZDialogTool getCurrentVC].navigationController.view convertRect:self.wTapView.frame fromView:self.wTapView.superview];
          }
          if (self.wTapViewType == DiaPopInViewTableView ||
              self.wTapViewType == DiaPopInViewCollectionView ||

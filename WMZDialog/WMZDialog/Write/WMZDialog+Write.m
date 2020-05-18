@@ -79,7 +79,6 @@ static NSString *oneLineHeightKey = @"oneLineHeight"; //oneLineHeight的key
             return NO;
         }
     }
-    
     if ([text isEqual:@""]) {
         if (![textView.text isEqualToString:@""]) {
             mainText = [textView.text substringToIndex:[textView.text length] - 1];
@@ -138,10 +137,12 @@ static NSString *oneLineHeightKey = @"oneLineHeight"; //oneLineHeight的key
  */
 - (void)writeOKAction:(UIButton*)btn{
     [self.writeView resignFirstResponder];
-    [self closeView];
-    if (self.wEventOKFinish) {
-        self.wEventOKFinish(self.writeView.text,nil);
-    }
+    DialogWeakSelf(self)
+    [self closeView:^{
+        if (weakObject.wEventOKFinish) {
+            weakObject.wEventOKFinish(weakObject.writeView.text,nil);
+        }
+    }];
 }
 #pragma clang diagnostic pop
 

@@ -51,8 +51,6 @@
             ta.estimatedSectionFooterHeight = 0.01;
             ta.estimatedSectionHeaderHeight = 0.01;
             ta.estimatedRowHeight = 100;
-        }else{
-            self.automaticallyAdjustsScrollViewInsets = NO;
         }
         temp = ta;
         [self.mainView addSubview:ta];
@@ -62,7 +60,7 @@
     if (self.wTapView) {
         self.wMainToBottom = NO;
         self.mainView.frame = CGRectMake(0,CGRectGetMaxY(self.wTapView.frame),self.wWidth, CGRectGetMaxY(temp.frame));
-        self.mainView.center = CGPointMake(self.view.center.x, self.mainView.center.y);
+        self.mainView.center = CGPointMake(self.center.x, self.mainView.center.y);
     }else{
         [self reSetMainViewFrame:CGRectMake(0,0,self.wWidth, CGRectGetMaxY(temp.frame))];
     }

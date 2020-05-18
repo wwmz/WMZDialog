@@ -26,7 +26,7 @@
          NSLog(@"%@",anyID);
      })
      //出现动画
-     .wShowAnimationSet(AninationCombineOne)
+//     .wShowAnimationSet(AninationCombineOne)
      //显示图片的大小
      .wImageSizeSet(CGSizeMake(Dialog_GetWNum(500), Dialog_GetWNum(500)))
      //图片地址

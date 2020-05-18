@@ -8,43 +8,65 @@
 
 #import "WMZDiaLogBase.h"
 
-@interface WMZDiaLogBase ()
+@interface WMZDiaLogBase ()<CAAnimationDelegate>
 @end
 
 @implementation WMZDiaLogBase
 
 
-- (void)dealAnamtionShowWithView:(UIView*)view withType:(DialogShowAnination)type withTime:(NSTimeInterval)time{
+- (void)dealAnamtionShowWithView:(UIView*)view withType:(DialogShowAnination)type withTime:(NSTimeInterval)time block:(animalBlock)block{
+    WMZDialogAnimation *animal = [WMZDialogAnimation new];
     if (type == AninatonCurverOn) {
-        curverOnAnimation(view, time);
+        [animal curverOnAnimationWithView:view duration:time];
     }else if (type == AninatonZoomIn) {
-        zoomInAnimation(view, time);
+        [animal zoomInAnimationWithView:view duration:time];
     }else if (type == AninatonCounterclockwise) {
-        rotationClockwiseAnimation(view, time);
+        [animal rotationClockwiseAnimationWithView:view duration:time];
     }else if (type == AninationCombineOne) {
-        combineShowOneAnimation(view, time);
+        [animal combineShowOneAnimationWithView:view duration:time];
     }else if (type == AninationCombineTwo) {
-        combineShowTwoAnimation(view, time);
+        [animal combineShowTwoAnimationWithView:view duration:time];
+    }else if (type == AninatonShowTop) {
+        [animal verticalMoveShowAnimationWithView:view duration:time top:YES];
+    }else if (type == AninatonShowBottom) {
+        [animal verticalMoveShowAnimationWithView:view duration:time top:NO];
+    }else if (type == AninatonShowLeft) {
+        [animal landscapeMoveShowAnimationWithView:view duration:time right:NO];
+    }else if (type == AninatonShowRight) {
+        [animal landscapeMoveShowAnimationWithView:view duration:time right:YES];
+    }
+    if (block) {
+        animal.block = ^{
+            block();
+        };
     }
 }
 
-- (void)dealAnamtionHideWithView:(UIView*)view withType:(DialogHideAnination)type withTime:(NSTimeInterval)time{
+- (void)dealAnamtionHideWithView:(UIView*)view withType:(DialogHideAnination)type withTime:(NSTimeInterval)time block:(animalBlock)block{
+    WMZDialogAnimation *animal = [WMZDialogAnimation new];
     if (type == AninatonCurverOff) {
-        curverOffAnimation(view, time);
+        [animal curverOffAnimationWithView:view duration:time];
     }else if (type == AninatonZoomOut) {
-        zoomOutAnimation(view, time);
+        [animal zoomOutAnimationWithView:view duration:time];
     }else if (type == AninatonClockwise) {
-        rotationCounterclockwiseAnimation(view, time);
+        [animal rotationCounterclockwiseAnimationWithView:view duration:time];
     }else if (type == AninationHideCombineOne) {
-        combineHideOneAnimation(view, time);
-    }else if (type == AninatonHideVerticalMove) {
-        verticalMoveAnimation(view, time);
-    }else if (type == AninatonHideLandscapeMove) {
-        landscapeMoveAnimation(view, time);
+        [animal combineHideOneAnimationWithView:view duration:time];
+    }else if (type == AninatonHideTop) {
+        [animal verticalMoveHideAnimationWithView:view duration:time top:YES];
+    }else if (type == AninatonHideBottom) {
+        [animal verticalMoveHideAnimationWithView:view duration:time top:NO];
+    }else if (type == AninatonHideLeft) {
+        [animal landscapeMoveHideAnimationWithView:view duration:time right:NO];
+    }else if (type == AninatonHideRight) {
+        [animal landscapeMoveHideAnimationWithView:view duration:time right:YES];
+    }
+    if (block) {
+        animal.block = ^{
+            block();
+        };
     }
 }
-
-
 //数据处理  type 1返回tree对象
 - (id)getMyDataArr:(NSInteger )tableViewTag withType:(NSInteger)type{
     if (tableViewTag==100) {
@@ -104,6 +126,7 @@
 }
 - (BOOL)updateAlertTypeDownProgress:(CGFloat)value{return YES;}
 - (void)closeView{}
+- (void)closeView:(nullable animalBlock)block{}
 - (UIView*)addBottomView:(CGFloat)maxY{return [UIView new];}
 - (void)reSetMainViewFrame:(CGRect)frame{};
 - (void)getDepth:(NSArray*)arr withTree:(WMZTree*)treePoint withDepth:(NSInteger)depth{}
@@ -165,7 +188,6 @@
 - (UIView *)shadowView{
     if (!_shadowView) {
         _shadowView = [UIView new];
-        _shadowView.frame = self.view.bounds;
     }
     return _shadowView;
 }
@@ -196,7 +218,7 @@
     if (!_effectView) {
         UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
         _effectView= [[UIVisualEffectView alloc] initWithEffect:effect];
-        _effectView.frame = self.view.bounds;
+        _effectView.frame = self.bounds;
     }
     return _effectView;
 }
@@ -228,7 +250,6 @@
     }
     return _dataArr;
 }
-
 @end
 
 @implementation WMZTree

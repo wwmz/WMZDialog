@@ -48,9 +48,9 @@
         case 2:{
             Dialog()
             //出现动画
-            .wShowAnimationSet(AninatonCurverOn)
+            .wShowAnimationSet(AninatonShowLeft)
             //消失动画
-            .wHideAnimationSet(AninatonCurverOff)
+            .wHideAnimationSet(AninatonHideLeft)
             .wEventCancelFinishSet(^(id anyID, id otherData) {})
             .wMessageSet(@"这是一条内容\n这是一条内容")
             .wTitleSet(@"这是一条标题\n这是一条标题")

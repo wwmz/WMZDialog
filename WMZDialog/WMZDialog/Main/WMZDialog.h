@@ -22,8 +22,6 @@ WMZDialog * Dialog(void);
 /*=========================================通用=================================================*/
 //数据源 
 WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, id,                       wData)
-//弹出的vc
-WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, UIViewController*,        wParentVC)
 //弹窗type
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, DialogType,               wType)
 //弹窗出现的动画
@@ -263,7 +261,6 @@ wData                 数据源                          id                     
 wShowAnimation       出现的动画                 DialogShowAnination         参考枚举           AninatonZoomIn              -
 wHideAnimation       消失的动画                 DialogHideAnination         参考枚举              none                     -
 wAnimationDurtion     动画时间                    NSTimeInterval             -                  0.8                      -
-wParentVC             父控制器                  UIViewController             -                当前VC                      -
 wType                弹窗是类型                    DialogType              参考枚举          DialogTypeNornal              -
 wWidth              弹窗视图的宽度                   CGFloat                  -            Dialog_GetWNum(500)            -
 wHeight             弹窗视图的宽度                   CGFloat                  -     默认自适应高度(Dialog_GetHNum(300))      -

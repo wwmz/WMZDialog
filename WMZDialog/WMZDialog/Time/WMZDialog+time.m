@@ -34,10 +34,12 @@
     __block NSInteger seconds = [totalTime integerValue];
     __weak typeof(self) weakSelf = self;
     if (seconds == 0) {
-        if (self.wEventFinish) {
-            self.wEventFinish(@"ok",nil, self.wType);
-        }
-        [self closeView];
+        DialogWeakSelf(self)
+        [self closeView:^{
+            if (weakObject.wEventFinish) {
+                weakObject.wEventFinish(@"ok",nil, weakObject.wType);
+            }
+        }];
     }
     dispatch_queue_t global = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     
@@ -51,10 +53,11 @@
         if (seconds<=0) {
             dispatch_source_cancel(timer);
             dispatch_async(dispatch_get_main_queue(), ^{
-                if (weakSelf.wEventFinish) {
-                    weakSelf.wEventFinish(@"ok", nil,weakSelf.wType);
-                }
-                [weakSelf closeView];
+                [weakSelf closeView:^{
+                    if (weakSelf.wEventFinish) {
+                        weakSelf.wEventFinish(@"ok", nil,weakSelf.wType);
+                    }
+                }];
             });
         }else{
             dispatch_async(dispatch_get_main_queue(), ^{
