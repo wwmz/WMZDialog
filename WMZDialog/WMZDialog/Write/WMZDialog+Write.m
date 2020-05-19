@@ -73,12 +73,6 @@ static NSString *oneLineHeightKey = @"oneLineHeight"; //oneLineHeight的key
     NSInteger line = 1;
     NSString *mainText = @"";
     
-    if (self.wWirteTextMaxLine == 1) {
-        if ([text isEqualToString:@"\n"]) {
-            [textView resignFirstResponder];
-            return NO;
-        }
-    }
     if ([text isEqual:@""]) {
         if (![textView.text isEqualToString:@""]) {
             mainText = [textView.text substringToIndex:[textView.text length] - 1];
@@ -101,8 +95,15 @@ static NSString *oneLineHeightKey = @"oneLineHeight"; //oneLineHeight的key
     if (!mainText.length) {
         height =  [WMZDialogTool heightForTextView:CGSizeMake(self.wWidth-self.wMainOffsetX*2, CGFLOAT_MAX) WithText:@"占位" WithFont:self.writeView.font.pointSize]+22.0;
     }
-    
+
     line = (height-22.0)/self.oneLineHeight.floatValue;
+    if (self.wWirteTextMaxLine == 1) {
+        if ([text isEqualToString:@"\n"]||line>1) {
+            [textView resignFirstResponder];
+            [self writeOKAction:nil];
+            return NO;
+        }
+    }
     //最大行数
     if (line>self.wWirteTextMaxLine) {
         height = self.wWirteTextMaxLine*self.oneLineHeight.floatValue+22.0;

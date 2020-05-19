@@ -196,6 +196,7 @@
     if (!_tableView) {
         _tableView =  [[WMZDialogTableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
         _tableView.scrollsToTop = NO;
+        [_tableView setSeparatorColor:DialogLineColor];
     }
     return _tableView;
 }

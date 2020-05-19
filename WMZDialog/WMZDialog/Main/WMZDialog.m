@@ -5,7 +5,6 @@
 //  Created by wmz on 2019/6/5.
 //  Copyright © 2019年 wmz. All rights reserved.
 //
-
 #import "WMZDialog.h"
 @interface WMZDialog ()
 /*
@@ -46,6 +45,7 @@ WMZDialogSetFuncImplementation(WMZDialog, BOOL,                           wPickR
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                         wMainToBottom)
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                         wCanSelectPay)
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                 wTapViewTableViewFoot)
+WMZDialogSetFuncImplementation(WMZDialog, BOOL,                     wOpenCalanderRule)
 WMZDialogSetFuncImplementation(WMZDialog, DiaPopInView,                  wTapViewType)
 WMZDialogSetFuncImplementation(WMZDialog, NSInteger,            wTableViewSectionHead)
 WMZDialogSetFuncImplementation(WMZDialog, NSArray*,                   wDateShowCircle)
@@ -131,7 +131,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
     if (self = [super init]) {
         _wType = DialogTypeNornal;
         _wWidth = Dialog_GetWNum(500);
-        _wHeight = Dialog_GetHNum(300);
+        _wHeight = DialogHeight;
         _wAnimationDurtion = 0.5f;
         _wDisappelSecond = 1.5f;
         _wMainBtnHeight = Dialog_GetHNum(60);
@@ -140,14 +140,14 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
         _wCancelTitle = @"取消";
         _wOKColor = DialogColor(0xFF9900);
         _wCancelColor = DialogColor(0x666666);
-        _wMainRadius = 10.0f;
+        _wMainRadius = 8.0f;
         _wMainBackColor = DialogColor(0xFFFFFF);
-        _wLineColor =  DialogColor(0x333333);
+        _wLineColor =  DialogLineColor;
         _wTitleColor = DialogColor(0x333333);
         _wMessageColor = DialogColor(0x333333);
         _wMainOffsetY = Dialog_GetHNum(20);
         _wMainOffsetX = Dialog_GetWNum(15);
-        _wLineAlpha = 0.5f;
+        _wLineAlpha = 0.9f;
         _wTitleFont = 14.0f;
         _wMessageFont = 16.0f;
         _wOKFont = 16.0f;
@@ -174,7 +174,6 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
         _wLocationType = 3;
         _wChainType = ChainPickView;
         _wDateTimeType = @"yyyy-MM-dd HH:mm:ss";
-        _wPickRepeat = YES;
         _wPlaceholder = @"请输入";
         _wLoadingSize = CGSizeMake( Dialog_GetHNum(90),  Dialog_GetHNum(90));
         _wLoadingColor = DialogColor(0x108ee9);
@@ -191,6 +190,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
         _wPopViewBorderColor = _wMainBackColor;
         _wTapRect = CGRectZero;
         _wPopViewRectCorner = DialogRectCornerNone;
+        _wOpenCalanderRule = YES;
     }
     return self;
 }
@@ -210,7 +210,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
 - (void)setUpDefaultParam{
     switch (self.wType) {
         case DialogTypeSheet:{
-            if (self.wHeight == Dialog_GetHNum(300)) {
+            if (self.wHeight == DialogHeight) {
                 self.wHeight = Dialog_GetHNum(200);
             }
             self.wMainToBottom = YES;
@@ -232,7 +232,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
         }
         break;
         case DialogTypeShare:{
-            if (self.wHeight == Dialog_GetHNum(300)) {
+            if (self.wHeight == DialogHeight) {
                 self.wHeight = Dialog_GetHNum(150);
             }
             self.wMainToBottom = YES;
@@ -272,7 +272,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
             break;
         case DialogTypeMenusSelect:
         {
-            if (self.wHeight == Dialog_GetHNum(300)) {
+            if (self.wHeight == DialogHeight) {
                 self.wHeight = self.wCellHeight*3;
             }
             self.wMainToBottom = YES;
@@ -292,11 +292,9 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
         {
             
             self.wTextAlignment = NSTextAlignmentLeft;
-            if (self.wHeight == Dialog_GetHNum(300)) {
+            if (self.wHeight == DialogHeight) {
                 if (self.wChainType == ChainTableView) {
                     self.wHeight = self.wCellHeight*3;
-                }else{
-                    self.wHeight = Dialog_GetHNum(250);
                 }
             }
             self.wMainToBottom = YES;
@@ -315,7 +313,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
             break;
         case DialogTypeTabbarMenu:
         {
-            if (self.wHeight == Dialog_GetHNum(300)) {
+            if (self.wHeight == DialogHeight) {
                 self.wHeight = Dialog_GetHNum(150);
             }
             self.wMainToBottom = YES;
@@ -338,7 +336,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
             break;
         case DialogTypeNaviMenu:
         {
-            if (self.wHeight == Dialog_GetHNum(300)) {
+            if (self.wHeight == DialogHeight) {
                 self.wHeight = Dialog_GetHNum(150);
             }
             self.wMainToBottom = YES;
@@ -364,9 +362,6 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
         }
              break;
         case DialogTypeAuto:{
-            if (self.wMainRadius == 10.0f) {
-                self.wMainRadius = 8.0f;
-            }
             if (self.wWidth == Dialog_GetWNum(500)) {
                 self.wWidth = Dialog_GetWNum(400);
             }
@@ -380,7 +375,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
             if (self.wWidth == Dialog_GetWNum(500)) {
                 self.wWidth = Device_Dialog_Width;
             }
-            if (self.wHeight == Dialog_GetHNum(300)) {
+            if (self.wHeight == DialogHeight) {
                 self.wHeight = Device_Dialog_Height-NavigationBar_Dialog_Height;
             }
             if (self.wAnimationDurtion == 0.5f) {
@@ -413,7 +408,6 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
     if (self.wWidth > Device_Dialog_Width) {
         self.wWidth = Device_Dialog_Width;
     }
-    
 }
 
 /*
@@ -791,7 +785,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
     
     
     UIView *line = [UIView new];
-    line.backgroundColor = [UIColor lightGrayColor];
+    line.backgroundColor = DialogLineColor;
     line.frame = CGRectMake(0, self.diaLogHeadView.frame.size.height, self.diaLogHeadView.frame.size.width, DialogK1px);
     [self.diaLogHeadView addSubview:line];
     return self.diaLogHeadView;
@@ -811,12 +805,10 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
     return 0.01;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return   self.wType == DialogTypeMenusSelect || self.wType == DialogTypeLocation?[[self getMyDataArr:tableView.tag withType:0] count]:[self.wData count];
+    return  self.wType == DialogTypeMenusSelect || self.wType == DialogTypeLocation?[[self getMyDataArr:tableView.tag withType:0] count]:[self.wData count];
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
     id data = (self.wType == DialogTypeMenusSelect || self.wType == DialogTypeLocation?[self getMyDataArr:tableView.tag withType:0]:self.wData)[indexPath.row];
-    
     if (self.wMyCell) {
         return self.wMyCell(indexPath,self.tableView,data);
     }else{
@@ -897,25 +889,24 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
         if (!self.wMultipleSelection) {
             if (self.wType != DialogTypeCardPresent) {
                 DialogWeakSelf(self)
-                [weakObject closeView:^{
-                    
-                    if (weakObject.wEventFinish) {
-                        weakObject.wEventFinish(any, indexPath,weakObject.wType);
-                    }
-                }];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [weakObject closeView:^{
+                           if (weakObject.wEventFinish) {
+                               weakObject.wEventFinish(any, indexPath,weakObject.wType);
+                           }
+                       }];
+                });
             }
         }
         
     }
 }
-
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
         [cell setSeparatorInset:UIEdgeInsetsZero];
     }
 }
-
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     if (self.wType != DialogTypeCardPresent || scrollView != self.tableView || !self.wOpenScrollClose) return;
     if (self.tableView.contentOffset.y<=0) {
@@ -1130,7 +1121,6 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
 
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    NSLog(@"销毁");
 }
 
 @end

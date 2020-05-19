@@ -45,18 +45,16 @@
                 [self.mainView addSubview:ta];
                 if (i>0) ta.hidden = YES;
             }
-        
             [self reSetMainViewFrame:CGRectMake(0,self.wTapView?CGRectGetMaxY(self.wTapView.frame):0,self.wWidth, CGRectGetMaxY(temp.frame))];
             self.mainView.center = CGPointMake(self.center.x, self.center.y);
     }else{
         self.wPickRepeat = NO;
-
+        
         self.diaLogHeadView = [self addTopView];
         [self.OKBtn addTarget:self action:@selector(locationPickOKAction:) forControlEvents:UIControlEventTouchUpInside];
         
         self.pickView.frame =  CGRectMake(0, CGRectGetMaxY(self.diaLogHeadView.frame), self.wWidth, self.wHeight);
         [self.mainView addSubview:self.pickView];
-        
         [self reSetMainViewFrame:CGRectMake(0,0,self.wWidth, CGRectGetMaxY(self.pickView.frame))];
         //设置只有一半圆角
         [WMZDialogTool setView:self.mainView Radii:CGSizeMake(self.wMainRadius,self.wMainRadius) RoundingCorners:UIRectCornerTopLeft |UIRectCornerTopRight];

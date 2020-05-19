@@ -222,6 +222,8 @@ WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,              
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wOpenChineseDate)
 //隐藏日历上的按钮 default YES
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wHideCalanderBtn)
+//开启日历上连续日期检测 default YES
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wOpenCalanderRule)
 //展示圆点的日期 携带格式为yyyy-MM-dd的日期
 WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, NSArray*,                 wDateShowCircle)
 //注册自定义的collectionViewCell
@@ -339,7 +341,7 @@ wSeparator           选中数据的分隔符                  NSString         
 =========================================DialogTypeDatePicker==========================================================================
  
 wDateTimeType        时间选择器样式                   NSString  yyyy年MM月dd日HH时mm分ss秒(自由组合) yyyy:MM:dd HH:mm:ss       -
-wPickRepeat         pickView无限循环                  BOOL                   -                     yes                    -
+wPickRepeat         pickView无限循环                  BOOL                   -                     no                    -
  
 =============================Share/tabbarMenu/NaviMENU========================================================================
  

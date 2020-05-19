@@ -65,7 +65,7 @@
              [headView addSubview:la];
              
              UIView *line = [UIView new];
-             line.backgroundColor = [UIColor lightGrayColor];
+             line.backgroundColor = DialogLineColor;
              line.frame = CGRectMake(0, headView.frame.size.height, headView.frame.size.width, 0.3);
              [headView addSubview:line];
              
@@ -132,7 +132,7 @@
             [headView addSubview:la];
             
             UIView *line = [UIView new];
-            line.backgroundColor = [UIColor lightGrayColor];
+            line.backgroundColor = DialogLineColor;
             line.frame = CGRectMake(0, headView.frame.size.height, headView.frame.size.width, 0.3);
             [headView addSubview:line];
             

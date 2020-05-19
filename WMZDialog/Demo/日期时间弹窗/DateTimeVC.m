@@ -47,8 +47,6 @@
         .wMinDateSet(minDate)
         //最大时间
         .wMaxDateSet(maxDate)
-        //此时最好关闭循环防止出错
-        .wPickRepeatSet(NO)
         .wTypeSet(DialogTypeDatePicker)
         .wStart();
         return;
@@ -68,7 +66,6 @@
      Dialog()
     .wEventOKFinishSet(^(id anyID, id otherData) {
         NSLog(@"选中 %@ %@",anyID,otherData);
-        Alert(@"选择");
     })
     //默认选中时间 不传默认是当前时间
     .wDefaultDateSet(sender.tag == 0?[NSDate dateWithTimeIntervalSinceNow:24*60*60]:[NSDate date])

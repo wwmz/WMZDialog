@@ -23,21 +23,14 @@
     [self.mainView addSubview:loadingView];
     
     if (self.wLoadingType == LoadingStyleWait) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            loadingAnimation(loadingView, self.wAnimationDurtion, self.wLoadingColor, 4);
-        });
+        loadingAnimation(loadingView, self.wAnimationDurtion, self.wLoadingColor, 4);
     }else  if (self.wLoadingType == LoadingStyleRight) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            waitAnimation(loadingView, self.wAnimationDurtion, self.wLoadingColor,5.0f);
-        });
+        waitAnimation(loadingView, self.wAnimationDurtion, self.wLoadingColor,5.0f);
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8*self.wAnimationDurtion * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             rightAnimation(loadingView, self.wAnimationDurtion, self.wLoadingColor, 4.0f);
         });
-
     }else  if (self.wLoadingType == LoadingStyleError) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01*self.wAnimationDurtion * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            waitAnimation(loadingView, self.wAnimationDurtion, self.wLoadingColor,5.0f);
-        });
+        waitAnimation(loadingView, self.wAnimationDurtion, self.wLoadingColor,5.0f);
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8*self.wAnimationDurtion * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             errorAnimation(loadingView, self.wAnimationDurtion, self.wLoadingColor, 4.0f);
         });

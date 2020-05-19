@@ -75,7 +75,8 @@ Dialog() \
 #define DialogWeakSelf(obj) __weak typeof(obj) weakObject = obj;
 #define DialogStrongSelf(obj) __strong typeof(obj) strongObject = weakObject;
 
-
+#define DialogHeight 200
+#define DialogLineColor  DialogColor(0xcbccce)
 typedef enum : NSUInteger{
     DialogTypeNornal = 1,           //默认弹窗
     DialogTypeSheet,                //底部弹窗

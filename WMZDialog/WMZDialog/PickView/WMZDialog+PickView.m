@@ -13,7 +13,7 @@
     self.diaLogHeadView = [self addTopView];
     [self.OKBtn addTarget:self action:@selector(PickOKAction:) forControlEvents:UIControlEventTouchUpInside];
 
-    self.pickView.frame =  CGRectMake(0, CGRectGetMaxY(self.diaLogHeadView.frame), self.wWidth, self.wHeight*1.2);
+    self.pickView.frame =  CGRectMake(0, CGRectGetMaxY(self.diaLogHeadView.frame), self.wWidth, self.wHeight);
     [self.mainView addSubview:self.pickView];
     
     [self reSetMainViewFrame:CGRectMake(0,0,self.wWidth, CGRectGetMaxY(self.pickView.frame))];
@@ -27,7 +27,25 @@
 - (void)PickOKAction:(UIButton*)btn{
     DialogWeakSelf(self)
     [self closeView:^{
-        [weakObject action];
+        DialogStrongSelf(weakObject)
+        if (strongObject.wEventOKFinish) {
+            if (strongObject.tree) {
+                NSArray *arr = [strongObject getTreeSelectDataArr:YES];
+                NSMutableArray *nameArr = [NSMutableArray new];
+                for (WMZTree *tree in arr) {
+                    [nameArr addObject:tree.name];
+                }
+                strongObject.wEventOKFinish(arr, nameArr);
+            }else{
+                NSMutableArray *mStr = [NSMutableArray new];
+                for (int i = 0; i<[strongObject.wData count]; i++) {
+                    NSArray *arr = strongObject.wData[i];
+                    NSString *str = arr [strongObject.wPickRepeat?[strongObject.pickView selectedRowInComponent:i]%arr.count:[strongObject.pickView selectedRowInComponent:i]];
+                    [mStr addObject:str];
+                }
+                strongObject.wEventOKFinish(mStr, nil);
+            }
+        }
     }];
 }
 

@@ -111,7 +111,6 @@
     self.pickView.frame =  CGRectMake(0, CGRectGetMaxY(self.diaLogHeadView.frame), self.wWidth, self.wHeight);
     [self.mainView addSubview:self.pickView];
     
-    
     for (int i = 0; i<self.selectArr.count; i++) {
         NSArray *arr = self.wData[i];
         NSString *value = self.selectArr[i];

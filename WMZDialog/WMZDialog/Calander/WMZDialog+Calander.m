@@ -7,7 +7,7 @@
 //
 
 #import "WMZDialog+Calander.h"
-#define NumberMounthes 12
+#define NumberMounthes 1
 #define allCount 42
 static  const void *currentYearKey = "currentYearKey";
 static  const void *currenMonthKey = @"currenMonthKey";
@@ -65,7 +65,7 @@ static  const void *todayKey = @"todayKey";
     
     UIView *titleView = [UIView new];
     [titleView addSubview:self.textLabel];
-    self.textLabel.frame = CGRectMake((self.wWidth-100)/2 , 0, 100, 40);
+    self.textLabel.frame = CGRectMake((self.wWidth-100)/2 , 0, 100, 30);
     self.textLabel.textAlignment = NSTextAlignmentCenter;
     titleView.frame = CGRectMake(0, 0, self.wWidth, self.wMessage.length?self.textLabel.frame.size.height:40);
     
@@ -103,7 +103,7 @@ static  const void *todayKey = @"todayKey";
         }else{
             weekTitleLable.textColor = DialogColor(0x333333);
         }
-        weekTitleLable.font = [UIFont fontWithName:@"Helvetica-Bold" size:17.0];
+        weekTitleLable.font = [UIFont fontWithName:@"Helvetica-Bold" size:15.0];
         weekTitleLable.text = [weekTitleArray objectAtIndex:i];
         weekTitleLable.textAlignment = NSTextAlignmentCenter;
         [headView addSubview:weekTitleLable];
@@ -115,7 +115,7 @@ static  const void *todayKey = @"todayKey";
     self.layout.minimumLineSpacing = 0;
     self.layout.minimumInteritemSpacing = 0;
     self.layout.scrollDirection = self.wDirectionVertical?UICollectionViewScrollDirectionVertical:UICollectionViewScrollDirectionHorizontal;
-    self.layout.itemSize = CGSizeMake(self.wWidth/weekTitleArray.count, 50);
+    self.layout.itemSize = CGSizeMake(self.wWidth/weekTitleArray.count, 40);
     self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,CGRectGetMaxY(headView.frame)+self.wMainOffsetY, self.wWidth, self.layout.itemSize.height*6) collectionViewLayout:self.layout];
     self.collectionView.backgroundColor = [UIColor whiteColor];
     [self.collectionView registerClass:[WMZDialogCollectionCell class] forCellWithReuseIdentifier:@"WMZDialogCollectionCell"];
@@ -154,7 +154,7 @@ static  const void *todayKey = @"todayKey";
     }
     [self scrollIndexPath:NumberMounthes shouldReloadData:YES animal:NO first:YES];
     self.currentIndex = NumberMounthes;
-    
+
     [self reSetMainViewFrame:CGRectMake(0,0,self.wWidth, CGRectGetMaxY(self.collectionView.frame))];
     [WMZDialogTool setView:self.mainView Radii:CGSizeMake(self.wMainRadius,self.wMainRadius) RoundingCorners:UIRectCornerTopLeft |UIRectCornerTopRight];
     return self.mainView;
@@ -307,29 +307,51 @@ static  const void *todayKey = @"todayKey";
 //确定
 - (void)calanderOKAction{
     DialogWeakSelf(self)
-    [self closeView:^{
-        [weakObject action];
-    }];
-}
-
-- (void)action{
-    if (self.wEventOKFinish) {
-        if (self.wMultipleSelection) {
-            if (self.selectArr.count) {
-                self.wEventOKFinish(@"选中的日期", self.selectArr);
-            }else{
-                self.wEventOKFinish(@"暂无选中", nil);
-            }
-        }else{
-            if (self.selecctCalanderModel) {
-                self.wEventOKFinish([NSString stringWithFormat:@"%ld-%ld-%ld",self.selecctCalanderModel.wYear,self.selecctCalanderModel.wMonth,self.selecctCalanderModel.wDay], self.selecctCalanderModel);
-            }else{
-                self.wEventOKFinish(@"暂无选中", nil);
+    NSMutableArray *marrStr = [NSMutableArray new];
+    NSMutableArray *marr = [NSMutableArray arrayWithArray:self.selectArr];
+    NSMutableArray *marrModel = [NSMutableArray new];
+    if (self.wMultipleSelection&&self.selectArr.count>1) {
+        [marr sortUsingComparator:^NSComparisonResult(CalanderModel*  _Nonnull obj1, CalanderModel*  _Nonnull obj2) {
+            return [obj1.wDate timeIntervalSince1970]>[obj2.wDate timeIntervalSince1970];
+        }];
+        [marr enumerateObjectsUsingBlock:^(CalanderModel*  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [marrStr addObject:[NSString stringWithFormat:@"%ld-%ld-%ld",obj.wYear,obj.wMonth,obj.wDay]];
+            [marrModel addObject:obj];
+        }];
+        BOOL connect = YES;
+        //检测是否是连续的时间段
+        for (int i = 0; i<marr.count; i++) {
+            CalanderModel *modelOne = marr[i];
+            if (i!=marr.count-1) {
+                CalanderModel *modelTwo = marr[i+1];
+                if ([modelTwo.wDate timeIntervalSince1970]-[modelOne.wDate timeIntervalSince1970]>24*60*60) {
+                    connect = NO;break;
+                }
             }
         }
+        if (self.wOpenCalanderRule&&!connect) {
+            Alert(@"请选择连续的时间段");
+            return;
+        }
     }
+    [self closeView:^{
+        if (weakObject.wEventOKFinish) {
+            if (weakObject.wMultipleSelection) {
+                if (weakObject.selectArr.count) {
+                    weakObject.wEventOKFinish(marrStr, marrModel);
+                }else{
+                    weakObject.wEventOKFinish(@"暂无选中", nil);
+                }
+            }else{
+                if (weakObject.selecctCalanderModel) {
+                    weakObject.wEventOKFinish([NSString stringWithFormat:@"%ld-%ld-%ld",weakObject.selecctCalanderModel.wYear,weakObject.selecctCalanderModel.wMonth,weakObject.selecctCalanderModel.wDay], weakObject.selecctCalanderModel);
+                }else{
+                    weakObject.wEventOKFinish(@"暂无选中", nil);
+                }
+            }
+        };
+    }];
 }
-
 //lastValue
 - (void)lastValue{
     self.currentIndex-=1;
@@ -468,19 +490,18 @@ static  const void *todayKey = @"todayKey";
 //刷新后滚动
 - (void)scrollIndexPath:(NSInteger)section shouldReloadData:(BOOL)reloadData animal:(BOOL)animal first:(BOOL)first{
     if (reloadData) {
+//        [self.collectionView reloadData];
         [UIView animateWithDuration:0.01 animations:^{
             [self.collectionView reloadData];
         } completion:^(BOOL finished) {
             if (first) {
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    if (finished) {
-                        if (self.wDirectionVertical) {
-                            [self.collectionView setContentOffset:CGPointMake(0, self.collectionView.frame.size.height*section) animated:animal];
-                        }else{
-                            [self.collectionView setContentOffset:CGPointMake(self.collectionView.frame.size.width*section, 0) animated:animal];
-                        }
+                if (finished) {
+                    if (self.wDirectionVertical) {
+                        [self.collectionView setContentOffset:CGPointMake(0, self.collectionView.frame.size.height*section) animated:animal];
+                    }else{
+                        [self.collectionView setContentOffset:CGPointMake(self.collectionView.frame.size.width*section, 0) animated:animal];
                     }
-                });
+                }
             }else{
                 if (finished) {
                     if (self.wDirectionVertical) {
@@ -493,13 +514,11 @@ static  const void *todayKey = @"todayKey";
         }];
     }else{
         if (first) {
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                if (self.wDirectionVertical) {
-                    [self.collectionView setContentOffset:CGPointMake(0, self.collectionView.frame.size.height*section) animated:animal];
-                }else{
-                    [self.collectionView setContentOffset:CGPointMake(self.collectionView.frame.size.width*section, 0) animated:animal];
-                }
-            });
+            if (self.wDirectionVertical) {
+                [self.collectionView setContentOffset:CGPointMake(0, self.collectionView.frame.size.height*section) animated:animal];
+            }else{
+                [self.collectionView setContentOffset:CGPointMake(self.collectionView.frame.size.width*section, 0) animated:animal];
+            }
         }else{
             if (self.wDirectionVertical) {
                 [self.collectionView setContentOffset:CGPointMake(0, self.collectionView.frame.size.height*section) animated:animal];
@@ -590,7 +609,7 @@ static  const void *todayKey = @"todayKey";
     if (!_dateLable) {
         _dateLable = [UILabel new];
         [_dateLable setTextAlignment:NSTextAlignmentCenter];
-        [_dateLable setFont:[UIFont fontWithName:@"Helvetica-Bold" size:19.0]];
+        [_dateLable setFont:[UIFont fontWithName:@"Helvetica-Bold" size:17.0]];
         _dateLable.textColor = DialogColor(0x333333);
     }
     return _dateLable;

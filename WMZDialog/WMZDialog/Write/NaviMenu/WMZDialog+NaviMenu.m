@@ -42,9 +42,7 @@
   
     self.mainView.frame = CGRectMake(0, 0, self.wWidth, CGRectGetMaxY(shareView.frame));
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        springShowAnimation(shareView, self.wAnimationDurtion , [shareView subviews], self.wColumnCount, self.wRowCount, 0, 0, 0, 0, YES,  ^{});
-    });
+    springShowAnimation(shareView, self.wAnimationDurtion , [shareView subviews], self.wColumnCount, self.wRowCount, 0, 0, 0, 0, YES,  ^{});
     return self.mainView;
 }
 
@@ -58,7 +56,7 @@
         if (weakObject.wEventFinish) {
             weakObject.wEventFinish(any,nil,weakObject.wType);
         }
-        if (self.wEventMenuClick) {
+        if (weakObject.wEventMenuClick) {
             weakObject.wEventMenuClick(any, row, section);
         }
     }];
