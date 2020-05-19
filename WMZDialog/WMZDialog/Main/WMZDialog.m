@@ -848,7 +848,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
             cell.textLabel.textColor = DialogColor(0x333333);
         }else{
             NSString *cellID = [NSString stringWithFormat:@"%ld-%ld",indexPath.section,indexPath.row];
-            cell.selectionStyle = self.wMultipleSelection?UITableViewCellSelectionStyleNone:UITableViewCellSelectionStyleDefault;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             if ([self.tempArr indexOfObject:cellID]!=NSNotFound) {
                 cell.accessoryType = self.wSelectShowChecked?UITableViewCellAccessoryCheckmark:UITableViewCellAccessoryNone;
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;

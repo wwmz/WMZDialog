@@ -100,7 +100,9 @@
     alert
     .wTitleSet(@"日历")
     //确定的点击方法
-    .wEventOKFinishSet(^(id anyID, id otherData) {})
+    .wEventOKFinishSet(^(id anyID, id otherData) {
+        NSLog(@"%@ %@",anyID,otherData);
+    })
     //开启滚动 default YES
     .wCalanderCanScrollSet(YES)
     //标题颜色

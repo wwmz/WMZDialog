@@ -7,7 +7,7 @@
 //
 
 #import "WMZDialog+Calander.h"
-#define NumberMounthes 1
+#define NumberMounthes 4
 #define allCount 42
 static  const void *currentYearKey = "currentYearKey";
 static  const void *currenMonthKey = @"currenMonthKey";
@@ -310,7 +310,7 @@ static  const void *todayKey = @"todayKey";
     NSMutableArray *marrStr = [NSMutableArray new];
     NSMutableArray *marr = [NSMutableArray arrayWithArray:self.selectArr];
     NSMutableArray *marrModel = [NSMutableArray new];
-    if (self.wMultipleSelection&&self.selectArr.count>1) {
+    if (self.wMultipleSelection&&self.selectArr.count>0) {
         [marr sortUsingComparator:^NSComparisonResult(CalanderModel*  _Nonnull obj1, CalanderModel*  _Nonnull obj2) {
             return [obj1.wDate timeIntervalSince1970]>[obj2.wDate timeIntervalSince1970];
         }];
@@ -490,41 +490,19 @@ static  const void *todayKey = @"todayKey";
 //刷新后滚动
 - (void)scrollIndexPath:(NSInteger)section shouldReloadData:(BOOL)reloadData animal:(BOOL)animal first:(BOOL)first{
     if (reloadData) {
-//        [self.collectionView reloadData];
-        [UIView animateWithDuration:0.01 animations:^{
-            [self.collectionView reloadData];
-        } completion:^(BOOL finished) {
-            if (first) {
-                if (finished) {
-                    if (self.wDirectionVertical) {
-                        [self.collectionView setContentOffset:CGPointMake(0, self.collectionView.frame.size.height*section) animated:animal];
-                    }else{
-                        [self.collectionView setContentOffset:CGPointMake(self.collectionView.frame.size.width*section, 0) animated:animal];
-                    }
-                }
-            }else{
-                if (finished) {
-                    if (self.wDirectionVertical) {
-                        [self.collectionView setContentOffset:CGPointMake(0, self.collectionView.frame.size.height*section) animated:animal];
-                    }else{
-                        [self.collectionView setContentOffset:CGPointMake(self.collectionView.frame.size.width*section, 0) animated:animal];
-                    }
-                }
-            }
-        }];
-    }else{
-        if (first) {
-            if (self.wDirectionVertical) {
-                [self.collectionView setContentOffset:CGPointMake(0, self.collectionView.frame.size.height*section) animated:animal];
-            }else{
-                [self.collectionView setContentOffset:CGPointMake(self.collectionView.frame.size.width*section, 0) animated:animal];
-            }
+        [self.collectionView reloadData];
+     }
+    if (first) {
+        if (self.wDirectionVertical) {
+            [self.collectionView setContentOffset:CGPointMake(0, self.collectionView.frame.size.height*section) animated:animal];
         }else{
-            if (self.wDirectionVertical) {
-                [self.collectionView setContentOffset:CGPointMake(0, self.collectionView.frame.size.height*section) animated:animal];
-            }else{
-                [self.collectionView setContentOffset:CGPointMake(self.collectionView.frame.size.width*section, 0) animated:animal];
-            }
+            [self.collectionView setContentOffset:CGPointMake(self.collectionView.frame.size.width*section, 0) animated:animal];
+        }
+    }else{
+        if (self.wDirectionVertical) {
+            [self.collectionView setContentOffset:CGPointMake(0, self.collectionView.frame.size.height*section) animated:animal];
+        }else{
+            [self.collectionView setContentOffset:CGPointMake(self.collectionView.frame.size.width*section, 0) animated:animal];
         }
     }
 }
