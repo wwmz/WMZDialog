@@ -22,6 +22,8 @@ WMZDialog * Dialog(void);
 /*=========================================通用=================================================*/
 //数据源 
 WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, id,                       wData)
+//设置弹窗tag 防止快读点击重复弹出
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, NSInteger,                wTag)
 //弹窗type
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, DialogType,               wType)
 //弹窗出现的动画

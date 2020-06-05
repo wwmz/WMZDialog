@@ -77,6 +77,7 @@ WMZDialogSetFuncImplementation(WMZDialog, id,                                wSo
 WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                         wTitleFont)
 WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                       wMessageFont)
 WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                       wShadowAlpha)
+WMZDialogSetFuncImplementation(WMZDialog, NSInteger,                             wTag)
 WMZDialogSetFuncImplementation(WMZDialog, NSInteger,                          wPayNum)
 WMZDialogSetFuncImplementation(WMZDialog, NSString*,             wDefaultSelectPayStr)
 WMZDialogSetFuncImplementation(WMZDialog, UIColor*,                    wMainBackColor)
@@ -555,6 +556,12 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
  */
 - (void)start:(id)alert{
     DialogWeakSelf(self);
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    if (self.wTag) {
+        self.tag = self.wTag;
+        if ([window viewWithTag:self.wTag]) return;
+    }
+    [window addSubview:self];
     if (self.wShowAnimation != AninatonShowNone ) {
         self.userInteractionEnabled = NO;
     }
@@ -568,7 +575,6 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
     }
     [self bringSubviewToFront:self.mainView];
     [self setParentVCView:0.9];
-    [[UIApplication sharedApplication].keyWindow addSubview:self];
     [self dealAnamtionShowWithView:self.mainView withType:self.wShowAnimation withTime:self.wAnimationDurtion block:^{
         weakObject.userInteractionEnabled = YES;
     }];
@@ -960,6 +966,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
                     NSInteger monthIndex = [self.pickView selectedRowInComponent:component+1];
                     int month =[[monthArr[self.wPickRepeat?monthIndex%monthArr.count:monthIndex] stringByTrimmingCharactersInSet:nonDigits] intValue];
                     NSArray *arr = @[@(year),@(month)];
+                    
                     SuppressPerformSelectorLeakWarning(
                         self.wData[2] = [self performSelector:NSSelectorFromString(@"timeDayWithArr:Data:") withObject:arr withObject:@{}];
                     );

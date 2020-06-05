@@ -36,10 +36,13 @@
         NSDateComponents *dateComponents1 = [[NSDateComponents alloc] init];
         [dateComponents1 setYear:-20];
         NSDate *minDate = [gregorian dateByAddingComponents:dateComponents1 toDate:[NSDate date] options:0];
+
+        
         Dialog()
         .wEventOKFinishSet(^(id anyID, id otherData) {
             NSLog(@"选中 %@ %@",anyID,otherData);
         })
+        .wDefaultDateSet([NSDate dateWithTimeIntervalSinceNow:24*60*60*2])
         //年月日时分秒|年月日|年月| 的格式 设置时间限制才有效 其余没有具体时间的约束无效
         .wDateTimeTypeSet(@"yyyy年MM月dd日")
 //        .wDateTimeTypeSet(@"yyyy-MM-dd HH:mm:ss")
@@ -49,6 +52,7 @@
         .wMaxDateSet(maxDate)
         .wTypeSet(DialogTypeDatePicker)
         .wStart();
+        
         return;
     }
     

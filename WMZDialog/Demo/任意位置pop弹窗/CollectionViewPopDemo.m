@@ -72,6 +72,7 @@ static NSString *const CollectionViewCell = @"CollectionViewCell";
     .wHideAnimationSet(AninatonZoomOut)
     .wDirectionSet(directionright)
     .wTapViewSet(sender)
+    .wTagSet(10086) //设置tag防止重复弹窗
     .wDataSet(@[
        @{@"name":@"微信",@"image":@"wallet"},
        @{@"name":@"支付宝",@"image":@"aaa"},

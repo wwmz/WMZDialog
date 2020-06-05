@@ -26,6 +26,7 @@
     NSDateComponents *minComponents = nil;
     //最大值
     NSDateComponents *maxComponents = nil;
+    
     if (self.wMinDate) {
         minComponents = [calendar components:unitFlags fromDate:self.wMinDate];
         self.minDate = [NSMutableDictionary new];
@@ -46,6 +47,7 @@
         [self.maxDate setObject:@([maxComponents minute]) forKey:@"mm"];
         [self.maxDate setObject:@([maxComponents second]) forKey:@"ss"];
     }
+    
     NSDictionary *dic = DateConigDic;
     
     NSDictionary *dateDic = @{
@@ -87,6 +89,7 @@
                     [mdic setObject:self.maxDate[@"yyyy"] forKey:@"max"];
                 }
             }
+            
             if([obj isEqualToString:@"dd"]){
                 NSArray *arr = @[[NSString stringWithFormat:@"%ld",[components year]],[NSString stringWithFormat:@"%ld",[components month]]];
                 SuppressPerformSelectorLeakWarning(
@@ -96,11 +99,10 @@
                                                    data =  [self performSelector:NSSelectorFromString(dic[obj]) withObject:mdic];
                 );
             }
-            
+
             if(data){
-                [self.wData addObject:data];
-                [self.selectArr addObject:str];
-                
+              [self.wData addObject:data];
+              [self.selectArr addObject:str];
             }
         }
     }
@@ -110,12 +112,16 @@
 
     self.pickView.frame =  CGRectMake(0, CGRectGetMaxY(self.diaLogHeadView.frame), self.wWidth, self.wHeight);
     [self.mainView addSubview:self.pickView];
-    
+        
+    [self reSetMainViewFrame:CGRectMake(0,0,self.wWidth, CGRectGetMaxY(self.pickView.frame))];
+    //设置只有一半圆角
+    [WMZDialogTool setView:self.mainView Radii:CGSizeMake(self.wMainRadius,self.wMainRadius) RoundingCorners:UIRectCornerTopLeft |UIRectCornerTopRight];
+   
+    [self updateTime:nil component:@(0)];
     for (int i = 0; i<self.selectArr.count; i++) {
-        NSArray *arr = self.wData[i];
+        NSArray *arr =  self.wData[i];
         NSString *value = self.selectArr[i];
         NSInteger index = [arr indexOfObject:value];
-        
         if (index<arr.count) {
             [self.pickView selectRow:index+(self.wPickRepeat?(pickViewCount/2*arr.count):0) inComponent:i animated:YES];
             if (i == 0&& (self.wMinDate||self.wMaxDate)) {
@@ -123,14 +129,6 @@
             }
         }
     }
-    
-    
-    [self reSetMainViewFrame:CGRectMake(0,0,self.wWidth, CGRectGetMaxY(self.pickView.frame))];
-    //设置只有一半圆角
-    [WMZDialogTool setView:self.mainView Radii:CGSizeMake(self.wMainRadius,self.wMainRadius) RoundingCorners:UIRectCornerTopLeft |UIRectCornerTopRight];
-   
-    [self updateTime:nil component:@(0)];
-    
     return self.mainView;
 }
 
@@ -238,11 +236,11 @@
         if((yearInfo % 400 == 0) || ((yearInfo % 4 == 0) && (yearInfo % 100 != 0))){
             isLeapYear = true ;
         }
-        
         NSArray *dayCountArr = @[@"31",isLeapYear?@"29":@"28",@"31",@"30",@"31",@"30",@"31",@"31",@"30",@"31",@"30",@"31"];
         day = [dayCountArr[month.integerValue-1] intValue];
         
     }
+    
     int min = 1;
     int max = day;
     if (limitDic&&limitDic[@"min"]) {
@@ -251,6 +249,7 @@
     if (limitDic&&limitDic[@"max"]) {
         max = [limitDic[@"max"] intValue];
     }
+    
     for (int i = min; i<= max;i++ ) {
         [dayArr addObject: i<10? [NSString stringWithFormat:@"0%d%@",i,name]:[NSString stringWithFormat:@"%d%@",i,name]];
     }
@@ -262,6 +261,7 @@
  *更新时间
  */
 - (void)updateTime:(NSNumber*)rowNum component:(NSNumber*)componentNum{
+    
     if (self.maxDate||self.minDate) {
         NSInteger component = [componentNum integerValue];
         //包含正确参数
@@ -272,13 +272,14 @@
         }
         //判断date的typeConfig时候全面
         if (trueCongig) {
-            for (int i = 0; i<=component+1; i++) {
+            for (int i = 0; i<=(component+1); i++) {
                 NSString *type = DateCongigMarr[i];
                 if ([self.wDateTimeType rangeOfString:type].location == NSNotFound ) {
                     trueCongig = NO;break;
                 }
             }
         }
+        
         if (trueCongig) {
             //更新后面的所有列
             for (NSInteger k = component+1; k<[self.wData count]; k++) {
@@ -299,10 +300,12 @@
                     [compareDateArr addObject:@(tmpDateConfig)];
                     [dateTypeArr addObject:DateCongigMarr[i]];
                 }
+                
                 NSMutableArray *yearMontharr = [NSMutableArray new];
                 for (int i = 0; i<compareDateArr.count; i++) {
                     int dateConfig = [compareDateArr[i] intValue];
                     NSString *dateType = dateTypeArr[i];
+                    
                     if (self.minDate&&self.minDate[dateType]) {
                         if (dateConfig >[self.minDate[dateType] intValue]) {
                             minLimit = NO;
@@ -332,7 +335,7 @@
                     self.wData[k] = [self performSelector:NSSelectorFromString(DateConigDic[nextType])  withObject:[NSDictionary dictionaryWithDictionary:mdic]];
                     );
                 }
-                 [self.pickView reloadComponent:k];
+                [self.pickView reloadComponent:k];
             }
         }
     }
