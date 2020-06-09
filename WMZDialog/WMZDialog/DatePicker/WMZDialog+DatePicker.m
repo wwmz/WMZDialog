@@ -107,6 +107,20 @@
         }
     }
     
+    [self updateTime:nil component:@(0)];
+    for (int i = 0; i<self.selectArr.count; i++) {
+        NSArray *arr =  self.wData[i];
+        NSString *value = self.selectArr[i];
+        NSInteger index = [arr indexOfObject:value];
+        
+        if (index<arr.count) {
+            [self.pickView selectRow:index+(self.wPickRepeat?(pickViewCount/2*arr.count):0) inComponent:i animated:YES];
+            if (i == 0&& (self.wMinDate||self.wMaxDate)) {
+                [self updateTime:@(index) component:@(0)];
+            }
+        }
+    }
+    
     self.diaLogHeadView = [self addTopView];
     [self.OKBtn addTarget:self action:@selector(PickDateOKAction:) forControlEvents:UIControlEventTouchUpInside];
 
@@ -117,18 +131,8 @@
     //设置只有一半圆角
     [WMZDialogTool setView:self.mainView Radii:CGSizeMake(self.wMainRadius,self.wMainRadius) RoundingCorners:UIRectCornerTopLeft |UIRectCornerTopRight];
    
-    [self updateTime:nil component:@(0)];
-    for (int i = 0; i<self.selectArr.count; i++) {
-        NSArray *arr =  self.wData[i];
-        NSString *value = self.selectArr[i];
-        NSInteger index = [arr indexOfObject:value];
-        if (index<arr.count) {
-            [self.pickView selectRow:index+(self.wPickRepeat?(pickViewCount/2*arr.count):0) inComponent:i animated:YES];
-            if (i == 0&& (self.wMinDate||self.wMaxDate)) {
-                [self updateTime:@(index) component:@(1)];
-            }
-        }
-    }
+
+
     return self.mainView;
 }
 
