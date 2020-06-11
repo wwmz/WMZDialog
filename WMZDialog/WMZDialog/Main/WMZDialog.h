@@ -233,6 +233,8 @@ WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, NSString*,         
 /*=========================================Attributes==========================================*/
 
 /*=========================================Event================================================*/
+//自定义mainView 可改变frame
+WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogCustomMainViewBlock,wCustomMainView)
 //自定义tableviewCell
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, diaLogCellCallBlock,      wMyCell)
 //自定义点击tableviewCell

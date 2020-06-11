@@ -157,7 +157,15 @@
 //饿了么
 - (void)elementDialog{
     __weak CustomVC *WEAK = self;
-    myAlert = Dialog()
+    myAlert =
+    Dialog()
+    //重设frame 如果需要改变frame
+    .wCustomMainViewSet(^(UIView *mainView) {
+//        CGRect rect = mainView.frame;
+//        rect.origin.x+=30;
+//        rect.size.height+=30;
+//        mainView.frame = rect;
+    })
     .wTypeSet(DialogTypeMyView)
     //关闭事件 此时要置为不然会内存泄漏
     .wEventCloseSet(^(id anyID, id otherData) {
@@ -166,6 +174,7 @@
     .wWidthSet(Device_Dialog_Width*0.8)
     .wShowAnimationSet(AninatonZoomIn)
     .wHideAnimationSet(AninatonZoomOut)
+    
     .wMyDiaLogViewSet(^UIView *(UIView *mainView) {
         UIImageView *image = [UIImageView new];
         image.image = [UIImage imageNamed:@"down_tyx"];

@@ -36,4 +36,7 @@
     }
 }
 -(void)action:(UIButton*)sender{}
+- (void)dealloc{
+    
+}
 @end

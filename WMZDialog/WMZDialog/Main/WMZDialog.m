@@ -128,6 +128,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DiaLogCollectionClickBlock,wCalanderCe
 WMZDialogSetFuncImplementation(WMZDialog, DialogClickBlock,            wEventOKFinish)
 WMZDialogSetFuncImplementation(WMZDialog, DialogClickBlock,        wEventCancelFinish)
 WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventFinish)
+WMZDialogSetFuncImplementation(WMZDialog, DialogCustomMainViewBlock,  wCustomMainView)
 - (instancetype)init{
     if (self = [super init]) {
         _wType = DialogTypeNornal;
@@ -704,6 +705,10 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventF
     }
     
     self.mainView.center = center;
+
+    if (self.wCustomMainView) {
+        self.wCustomMainView(self.mainView);
+    }
 }
 
 
