@@ -1,4 +1,4 @@
-# WMZDailog - 功能样式最多的最齐全的的弹窗控件 控件全部采用链式编程，所有属性均可定制（pod 更新至 1.1.2）
+# WMZDailog - 功能样式最多的最齐全的的弹窗控件 控件全部采用链式编程，所有属性均可定制（pod 更新至 1.1.3）
 
 题外
 ==============
@@ -305,13 +305,12 @@ typedef enum : NSUInteger{
 
 ### 依赖
 无任何依赖 
-如果需要用到购物车弹窗 可自行导入WMZTags
 
 安装
 ==============
 
 ### CocoaPods  
-1. 将 cocoapods 更新至最新版本. （1.1.2）
+1. 将 cocoapods 更新至最新版本. （1.1.3）
 2. 在 Podfile 中添加 `pod 'WMZDialog'`。  
 3. 执行 `pod install` 或 `pod update`。
 4. 导入 #import "WMZDialog.h"。
@@ -358,3 +357,4 @@ LEETheme 使用 MIT 许可证，详情见 [LICENSE](LICENSE) 文件。
 - 20200107 cocopod 更新至 1.0.7 修复日期选择的bug  修复pop弹窗的bug   修复presentCard弹窗的bug
 - 20200117 cocopod 更新至 1.1.0 过年更新一波bug
 - 20200519 cocopod 更新至 1.1.2 优化一些地方
+- 20200606 cocopod 更新至 1.1.3 新增wTag可防止重复点击 新增自定义frame的方法
