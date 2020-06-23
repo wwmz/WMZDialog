@@ -45,7 +45,8 @@ NS_ASSUME_NONNULL_BEGIN
 +(void)setView:(UIView*)view Radii:(CGSize)size RoundingCorners:(UIRectCorner)rectCorner;
 //传入 秒  得到 xx:xx:xx
 + (NSString *)getMMSSFromSS:(NSString *)totalTime;
-
+//判断颜色是否相等
++ (BOOL)isEqualToColor:(UIColor*)colorA anotherColor:(UIColor*)colorB;
 @end
 
 @interface UIView (DialogPop)

@@ -368,8 +368,12 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomMainViewBlock,  wCustomMai
                 self.wWidth = Dialog_GetWNum(400);
             }
             self.wShadowShow = NO;
-            self.wMessageColor = DialogColor(0xffffff);
-            self.wMainBackColor = DialogColor(0x333333);
+            if ([WMZDialogTool isEqualToColor:self.wMainBackColor anotherColor:DialogColor(0xFFFFFF)]) {
+                self.wMainBackColor = DialogColor(0x333333);
+            }
+            if ([WMZDialogTool isEqualToColor:self.wMessageColor anotherColor:DialogColor(0x333333)]) {
+                self.wMessageColor = DialogColor(0xffffff);
+            }
         }
             break;
         case DialogTypeCardPresent:{

@@ -155,7 +155,15 @@
     return format_time;
     
 }
-
+//判断颜色是否相等
++ (BOOL) isEqualToColor:(UIColor*)colorA anotherColor:(UIColor*)colorB
+{
+    if (CGColorEqualToColor(colorA.CGColor, colorB.CGColor)) {
+        return YES;
+   }else {
+           return NO;
+   }
+}
 
 @end
 
