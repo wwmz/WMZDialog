@@ -24,10 +24,10 @@ static NSString *progressViewKey = @"progressView"; //progressView的key
     self.titleLabel.frame = CGRectMake(self.wMainOffsetX, CGRectGetMaxY(downImage.frame)+ (self.wTitle.length?self.wMainOffsetY:0), self.wWidth-self.wMainOffsetX*2, [WMZDialogTool heightForTextView:CGSizeMake(self.wWidth-self.wMainOffsetX*2, CGFLOAT_MAX) WithText:self.titleLabel.text WithFont:self.titleLabel.font.pointSize]);
     
     [self.mainView addSubview:self.progressView];
-    self.progressView.frame = CGRectMake(self.wMainOffsetX, CGRectGetMaxY(self.titleLabel.frame)+self.wMainOffsetY, self.wWidth*0.75, Dialog_GetHNum(20));
+    self.progressView.frame = CGRectMake(self.wMainOffsetX, CGRectGetMaxY(self.titleLabel.frame)+self.wMainOffsetY, self.wWidth*0.75, Dialog_GetWNum(20));
     [self.mainView addSubview:self.textLabel];
     
-    self.textLabel.frame = CGRectMake(CGRectGetMaxX(self.progressView.frame)+ self.wMainOffsetX, 0, self.wWidth*0.25- self.wMainOffsetX*3, Dialog_GetHNum(30));
+    self.textLabel.frame = CGRectMake(CGRectGetMaxX(self.progressView.frame)+ self.wMainOffsetX, 0, self.wWidth*0.25- self.wMainOffsetX*3, Dialog_GetWNum(30));
     self.textLabel.center = CGPointMake(self.textLabel.center.x, self.progressView.center.y);
     [self reSetMainViewFrame:CGRectMake(0, 0, self.wWidth, CGRectGetMaxY(self.textLabel.frame)+self.wMainOffsetY)];
     

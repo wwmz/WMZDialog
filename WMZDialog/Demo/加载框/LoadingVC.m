@@ -99,9 +99,8 @@
             .wLoadingSizeSet(CGSizeMake(50, 50))
             .wStart();
             
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [alert closeView];
-            });
+            //自动消失
+            [alert performSelector:@selector(closeView) withObject:nil afterDelay:2.5];
         }
            break;
         

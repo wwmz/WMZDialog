@@ -502,16 +502,16 @@
 		F3120D922440581C00CF7CB7 /* 任意位置pop弹窗 */ = {
 			isa = PBXGroup;
 			children = (
+				F3120D992440581C00CF7CB7 /* CollectionViewPopDemo.h */,
 				F3120D932440581C00CF7CB7 /* CollectionViewPopDemo.m */,
-				F3120D942440581C00CF7CB7 /* ScrollViewPopDemo.m */,
 				F3120D952440581C00CF7CB7 /* PopVC.h */,
+				F3120D9A2440581C00CF7CB7 /* PopVC.m */,
+				F3120D9C2440581C00CF7CB7 /* TableViewPopDemo.h */,
 				F3120D962440581C00CF7CB7 /* TableViewPopDemo.m */,
 				F3120D972440581C00CF7CB7 /* NestedPopDemo.h */,
-				F3120D982440581C00CF7CB7 /* ScrollViewPopDemo.h */,
-				F3120D992440581C00CF7CB7 /* CollectionViewPopDemo.h */,
-				F3120D9A2440581C00CF7CB7 /* PopVC.m */,
 				F3120D9B2440581C00CF7CB7 /* NestedPopDemo.m */,
-				F3120D9C2440581C00CF7CB7 /* TableViewPopDemo.h */,
+				F3120D982440581C00CF7CB7 /* ScrollViewPopDemo.h */,
+				F3120D942440581C00CF7CB7 /* ScrollViewPopDemo.m */,
 			);
 			path = "任意位置pop弹窗";
 			sourceTree = "<group>";
@@ -640,6 +640,8 @@
 				F335AADF23B09508001BBC87 /* Main */,
 				F3F4A76E232B3FC9008C70B2 /* WMZDialogTool */,
 				F3F4A76A232B3FC9008C70B2 /* WMZDialog.bundle */,
+				F3F4A749232B3FC9008C70B2 /* Loading */,
+				F3F4A745232B3FC9008C70B2 /* NaviMenu */,
 				F3F4A74C232B3FC9008C70B2 /* TabbarMenu */,
 				F3F4A742232B3FC9008C70B2 /* Write */,
 				F3F4A74F232B3FC9008C70B2 /* AutoDisappear */,
@@ -665,7 +667,6 @@
 		F3F4A742232B3FC9008C70B2 /* Write */ = {
 			isa = PBXGroup;
 			children = (
-				F3F4A745232B3FC9008C70B2 /* NaviMenu */,
 				F3F4A743232B3FC9008C70B2 /* WMZDialog+Write.h */,
 				F3F4A744232B3FC9008C70B2 /* WMZDialog+Write.m */,
 			);
@@ -693,7 +694,6 @@
 		F3F4A74C232B3FC9008C70B2 /* TabbarMenu */ = {
 			isa = PBXGroup;
 			children = (
-				F3F4A749232B3FC9008C70B2 /* Loading */,
 				F3F4A74D232B3FC9008C70B2 /* WMZDialog+TabbarMenu.m */,
 				F3F4A74E232B3FC9008C70B2 /* WMZDialog+TabbarMenu.h */,
 			);

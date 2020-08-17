@@ -58,7 +58,7 @@
             .wCancelTitleSet(@"这是一个长的取消按钮这是一个长的取消按钮这是一个长的取消按钮这是一个长的取消按钮")
             .wOKColorSet([UIColor orangeColor])
             .wCancelColorSet([UIColor redColor])
-            .wStart();
+            .wStartView(self.view);
         }
             break;
             

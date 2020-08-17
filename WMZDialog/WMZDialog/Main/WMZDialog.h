@@ -16,7 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 WMZDialog * Dialog(void);
 //开始 必传
 @property(nonatomic,copy,readonly) WMZDialog *(^wStart)(void);
-
+//开始 带父视图
+@property(nonatomic,copy,readonly) WMZDialog *(^wStartView)(UIView *parentView);
 /*=========================================Attributes==========================================*/
 
 /*=========================================通用=================================================*/
@@ -94,6 +95,8 @@ WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,              
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wMultipleSelection)
 //选中是否打钩
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wSelectShowChecked)
+//列表默认选中
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, id,                       wListDefaultValue)
 
 /*=========================================disappear=======================================================================*/
 //自动消失时间
@@ -237,6 +240,8 @@ WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, NSString*,         
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogCustomMainViewBlock,wCustomMainView)
 //自定义tableviewCell
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, diaLogCellCallBlock,      wMyCell)
+//自定义tableviewCell (带是否选中isSelected 参数)
+WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, diaLogCustomCellBlock,    wCustomCell)
 //自定义点击tableviewCell
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, diaLogCellCallBlock,      wSelectCell)
 //自定义弹窗视图内容
@@ -269,10 +274,10 @@ wHideAnimation       消失的动画                 DialogHideAnination        
 wAnimationDurtion     动画时间                    NSTimeInterval             -                  0.8                      -
 wType                弹窗是类型                    DialogType              参考枚举          DialogTypeNornal              -
 wWidth              弹窗视图的宽度                   CGFloat                  -            Dialog_GetWNum(500)            -
-wHeight             弹窗视图的宽度                   CGFloat                  -     默认自适应高度(Dialog_GetHNum(300))      -
-wMainOffsetY           Y间距                       CGFloat                  -             Dialog_GetHNum(20)            -
-wMainOffsetX           X间距                       CGFloat                  -             Dialog_GetHNum(15)            -
-wMainBtnHeight        按钮高度                      CGFloat                  -             Dialog_GetHNum(60)            -
+wHeight             弹窗视图的宽度                   CGFloat                  -     默认自适应高度(Dialog_GetWNum(300))      -
+wMainOffsetY           Y间距                       CGFloat                  -             Dialog_GetWNum(20)            -
+wMainOffsetX           X间距                       CGFloat                  -             Dialog_GetWNum(15)            -
+wMainBtnHeight        按钮高度                      CGFloat                  -             Dialog_GetWNum(60)            -
 wMainToBottom       视图在最底部                       BOOL                   -                  NO                       -
 wLineColor           线条的颜色                     UIColor                   -            DialogColor(0x333333)          -
 wLineAlpha          线条的透明度                     CGFLoat                  -                 0.5f                      -
@@ -307,7 +312,7 @@ wDisappelSecond     自动消失的时间                    CGFLoat            
 =========================================DialogTypePay=============================================================================
  
 wSonData            支付方式选择数据源                 id                     -                    -                        -
-wKeyBoardMarginY    弹窗与键盘的距离                 CGFLoat                   -                Dialog_GetHNum(70)          -
+wKeyBoardMarginY    弹窗与键盘的距离                 CGFLoat                   -                Dialog_GetWNum(70)          -
 wPayNum               支付密码位数                  NSInteger                 -            6(若要设置位数比6大的则要保证宽度足够) -
 wDefaultSelectPayStr 支付方式默认文本                NSString                  -                   农业银行                   -
  
@@ -355,7 +360,7 @@ wRowCount              行                            NSInteger              -  
 
 =========================================DialogTypeLoading===============================================================================
 wLoadingType          加载框样式                     LoadingStyle             -                LoadingStyleWait            -
-wLoadingSize          加载框size                     CGSize                  -              Dialog_GetHNum(90,90)         -
+wLoadingSize          加载框size                     CGSize                  -              Dialog_GetWNum(90,90)         -
 wLoadingColor         加载框线条颜色                  UIColor                  -                  确定按钮的文本颜色           -
  
 =========================================DialogTypeCardPresent==========================================================================

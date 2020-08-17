@@ -30,6 +30,7 @@
         NSDate *minDate = [gregorian dateByAddingComponents:dateComponents toDate:[NSDate date] options:0];
         
         Dialog()
+//        .wDefaultDateSet(minDate)   //跳转到默认日期页
         .wMaxDateSet([NSDate date])
         .wMinDateSet(minDate)
         .wTypeSet(DialogTypeCalander)

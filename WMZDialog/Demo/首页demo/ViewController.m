@@ -28,8 +28,9 @@
     self.tableView =  [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.estimatedRowHeight = 50;
     if (@available(iOS 11.0, *)) {
-        self.tableView.estimatedRowHeight = 50;
+
     }else{
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
@@ -89,11 +90,11 @@
     //宽度
     .wWidthSet(Dialog_GetWNum(500))
     //高度
-    .wHeightSet(Dialog_GetHNum(300))
+    .wHeightSet(Dialog_GetWNum(300))
     //自动消失时间
     .wDisappelSecondSet(1.5f)
     //按钮的高度
-    .wMainBtnHeightSet(Dialog_GetHNum(60))
+    .wMainBtnHeightSet(Dialog_GetWNum(60))
     //确定按钮文本
     .wOKTitleSet(@"确定")
     //取消按钮文本
@@ -111,7 +112,7 @@
     //线的颜色
     .wLineColorSet(DialogColor(0x333333))
     //主视图间的x轴间距
-    .wMainOffsetYSet(Dialog_GetHNum(20))
+    .wMainOffsetYSet(Dialog_GetWNum(20))
     //主视图间的y轴间距
     .wMainOffsetXSet(Dialog_GetWNum(15))
     //线的透明度
@@ -129,7 +130,7 @@
     //遮罩层的颜色
     .wShadowColorSet(DialogColor(0x333333))
     //主视图距离弹出键盘的距离
-    .wKeyBoardMarginYSet(Dialog_GetHNum(80))
+    .wKeyBoardMarginYSet(Dialog_GetWNum(80))
     //支付密码的长度
     .wPayNumSet(6)
     //默认支付选择方式

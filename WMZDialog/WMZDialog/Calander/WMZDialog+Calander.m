@@ -30,7 +30,7 @@ static  const void *todayKey = @"todayKey";
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     
-    NSDate *currentDate = [[NSDate alloc]init];
+    NSDate *currentDate = self.wDefaultDate;
     self.currentYear = [NSDate year:currentDate];
     self.currentMonth = [NSDate month:currentDate];
     self.currentDay = [NSDate day:currentDate];

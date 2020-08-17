@@ -28,9 +28,8 @@
     self.textLabel.frame =  CGRectMake(self.wMainOffsetX,(downImage?CGRectGetMaxY(downImage.frame):0)+self.wMainOffsetY, size.width, size.height);
     
     [self reSetMainViewFrame:CGRectMake(0, 0,  downImage?self.wWidth:(self.textLabel.frame.size.width+self.wMainOffsetX*2), CGRectGetMaxY(self.textLabel.frame)+self.wMainOffsetY)];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(self.wDisappelSecond * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self closeView];
-    });
+
+    [self performSelector:@selector(closeView) withObject:nil afterDelay:self.wDisappelSecond];
     
     return self.mainView;
 }

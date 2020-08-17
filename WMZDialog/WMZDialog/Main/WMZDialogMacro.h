@@ -63,19 +63,18 @@ Dialog() \
     (wMenuIndicator); \
 })\
 
-
+#define DialogHorizontalScreen (([UIScreen mainScreen].bounds.size.width/[UIScreen mainScreen].bounds.size.height)>1.0)?YES:NO
 #define Device_Dialog_Height [UIScreen mainScreen].bounds.size.height
 #define Device_Dialog_Width  [UIScreen mainScreen].bounds.size.width
 #define NavigationBar_Dialog_Height (([[UIApplication sharedApplication] statusBarFrame].size.height) + 44)
-#define Dialog_GetWNum(A)   (A)/2.0*(Device_Dialog_Width/375)
-#define Dialog_GetHNum(B)   (B)/2.0*(Device_Dialog_Height/667)
+#define Dialog_GetWNum(A)  (A)/2.0*(((DialogHorizontalScreen == 1)?Device_Dialog_Height:Device_Dialog_Width)/375)
 #define DialogColor(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 #define DialogK1px (1 / UIScreen.mainScreen.scale)
 
 #define DialogWeakSelf(obj) __weak typeof(obj) weakObject = obj;
 #define DialogStrongSelf(obj) __strong typeof(obj) strongObject = weakObject;
 
-#define DialogHeight 200
+#define DialogHeight Dialog_GetWNum(400)
 #define DialogLineColor  DialogColor(0xcbccce)
 typedef enum : NSUInteger{
     DialogTypeNornal = 1,           //默认弹窗
@@ -189,6 +188,11 @@ typedef void (^DialogCustomMainViewBlock)(UIView *mainView);
  * UITableViewCell的block
  */
 typedef UITableViewCell* (^diaLogCellCallBlock)(NSIndexPath *indexPath,UITableView* tableView,id model);
+
+/*
+ * UITableViewCell的block
+ */
+typedef UITableViewCell* (^diaLogCustomCellBlock)(NSIndexPath *indexPath,UITableView* tableView,id model,BOOL isSelected);
 
 /*
  * collectionCell的block

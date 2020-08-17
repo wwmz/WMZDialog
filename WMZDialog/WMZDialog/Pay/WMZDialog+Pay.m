@@ -21,19 +21,19 @@ static NSString *selectPayViewKey = @"selectPayView"; //selectPayView的key
     [closeBtn setTitle:@"X" forState:UIControlStateNormal];
     [closeBtn setTitleColor:self.wCancelColor forState:UIControlStateNormal];
     closeBtn.backgroundColor = self.wMainBackColor;
-    closeBtn.frame = CGRectMake(self.wMainOffsetX, self.wMainOffsetY, self.wMainOffsetX*3, Dialog_GetHNum(50));
+    closeBtn.frame = CGRectMake(self.wMainOffsetX, self.wMainOffsetY, self.wMainOffsetX*3, Dialog_GetWNum(50));
     [closeBtn addTarget:self action:@selector(closeBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [self.mainView addSubview:closeBtn];
 
     self.titleLabel.text = self.wTitle;
     [self.mainView addSubview:self.titleLabel];
-    self.titleLabel.frame = CGRectMake(Dialog_GetWNum(80), self.wMainOffsetY, self.wWidth-Dialog_GetWNum(160), Dialog_GetHNum(50));
+    self.titleLabel.frame = CGRectMake(Dialog_GetWNum(80), self.wMainOffsetY, self.wWidth-Dialog_GetWNum(160), Dialog_GetWNum(50));
 
 
 
     [self.mainView addSubview:self.textLabel];
     self.textLabel.text = self.wMessage;
-    self.textLabel.frame = CGRectMake(0, CGRectGetMaxY(self.titleLabel.frame)+self.wMainOffsetY, self.wWidth, Dialog_GetHNum(60));
+    self.textLabel.frame = CGRectMake(0, CGRectGetMaxY(self.titleLabel.frame)+self.wMainOffsetY, self.wWidth, Dialog_GetWNum(60));
     self.textLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:self.wMessageFont*2];
     
     
@@ -43,7 +43,7 @@ static NSString *selectPayViewKey = @"selectPayView"; //selectPayView的key
     downLine.backgroundColor = self.wLineColor;
     downLine.frame = CGRectMake(self.wMainOffsetX, CGRectGetMaxY(self.textLabel.frame)+self.wMainOffsetY, self.wWidth-self.wMainOffsetX*2, DialogK1px);
 
-    [self selectPayView:CGRectGetMaxY(downLine.frame)+self.wMainOffsetY/2 Height:Dialog_GetHNum(80)];
+    [self selectPayView:CGRectGetMaxY(downLine.frame)+self.wMainOffsetY/2 Height:Dialog_GetWNum(80)];
     [self.mainView addSubview:self.selectPayView];
     
     self.payField = [UITextField new];

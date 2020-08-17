@@ -49,7 +49,7 @@
     if (!headView||self.wEventCancelFinish) {
         UIView *emptyView =  [UIView new];
         emptyView.backgroundColor = self.tableView.backgroundColor;
-        emptyView.frame = CGRectMake(0, CGRectGetMaxY(self.tableView.frame), self.wWidth, Dialog_GetHNum(20));
+        emptyView.frame = CGRectMake(0, CGRectGetMaxY(self.tableView.frame), self.wWidth, Dialog_GetWNum(20));
         [self.mainView addSubview:emptyView];
         
         [self.mainView addSubview:self.cancelBtn];

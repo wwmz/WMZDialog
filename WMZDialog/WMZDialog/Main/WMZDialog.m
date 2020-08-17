@@ -22,10 +22,26 @@ WMZDialog * Dialog(void){
 
 - (WMZDialog * _Nonnull (^)(void))wStart{
      return ^WMZDialog*(){
-         [self start];
+         [self setUpUI:nil];
          return self;
      };
 }
+
+- (WMZDialog * _Nonnull (^)(UIView * _Nonnull))wStartView{
+    return ^WMZDialog*(UIView *startView){
+        [self setUpUI:startView];
+        return self;
+    };
+}
+
+- (void)setUpUI:(nullable UIView*)startView{
+    [self setUpDefaultParam];
+    [self setUpUI];
+    [self setUIdelagate:startView];
+    [self addNotification];
+}
+
+
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                    wMultipleSelection)
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                    wSelectShowChecked)
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                      wOpenScrollClose)
@@ -74,6 +90,7 @@ WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                        wCance
 WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                         wLineAlpha)
 WMZDialogSetFuncImplementation(WMZDialog, id,                                   wData)
 WMZDialogSetFuncImplementation(WMZDialog, id,                                wSonData)
+WMZDialogSetFuncImplementation(WMZDialog, id,                       wListDefaultValue)
 WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                         wTitleFont)
 WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                       wMessageFont)
 WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                       wShadowAlpha)
@@ -116,6 +133,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogHideAnination,         wHideAnim
 WMZDialogSetFuncImplementation(WMZDialog, ChainType,                       wChainType)
 WMZDialogSetFuncImplementation(WMZDialog, LoadingStyle,                  wLoadingType)
 WMZDialogSetFuncImplementation(WMZDialog, DiaDirection,                    wDirection)
+WMZDialogSetFuncImplementation(WMZDialog, diaLogCustomCellBlock,          wCustomCell)
 WMZDialogSetFuncImplementation(WMZDialog, diaLogPresentCallBlock,     wParentHeadView)
 WMZDialogSetFuncImplementation(WMZDialog, diaLogPresentCallBlock,   wParentBottomView)
 WMZDialogSetFuncImplementation(WMZDialog, diaLogCellCallBlock,            wSelectCell)
@@ -136,8 +154,8 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomMainViewBlock,  wCustomMai
         _wHeight = DialogHeight;
         _wAnimationDurtion = 0.5f;
         _wDisappelSecond = 1.5f;
-        _wMainBtnHeight = Dialog_GetHNum(60);
-        _wCellHeight = Dialog_GetHNum(80);
+        _wMainBtnHeight = Dialog_GetWNum(60);
+        _wCellHeight = Dialog_GetWNum(80);
         _wOKTitle = @"确定";
         _wCancelTitle = @"取消";
         _wOKColor = DialogColor(0xFF9900);
@@ -147,7 +165,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomMainViewBlock,  wCustomMai
         _wLineColor =  DialogLineColor;
         _wTitleColor = DialogColor(0x333333);
         _wMessageColor = DialogColor(0x333333);
-        _wMainOffsetY = Dialog_GetHNum(20);
+        _wMainOffsetY = Dialog_GetWNum(20);
         _wMainOffsetX = Dialog_GetWNum(15);
         _wLineAlpha = 0.9f;
         _wTitleFont = 14.0f;
@@ -158,7 +176,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomMainViewBlock,  wCustomMai
         _wMessage = @"内容";
         _wShadowAlpha = 0.4f;
         _wShadowColor = DialogColor(0x333333);
-        _wKeyBoardMarginY = Dialog_GetHNum(80);
+        _wKeyBoardMarginY = Dialog_GetWNum(40);
         _wPayNum = 5;
         _wDefaultSelectPayStr = @"农业银行";
         _wShadowCanTap = YES;
@@ -177,7 +195,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomMainViewBlock,  wCustomMai
         _wChainType = ChainPickView;
         _wDateTimeType = @"yyyy-MM-dd HH:mm:ss";
         _wPlaceholder = @"请输入";
-        _wLoadingSize = CGSizeMake( Dialog_GetHNum(90),  Dialog_GetHNum(90));
+        _wLoadingSize = CGSizeMake(Dialog_GetWNum(90),  Dialog_GetWNum(90));
         _wLoadingColor = DialogColor(0x108ee9);
         _wSeparator = @",";
         _wLeftScrollClose = YES;
@@ -193,17 +211,13 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomMainViewBlock,  wCustomMai
         _wTapRect = CGRectZero;
         _wPopViewRectCorner = DialogRectCornerNone;
         _wOpenCalanderRule = YES;
+        _wTag = 10086;
     }
     return self;
 }
-
-/*
- *设置
- */
-- (void)start{
-    [self setUpDefaultParam];
-    [self setUpUI];
-    [self setUIdelagate];
+- (void)addNotification{
+    //监听横竖屏
+//    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(change:) name:UIDeviceOrientationDidChangeNotification object:nil];
 }
 
 /*
@@ -213,14 +227,14 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomMainViewBlock,  wCustomMai
     switch (self.wType) {
         case DialogTypeSheet:{
             if (self.wHeight == DialogHeight) {
-                self.wHeight = Dialog_GetHNum(200);
+                self.wHeight = Dialog_GetWNum(200);
             }
             self.wMainToBottom = YES;
             if (self.wWidth == Dialog_GetWNum(500)) {
                 self.wWidth = Device_Dialog_Width;
             }
-            if (self.wMainBtnHeight == Dialog_GetHNum(60)) {
-                self.wMainBtnHeight = Dialog_GetHNum(88);
+            if (self.wMainBtnHeight == Dialog_GetWNum(60)) {
+                self.wMainBtnHeight = Dialog_GetWNum(88);
             }
         }
             break;
@@ -235,14 +249,14 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomMainViewBlock,  wCustomMai
         break;
         case DialogTypeShare:{
             if (self.wHeight == DialogHeight) {
-                self.wHeight = Dialog_GetHNum(150);
+                self.wHeight = Dialog_GetWNum(150);
             }
             self.wMainToBottom = YES;
             if (self.wWidth == Dialog_GetWNum(500)) {
                 self.wWidth = Device_Dialog_Width;
             }
-            if (self.wMainBtnHeight == Dialog_GetHNum(60)) {
-                self.wMainBtnHeight+=Dialog_GetHNum(10);
+            if (self.wMainBtnHeight == Dialog_GetWNum(60)) {
+                self.wMainBtnHeight+=Dialog_GetWNum(10);
             }
             if ([self.wTitle isEqualToString:@"提示"]) {
                 self.wTitle = @"分享到";
@@ -316,15 +330,15 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomMainViewBlock,  wCustomMai
         case DialogTypeTabbarMenu:
         {
             if (self.wHeight == DialogHeight) {
-                self.wHeight = Dialog_GetHNum(150);
+                self.wHeight = Dialog_GetWNum(150);
             }
             self.wMainToBottom = YES;
 
             if (self.wWidth == Dialog_GetWNum(500)) {
                 self.wWidth = Device_Dialog_Width;
             }
-            if (self.wMainBtnHeight == Dialog_GetHNum(60)) {
-                self.wMainBtnHeight+=Dialog_GetHNum(10);
+            if (self.wMainBtnHeight == Dialog_GetWNum(60)) {
+                self.wMainBtnHeight+=Dialog_GetWNum(10);
             }
             if (!self.wColumnCount) {
                 self.wColumnCount = 4;
@@ -339,15 +353,15 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomMainViewBlock,  wCustomMai
         case DialogTypeNaviMenu:
         {
             if (self.wHeight == DialogHeight) {
-                self.wHeight = Dialog_GetHNum(150);
+                self.wHeight = Dialog_GetWNum(150);
             }
             self.wMainToBottom = YES;
 
             if (self.wWidth == Dialog_GetWNum(500)) {
                 self.wWidth = Device_Dialog_Width;
             }
-            if (self.wMainBtnHeight == Dialog_GetHNum(60)) {
-                self.wMainBtnHeight+=Dialog_GetHNum(10);
+            if (self.wMainBtnHeight == Dialog_GetWNum(60)) {
+                self.wMainBtnHeight+=Dialog_GetWNum(10);
             }
             if (!self.wColumnCount) {
                 self.wColumnCount = 3;
@@ -428,9 +442,6 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomMainViewBlock,  wCustomMai
         //监听键盘出现
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     }
-    //监听横竖屏
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(change:) name:UIDeviceOrientationDidChangeNotification object:nil];
-    
     if (self.wType != DialogTypeShare&&
         self.wType != DialogTypeMyView&&
         self.wType != DialogTypeTabbarMenu&&
@@ -475,7 +486,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomMainViewBlock,  wCustomMai
     self.wCloseBtn.layer.borderColor = self.wCancelColor.CGColor;
     
     
-    self.mainView.frame = CGRectMake(0, 0, self.wWidth, Dialog_GetHNum(267));
+    self.mainView.frame = CGRectMake(0, 0, self.wWidth, Dialog_GetWNum(267));
     self.mainView.backgroundColor = _wMainBackColor;
     
     self.shadowView.frame = self.bounds;
@@ -490,7 +501,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomMainViewBlock,  wCustomMai
 }
 
 //设置UI代理
-- (void)setUIdelagate{
+- (void)setUIdelagate:(nullable UIView*)showView{
     if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]&&self.wType!=DialogTypePop) {
         [self.tableView setSeparatorInset:UIEdgeInsetsZero];
     }
@@ -503,8 +514,8 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomMainViewBlock,  wCustomMai
         if (self.wData&&([self.wData isKindOfClass:[NSArray class]]||[self.wData isKindOfClass:[NSMutableArray class]])) {
             self.tableView.delegate = self;
             self.tableView.dataSource = self;
+            self.tableView.estimatedRowHeight = 100;
             if (@available(iOS 11.0, *)) {
-                self.tableView.estimatedRowHeight = 100;
                 self.tableView.estimatedSectionFooterHeight = 0.01;
                 self.tableView.estimatedSectionHeaderHeight = 0.01;
                 self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
@@ -537,7 +548,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomMainViewBlock,  wCustomMai
     [self addSubview:self.mainView];
     
     if (self.wMyDiaLogView) {
-        [self start:self.mainView];
+        [self showView:showView];
         UIView *bottomView = self.wMyDiaLogView(self.mainView);
         [bottomView layoutIfNeeded];
         if (self.wAddBottomView) {
@@ -550,8 +561,8 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomMainViewBlock,  wCustomMai
         SEL sel = NSSelectorFromString(self.configDic[@(self.wType)]);
         if (!sel) return;
         SuppressPerformSelectorLeakWarning(
-                                           id alert = [self performSelector:sel];
-                                           [self performSelector:@selector(start:) withObject:alert];
+                                           [self performSelector:sel];
+                                           [self performSelector:@selector(showView:) withObject:showView];
                                            );
     }
 }
@@ -559,14 +570,14 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomMainViewBlock,  wCustomMai
 /*
  *开始
  */
-- (void)start:(id)alert{
+- (void)showView:(nullable UIView*)showView{
     DialogWeakSelf(self);
-    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    UIView *view = showView?:[UIApplication sharedApplication].keyWindow;
     if (self.wTag) {
         self.tag = self.wTag;
-        if ([window viewWithTag:self.wTag]) return;
+        if ([view viewWithTag:self.wTag]) return;
     }
-    [window addSubview:self];
+    [view addSubview:self];
     if (self.wShowAnimation != AninatonShowNone ) {
         self.userInteractionEnabled = NO;
     }
@@ -826,56 +837,64 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomMainViewBlock,  wCustomMai
     id data = (self.wType == DialogTypeMenusSelect || self.wType == DialogTypeLocation?[self getMyDataArr:tableView.tag withType:0]:self.wData)[indexPath.row];
     if (self.wMyCell) {
         return self.wMyCell(indexPath,self.tableView,data);
-    }else{
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DiaLogCell"];
-        if (!cell) {
-            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"DiaLogCell"];
-        }
-        cell.backgroundColor = [UIColor whiteColor];
-        cell.tintColor = self.wOKColor;
-        cell.textLabel.textAlignment = self.wTextAlignment;
-        cell.textLabel.font = [UIFont systemFontOfSize:self.wMessageFont];
-        cell.selectionStyle = UITableViewCellSelectionStyleDefault;
-        if ([data isKindOfClass:[WMZTree class]]) {
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            WMZTree *selectDic = (WMZTree*)data;
-            cell.textLabel.text = selectDic.name;
-            if (self.wTableViewColor.count>self.depth-1) {
-                 cell.backgroundColor = self.wTableViewColor[selectDic.depth-1];
-            }
-            if (selectDic.isSelected) {
-                cell.textLabel.textColor = self.wOKColor;
-                cell.accessoryType = self.wSelectShowChecked?UITableViewCellAccessoryCheckmark:UITableViewCellAccessoryNone;
-            }else{
-                cell.textLabel.textColor = self.wMessageColor;
-                cell.accessoryType = UITableViewCellAccessoryNone;
-            }
-        }else if([data isKindOfClass:[NSDictionary class]]){
-            UIImage *icon = [UIImage imageNamed:data[@"image"]];
-            cell.imageView.image = icon;
-            CGSize itemSize = CGSizeMake(30, 30);
-            UIGraphicsBeginImageContextWithOptions(itemSize, NO, 0.0);
-            CGRect imageRect = CGRectMake(0, 0, itemSize.width, itemSize.height);
-            [icon drawInRect:imageRect];
-            cell.imageView.image = UIGraphicsGetImageFromCurrentImageContext();
-            UIGraphicsEndImageContext();
-            cell.textLabel.text = data[@"name"]?:@"";
-            cell.textLabel.textColor = DialogColor(0x333333);
-        }else{
-            NSString *cellID = [NSString stringWithFormat:@"%ld-%ld",indexPath.section,indexPath.row];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            if ([self.tempArr indexOfObject:cellID]!=NSNotFound) {
-                cell.accessoryType = self.wSelectShowChecked?UITableViewCellAccessoryCheckmark:UITableViewCellAccessoryNone;
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                cell.textLabel.textColor = self.wOKColor;
-            }else{
-                cell.accessoryType = UITableViewCellAccessoryNone;
-                cell.textLabel.textColor = self.wMessageColor;
-            }
-            cell.textLabel.text = data;
-        }
-        return cell;
     }
+    if (self.wCustomCell) {
+        return self.wCustomCell(indexPath,self.tableView,data,YES);
+    }
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DiaLogCell"];
+    if (!cell) {
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"DiaLogCell"];
+    }
+    cell.backgroundColor = [UIColor whiteColor];
+    cell.tintColor = self.wOKColor;
+    cell.textLabel.textAlignment = self.wTextAlignment;
+    cell.textLabel.font = [UIFont systemFontOfSize:self.wMessageFont];
+    cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+    if ([data isKindOfClass:[WMZTree class]]) {
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        WMZTree *selectDic = (WMZTree*)data;
+        cell.textLabel.text = selectDic.name;
+        if (self.wTableViewColor.count>self.depth-1) {
+             cell.backgroundColor = self.wTableViewColor[selectDic.depth-1];
+        }
+        if (selectDic.isSelected) {
+            cell.textLabel.textColor = self.wOKColor;
+            cell.accessoryType = self.wSelectShowChecked?UITableViewCellAccessoryCheckmark:UITableViewCellAccessoryNone;
+        }else{
+            cell.textLabel.textColor = self.wMessageColor;
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        }
+    }else if([data isKindOfClass:[NSDictionary class]]){
+        NSString *iconStr = data[@"image"];
+        BOOL hasImage = NO;
+        if (iconStr&&[iconStr isKindOfClass:[NSString class]]&&iconStr.length) {
+            hasImage = YES;
+        }
+        UIImage *icon = [UIImage imageNamed:iconStr?:@" "];
+        cell.imageView.image = icon;
+        CGSize itemSize = CGSizeMake(hasImage?30:0, 30);
+        UIGraphicsBeginImageContextWithOptions(itemSize, NO, 0.0);
+        CGRect imageRect = CGRectMake(0, 0, itemSize.width, itemSize.height);
+        [icon drawInRect:imageRect];
+        cell.imageView.image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        cell.textLabel.text = data[@"name"]?:@"";
+        BOOL isSelect = data[@"isSelected"]?[data[@"isSelected"] boolValue]:NO;
+        cell.textLabel.textColor =  isSelect?self.wOKColor:self.wMessageColor;
+    }else{
+        NSString *cellID = [NSString stringWithFormat:@"%ld-%ld",indexPath.section,indexPath.row];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        if ([self.tempArr indexOfObject:cellID]!=NSNotFound) {
+            cell.accessoryType = self.wSelectShowChecked?UITableViewCellAccessoryCheckmark:UITableViewCellAccessoryNone;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.textLabel.textColor = self.wOKColor;
+        }else{
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            cell.textLabel.textColor = self.wMessageColor;
+        }
+        cell.textLabel.text = data;
+    }
+    return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -891,11 +910,22 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomMainViewBlock,  wCustomMai
         if (self.wSelectCell) {
             self.wSelectCell(indexPath,tableView,any);return;
         }
+        NSMutableDictionary *mdic = [NSMutableDictionary new];
         if ([self.tempArr indexOfObject:cellID]==NSNotFound) {
+            if ([any isKindOfClass:[NSDictionary class]]) {
+                mdic = [NSMutableDictionary dictionaryWithDictionary:any];
+                [mdic setValue:@(YES) forKey:@"isSelected"];
+                any = [NSDictionary dictionaryWithDictionary:mdic];
+            }
             [self.selectArr addObject:any];
             [self.tempArr addObject:cellID];
             [self.pathArr addObject:indexPath];
         }else{
+            if ([any isKindOfClass:[NSDictionary class]]) {
+                mdic = [NSMutableDictionary dictionaryWithDictionary:any];
+                [mdic setValue:@(NO) forKey:@"isSelected"];
+                any = [NSDictionary dictionaryWithDictionary:mdic];
+            }
             [self.selectArr removeObject:any];
             [self.pathArr removeObject:indexPath];
             [self.tempArr removeObject:cellID];
@@ -1088,22 +1118,23 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomMainViewBlock,  wCustomMai
  */
 -(void)change:(NSNotification*)notification
 {
-//    CGFloat width=[UIScreen mainScreen].bounds.size.width;
-//    CGFloat height=[UIScreen mainScreen].bounds.size.height;
-//    if(width/height<1.0)
-//    {
-//        for (UIView *view in [self subviews]) {
-//            [view removeFromSuperview];
-//        }
-//        [self start];
-//        
-//    }else
-//    {
-//        for (UIView *view in [self subviews]) {
-//             [view removeFromSuperview];
-//        };
-//        [self start];
-//    }
+    CGFloat width=[UIScreen mainScreen].bounds.size.width;
+    CGFloat height=[UIScreen mainScreen].bounds.size.height;
+    if(width/height<1.0)
+    {
+        for (UIView *view in self.subviews) {
+            [view removeFromSuperview];
+        }
+        [self removeFromSuperview];
+        [self performSelector:@selector(setUpUI:) withObject:self.superview afterDelay:0.001];
+    }else
+    {
+        for (UIView *view in self.subviews) {
+             [view removeFromSuperview];
+        };
+        [self removeFromSuperview];
+        [self performSelector:@selector(setUpUI:) withObject:self.superview afterDelay:0.001];
+    }
 }
 
 - (NSMutableDictionary *)configDic{
@@ -1134,9 +1165,4 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomMainViewBlock,  wCustomMai
     }
     return _configDic;
 }
-
-- (void)dealloc{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
 @end

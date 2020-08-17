@@ -10,8 +10,8 @@
 //
 
 #import "CustomVC.h"
-
-@interface CustomVC (){
+@interface CustomVC ()<UITableViewDataSource>
+{
     WMZDialog *myAlert;
 }
 @end
@@ -157,6 +157,7 @@
 //饿了么
 - (void)elementDialog{
     __weak CustomVC *WEAK = self;
+    DialogWeakSelf(self)
     myAlert =
     Dialog()
     //重设frame 如果需要改变frame
@@ -176,6 +177,7 @@
     .wHideAnimationSet(AninatonZoomOut)
     
     .wMyDiaLogViewSet(^UIView *(UIView *mainView) {
+        DialogStrongSelf(weakObject)
         UIImageView *image = [UIImageView new];
         image.image = [UIImage imageNamed:@"down_tyx"];
         image.frame = CGRectMake((mainView.frame.size.width-70)/2, 15, 70, 70);
@@ -211,6 +213,7 @@
     })
     .wStart();
 }
+
 
 - (void)elementAction:(UIButton*)sender{
     NSLog(@"饿了么点击");

@@ -251,6 +251,10 @@
     }
     return _dataArr;
 }
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 @end
 
 @implementation WMZTree
