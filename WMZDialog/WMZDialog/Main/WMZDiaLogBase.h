@@ -32,6 +32,13 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithDetpth:(NSInteger)depth withName:(NSString*)name  withID:(NSString*)ID;
 @end
 
+//defaultCell
+@interface DialogCell:UITableViewCell
+//是否选中
+@property(nonatomic,assign)BOOL isSelected;
+//是否选中
+@property(nonatomic,strong)id model;
+@end
 
 
 @interface WMZDiaLogBase : UIView

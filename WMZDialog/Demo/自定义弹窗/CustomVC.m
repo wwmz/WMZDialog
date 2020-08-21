@@ -10,7 +10,7 @@
 //
 
 #import "CustomVC.h"
-@interface CustomVC ()<UITableViewDataSource>
+@interface CustomVC ()
 {
     WMZDialog *myAlert;
 }
@@ -86,6 +86,7 @@
         
         mainView.layer.masksToBounds = YES;
         mainView.layer.cornerRadius = 10;
+        [mainView layoutIfNeeded];
         return know;
     })
     .wStart();
@@ -156,7 +157,6 @@
 
 //饿了么
 - (void)elementDialog{
-    __weak CustomVC *WEAK = self;
     DialogWeakSelf(self)
     myAlert =
     Dialog()
@@ -205,7 +205,7 @@
         know.frame = CGRectMake(20, CGRectGetMaxY(text.frame)+15, mainView.frame.size.width-40, 44);
         [know setTitle:@"参加内侧" forState:UIControlStateNormal];
         know.backgroundColor = DialogColor(0x108ee9);
-        [know addTarget:WEAK action:@selector(elementAction:) forControlEvents:UIControlEventTouchUpInside];
+        [know addTarget:strongObject action:@selector(elementAction:) forControlEvents:UIControlEventTouchUpInside];
         
         mainView.layer.masksToBounds = YES;
         mainView.layer.cornerRadius = 10;

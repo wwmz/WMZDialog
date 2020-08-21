@@ -180,11 +180,6 @@ typedef void (^DialogMenuClickBlock)(id anyID,NSInteger section,NSInteger row);
 typedef void (^DialogTableClickBlock)(id anyID,NSIndexPath *path,DialogType type);
 
 /*
-* 自定义mainView
-*/
-typedef void (^DialogCustomMainViewBlock)(UIView *mainView);
-
-/*
  * UITableViewCell的block
  */
 typedef UITableViewCell* (^diaLogCellCallBlock)(NSIndexPath *indexPath,UITableView* tableView,id model);
@@ -213,5 +208,16 @@ typedef UIView* (^diaLogMyViewCallBlock)(UIView* mainView);
  * 自定义presrnt ios13视图
  */
 typedef UIView* (^diaLogPresentCallBlock)(UIView* mainView,UITableView *tableView);
+
+/*
+* 自定义View
+*/
+typedef void (^DialogCustomMainViewBlock)(UIView * mainView);
+typedef void (^DialogCustomTitle)        (UILabel * titleLa);
+typedef void (^DialogCustomMessage)      (UILabel * messageLa);
+typedef void (^DialogCustomOKBtn)        (UIButton * okBtn);
+typedef void (^DialogCustomCancelBtn)    (UIButton * cancelBtn);
+typedef void (^DialogCustomCloseBtn)     (UIButton * closeBtn);
+typedef void (^DialogCustomTextView)     (UITextView * textView);
 
 #endif /* WMZDialogMacro_h */

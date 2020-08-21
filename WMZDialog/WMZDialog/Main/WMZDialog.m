@@ -11,37 +11,29 @@
  *配置
  */
 @property(nonatomic,strong)NSMutableDictionary *configDic;
-
 @end
-
 @implementation WMZDialog
-
 WMZDialog * Dialog(void){
     return  [WMZDialog  new];
 }
-
 - (WMZDialog * _Nonnull (^)(void))wStart{
      return ^WMZDialog*(){
          [self setUpUI:nil];
          return self;
      };
 }
-
 - (WMZDialog * _Nonnull (^)(UIView * _Nonnull))wStartView{
     return ^WMZDialog*(UIView *startView){
         [self setUpUI:startView];
         return self;
     };
 }
-
 - (void)setUpUI:(nullable UIView*)startView{
     [self setUpDefaultParam];
     [self setUpUI];
     [self setUIdelagate:startView];
     [self addNotification];
 }
-
-
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                    wMultipleSelection)
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                    wSelectShowChecked)
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                      wOpenScrollClose)
@@ -63,6 +55,7 @@ WMZDialogSetFuncImplementation(WMZDialog, BOOL,                         wCanSele
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                 wTapViewTableViewFoot)
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                     wOpenCalanderRule)
 WMZDialogSetFuncImplementation(WMZDialog, DiaPopInView,                  wTapViewType)
+WMZDialogSetFuncImplementation(WMZDialog, NSInteger,                 wListScrollCount)
 WMZDialogSetFuncImplementation(WMZDialog, NSInteger,            wTableViewSectionHead)
 WMZDialogSetFuncImplementation(WMZDialog, NSArray*,                   wDateShowCircle)
 WMZDialogSetFuncImplementation(WMZDialog, UIView* ,                          wTapView)
@@ -90,7 +83,7 @@ WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                        wCance
 WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                         wLineAlpha)
 WMZDialogSetFuncImplementation(WMZDialog, id,                                   wData)
 WMZDialogSetFuncImplementation(WMZDialog, id,                                wSonData)
-WMZDialogSetFuncImplementation(WMZDialog, id,                       wListDefaultValue)
+WMZDialogSetFuncImplementation(WMZDialog, NSArray*,                 wListDefaultValue)
 WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                         wTitleFont)
 WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                       wMessageFont)
 WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                       wShadowAlpha)
@@ -147,6 +140,13 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogClickBlock,            wEventOKF
 WMZDialogSetFuncImplementation(WMZDialog, DialogClickBlock,        wEventCancelFinish)
 WMZDialogSetFuncImplementation(WMZDialog, DialogTableClickBlock,         wEventFinish)
 WMZDialogSetFuncImplementation(WMZDialog, DialogCustomMainViewBlock,  wCustomMainView)
+WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTitle,           wCustomTitleLa)
+WMZDialogSetFuncImplementation(WMZDialog, DialogCustomMessage,       wCustomMessageLa)
+WMZDialogSetFuncImplementation(WMZDialog, DialogCustomOKBtn,             wCustomOKBtn)
+WMZDialogSetFuncImplementation(WMZDialog, DialogCustomCancelBtn,     wCustomCancelBtn)
+WMZDialogSetFuncImplementation(WMZDialog, DialogCustomCloseBtn,       wCustomCloseBtn)
+WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTextView,       wCustomTextView)
+
 - (instancetype)init{
     if (self = [super init]) {
         _wType = DialogTypeNornal;
@@ -212,6 +212,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomMainViewBlock,  wCustomMai
         _wPopViewRectCorner = DialogRectCornerNone;
         _wOpenCalanderRule = YES;
         _wTag = 10086;
+        _wListScrollCount = 8;
     }
     return self;
 }
@@ -224,6 +225,16 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomMainViewBlock,  wCustomMai
  *根据type设置默认属性
  */
 - (void)setUpDefaultParam{
+    
+    if (self.wListDefaultValue&&[self.wListDefaultValue isKindOfClass:[NSArray class]]) {
+        
+        self.tempArr = [NSMutableArray arrayWithArray:self.wListDefaultValue];
+        if (self.tempArr.count>1&&!self.wMultipleSelection) {
+            NSMutableArray *temp = [NSMutableArray arrayWithObject:self.tempArr[0]];
+            self.tempArr = [NSMutableArray arrayWithArray:temp];
+        }
+    }
+    
     switch (self.wType) {
         case DialogTypeSheet:{
             if (self.wHeight == DialogHeight) {
@@ -506,7 +517,6 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomMainViewBlock,  wCustomMai
         [self.tableView setSeparatorInset:UIEdgeInsetsZero];
     }
     
-    
     if (self.wType == DialogTypeSelect ||
         self.wType == DialogTypeSheet ||
         self.wType == DialogTypePop||
@@ -526,7 +536,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomMainViewBlock,  wCustomMai
             }
         }
 
-        if ([self.wData count]>8) {
+        if ([self.wData count]>self.wListScrollCount) {
             self.tableView.scrollEnabled = YES;
         }else{
             self.tableView.scrollEnabled = NO;
@@ -721,12 +731,25 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomMainViewBlock,  wCustomMai
     
     self.mainView.center = center;
 
+    if (self.wCustomTitleLa) {
+        self.wCustomTitleLa(self.titleLabel);
+    }
+    if (self.wCustomMessageLa) {
+        self.wCustomTitleLa(self.textLabel);
+    }
+    if (self.wCustomOKBtn) {
+        self.wCustomOKBtn(self.OKBtn);
+    }
+    if (self.wCustomCancelBtn) {
+        self.wCustomCancelBtn(self.cancelBtn);
+    }
+    if (self.wCustomCloseBtn) {
+        self.wCustomCloseBtn(self.wCloseBtn);
+    }
     if (self.wCustomMainView) {
         self.wCustomMainView(self.mainView);
     }
 }
-
-
 /*
  *添加底部
  */
@@ -818,32 +841,44 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomMainViewBlock,  wCustomMai
 }
 
 # pragma  mark tableView 代理
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    return nil;
-}
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-    return nil;
-}
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 0.01;
-}
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 0.01;
-}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{return nil;}
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{return nil;}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{return 0.01;}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{return 0.01;}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return  self.wType == DialogTypeMenusSelect || self.wType == DialogTypeLocation?[[self getMyDataArr:tableView.tag withType:0] count]:[self.wData count];
+    return self.wType == DialogTypeMenusSelect || self.wType == DialogTypeLocation?[[self getMyDataArr:tableView.tag withType:0] count]:[self.wData count];
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     id data = (self.wType == DialogTypeMenusSelect || self.wType == DialogTypeLocation?[self getMyDataArr:tableView.tag withType:0]:self.wData)[indexPath.row];
+    BOOL isSelect = NO;
+    if (![data isKindOfClass:[WMZTree class]]) {
+        for (int i = 0; i<self.tempArr.count; i++) {
+            id obj = self.tempArr[i];
+            if (([obj isKindOfClass:[NSNumber class]]&&([obj intValue] == indexPath.row))||
+                ([obj isKindOfClass:[NSIndexPath class]]&&indexPath.row == [(NSIndexPath*)obj row])||
+                ([obj isKindOfClass:[NSString class]]&&[data isKindOfClass:[NSDictionary class]]&&
+                [data[@"id"] isEqualToString:obj])||
+                (([data isEqual:obj]))) {
+                isSelect = YES;
+                if ([self.selectArr indexOfObject:data] == NSNotFound) {
+                    [self.selectArr addObject:data];
+                }
+                if ([self.pathArr indexOfObject:indexPath] == NSNotFound) {
+                    [self.pathArr addObject:indexPath];
+                }
+                break;
+             }
+        }
+    }
+    if (self.wCustomCell) {
+        return self.wCustomCell(indexPath,self.tableView,data,isSelect);
+    }
     if (self.wMyCell) {
         return self.wMyCell(indexPath,self.tableView,data);
     }
-    if (self.wCustomCell) {
-        return self.wCustomCell(indexPath,self.tableView,data,YES);
-    }
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DiaLogCell"];
+    DialogCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DialogCell"];
     if (!cell) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"DiaLogCell"];
+        cell = [[DialogCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"DialogCell"];
     }
     cell.backgroundColor = [UIColor whiteColor];
     cell.tintColor = self.wOKColor;
@@ -864,72 +899,82 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomMainViewBlock,  wCustomMai
             cell.textLabel.textColor = self.wMessageColor;
             cell.accessoryType = UITableViewCellAccessoryNone;
         }
-    }else if([data isKindOfClass:[NSDictionary class]]){
-        NSString *iconStr = data[@"image"];
-        BOOL hasImage = NO;
-        if (iconStr&&[iconStr isKindOfClass:[NSString class]]&&iconStr.length) {
-            hasImage = YES;
-        }
-        UIImage *icon = [UIImage imageNamed:iconStr?:@" "];
-        cell.imageView.image = icon;
-        CGSize itemSize = CGSizeMake(hasImage?30:0, 30);
-        UIGraphicsBeginImageContextWithOptions(itemSize, NO, 0.0);
-        CGRect imageRect = CGRectMake(0, 0, itemSize.width, itemSize.height);
-        [icon drawInRect:imageRect];
-        cell.imageView.image = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        cell.textLabel.text = data[@"name"]?:@"";
-        BOOL isSelect = data[@"isSelected"]?[data[@"isSelected"] boolValue]:NO;
-        cell.textLabel.textColor =  isSelect?self.wOKColor:self.wMessageColor;
     }else{
-        NSString *cellID = [NSString stringWithFormat:@"%ld-%ld",indexPath.section,indexPath.row];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        if ([self.tempArr indexOfObject:cellID]!=NSNotFound) {
-            cell.accessoryType = self.wSelectShowChecked?UITableViewCellAccessoryCheckmark:UITableViewCellAccessoryNone;
+        if([data isKindOfClass:[NSDictionary class]]){
+            NSString *iconStr = data[@"image"];
+            BOOL hasImage = NO;
+            if (iconStr&&[iconStr isKindOfClass:[NSString class]]&&iconStr.length) {
+                hasImage = YES;
+            }
+            UIImage *icon = [UIImage imageNamed:iconStr?:@" "];
+            cell.imageView.image = icon;
+            CGSize itemSize = CGSizeMake(hasImage?30:0, 30);
+            UIGraphicsBeginImageContextWithOptions(itemSize, NO, 0.0);
+            CGRect imageRect = CGRectMake(0, 0, itemSize.width, itemSize.height);
+            [icon drawInRect:imageRect];
+            cell.imageView.image = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            cell.textLabel.text = data[@"name"]?:@"";
+            cell.textLabel.textColor =  isSelect?self.wOKColor:self.wMessageColor;
+        }else if([data isKindOfClass:[NSString class]]){
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.textLabel.textColor = self.wOKColor;
-        }else{
-            cell.accessoryType = UITableViewCellAccessoryNone;
-            cell.textLabel.textColor = self.wMessageColor;
+            if (isSelect) {
+                cell.accessoryType = self.wSelectShowChecked?UITableViewCellAccessoryCheckmark:UITableViewCellAccessoryNone;
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.textLabel.textColor = self.wOKColor;
+            }else{
+                cell.accessoryType = UITableViewCellAccessoryNone;
+                cell.textLabel.textColor = self.wMessageColor;
+            }
+            cell.textLabel.text = data;
         }
-        cell.textLabel.text = data;
     }
     return cell;
 }
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     //为0则自动计算高度
     return  self.wCellHeight?:UITableViewAutomaticDimension;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    id data = (self.wType == DialogTypeMenusSelect || self.wType == DialogTypeLocation?[self getMyDataArr:tableView.tag withType:0]:self.wData)[indexPath.row];
+    if (self.wSelectCell) {
+        self.wSelectCell(indexPath,tableView,data);return;
+    }
+    BOOL isSelect = NO;
+    NSInteger index = NSNotFound;
+    for (int i = 0; i<self.tempArr.count; i++) {
+        id obj = self.tempArr[i];
+        if (([obj isKindOfClass:[NSNumber class]]&&([obj intValue] == indexPath.row))||
+            ([obj isKindOfClass:[NSIndexPath class]]&&indexPath.row == [(NSIndexPath*)obj row])||
+            ([obj isKindOfClass:[NSString class]]&&[data isKindOfClass:[NSDictionary class]]&&
+            [data[@"id"] isEqualToString:obj])||
+            (([data isEqual:obj]))) {
+            isSelect = YES;
+            index = i;
+            break;
+         }
+    }
+    if (isSelect&&self.wMultipleSelection) {
+        [self.tempArr removeObjectAtIndex:index];
+        [self.selectArr removeObjectAtIndex:index];
+        [self.pathArr removeObjectAtIndex:index];
+    }
+    if (!isSelect) {
+        if (!self.wMultipleSelection) {
+            [self.tempArr removeAllObjects];
+            [self.selectArr removeAllObjects];
+            [self.pathArr removeAllObjects];
+        }
+        [self.tempArr addObject:indexPath];
+        [self.selectArr addObject:data];
+        [self.pathArr addObject:indexPath];
+    }
+
     if (self.wType == DialogTypeMenusSelect || self.wType == DialogTypeLocation) {
         [self selectWithTableView:tableView withIndexPath:indexPath];
     }else{
-        NSString *cellID = [NSString stringWithFormat:@"%ld-%ld",indexPath.section,indexPath.row];
-        id any = self.wData[indexPath.row];
-        if (self.wSelectCell) {
-            self.wSelectCell(indexPath,tableView,any);return;
-        }
-        NSMutableDictionary *mdic = [NSMutableDictionary new];
-        if ([self.tempArr indexOfObject:cellID]==NSNotFound) {
-            if ([any isKindOfClass:[NSDictionary class]]) {
-                mdic = [NSMutableDictionary dictionaryWithDictionary:any];
-                [mdic setValue:@(YES) forKey:@"isSelected"];
-                any = [NSDictionary dictionaryWithDictionary:mdic];
-            }
-            [self.selectArr addObject:any];
-            [self.tempArr addObject:cellID];
-            [self.pathArr addObject:indexPath];
-        }else{
-            if ([any isKindOfClass:[NSDictionary class]]) {
-                mdic = [NSMutableDictionary dictionaryWithDictionary:any];
-                [mdic setValue:@(NO) forKey:@"isSelected"];
-                any = [NSDictionary dictionaryWithDictionary:mdic];
-            }
-            [self.selectArr removeObject:any];
-            [self.pathArr removeObject:indexPath];
-            [self.tempArr removeObject:cellID];
-        }
         [self.tableView reloadData];
         if (!self.wMultipleSelection) {
             if (self.wType != DialogTypeCardPresent) {
@@ -937,7 +982,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomMainViewBlock,  wCustomMai
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [weakObject closeView:^{
                            if (weakObject.wEventFinish) {
-                               weakObject.wEventFinish(any, indexPath,weakObject.wType);
+                               weakObject.wEventFinish(data, indexPath,weakObject.wType);
                            }
                        }];
                 });

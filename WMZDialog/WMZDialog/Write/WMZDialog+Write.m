@@ -48,6 +48,9 @@ static NSString *oneLineHeightKey = @"oneLineHeight"; //oneLineHeight的key
     UIView *view =  [self addBottomView:CGRectGetMaxY(self.writeView.frame)+self.wMainOffsetY];
     [self.OKBtn removeTarget:self action:NSSelectorFromString(@"OKAction:") forControlEvents:UIControlEventTouchUpInside];
     [self.OKBtn addTarget:self action:@selector(writeOKAction:) forControlEvents:UIControlEventTouchUpInside];
+    if (self.wCustomTextView) {
+        self.wCustomTextView(self.writeView);
+    }
     [self reSetMainViewFrame:CGRectMake(0, 0, self.wWidth, CGRectGetMaxY(view.frame))];
     
     return self.mainView;
@@ -62,7 +65,6 @@ static NSString *oneLineHeightKey = @"oneLineHeight"; //oneLineHeight的key
         
     }
 }
-
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {

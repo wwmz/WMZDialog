@@ -275,3 +275,6 @@
 }
 
 @end
+
+@implementation DialogCell
+@end

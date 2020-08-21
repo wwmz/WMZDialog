@@ -42,9 +42,38 @@
 //展示所有属性
 - (void)showAllProperties{
     Dialog()
+    //自定义视图
+    .wCustomTextViewSet(^(UITextView *textView) {
+        
+    })
+    .wCustomMessageLaSet(^(UILabel *messageLa) {
+        
+    })
+    .wCustomOKBtnSet(^(UIButton *okBtn) {
+        
+    })
+    .wCustomCloseBtnSet(^(UIButton *closeBtn) {
+        
+    })
+    .wCustomCancelBtnSet(^(UIButton *cancelBtn) {
+        
+    })
+    .wCustomMainViewSet(^(UIView *mainView) {
+        
+    })
     //自定义cell内容
     .wMyCellSet(^UITableViewCell *(NSIndexPath *indexPath, UITableView *tableView, id model) {
         return [UITableViewCell new];
+    })
+    //自定义cell内容 带选中select
+    .wCustomCellSet(^UITableViewCell *(NSIndexPath *indexPath, UITableView *tableView, id model, BOOL isSelected) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+        if (!cell) {
+            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+        }
+        cell.textLabel.textColor = isSelected?[UIColor redColor]:[UIColor blueColor];
+        cell.textLabel.text = model;
+        return cell;
     })
     .wSeparatorSet(@",")
     //出现时候的动画
@@ -181,6 +210,10 @@
     .wMultipleSelectionSet(NO)
     //选中是否显示打钩
     .wSelectShowCheckedSet(NO)
+    //自定义视图
+    .wCustomTitleLaSet(^(UILabel *titleLa) {
+       
+    })
     //开始
     .wStart();
 }

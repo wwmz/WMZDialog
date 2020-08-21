@@ -16,7 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-     self.dataArr = @[@"单选",@"多选",@"多选(底部取消)"];
+     self.dataArr = @[@"单选",@"多选",@"多选(底部取消)",@"传字典"];
 }
 
 -(void)action:(UIButton*)sender{
@@ -29,6 +29,10 @@
             .wEventFinishSet(^(id anyID,NSIndexPath *path, DialogType type) {
                 NSLog(@"%@",anyID);
             })
+            //默认选中第二个
+            .wListDefaultValueSet(@[@(1)])
+            //默认选中男
+//            .wListDefaultValueSet(@[@"男"])
             .wStart();
         }
             break;
@@ -39,6 +43,8 @@
                 NSLog(@"确定 %@",anyID);
             })
             .wDataSet(@[@"男",@"女",@"保密"])
+            //默认选中男,女
+            .wListDefaultValueSet(@[@"男",@"女"])
             .wMultipleSelectionSet(YES)
             .wSelectShowCheckedSet(YES)
             .wStart();
@@ -57,6 +63,19 @@
             .wMultipleSelectionSet(YES)
             .wShowAnimationSet(AninatonShowTop)
             .wHideAnimationSet(AninatonHideTop)
+            .wStart();
+        }
+            break;
+            
+        case 3:{
+            Dialog().wTypeSet(DialogTypeSheet)
+            .wDataSet(@[@{@"name":@"男",@"id":@"1"},
+                        @{@"name":@"女",@"id":@"2"},
+                        @{@"name":@"未知",@"id":@"3"}])
+            .wTitleSet(@"")
+            .wCancelTitleSet(@"")//隐藏底部取消按钮
+            //默认选中id为3
+            .wListDefaultValueSet(@[@"3"])
             .wStart();
         }
             break;

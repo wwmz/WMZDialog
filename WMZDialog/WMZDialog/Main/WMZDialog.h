@@ -23,7 +23,7 @@ WMZDialog * Dialog(void);
 /*=========================================通用=================================================*/
 //数据源 
 WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, id,                       wData)
-//设置弹窗tag 防止快读点击重复弹出
+//设置弹窗tag 防止快读点击重复弹出 
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, NSInteger,                wTag)
 //弹窗type
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, DialogType,               wType)
@@ -31,8 +31,12 @@ WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, DialogType,        
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, DialogShowAnination,      wShowAnimation)
 //弹窗消失的动画
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, DialogHideAnination,      wHideAnimation)
-//弹窗动画时间
+//弹窗动画时间 
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, NSTimeInterval,           wAnimationDurtion)
+//列表默认选中 可传/model/@(index)/字符串/{@"id"}/ 的数组 单个表示单选 多个表示多选
+WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, NSArray*,                 wListDefaultValue)
+//列表达到滚动的个数 default 8
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, NSInteger,                wListScrollCount)
 //弹窗的宽度
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGFloat,                  wWidth)
 //弹窗的高度
@@ -95,8 +99,6 @@ WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,              
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wMultipleSelection)
 //选中是否打钩
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wSelectShowChecked)
-//列表默认选中
-WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, id,                       wListDefaultValue)
 
 /*=========================================disappear=======================================================================*/
 //自动消失时间
@@ -236,8 +238,6 @@ WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, NSString*,         
 /*=========================================Attributes==========================================*/
 
 /*=========================================Event================================================*/
-//自定义mainView 可改变frame
-WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogCustomMainViewBlock,wCustomMainView)
 //自定义tableviewCell
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, diaLogCellCallBlock,      wMyCell)
 //自定义tableviewCell (带是否选中isSelected 参数)
@@ -262,6 +262,23 @@ WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DiaLogCollectionCel
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DiaLogCollectionClickBlock,wCalanderCellClick)
 
 /*=========================================Event================================================*/
+
+/*=========================================CustomView================================================*/
+//自定义mainView 可改变frame
+WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogCustomMainViewBlock,wCustomMainView)
+//自定义TitleLa
+WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogCustomTitle,wCustomTitleLa)
+//自定义MessageLa
+WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogCustomMessage,wCustomMessageLa)
+//自定义OKBtn
+WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogCustomOKBtn,wCustomOKBtn)
+//自定义CancelBtn
+WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogCustomCancelBtn,wCustomCancelBtn)
+//自定义closeBtn
+WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogCustomCloseBtn,wCustomCloseBtn)
+//自定义TextView
+WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogCustomTextView,wCustomTextView)
+/*=========================================CustomView================================================*/
 
 /*=========================================参数说明=====================================================================
 
