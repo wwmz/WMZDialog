@@ -218,7 +218,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTextView,       wCustomTex
 }
 - (void)addNotification{
     //监听横竖屏
-//    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(change:) name:UIDeviceOrientationDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(change:) name:UIDeviceOrientationDidChangeNotification object:nil];
 }
 
 /*
@@ -1163,23 +1163,20 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTextView,       wCustomTex
  */
 -(void)change:(NSNotification*)notification
 {
-    CGFloat width=[UIScreen mainScreen].bounds.size.width;
-    CGFloat height=[UIScreen mainScreen].bounds.size.height;
-    if(width/height<1.0)
-    {
-        for (UIView *view in self.subviews) {
-            [view removeFromSuperview];
+    NSMutableArray *marr = [NSMutableArray new];
+    [marr addObject:self];
+    while (marr.count) {
+        UIView *view = marr.firstObject;
+        [marr removeLastObject];
+        if (view.subviews.count) {
+            for (UIView *sonView in view.subviews) {
+                 [sonView removeFromSuperview];
+                 [marr addObject:sonView];
+             }
         }
-        [self removeFromSuperview];
-        [self performSelector:@selector(setUpUI:) withObject:self.superview afterDelay:0.001];
-    }else
-    {
-        for (UIView *view in self.subviews) {
-             [view removeFromSuperview];
-        };
-        [self removeFromSuperview];
-        [self performSelector:@selector(setUpUI:) withObject:self.superview afterDelay:0.001];
     }
+    [self removeFromSuperview];
+    [self performSelector:@selector(setUpUI:) withObject:self.superview afterDelay:0.001];
 }
 
 - (NSMutableDictionary *)configDic{
