@@ -218,7 +218,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTextView,       wCustomTex
 }
 - (void)addNotification{
     //监听横竖屏
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(change:) name:UIDeviceOrientationDidChangeNotification object:nil];
+//    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(change:) name:UIDeviceOrientationDidChangeNotification object:nil];
 }
 
 /*
@@ -560,12 +560,13 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTextView,       wCustomTex
     if (self.wMyDiaLogView) {
         [self showView:showView];
         UIView *bottomView = self.wMyDiaLogView(self.mainView);
+        [self.mainView layoutIfNeeded];
         [bottomView layoutIfNeeded];
         if (self.wAddBottomView) {
             UIView *addBottomView  = [self addBottomView:CGRectGetMaxY(bottomView.frame)+self.wMainOffsetY];
             [self reSetMainViewFrame:CGRectMake(0, 0, self.wWidth, CGRectGetMaxY(addBottomView.frame)+self.wMainOffsetY)];
         }else{
-            [self reSetMainViewFrame:CGRectMake(0, 0, self.wWidth, CGRectGetMaxY(bottomView.frame)+self.wMainOffsetY)];
+            [self reSetMainViewFrame:CGRectMake(0, 0, self.wWidth, CGRectGetMaxY(bottomView.frame))];
         }
     }else{
         SEL sel = NSSelectorFromString(self.configDic[@(self.wType)]);
