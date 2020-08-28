@@ -184,10 +184,19 @@ typedef void (^DialogTableClickBlock)(id anyID,NSIndexPath *path,DialogType type
  */
 typedef UITableViewCell* (^diaLogCellCallBlock)(NSIndexPath *indexPath,UITableView* tableView,id model);
 
+
+
+/*
+ * UITableViewCell点击的block
+ */
+typedef void (^diaLogCellSelectlock)(NSIndexPath *indexPath,UITableView* tableView,id model);
+
 /*
  * UITableViewCell的block
  */
 typedef UITableViewCell* (^diaLogCustomCellBlock)(NSIndexPath *indexPath,UITableView* tableView,id model,BOOL isSelected);
+
+
 
 /*
  * collectionCell的block

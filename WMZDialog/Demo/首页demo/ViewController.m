@@ -61,6 +61,9 @@
     .wCustomMainViewSet(^(UIView *mainView) {
         
     })
+//    .wSelectCellSet(^UITableViewCell *(NSIndexPath *indexPath, UITableView *tableView, id model) {
+//
+//    })
     //自定义cell内容
     .wMyCellSet(^UITableViewCell *(NSIndexPath *indexPath, UITableView *tableView, id model) {
         return [UITableViewCell new];
@@ -82,6 +85,7 @@
     .wHideAnimationSet(1)
     //动画持续时间
     .wAnimationDurtionSet(0.7)
+    
     //下拉无限级菜单选中事件
     .wEventMenuClickSet( ^(id anyID, NSInteger section, NSInteger row) {
         NSLog(@"菜单点击方法 当前选中值:%@ 当前选中列:%ld 当前选中行:%ld",anyID,section,row);

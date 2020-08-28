@@ -129,7 +129,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DiaDirection,                    wDire
 WMZDialogSetFuncImplementation(WMZDialog, diaLogCustomCellBlock,          wCustomCell)
 WMZDialogSetFuncImplementation(WMZDialog, diaLogPresentCallBlock,     wParentHeadView)
 WMZDialogSetFuncImplementation(WMZDialog, diaLogPresentCallBlock,   wParentBottomView)
-WMZDialogSetFuncImplementation(WMZDialog, diaLogCellCallBlock,            wSelectCell)
+WMZDialogSetFuncImplementation(WMZDialog, diaLogCellSelectlock,           wSelectCell)
 WMZDialogSetFuncImplementation(WMZDialog, DialogClickBlock,               wEventClose)
 WMZDialogSetFuncImplementation(WMZDialog, DialogMenuClickBlock,       wEventMenuClick)
 WMZDialogSetFuncImplementation(WMZDialog, diaLogMyViewCallBlock,        wMyDiaLogView)

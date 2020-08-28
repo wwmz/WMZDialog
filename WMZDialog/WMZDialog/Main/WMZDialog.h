@@ -243,7 +243,7 @@ WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, diaLogCellCallBlock
 //自定义tableviewCell (带是否选中isSelected 参数)
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, diaLogCustomCellBlock,    wCustomCell)
 //自定义点击tableviewCell
-WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, diaLogCellCallBlock,      wSelectCell)
+WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, diaLogCellSelectlock,     wSelectCell)
 //自定义弹窗视图内容
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, diaLogMyViewCallBlock,    wMyDiaLogView)
 //按钮确定点击事件
