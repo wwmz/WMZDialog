@@ -35,7 +35,7 @@
     }else{
         if (self.wTitle&&self.wTitle.length) {
             [self.mainView addSubview:self.titleLabel];
-            self.titleLabel.frame = CGRectMake(self.wMainOffsetX,self.wTitle.length?self.wMainOffsetY:0, self.wWidth-self.wMainOffsetX*2, [WMZDialogTool heightForTextView:CGSizeMake(self.wWidth-self.wMainOffsetX*2, CGFLOAT_MAX) WithText:self.titleLabel.text WithFont:self.titleLabel.font.pointSize]);
+            self.titleLabel.frame = CGRectMake(self.wMainOffsetX,self.wTitle.length?self.wMainOffsetY:0, self.wWidth-self.wMainOffsetX*2, [WMZDialogTool sizeForTextView:CGSizeMake(self.wWidth-self.wMainOffsetX*2, CGFLOAT_MAX) text:self.titleLabel.text font:self.titleLabel.font.pointSize].height);
         }
     }
     self.tableView.frame = CGRectMake(0, headView?
@@ -59,7 +59,7 @@
     }
     [self reSetMainViewFrame:CGRectMake(0, 0, self.wWidth, !hadBottomCancel?CGRectGetMaxY(self.tableView.frame):CGRectGetMaxY(self.cancelBtn.frame))];
     //设置只有一半圆角
-    [WMZDialogTool setView:self.mainView Radii:CGSizeMake(self.wMainRadius,self.wMainRadius) RoundingCorners:UIRectCornerTopLeft |UIRectCornerTopRight];
+    [WMZDialogTool setView:self.mainView radio:CGSizeMake(self.wMainRadius,self.wMainRadius) roundingCorners:UIRectCornerTopLeft |UIRectCornerTopRight];
      return self.mainView;
 }
 

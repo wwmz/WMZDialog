@@ -156,7 +156,7 @@ static  const void *todayKey = @"todayKey";
     self.currentIndex = NumberMounthes;
 
     [self reSetMainViewFrame:CGRectMake(0,0,self.wWidth, CGRectGetMaxY(self.collectionView.frame))];
-    [WMZDialogTool setView:self.mainView Radii:CGSizeMake(self.wMainRadius,self.wMainRadius) RoundingCorners:UIRectCornerTopLeft |UIRectCornerTopRight];
+    [WMZDialogTool setView:self.mainView radio:CGSizeMake(self.wMainRadius,self.wMainRadius) roundingCorners:UIRectCornerTopLeft |UIRectCornerTopRight];
     return self.mainView;
 }
 
@@ -330,7 +330,10 @@ static  const void *todayKey = @"todayKey";
             }
         }
         if (self.wOpenCalanderRule&&!connect) {
-            Alert(@"请选择连续的时间段");
+            Dialog()
+            .wMessageSet(@"请选择连续的时间段")
+            .wTagSet(100)
+            .wStart();
             return;
         }
     }
@@ -572,13 +575,13 @@ static  const void *todayKey = @"todayKey";
 - (void)UI{
     CGRect frame =  self.frame;
     
-    [self addSubview:self.dateLable];
+    [self.contentView addSubview:self.dateLable];
     self.dateLable.frame = CGRectMake(0, 0, frame.size.width, frame.size.height*0.5);
     
-    [self addSubview:self.chineseLable];
+    [self.contentView addSubview:self.chineseLable];
     self.chineseLable.frame = CGRectMake(0, CGRectGetMaxY(self.dateLable.frame), frame.size.width, frame.size.height*0.3);
     
-    [self addSubview:self.circleLabel];
+    [self.contentView addSubview:self.circleLabel];
     self.circleLabel.frame = CGRectMake(0, CGRectGetMaxY(self.chineseLable.frame), frame.size.width, 10);
     
 }
@@ -618,10 +621,10 @@ static  const void *todayKey = @"todayKey";
 - (void)UI{
     CGRect frame =  self.frame;
     
-    [self addSubview:self.dateLable];
+    [self.contentView addSubview:self.dateLable];
     self.dateLable.frame = CGRectMake(0, 0, frame.size.width, frame.size.height*0.6);
     
-    [self addSubview:self.circleLabel];
+    [self.contentView addSubview:self.circleLabel];
     self.circleLabel.frame = CGRectMake(0, CGRectGetMaxY(self.dateLable.frame), frame.size.width, 10);
     
 }

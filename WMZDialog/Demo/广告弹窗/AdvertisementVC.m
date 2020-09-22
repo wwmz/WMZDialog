@@ -22,6 +22,10 @@
 -(void)action:(UIButton*)sender{
      Dialog()
      .wTypeSet(DialogTypeAdvertisement)
+//      //自定义图片
+//     .wCustomImageViewSet(^(UIImageView *imageView) {
+//
+//     })
      .wEventFinishSet(^(id anyID, NSIndexPath *path, DialogType type) {
          NSLog(@"%@",anyID);
      })

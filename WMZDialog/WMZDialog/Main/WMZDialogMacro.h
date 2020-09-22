@@ -228,5 +228,5 @@ typedef void (^DialogCustomOKBtn)        (UIButton * okBtn);
 typedef void (^DialogCustomCancelBtn)    (UIButton * cancelBtn);
 typedef void (^DialogCustomCloseBtn)     (UIButton * closeBtn);
 typedef void (^DialogCustomTextView)     (UITextView * textView);
-
+typedef void (^DialogCustomImageView)    (UIImageView * imageView);
 #endif /* WMZDialogMacro_h */

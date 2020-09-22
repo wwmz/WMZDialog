@@ -21,7 +21,7 @@
         [self.mainView addSubview:downImage];
     }
     [self.mainView addSubview:self.textLabel];
-    CGSize size = [WMZDialogTool sizeForTextView:CGSizeMake(self.wWidth-self.wMainOffsetX*2, CGFLOAT_MAX) WithText:self.textLabel.text WithFont:self.textLabel.font.pointSize];
+    CGSize size = [WMZDialogTool sizeForTextView:CGSizeMake(self.wWidth-self.wMainOffsetX*2, CGFLOAT_MAX) text:self.textLabel.text font:self.textLabel.font.pointSize];
     if (downImage) {
         size.width = self.wWidth-self.wMainOffsetX*2;
     }

@@ -18,6 +18,9 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(advertTapAction)];
     [image addGestureRecognizer:tap];
     [self.mainView addSubview:image];
+    if (self.wCustomImageView) {
+        self.wCustomImageView(image);
+    }
 
     self.wCloseBtn.frame = CGRectMake((self.wWidth-self.wMainBtnHeight)/2, CGRectGetMaxY(image.frame)+self.wMainOffsetY, self.wMainBtnHeight, self.wMainBtnHeight);
     [self.wCloseBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

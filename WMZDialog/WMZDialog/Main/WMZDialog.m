@@ -119,6 +119,7 @@ WMZDialogSetFuncImplementation(WMZDialog, NSDate*,                           wMa
 WMZDialogSetFuncImplementation(WMZDialog, NSDate*,                           wMinDate)
 WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                wPopViewBorderWidth)
 WMZDialogSetFuncImplementation(WMZDialog, UIColor*,               wPopViewBorderColor)
+WMZDialogSetFuncImplementation(WMZDialog, DialogCustomImageView,     wCustomImageView)
 WMZDialogSetFuncImplementation(WMZDialog, DialogRectCorner,        wPopViewRectCorner)
 WMZDialogSetFuncImplementation(WMZDialog, DialogType,                           wType)
 WMZDialogSetFuncImplementation(WMZDialog, DialogShowAnination,         wShowAnimation)
@@ -423,9 +424,14 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTextView,       wCustomTex
             }
         }
             break;
+        case  DialogTypeMyView:{
+            if (self.wHeight == DialogHeight) {
+                self.wHeight = 0;
+            }
+            break;
+        }
         case DialogTypeNornal:
              DialogTypeSelect:
-             DialogTypeMyView:
              DialogTypeWrite:
              DialogTypeTime:
              DialogTypeDown:
@@ -562,11 +568,13 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTextView,       wCustomTex
         UIView *bottomView = self.wMyDiaLogView(self.mainView);
         [self.mainView layoutIfNeeded];
         [bottomView layoutIfNeeded];
+        BOOL customHeight = (self.wHeight>0);
         if (self.wAddBottomView) {
             UIView *addBottomView  = [self addBottomView:CGRectGetMaxY(bottomView.frame)+self.wMainOffsetY];
-            [self reSetMainViewFrame:CGRectMake(0, 0, self.wWidth, CGRectGetMaxY(addBottomView.frame)+self.wMainOffsetY)];
+            [self reSetMainViewFrame:CGRectMake(0, 0, self.wWidth, customHeight?self.wHeight:(CGRectGetMaxY(addBottomView.frame)+self.wMainOffsetY))];
         }else{
-            [self reSetMainViewFrame:CGRectMake(0, 0, self.wWidth, CGRectGetMaxY(bottomView.frame))];
+            
+            [self reSetMainViewFrame:CGRectMake(0, 0, self.wWidth, customHeight?self.wHeight:CGRectGetMaxY(bottomView.frame))];
         }
     }else{
         SEL sel = NSSelectorFromString(self.configDic[@(self.wType)]);
@@ -786,10 +794,10 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTextView,       wCustomTex
     [self.bottomView addSubview:self.OKBtn];
     self.OKBtn.frame = CGRectMake(self.wEventCancelFinish?CGRectGetMaxX(self.cancelBtn.frame)+DialogK1px:0, CGRectGetMaxY(upLine.frame)+self.wMainOffsetX,self.wEventCancelFinish?self.wWidth/2-DialogK1px/2:self.wWidth, self.wMainBtnHeight);
     
-    CGSize OKSize = [WMZDialogTool sizeForTextView:CGSizeMake(self.wWidth - self.wMainOffsetX, CGFLOAT_MAX) WithText:self.wOKTitle WithFont:self.wOKFont];
+    CGSize OKSize = [WMZDialogTool sizeForTextView:CGSizeMake(self.wWidth - self.wMainOffsetX, CGFLOAT_MAX) text:self.wOKTitle font:self.wOKFont];
     CGSize cancelSize ;
     if (self.wEventCancelFinish) {
-        cancelSize = [WMZDialogTool sizeForTextView:CGSizeMake(self.wWidth - self.wMainOffsetX, CGFLOAT_MAX) WithText:self.wCancelTitle WithFont:self.wCancelFont];
+        cancelSize = [WMZDialogTool sizeForTextView:CGSizeMake(self.wWidth - self.wMainOffsetX, CGFLOAT_MAX) text:self.wCancelTitle font:self.wCancelFont];
     }
     if (OKSize.width >self.OKBtn.frame.size.width - self.wMainOffsetX||
         cancelSize.width >self.OKBtn.frame.size.width - self.wMainOffsetX) {

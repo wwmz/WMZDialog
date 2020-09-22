@@ -21,7 +21,7 @@ static NSString *progressViewKey = @"progressView"; //progressView的key
     [self.mainView addSubview:downImage];
     
     [self.mainView addSubview:self.titleLabel];
-    self.titleLabel.frame = CGRectMake(self.wMainOffsetX, CGRectGetMaxY(downImage.frame)+ (self.wTitle.length?self.wMainOffsetY:0), self.wWidth-self.wMainOffsetX*2, [WMZDialogTool heightForTextView:CGSizeMake(self.wWidth-self.wMainOffsetX*2, CGFLOAT_MAX) WithText:self.titleLabel.text WithFont:self.titleLabel.font.pointSize]);
+    self.titleLabel.frame = CGRectMake(self.wMainOffsetX, CGRectGetMaxY(downImage.frame)+ (self.wTitle.length?self.wMainOffsetY:0), self.wWidth-self.wMainOffsetX*2, [WMZDialogTool sizeForTextView:CGSizeMake(self.wWidth-self.wMainOffsetX*2, CGFLOAT_MAX) text:self.titleLabel.text font:self.titleLabel.font.pointSize].height);
     
     [self.mainView addSubview:self.progressView];
     self.progressView.frame = CGRectMake(self.wMainOffsetX, CGRectGetMaxY(self.titleLabel.frame)+self.wMainOffsetY, self.wWidth*0.75, Dialog_GetWNum(20));

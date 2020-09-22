@@ -21,22 +21,22 @@ static NSString *oneLineHeightKey = @"oneLineHeight"; //oneLineHeight的key
         self.wWirteTextMaxLine = 7;
     }
     [self.mainView addSubview:self.titleLabel];
-    self.titleLabel.frame = CGRectMake(self.wMainOffsetX, self.wTitle.length?self.wMainOffsetY:0, self.wWidth-self.wMainOffsetX*2, [WMZDialogTool heightForTextView:CGSizeMake(self.wWidth-self.wMainOffsetX*2, CGFLOAT_MAX) WithText:self.titleLabel.text WithFont:self.titleLabel.font.pointSize]);
+    self.titleLabel.frame = CGRectMake(self.wMainOffsetX, self.wTitle.length?self.wMainOffsetY:0, self.wWidth-self.wMainOffsetX*2, [WMZDialogTool sizeForTextView:CGSizeMake(self.wWidth-self.wMainOffsetX*2, CGFLOAT_MAX) text:self.titleLabel.text font:self.titleLabel.font.pointSize].height);
     
     [self.mainView addSubview:self.textLabel];
-    self.textLabel.frame =  CGRectMake(self.wMainOffsetX,CGRectGetMaxY(self.titleLabel.frame)+ ( self.wMessage.length?self.wMainOffsetY:0), self.wWidth-self.wMainOffsetX*2, [WMZDialogTool heightForTextView:CGSizeMake(self.wWidth-self.wMainOffsetX*2, CGFLOAT_MAX) WithText:self.textLabel.text WithFont:self.textLabel.font.pointSize]);
+    self.textLabel.frame =  CGRectMake(self.wMainOffsetX,CGRectGetMaxY(self.titleLabel.frame)+ ( self.wMessage.length?self.wMainOffsetY:0), self.wWidth-self.wMainOffsetX*2, [WMZDialogTool sizeForTextView:CGSizeMake(self.wWidth-self.wMainOffsetX*2, CGFLOAT_MAX) text:self.textLabel.text font:self.textLabel.font.pointSize].height);
     
     
     [self.mainView addSubview:self.writeView];
-    self.writeView.frame = CGRectMake(self.wMainOffsetX,CGRectGetMaxY(self.textLabel.frame)+self.wMainOffsetY, self.wWidth-self.wMainOffsetX*2, [WMZDialogTool heightForTextView:CGSizeMake(self.wWidth-self.wMainOffsetX*2, CGFLOAT_MAX) WithText:self.wWriteDefaultText?:@"占位" WithFont:self.writeView.font.pointSize]+22.0);
+    self.writeView.frame = CGRectMake(self.wMainOffsetX,CGRectGetMaxY(self.textLabel.frame)+self.wMainOffsetY, self.wWidth-self.wMainOffsetX*2, [WMZDialogTool sizeForTextView:CGSizeMake(self.wWidth-self.wMainOffsetX*2, CGFLOAT_MAX) text:self.wWriteDefaultText?:@"占位" font:self.writeView.font.pointSize].height+22.0);
     if (self.wWriteDefaultText) {
         self.writeView.text = self.wWriteDefaultText;
     }
     
-    self.oneLineHeight = @([self heightForTextView:CGSizeMake(self.writeView.contentSize.width , CGFLOAT_MAX) WithText:@"测试"]);
+    self.oneLineHeight = @([self sizeForTextView:CGSizeMake(self.writeView.contentSize.width , CGFLOAT_MAX) WithText:@"测试"]);
     
     
-    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(3, 4, self.wWidth-self.wMainOffsetX*2-6, [WMZDialogTool heightForTextView:CGSizeMake(self.wWidth-self.wMainOffsetX*2, CGFLOAT_MAX) WithText:@"占位" WithFont:self.writeView.font.pointSize]+10)];
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(3, 4, self.wWidth-self.wMainOffsetX*2-6, [WMZDialogTool sizeForTextView:CGSizeMake(self.wWidth-self.wMainOffsetX*2, CGFLOAT_MAX) text:@"占位" font:self.writeView.font.pointSize].height+10)];
     label.enabled = NO;
     label.tag = 999;
     label.text = self.wPlaceholder;
@@ -92,10 +92,10 @@ static NSString *oneLineHeightKey = @"oneLineHeight"; //oneLineHeight的key
     
     float fPadding = 10;
     CGSize constraint = CGSizeMake(textView.contentSize.width - fPadding, CGFLOAT_MAX);
-    height = [WMZDialogTool heightForTextView:constraint WithText:mainText WithFont:self.writeView.font.pointSize]+22.0;
+    height = [WMZDialogTool sizeForTextView:constraint text:mainText font:self.writeView.font.pointSize].height+22.0;
     
     if (!mainText.length) {
-        height =  [WMZDialogTool heightForTextView:CGSizeMake(self.wWidth-self.wMainOffsetX*2, CGFLOAT_MAX) WithText:@"占位" WithFont:self.writeView.font.pointSize]+22.0;
+        height =  [WMZDialogTool sizeForTextView:CGSizeMake(self.wWidth-self.wMainOffsetX*2, CGFLOAT_MAX) text:@"占位" font:self.writeView.font.pointSize].height+22.0;
     }
 
     line = (height-22.0)/self.oneLineHeight.floatValue;
@@ -149,7 +149,7 @@ static NSString *oneLineHeightKey = @"oneLineHeight"; //oneLineHeight的key
 }
 #pragma clang diagnostic pop
 
-- (float)heightForTextView:(CGSize)constraint WithText: (NSString *) strText{
+- (float)sizeForTextView:(CGSize)constraint WithText: (NSString *) strText{
     CGRect size = [strText boundingRectWithSize:constraint
                                         options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading)
                                      attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:self.wMessageFont]}

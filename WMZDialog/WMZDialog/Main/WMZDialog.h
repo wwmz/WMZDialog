@@ -23,7 +23,7 @@ WMZDialog * Dialog(void);
 /*=========================================通用=================================================*/
 //数据源 
 WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, id,                       wData)
-//设置弹窗tag 防止快读点击重复弹出 
+//设置弹窗tag 防止快速点击重复弹出 (也可同个设置不同tag 依次弹出)
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, NSInteger,                wTag)
 //弹窗type
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, DialogType,               wType)
@@ -278,6 +278,8 @@ WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogCustomCancelB
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogCustomCloseBtn,wCustomCloseBtn)
 //自定义TextView
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogCustomTextView,wCustomTextView)
+//自定义ImageView
+WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogCustomImageView,wCustomImageView)
 /*=========================================CustomView================================================*/
 
 /*=========================================参数说明=====================================================================

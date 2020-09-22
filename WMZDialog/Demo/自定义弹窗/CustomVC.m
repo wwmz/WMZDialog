@@ -10,6 +10,7 @@
 //
 
 #import "CustomVC.h"
+#import "Masonry.h"
 @interface CustomVC ()
 {
     WMZDialog *myAlert;
@@ -20,7 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.dataArr = @[@"优酷",@"哔哩哔哩",@"饿了么升级"];
+    self.dataArr = @[@"优酷(自动布局)",@"bili(自动计算)",@"饿了么(固定高度)"];
 }
 
 -(void)action:(UIButton*)sender{
@@ -44,52 +45,62 @@
 }
 
 
-//自定义优酷方法
+//自定义优酷方法  Masonry使用示例
 - (void)youkuDialog{
     __weak CustomVC *WEAK = self;
     myAlert = Dialog()
     .wTypeSet(DialogTypeMyView)
-    //关闭事件 此时要置为不然会内存泄漏
-    .wEventCloseSet(^(id anyID, id otherData) {
-        myAlert = nil;
-    })
     .wShowAnimationSet(AninatonZoomIn)
     .wHideAnimationSet(AninatonZoomOut)
     .wMyDiaLogViewSet(^UIView *(UIView *mainView) {
         UIImageView *image = [UIImageView new];
         image.image = [UIImage imageNamed:@"healthy"];
-        image.frame = CGRectMake(0, 0, mainView.frame.size.width, 80);
         [mainView addSubview:image];
+        [image mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(80).priorityHigh();
+            make.left.right.top.mas_equalTo(0);
+        }];
         
         UILabel *la = [UILabel new];
         la.font = [UIFont systemFontOfSize:15.0f];
         la.text = @"为呵护未成年人健康成长,优酷特别推出青少年模式,该模式下部分功能无法正常使用,请监护人主动选择，并设置监护密码";
         la.numberOfLines = 0;
-        la.frame = CGRectMake(10, CGRectGetMaxY(image.frame), mainView.frame.size.width-20, 100);
         [mainView addSubview:la];
+        [la mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(10);
+            make.right.mas_equalTo(-10);
+            make.top.equalTo(image.mas_bottom);
+        }];
         
         UIButton *enter = [UIButton buttonWithType:UIButtonTypeCustom];
         [mainView addSubview:enter];
         enter.titleLabel.font = [UIFont systemFontOfSize:14.0f];
-        enter.frame = CGRectMake(0, CGRectGetMaxY(la.frame), mainView.frame.size.width, 44);
         [enter setTitle:@"进入青少年模式 >" forState:UIControlStateNormal];
         [enter setTitleColor:DialogColor(0x108ee9) forState:UIControlStateNormal];
         [enter addTarget:WEAK action:@selector(youkuAction:) forControlEvents:UIControlEventTouchUpInside];
+        [enter mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_equalTo(0);
+            make.height.mas_equalTo(44).priorityHigh();
+            make.top.equalTo(la.mas_bottom);
+        }];
         
         UIButton *know = [UIButton buttonWithType:UIButtonTypeCustom];
         [mainView addSubview:know];
         know.titleLabel.font = [UIFont systemFontOfSize:14.0f];
-        know.frame = CGRectMake(0, CGRectGetMaxY(enter.frame), mainView.frame.size.width, 44);
         [know setTitle:@"我知道了" forState:UIControlStateNormal];
         [know setTitleColor:DialogColor(0x3333333) forState:UIControlStateNormal];
         [know addTarget:WEAK action:@selector(youkuAction:) forControlEvents:UIControlEventTouchUpInside];
-        
+        [know mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_equalTo(0);
+            make.height.mas_equalTo(44).priorityHigh();
+            make.top.equalTo(enter.mas_bottom);
+        }];
+    
         mainView.layer.masksToBounds = YES;
         mainView.layer.cornerRadius = 10;
-        [mainView layoutIfNeeded];
         return know;
     })
-    .wStart();
+    .wStartView(self.view);
 }
 
 //优酷自定义方法
@@ -103,10 +114,6 @@
 - (void)bilibiliDialog{
     myAlert = Dialog()
     .wTypeSet(DialogTypeMyView)
-    //关闭事件 此时要置为不然会内存泄漏
-    .wEventCloseSet(^(id anyID, id otherData) {
-        myAlert = nil;
-    })
     .wShowAnimationSet(AninatonCounterclockwise)
     .wHideAnimationSet(AninatonClockwise)
     .wWidthSet(Device_Dialog_Width*0.85)
@@ -155,7 +162,7 @@
 }
 
 
-//饿了么
+//饿了么  //固定高度
 - (void)elementDialog{
     DialogWeakSelf(self)
     myAlert =
@@ -167,15 +174,12 @@
 //        rect.size.height+=30;
 //        mainView.frame = rect;
     })
+    //固定高度
+    .wHeightSet(350)
     .wTypeSet(DialogTypeMyView)
-    //关闭事件 此时要置为不然会内存泄漏
-    .wEventCloseSet(^(id anyID, id otherData) {
-        myAlert = nil;
-    })
     .wWidthSet(Device_Dialog_Width*0.8)
     .wShowAnimationSet(AninatonZoomIn)
     .wHideAnimationSet(AninatonZoomOut)
-    
     .wMyDiaLogViewSet(^UIView *(UIView *mainView) {
         DialogStrongSelf(weakObject)
         UIImageView *image = [UIImageView new];
@@ -219,5 +223,6 @@
     NSLog(@"饿了么点击");
      [myAlert closeView];
 }
+
 
 @end

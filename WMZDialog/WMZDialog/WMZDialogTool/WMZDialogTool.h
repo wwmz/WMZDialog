@@ -37,12 +37,10 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIViewController *)getCurrentVC;
 //16进制颜色
 + (UIColor *)stringTOColor:(NSString *)str;
-//获取文本高度
-+ (float)heightForTextView:(CGSize)constraint WithText:(NSString *)strText WithFont:(CGFloat)font;
 //获取文本size
-+ (CGSize)sizeForTextView:(CGSize)constraint WithText: (NSString *) strText WithFont:(CGFloat)font;
++ (CGSize)sizeForTextView:(CGSize)constraint text: (NSString *)text font:(CGFloat)font;
 //设置圆角 单边
-+(void)setView:(UIView*)view Radii:(CGSize)size RoundingCorners:(UIRectCorner)rectCorner;
++(void)setView:(UIView*)view radio:(CGSize)size roundingCorners:(UIRectCorner)rectCorner;
 //传入 秒  得到 xx:xx:xx
 + (NSString *)getMMSSFromSS:(NSString *)totalTime;
 //判断颜色是否相等

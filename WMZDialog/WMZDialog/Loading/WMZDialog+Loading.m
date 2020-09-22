@@ -37,7 +37,7 @@
     }
     
     [self.mainView addSubview:self.titleLabel];
-    self.titleLabel.frame = CGRectMake(self.wMainOffsetX, CGRectGetMaxY(loadingView.frame)+self.wMainOffsetY, self.wWidth-self.wMainOffsetX*2, [WMZDialogTool heightForTextView:CGSizeMake(self.wWidth-self.wMainOffsetX*2, CGFLOAT_MAX) WithText:self.titleLabel.text WithFont:self.titleLabel.font.pointSize]);
+    self.titleLabel.frame = CGRectMake(self.wMainOffsetX, CGRectGetMaxY(loadingView.frame)+self.wMainOffsetY, self.wWidth-self.wMainOffsetX*2, [WMZDialogTool sizeForTextView:CGSizeMake(self.wWidth-self.wMainOffsetX*2, CGFLOAT_MAX) text:self.titleLabel.text font:self.titleLabel.font.pointSize].height);
 
     
     [self reSetMainViewFrame:CGRectMake(0,0,self.wWidth,CGRectGetMaxY(self.titleLabel.frame))];

@@ -17,9 +17,7 @@
 + (UIViewController *)getCurrentVC
 {
     UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
-    
     UIViewController *currentVC = [self getCurrentVCFrom:rootViewController];
-    
     return currentVC;
 }
 
@@ -28,27 +26,17 @@
     UIViewController *currentVC;
     
     if ([rootVC presentedViewController]) {
-        // 视图是被presented出来的
-        
         rootVC = [rootVC presentedViewController];
     }
-    
     if ([rootVC isKindOfClass:[UITabBarController class]]) {
-        // 根视图为UITabBarController
-        
         currentVC = [self getCurrentVCFrom:[(UITabBarController *)rootVC selectedViewController]];
         
     } else if ([rootVC isKindOfClass:[UINavigationController class]]){
-        // 根视图为UINavigationController
-        
         currentVC = [self getCurrentVCFrom:[(UINavigationController *)rootVC visibleViewController]];
         
     } else {
-        // 根视图为非导航类
-        
         currentVC = rootVC;
     }
-    
     return currentVC;
 }
 
@@ -104,32 +92,19 @@
 }
 
 //获取文本size
-+ (CGSize)sizeForTextView:(CGSize)constraint WithText: (NSString *) strText WithFont:(CGFloat)font{
-    if (!strText||strText.length==0) {
++ (CGSize)sizeForTextView:(CGSize)constraint text:(NSString *)text font:(CGFloat)font{
+    if (!text||text.length==0) {
         return CGSizeZero;
     }
-    CGRect rect = [strText boundingRectWithSize:constraint
+    CGRect rect = [text boundingRectWithSize:constraint
                                         options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading)
                                      attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:font]}
                                         context:nil];
     return rect.size;
 }
 
-//获取文本高度
-+ (float)heightForTextView:(CGSize)constraint WithText: (NSString *) strText WithFont:(CGFloat)font{
-    if (!strText||strText.length==0) {
-        return 0;
-    }
-    CGRect size = [strText boundingRectWithSize:constraint
-                                        options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading)
-                                     attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:font]}
-                                        context:nil];
-    float textHeight = size.size.height;
-    return textHeight;
-}
-
 //设置圆角 单边
-+(void)setView:(UIView*)view Radii:(CGSize)size RoundingCorners:(UIRectCorner)rectCorner {
++(void)setView:(UIView*)view radio:(CGSize)size roundingCorners:(UIRectCorner)rectCorner{
     //设置只有一半圆角
     UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:view.bounds byRoundingCorners:rectCorner cornerRadii:size];
     CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
@@ -137,7 +112,6 @@
     maskLayer.path = maskPath.CGPath;
     view.layer.mask = maskLayer;
 }
-
 
 //传入 秒  得到 xx:xx:xx
 + (NSString *)getMMSSFromSS:(NSString *)totalTime{
