@@ -25,9 +25,41 @@
             filePath = "WMZDialog/WMZDialog/Main/WMZDialog.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "570"
-            endingLineNumber = "570"
+            startingLineNumber = "566"
+            endingLineNumber = "566"
             landmarkName = "-setUIdelagate:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2936CD06-3F65-43FD-9888-3FD82D1C06A7"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WMZDialog/Demo/&#x62fe;&#x53d6;&#x5668;&#x5f39;&#x7a97;/PickVC.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "-action:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4984F593-B1FC-42D0-9852-E87F06B9AB22"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WMZDialog/WMZDialog/Main/WMZDialog.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1118"
+            endingLineNumber = "1118"
+            landmarkName = "-getMyDataArr:withType:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

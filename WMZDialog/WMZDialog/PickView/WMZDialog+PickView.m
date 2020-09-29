@@ -20,6 +20,36 @@
     //设置只有一半圆角
     [WMZDialogTool setView:self.mainView radio:CGSizeMake(self.wMainRadius,self.wMainRadius) roundingCorners:UIRectCornerTopLeft |UIRectCornerTopRight];
     
+    if (self.wListDefaultValue) {
+        if ([self.wData isKindOfClass:[NSArray class]]) {
+            NSArray *arr = (NSArray*)self.wData;
+            [arr enumerateObjectsUsingBlock:^(NSArray*  _Nonnull sonArr, NSUInteger idx, BOOL * _Nonnull stop) {
+                if ([sonArr isKindOfClass:[NSArray class]]) {
+                    if (self.wListDefaultValue.count>idx) {
+                        id son = self.wListDefaultValue[idx];
+                        NSInteger index = NSNotFound;
+                       if ([son isKindOfClass:[NSDictionary class]]) {
+                           NSString *ID = son[@"id"];
+                           if (ID&&[ID length]) {
+                               index = [sonArr indexOfObject:ID];
+                           }
+                        }else if ([son isKindOfClass:[NSNumber class]]) {
+                            NSInteger num = [son intValue];
+                            if (sonArr.count>num) {
+                                index = num;
+                            }
+                        }else{
+                            index = [sonArr indexOfObject:son];
+                            
+                        }
+                        if (index!=NSNotFound) {
+                            [self.pickView selectRow:index inComponent:idx animated:YES];
+                        }
+                    }
+                }
+            }];
+        }
+    }
     return self.mainView;
 }
 

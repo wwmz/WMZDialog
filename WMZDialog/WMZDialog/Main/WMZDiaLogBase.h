@@ -176,6 +176,10 @@ NS_ASSUME_NONNULL_BEGIN
  *关闭
  */
 - (void)closeView;
+/*
+ *开始
+ */
+- (void)showView:(nullable UIView*)showView;
 - (void)closeView:(nullable animalBlock)block;
 /*
  *添加底部

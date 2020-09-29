@@ -31,8 +31,6 @@
             .wLoadingColorSet(DialogColor(0xFF9900))
             //无文字
             .wTitleSet(@"")
-            //毛玻璃背景
-            .wEffectShowSet(YES)
             .wTypeSet(DialogTypeLoading)
             //加载框type
             .wLoadingTypeSet(LoadingStyleWait)
@@ -40,8 +38,7 @@
             .wAnimationDurtionSet(1)
             //加载框大小
             .wLoadingSizeSet(CGSizeMake(50, 50))
-            .wStart();
-            
+            .wStartView(self.view);
             
         }
             break;

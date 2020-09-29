@@ -43,10 +43,11 @@
                 }
                 temp = ta;
                 [self.mainView addSubview:ta];
-                if (i>0) ta.hidden = YES;
+                if (!self.wListDefaultValue) {
+                    if (i>0) ta.hidden = YES;
+                }
             }
             [self reSetMainViewFrame:CGRectMake(0,self.wTapView?CGRectGetMaxY(self.wTapView.frame):0,self.wWidth, CGRectGetMaxY(temp.frame))];
-            self.mainView.center = CGPointMake(self.center.x, self.center.y);
     }else{
         self.wPickRepeat = NO;
         
@@ -58,8 +59,61 @@
         [self reSetMainViewFrame:CGRectMake(0,0,self.wWidth, CGRectGetMaxY(self.pickView.frame))];
         //设置只有一半圆角
         [WMZDialogTool setView:self.mainView radio:CGSizeMake(self.wMainRadius,self.wMainRadius) roundingCorners:UIRectCornerTopLeft |UIRectCornerTopRight];
+        
     }
-
+    
+    if (self.wListDefaultValue) {
+        [self.wListDefaultValue enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger component, BOOL * _Nonnull stop) {
+            if (self.wLocationType>component) {
+                NSMutableArray *dataArr = [self getMyDataArr:component+100 withType:0];
+                 NSInteger row = NSNotFound;
+                 if ([obj isKindOfClass:[NSNumber class]]) {
+                     NSInteger num = [obj intValue];
+                     if (dataArr.count>num) {
+                         row = num;
+                     }
+                 }else if([obj isKindOfClass:[NSString class]]){
+                     for (int i = 0 ; i<dataArr.count; i++) {
+                         WMZTree *tree = dataArr[i];
+                         if ([tree.name isEqualToString:obj]||
+                             [tree.ID isEqualToString:obj]) {
+                             row = i;
+                             break;
+                         }
+                     }
+                }else{
+                     row = [dataArr indexOfObject:obj];
+                }
+                for (int i = 0 ; i<dataArr.count; i++) {
+                      WMZTree *tree = dataArr[i];
+                      if (i == row) {
+                          tree.isSelected = YES;
+                      }else{
+                          tree.isSelected = NO;
+                      }
+                  }
+                 if (component<self.depth-1) {
+                     WMZTree *selectTree =  dataArr[self.wPickRepeat?row%dataArr.count:row];
+                     for (WMZTree *tree in selectTree.children) {
+                         tree.isSelected = NO;
+                     }
+                 }
+                 if (self.wChainType == ChainPickView) {
+                     if (row!=NSNotFound) {
+                        [self.pickView selectRow:row inComponent:component animated:YES];
+                     }
+                 }else{
+                     if (row!=NSNotFound) {
+                         UITableView *ta  = [self.mainView viewWithTag:component+100];
+                         if ([ta isKindOfClass:[UITableView class]]) {
+                             [ta scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:NO];
+                             [ta selectRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
+                         }
+                     }
+                 }
+            }
+        }];
+    }
     return self.mainView;
 }
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict

@@ -135,7 +135,6 @@
         self.tapRect = self.wTapRect;
     }
     [self.mainView addSubview:self.titleLabel];
-    self.tableView.separatorStyle =  UITableViewCellSeparatorStyleNone;
     self.tableView.frame = CGRectMake(0, 0, self.wWidth, self.wCellHeight*([self.wData count]>self.wListScrollCount?self.wListScrollCount:[self.wData count]));
     if (self.tableView.frame.size.height == 0 &&[self.wData count]) {
         CGRect rect = self.tableView.frame;

@@ -112,7 +112,6 @@
         NSArray *arr =  self.wData[i];
         NSString *value = self.selectArr[i];
         NSInteger index = [arr indexOfObject:value];
-        
         if (index<arr.count) {
             [self.pickView selectRow:index+(self.wPickRepeat?(pickViewCount/2*arr.count):0) inComponent:i animated:YES];
             if (i == 0&& (self.wMinDate||self.wMaxDate)) {

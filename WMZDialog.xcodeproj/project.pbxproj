@@ -721,8 +721,8 @@
 		F3F4A757232B3FC9008C70B2 /* Location */ = {
 			isa = PBXGroup;
 			children = (
-				F3F4A758232B3FC9008C70B2 /* WMZDialog+Location.m */,
 				F3F4A759232B3FC9008C70B2 /* WMZDialog+Location.h */,
+				F3F4A758232B3FC9008C70B2 /* WMZDialog+Location.m */,
 			);
 			path = Location;
 			sourceTree = "<group>";

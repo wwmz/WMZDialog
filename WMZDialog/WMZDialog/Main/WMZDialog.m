@@ -119,7 +119,7 @@ WMZDialogSetFuncImplementation(WMZDialog, NSDate*,                           wMa
 WMZDialogSetFuncImplementation(WMZDialog, NSDate*,                           wMinDate)
 WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                wPopViewBorderWidth)
 WMZDialogSetFuncImplementation(WMZDialog, UIColor*,               wPopViewBorderColor)
-WMZDialogSetFuncImplementation(WMZDialog, DialogCustomImageView,     wCustomImageView)
+WMZDialogSetFuncImplementation(WMZDialog, UITableViewCellSeparatorStyle,wSeparatorStyle)
 WMZDialogSetFuncImplementation(WMZDialog, DialogRectCorner,        wPopViewRectCorner)
 WMZDialogSetFuncImplementation(WMZDialog, DialogType,                           wType)
 WMZDialogSetFuncImplementation(WMZDialog, DialogShowAnination,         wShowAnimation)
@@ -147,6 +147,8 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomOKBtn,             wCustom
 WMZDialogSetFuncImplementation(WMZDialog, DialogCustomCancelBtn,     wCustomCancelBtn)
 WMZDialogSetFuncImplementation(WMZDialog, DialogCustomCloseBtn,       wCustomCloseBtn)
 WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTextView,       wCustomTextView)
+WMZDialogSetFuncImplementation(WMZDialog, DialogCustomImageView,     wCustomImageView)
+WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTableView)
 
 - (instancetype)init{
     if (self = [super init]) {
@@ -214,6 +216,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTextView,       wCustomTex
         _wOpenCalanderRule = YES;
         _wTag = 10086;
         _wListScrollCount = 8;
+        _wSeparatorStyle = UITableViewCellSeparatorStyleSingleLine;
     }
     return self;
 }
@@ -228,7 +231,6 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTextView,       wCustomTex
 - (void)setUpDefaultParam{
     
     if (self.wListDefaultValue&&[self.wListDefaultValue isKindOfClass:[NSArray class]]) {
-        
         self.tempArr = [NSMutableArray arrayWithArray:self.wListDefaultValue];
         if (self.tempArr.count>1&&!self.wMultipleSelection) {
             NSMutableArray *temp = [NSMutableArray arrayWithObject:self.tempArr[0]];
@@ -473,7 +475,6 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTextView,       wCustomTex
         self.mainView.layer.cornerRadius = self.wMainRadius;
         self.mainView.layer.masksToBounds = YES;
     }
-    
     self.titleLabel.text = _wTitle;
     self.titleLabel.font = [UIFont systemFontOfSize:_wTitleFont];
     self.titleLabel.textColor =  _wTitleColor;
@@ -494,14 +495,12 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTextView,       wCustomTex
     self.OKBtn.backgroundColor = _wMainBackColor;
     [self.OKBtn addTarget:self action:@selector(OKAction:) forControlEvents:UIControlEventTouchUpInside];
     
-    
     [self.wCloseBtn addTarget:self action:@selector(closeView) forControlEvents:UIControlEventTouchUpInside];
     [self.wCloseBtn setTitle:@"X" forState:UIControlStateNormal];
     [self.wCloseBtn setTitleColor:self.wCancelColor forState:UIControlStateNormal];
     self.wCloseBtn.backgroundColor = self.wMainBackColor;
     self.wCloseBtn.layer.borderWidth = DialogK1px;
     self.wCloseBtn.layer.borderColor = self.wCancelColor.CGColor;
-    
     
     self.mainView.frame = CGRectMake(0, 0, self.wWidth, Dialog_GetWNum(267));
     self.mainView.backgroundColor = _wMainBackColor;
@@ -519,10 +518,6 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTextView,       wCustomTex
 
 //设置UI代理
 - (void)setUIdelagate:(nullable UIView*)showView{
-    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]&&self.wType!=DialogTypePop) {
-        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
-    }
-    
     if (self.wType == DialogTypeSelect ||
         self.wType == DialogTypeSheet ||
         self.wType == DialogTypePop||
@@ -531,6 +526,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTextView,       wCustomTex
             self.tableView.delegate = self;
             self.tableView.dataSource = self;
             self.tableView.estimatedRowHeight = 100;
+            self.tableView.separatorStyle = self.wSeparatorStyle;;
             if (@available(iOS 11.0, *)) {
                 self.tableView.estimatedSectionFooterHeight = 0.01;
                 self.tableView.estimatedSectionHeaderHeight = 0.01;
@@ -585,7 +581,6 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTextView,       wCustomTex
                                            );
     }
 }
-
 /*
  *开始
  */
@@ -669,7 +664,6 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTextView,       wCustomTex
 - (void)closeView{
     [self closeView:nil];
 }
-
 - (void)closeAction:(animalBlock)block{
     __weak WMZDialog *weakSelf = self;
     self.userInteractionEnabled = NO;
@@ -714,7 +708,6 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTextView,       wCustomTex
         }
     }];
 }
-
 /*
  *重新设置mainView的frame
  */
@@ -737,9 +730,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTextView,       wCustomTex
         center = self.center;
         self.mainView.frame =frame;
     }
-    
     self.mainView.center = center;
-
     if (self.wCustomTitleLa) {
         self.wCustomTitleLa(self.titleLabel);
     }
@@ -757,6 +748,9 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTextView,       wCustomTex
     }
     if (self.wCustomMainView) {
         self.wCustomMainView(self.mainView);
+    }
+    if (self.wCustomTableView) {
+        self.wCustomTableView(self.tableView);
     }
 }
 /*
@@ -940,12 +934,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTextView,       wCustomTex
     }
     return cell;
 }
-
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    //为0则自动计算高度
-    return  self.wCellHeight?:UITableViewAutomaticDimension;
-}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{return self.wCellHeight?:UITableViewAutomaticDimension;}//为0则自动计算高度
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     id data = (self.wType == DialogTypeMenusSelect || self.wType == DialogTypeLocation?[self getMyDataArr:tableView.tag withType:0]:self.wData)[indexPath.row];
     if (self.wSelectCell) {
@@ -980,7 +969,6 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTextView,       wCustomTex
         [self.selectArr addObject:data];
         [self.pathArr addObject:indexPath];
     }
-
     if (self.wType == DialogTypeMenusSelect || self.wType == DialogTypeLocation) {
         [self selectWithTableView:tableView withIndexPath:indexPath];
     }else{
@@ -997,7 +985,6 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTextView,       wCustomTex
                 });
             }
         }
-        
     }
 }
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -1088,7 +1075,6 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTextView,       wCustomTex
         SuppressPerformSelectorLeakWarning(
              [self performSelector:NSSelectorFromString(@"updateTime:component:") withObject:@(row) withObject:@(component)];
         );
-
         return;
     }
     if (self.tree) {
@@ -1124,6 +1110,31 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTextView,       wCustomTex
             }
             [self.pickView reloadComponent:component];
         }
+    }
+}
+//数据处理  type 1返回tree对象
+- (id)getMyDataArr:(NSInteger )tableViewTag withType:(NSInteger)type{
+    if (tableViewTag==100) {
+        return type?self.tree:self.tree.children;
+    }else{
+        NSInteger taNum = 100;
+        WMZTree *resultDic = nil;
+        while (taNum < tableViewTag) {
+            NSMutableArray *arr = (taNum == 100?self.tree.children:resultDic.children);
+            NSInteger selectLastIndex = 0;
+            for (int i = 0; i<arr.count; i++) {
+                WMZTree *tree = arr[i];
+                if (tree.isSelected) {
+                    selectLastIndex = i;
+                    break;
+                }
+            }
+            if (arr.count) {
+                resultDic = arr[selectLastIndex];
+            }
+            taNum++;
+        }
+        return  type?resultDic:resultDic.children;
     }
 }
 /*
@@ -1166,7 +1177,6 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTextView,       wCustomTex
         }
     }];
 }
-
 /*
  *横竖屏通知
  */

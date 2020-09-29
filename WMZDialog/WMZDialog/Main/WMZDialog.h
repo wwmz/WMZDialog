@@ -33,7 +33,7 @@ WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, DialogShowAnination
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, DialogHideAnination,      wHideAnimation)
 //弹窗动画时间 
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, NSTimeInterval,           wAnimationDurtion)
-//列表默认选中 可传/model/@(index)/字符串/{@"id"}/ 的数组 单个表示单选 多个表示多选
+//默认选中 可传/model/@(index)/字符串/{@"id"}/ 的数组 单个表示单选 多个表示多选
 WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, NSArray*,                 wListDefaultValue)
 //列表达到滚动的个数 default 8
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, NSInteger,                wListScrollCount)
@@ -99,6 +99,8 @@ WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,              
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wMultipleSelection)
 //选中是否打钩
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wSelectShowChecked)
+//下划线样式 default line
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, UITableViewCellSeparatorStyle,wSeparatorStyle)
 
 /*=========================================disappear=======================================================================*/
 //自动消失时间
@@ -280,6 +282,8 @@ WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogCustomCloseBt
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogCustomTextView,wCustomTextView)
 //自定义ImageView
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogCustomImageView,wCustomImageView)
+//自定义tableview
+WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogCustomTableView,wCustomTableView)
 /*=========================================CustomView================================================*/
 
 /*=========================================参数说明=====================================================================
@@ -417,7 +421,7 @@ wCalanderCellClick   自定义日历点击                      -               
 
 =========================================参数说明==========================================================================*/
 
-
+- (void)showView:(nullable UIView*)showView;
 
 @end
 

@@ -67,31 +67,6 @@
         };
     }
 }
-//数据处理  type 1返回tree对象
-- (id)getMyDataArr:(NSInteger )tableViewTag withType:(NSInteger)type{
-    if (tableViewTag==100) {
-        return type?self.tree:self.tree.children;
-    }else{
-        NSInteger taNum = 100;
-        WMZTree *resultDic = nil;
-        while (taNum < tableViewTag) {
-            NSMutableArray *arr = (taNum == 100?self.tree.children:resultDic.children);
-            int selectLastIndex = 0;
-            for (int i = 0; i<arr.count; i++) {
-                WMZTree *tree = arr[i];
-                if (tree.isSelected) {
-                    selectLastIndex = i;
-                    break;
-                }
-            }
-            if (arr.count) {
-                resultDic = arr[selectLastIndex];
-            }
-            taNum++;
-        }
-        return  type?resultDic:resultDic.children;
-    }
-}
 
 //获取tree选中的数据
 - (NSArray*)getTreeSelectDataArr:(BOOL)first{
@@ -107,8 +82,6 @@
     
     return self.selectArr;
 }
-
-
 - (WMZTree*)getTreeData:(WMZTree*)tree first:(BOOL)first{
     WMZTree *firstSelectTree = nil;
     for (int i = 0; i<tree.children.count; i++) {
@@ -134,7 +107,8 @@
 - (void)updateMenuChildrenDataWithSection:(NSInteger)section  withUpdateChildren:(BOOL)update withData:(NSArray*)data{}
 - (UIView*)addTopView{return [UIView new];}
 - (void)scrollToToday{};
-
+- (void)showView:(nullable UIView*)showView{};
+- (id)getMyDataArr:(NSInteger )tableViewTag withType:(NSInteger)type{return  nil;}
 
 
 - (NSBundle *)dialogBundle{

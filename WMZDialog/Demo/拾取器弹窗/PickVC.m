@@ -9,7 +9,9 @@
 #import "PickVC.h"
 
 @interface PickVC ()
-
+{
+    WMZDialog *dialog;
+}
 @end
 
 @implementation PickVC
@@ -22,10 +24,11 @@
 -(void)action:(UIButton*)sender{
     switch (sender.tag) {
            case 0:{
-               Dialog()
+                Dialog()
                .wEventOKFinishSet(^(id anyID, id otherData) {
                    NSLog(@"%@",anyID);
                })
+               .wListDefaultValueSet(@[@"数据12",@(2)])  //默认选中第一列数据12 第二列第三个(可传入id/nsnumber类型 组合)
                .wTypeSet(DialogTypePickSelect)
                .wDataSet( @[@[@"数据11",@"数据12",@"数据13",@"数据14"],
                             @[@"数据2",@"数据22",@"数据23",@"数据24"]])

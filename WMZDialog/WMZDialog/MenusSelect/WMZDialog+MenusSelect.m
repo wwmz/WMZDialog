@@ -45,7 +45,7 @@
         ta.dataSource = self;
         ta.rowHeight = self.wCellHeight;
         ta.tag = 100+i;
-        ta.separatorStyle = UITableViewCellSeparatorStyleNone;
+        ta.separatorStyle = self.wSeparatorStyle;
         ta.estimatedRowHeight = 100;
         if (@available(iOS 11.0, *)) {
             ta.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
@@ -54,7 +54,9 @@
         }
         temp = ta;
         [self.mainView addSubview:ta];
-        if (i>0) ta.hidden = YES;
+        if (!self.wListDefaultValue) {
+            if (i>0) ta.hidden = YES;
+        }
     }
     
     if (self.wTapView) {
