@@ -216,7 +216,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
         _wOpenCalanderRule = YES;
         _wTag = 10086;
         _wListScrollCount = 8;
-        _wSeparatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        _wSeparatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return self;
 }

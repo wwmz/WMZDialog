@@ -114,8 +114,8 @@
         NSInteger index = [arr indexOfObject:value];
         if (index<arr.count) {
             [self.pickView selectRow:index+(self.wPickRepeat?(pickViewCount/2*arr.count):0) inComponent:i animated:YES];
-            if (i == 0&& (self.wMinDate||self.wMaxDate)) {
-                [self updateTime:@(index) component:@(0)];
+            if ((self.wMinDate||self.wMaxDate)&&i!=self.selectArr.count-1) {
+                [self updateTime:@(index) component:@(i)];
             }
         }
     }
@@ -238,6 +238,7 @@
         if((yearInfo % 400 == 0) || ((yearInfo % 4 == 0) && (yearInfo % 100 != 0))){
             isLeapYear = true ;
         }
+        
         NSArray *dayCountArr = @[@"31",isLeapYear?@"29":@"28",@"31",@"30",@"31",@"30",@"31",@"31",@"30",@"31",@"30",@"31"];
         day = [dayCountArr[month.integerValue-1] intValue];
         
@@ -255,6 +256,7 @@
     for (int i = min; i<= max;i++ ) {
         [dayArr addObject: i<10? [NSString stringWithFormat:@"0%d%@",i,name]:[NSString stringWithFormat:@"%d%@",i,name]];
     }
+    
     return [NSArray arrayWithArray:dayArr];
 }
 
@@ -297,10 +299,14 @@
                     int tmpDateConfig = 0;
                     NSArray *tmpDateConfigArr = self.wData[i];
                     NSInteger yearIndex = [self.pickView selectedRowInComponent:i];
+                    
                     NSInteger index = MIN((self.wPickRepeat?yearIndex%tmpDateConfigArr.count:yearIndex), (self.wPickRepeat?(tmpDateConfigArr.count-1)%tmpDateConfigArr.count:(tmpDateConfigArr.count-1)));
+                    
                     tmpDateConfig =[[tmpDateConfigArr[index] stringByTrimmingCharactersInSet:nonDigits] intValue];
+                    
                     [compareDateArr addObject:@(tmpDateConfig)];
                     [dateTypeArr addObject:DateCongigMarr[i]];
+                    
                 }
                 
                 NSMutableArray *yearMontharr = [NSMutableArray new];
@@ -322,16 +328,20 @@
                         [yearMontharr addObject:compareDateArr[i]];
                     }
                 }
+                
                 if (self.minDate&&self.minDate[nextType]&&minLimit) {
                     [mdic setObject:self.minDate[nextType] forKey:@"min"];
                 }
                 if (self.maxDate&&self.maxDate[nextType]&&maxLimit) {
                     [mdic setObject:self.maxDate[nextType] forKey:@"max"];
                 }
+                
                 if(k == 2){
+                    
                     SuppressPerformSelectorLeakWarning(
                         self.wData[k] = [self performSelector:NSSelectorFromString(DateConigDic[nextType])  withObject:[NSArray arrayWithArray:yearMontharr] withObject:[NSDictionary dictionaryWithDictionary:mdic]];
                     );
+                    
                 }else{
                     SuppressPerformSelectorLeakWarning(
                     self.wData[k] = [self performSelector:NSSelectorFromString(DateConigDic[nextType])  withObject:[NSDictionary dictionaryWithDictionary:mdic]];
