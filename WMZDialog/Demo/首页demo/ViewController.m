@@ -61,8 +61,12 @@
     .wCustomMainViewSet(^(UIView *mainView) {
         
     })
-//    .wSelectCellSet(^UITableViewCell *(NSIndexPath *indexPath, UITableView *tableView, id model) {
-//
+    .wCustomTableViewSet(^(UITableView *tableView) {
+        tableView.bounces = NO;
+    })
+    //自定义点击
+//    .wSelectCellSet(^(NSIndexPath *indexPath, UITableView *tableView, id model) {
+//        
 //    })
     //自定义cell内容
     .wMyCellSet(^UITableViewCell *(NSIndexPath *indexPath, UITableView *tableView, id model) {
