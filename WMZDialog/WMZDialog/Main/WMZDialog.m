@@ -594,6 +594,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
     [view addSubview:self];
     if (self.wShowAnimation != AninatonShowNone ) {
         self.mainView.userInteractionEnabled = NO;
+        self.shadowView.userInteractionEnabled = NO;
     }
     if (self.wEffectShow) {
         [self addSubview:self.effectView];
@@ -606,7 +607,8 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
     [self bringSubviewToFront:self.mainView];
     [self setParentVCView:0.9];
     [self dealAnamtionShowWithView:self.mainView withType:self.wShowAnimation withTime:self.wAnimationDurtion block:^{
-        weakObject.mainView.userInteractionEnabled = NO;
+        weakObject.mainView.userInteractionEnabled = YES;
+        weakObject.shadowView.userInteractionEnabled = YES;
     }];
 }
 /*
