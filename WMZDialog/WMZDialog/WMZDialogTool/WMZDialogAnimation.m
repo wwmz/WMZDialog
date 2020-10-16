@@ -77,6 +77,32 @@
     [contentLayer addAnimation: scaleAnimation forKey:@"myScale"];
 }
 
+//大到小-小到大
+-(void)zoomInBigToNormalAnimationWithView:(UIView*)view duration:(NSTimeInterval)duration{
+     CAGradientLayer *contentLayer = (CAGradientLayer *)view.layer;
+     CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+     scaleAnimation.fromValue = [NSNumber numberWithFloat:1.2];
+     scaleAnimation.toValue = [NSNumber numberWithFloat:0.8];
+     scaleAnimation.beginTime = 0;
+     scaleAnimation.duration = duration/2;
+
+     CABasicAnimation *showViewAnn = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+     showViewAnn.fromValue = [NSNumber numberWithFloat:0.8];
+     showViewAnn.toValue = [NSNumber numberWithFloat:1.0];
+     showViewAnn.beginTime = duration/2;
+     showViewAnn.duration = duration/2;
+
+     CAAnimationGroup *group = [CAAnimationGroup animation];
+     group.repeatCount = 1;
+     group.duration = duration;
+     group.fillMode = kCAFillModeForwards;
+     group.removedOnCompletion = YES;
+     [group setAnimations:@[scaleAnimation,showViewAnn]];
+     group.delegate = self;
+     [contentLayer addAnimation:group forKey:@"groupAnimation"];
+}
+
+
 
 //逆时针
 -(void)rotationClockwiseAnimationWithView:(UIView*)view duration:(NSTimeInterval)duration{

@@ -130,6 +130,7 @@ typedef enum : NSUInteger{
     AninatonShowNone = 0 ,         //无
     AninatonCurverOn,              //淡入
     AninatonZoomIn,                //由小变大
+    AninatonZoomInCombin,          //由大变小-小到大
     AninatonCounterclockwise,      //逆时针旋转
     AninatonShowTop,               //由下往上
     AninatonShowBottom,            //由上往下

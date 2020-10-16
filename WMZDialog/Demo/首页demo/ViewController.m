@@ -66,7 +66,7 @@
     })
     //自定义点击
 //    .wSelectCellSet(^(NSIndexPath *indexPath, UITableView *tableView, id model) {
-//        
+//
 //    })
     //自定义cell内容
     .wMyCellSet(^UITableViewCell *(NSIndexPath *indexPath, UITableView *tableView, id model) {

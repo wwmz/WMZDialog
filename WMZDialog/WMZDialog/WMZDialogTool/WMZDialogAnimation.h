@@ -42,7 +42,8 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)landscapeMoveShowAnimationWithView:(UIView*)view duration:(NSTimeInterval)duration right:(BOOL)right;
 //横向移动消失
 -(void)landscapeMoveHideAnimationWithView:(UIView*)view duration:(NSTimeInterval)duration right:(BOOL)right;
-
+//大到小-小到大
+-(void)zoomInBigToNormalAnimationWithView:(UIView*)view duration:(NSTimeInterval)duration;
 
 /*
  *阻尼动画 出现的弹簧运动

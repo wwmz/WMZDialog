@@ -178,7 +178,7 @@
     .wHeightSet(350)
     .wTypeSet(DialogTypeMyView)
     .wWidthSet(Device_Dialog_Width*0.8)
-    .wShowAnimationSet(AninatonZoomIn)
+    .wShowAnimationSet(AninatonZoomInCombin)
     .wHideAnimationSet(AninatonZoomOut)
     .wMyDiaLogViewSet(^UIView *(UIView *mainView) {
         DialogStrongSelf(weakObject)

@@ -34,6 +34,8 @@
         [animal landscapeMoveShowAnimationWithView:view duration:time right:NO];
     }else if (type == AninatonShowRight) {
         [animal landscapeMoveShowAnimationWithView:view duration:time right:YES];
+    }else if (type == AninatonZoomInCombin) {
+        [animal zoomInBigToNormalAnimationWithView:view duration:time];
     }
     if (block) {
         animal.block = ^{

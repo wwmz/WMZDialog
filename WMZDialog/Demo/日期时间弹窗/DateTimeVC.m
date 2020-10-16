@@ -71,7 +71,7 @@
         NSLog(@"选中 %@ %@",anyID,otherData);
     })
     //默认选中时间 不传默认是当前时间
-    .wDefaultDateSet(sender.tag == 0?[NSDate dateWithTimeIntervalSinceNow:24*60*60]:[NSDate date])
+    .wDefaultDateSet([NSDate date])
     .wDateTimeTypeSet(mdic[@(sender.tag)])
     .wPickRepeatSet(sender.tag == 6?YES:NO)
     .wTypeSet(DialogTypeDatePicker)
