@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "WMZDialog.h"
 #import "BaseVC.h"
+#import "WMZDialog-Swift.h"
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)NSString *name;
 @property(nonatomic,strong)UITableView *tableView;
@@ -21,9 +22,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.arr =@[@"普通弹窗",@"底部弹窗",@"自动消失弹窗",@"支付弹窗",@"分享弹窗",@"自适应编辑弹窗",@"选择弹窗",@"拾取器弹窗",@"倒计时弹窗",@"上下左右弹出列表",@"下载弹窗",@"下拉无限级菜单弹窗",@"广告弹窗",@"地区弹窗",@"日期时间弹窗",@"底部菜单弹窗",@"顶部菜单弹窗",@"加载框",@"ios13Present弹窗",@"日历弹窗",@"自定义弹窗"];
+    self.arr =@[@"普通弹窗",@"底部弹窗",@"自动消失弹窗",@"支付弹窗",@"分享弹窗",@"自适应编辑弹窗",@"选择弹窗",@"拾取器弹窗",@"倒计时弹窗",@"上下左右弹出列表",@"下载弹窗",@"下拉无限级菜单弹窗",@"广告弹窗",@"地区弹窗",@"日期时间弹窗",@"底部菜单弹窗",@"顶部菜单弹窗",@"加载框",@"ios13Present弹窗",@"日历弹窗",@"自定义弹窗",@"swift示范"];
 
-    self.vcArr = @[@"NormalVC",@"SheetVC",@"AutoDisappealVC",@"PayVC",@"ShareVC",@"WriteVC",@"SelectVC",@"PickVC",@"TimeVC",@"PopVC",@"DownVC",@"MenusSelectVC",@"AdvertisementVC",@"LocationVC",@"DateTimeVC",@"TabbarMenuVC",@"NaviMenuVC",@"LoadingVC",@"PresentVC",@"CalanderVC",@"CustomVC"];
+    self.vcArr = @[@"NormalVC",@"SheetVC",@"AutoDisappealVC",@"PayVC",@"ShareVC",@"WriteVC",@"SelectVC",@"PickVC",@"TimeVC",@"PopVC",@"DownVC",@"MenusSelectVC",@"AdvertisementVC",@"LocationVC",@"DateTimeVC",@"TabbarMenuVC",@"NaviMenuVC",@"LoadingVC",@"PresentVC",@"CalanderVC",@"CustomVC",@""];
 
     self.tableView =  [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
@@ -251,9 +252,16 @@
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    BaseVC *VC = [NSClassFromString(self.vcArr[indexPath.section]) new];
-    VC.name = self.arr[indexPath.section];
-    [self.navigationController pushViewController:VC animated:YES];
+    if (indexPath.section == self.arr.count - 1) {
+        SwiftVC *VC = [SwiftVC new];
+        VC.name = @"swift示范";
+        VC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:VC animated:YES];
+    }else{
+        BaseVC *VC = [NSClassFromString(self.vcArr[indexPath.section]) new];
+        VC.name = self.arr[indexPath.section];
+        [self.navigationController pushViewController:VC animated:YES];
+    }
 }
 @end
 

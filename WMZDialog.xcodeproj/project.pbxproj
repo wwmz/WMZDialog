@@ -42,6 +42,7 @@
 		F3120DEB2440733300CF7CB7 /* CustomVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F3120DEA2440733300CF7CB7 /* CustomVC.m */; };
 		F3120DEF2440736C00CF7CB7 /* PresentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F3120DEE2440736C00CF7CB7 /* PresentVC.m */; };
 		F3199A1E23756C4600C674C0 /* CalanderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F3199A1D23756C4600C674C0 /* CalanderModel.m */; };
+		F32F6BFE253FF2E2002DE0C8 /* SwiftVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32F6BFD253FF2E2002DE0C8 /* SwiftVC.swift */; };
 		F335AAE523B09508001BBC87 /* WMZDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = F335AAE023B09508001BBC87 /* WMZDialog.m */; };
 		F335AAE623B09508001BBC87 /* WMZDiaLogBase.m in Sources */ = {isa = PBXBuildFile; fileRef = F335AAE423B09508001BBC87 /* WMZDiaLogBase.m */; };
 		F35480CC23714BDD00605C77 /* WMZDialog+CardPresent.m in Sources */ = {isa = PBXBuildFile; fileRef = F35480CB23714BDD00605C77 /* WMZDialog+CardPresent.m */; };
@@ -170,6 +171,8 @@
 		F3120DEE2440736C00CF7CB7 /* PresentVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PresentVC.m; sourceTree = "<group>"; };
 		F3199A1C23756C4600C674C0 /* CalanderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalanderModel.h; sourceTree = "<group>"; };
 		F3199A1D23756C4600C674C0 /* CalanderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CalanderModel.m; sourceTree = "<group>"; };
+		F32F6BFC253FF2E2002DE0C8 /* WMZDialog-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WMZDialog-Bridging-Header.h"; sourceTree = "<group>"; };
+		F32F6BFD253FF2E2002DE0C8 /* SwiftVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftVC.swift; sourceTree = "<group>"; };
 		F335AAE023B09508001BBC87 /* WMZDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMZDialog.m; sourceTree = "<group>"; };
 		F335AAE123B09508001BBC87 /* WMZDiaLogBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMZDiaLogBase.h; sourceTree = "<group>"; };
 		F335AAE223B09508001BBC87 /* WMZDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMZDialog.h; sourceTree = "<group>"; };
@@ -281,6 +284,7 @@
 		184C26792305439C00679FCA /* Demo */ = {
 			isa = PBXGroup;
 			children = (
+				F32F6BF8253FF2B3002DE0C8 /* Swift调用 */,
 				F3120DEC2440735F00CF7CB7 /* iOS13Present弹窗 */,
 				F3120DCD244065AD00CF7CB7 /* 编辑弹窗 */,
 				F3120DB1244058A100CF7CB7 /* 普通弹窗 */,
@@ -568,6 +572,15 @@
 				F3120DEE2440736C00CF7CB7 /* PresentVC.m */,
 			);
 			path = "iOS13Present弹窗";
+			sourceTree = "<group>";
+		};
+		F32F6BF8253FF2B3002DE0C8 /* Swift调用 */ = {
+			isa = PBXGroup;
+			children = (
+				F32F6BFD253FF2E2002DE0C8 /* SwiftVC.swift */,
+				F32F6BFC253FF2E2002DE0C8 /* WMZDialog-Bridging-Header.h */,
+			);
+			path = "Swift调用";
 			sourceTree = "<group>";
 		};
 		F335AADF23B09508001BBC87 /* Main */ = {
@@ -910,6 +923,7 @@
 				TargetAttributes = {
 					1871670E22A76AFB001C6B41 = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1130;
 					};
 					1871672622A76B03001C6B41 = {
 						CreatedOnToolsVersion = 10.0;
@@ -1004,6 +1018,7 @@
 				F3120DBA244058E700CF7CB7 /* NormalVC.m in Sources */,
 				F3120DDF24406F7600CF7CB7 /* AdvertisementVC.m in Sources */,
 				F3F4A795232B3FC9008C70B2 /* WMZDialog+time.m in Sources */,
+				F32F6BFE253FF2E2002DE0C8 /* SwiftVC.swift in Sources */,
 				F3F4A794232B3FC9008C70B2 /* WMZDialog+Pay.m in Sources */,
 				F335AAE523B09508001BBC87 /* WMZDialog.m in Sources */,
 				F3120DAD2440581C00CF7CB7 /* NestedPopDemo.m in Sources */,
@@ -1211,6 +1226,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -1224,6 +1240,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.WMZDialog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "WMZDialog/Demo/Swift调用/WMZDialog-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WARNING_CFLAGS = "-Wno-objc-protocol-method-implementation";
 			};
@@ -1233,6 +1252,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -1246,6 +1266,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.WMZDialog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "WMZDialog/Demo/Swift调用/WMZDialog-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WARNING_CFLAGS = "-Wno-objc-protocol-method-implementation";
 			};
@@ -1254,6 +1276,7 @@
 		1871673F22A76B03001C6B41 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HR6T4LQD9T;
@@ -1273,6 +1296,7 @@
 		1871674022A76B03001C6B41 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HR6T4LQD9T;
@@ -1292,6 +1316,7 @@
 		1871674222A76B03001C6B41 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HR6T4LQD9T;
 				INFOPLIST_FILE = WMZDialogUITests/Info.plist;
@@ -1310,6 +1335,7 @@
 		1871674322A76B03001C6B41 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HR6T4LQD9T;
 				INFOPLIST_FILE = WMZDialogUITests/Info.plist;
