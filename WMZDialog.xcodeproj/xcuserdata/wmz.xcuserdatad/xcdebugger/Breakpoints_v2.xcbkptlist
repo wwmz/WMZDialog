@@ -57,9 +57,9 @@
             filePath = "WMZDialog/WMZDialog/Main/WMZDialog.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1120"
-            endingLineNumber = "1120"
-            landmarkName = "-getMyDataArr:withType:"
+            startingLineNumber = "1119"
+            endingLineNumber = "1119"
+            landmarkName = "-pickerView:didSelectRow:inComponent:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

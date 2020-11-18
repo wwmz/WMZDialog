@@ -31,6 +31,21 @@ isPhoneX = YES;\
 isPhoneX;\
 })
 
+#define  DialogWindow \
+({\
+UIApplication *app = [UIApplication sharedApplication];     \
+UIWindow *window = nil; \
+if ([app.delegate respondsToSelector:@selector(window)]) { \
+    window =  [app.delegate window];\
+}else{    \
+    if (![app keyWindow]) { \
+        window =  app.windows.firstObject;  \
+    } \
+    window =  [app keyWindow]; \
+} \
+(window); \
+})\
+
 #define SuppressPerformSelectorLeakWarning(Stuff) \
 do { \
 _Pragma("clang diagnostic push") \

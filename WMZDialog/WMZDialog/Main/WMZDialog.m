@@ -132,6 +132,7 @@ WMZDialogSetFuncImplementation(WMZDialog, diaLogPresentCallBlock,     wParentHea
 WMZDialogSetFuncImplementation(WMZDialog, diaLogPresentCallBlock,   wParentBottomView)
 WMZDialogSetFuncImplementation(WMZDialog, diaLogCellSelectlock,           wSelectCell)
 WMZDialogSetFuncImplementation(WMZDialog, DialogClickBlock,               wEventClose)
+WMZDialogSetFuncImplementation(WMZDialog, DialogClickBlock,         wEventShadomClose)
 WMZDialogSetFuncImplementation(WMZDialog, DialogMenuClickBlock,       wEventMenuClick)
 WMZDialogSetFuncImplementation(WMZDialog, diaLogMyViewCallBlock,        wMyDiaLogView)
 WMZDialogSetFuncImplementation(WMZDialog, diaLogCellCallBlock,                wMyCell)
@@ -214,7 +215,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
         _wTapRect = CGRectZero;
         _wPopViewRectCorner = DialogRectCornerNone;
         _wOpenCalanderRule = YES;
-        _wTag = 10086;
+        _wTag = 123456;
         _wListScrollCount = 8;
         _wSeparatorStyle = UITableViewCellSeparatorStyleNone;
     }
@@ -511,7 +512,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
     
     if (self.wShadowCanTap) {
         self.shadowView.userInteractionEnabled = YES;
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(closeView)];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(shadomClick)];
         [self.shadowView addGestureRecognizer:tap];
     }
 }
@@ -586,7 +587,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
  */
 - (void)showView:(nullable UIView*)showView{
     DialogWeakSelf(self);
-    UIView *view = showView?:[UIApplication sharedApplication].keyWindow;
+    UIView *view = showView?:DialogWindow;
     if (self.wTag) {
         self.tag = self.wTag;
         if ([view viewWithTag:self.wTag]) return;
@@ -844,7 +845,13 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
     [self.diaLogHeadView addSubview:line];
     return self.diaLogHeadView;
 }
-
+//阴影点击
+- (void)shadomClick{
+    [self closeView];
+    if (self.wEventShadomClose) {
+        self.wEventShadomClose(@"阴影点击", nil);
+    }
+}
 # pragma  mark tableView 代理
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{return nil;}
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{return nil;}
@@ -1023,7 +1030,6 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
         pickerLabel = [[UILabel alloc] init];
         pickerLabel.adjustsFontSizeToFitWidth = YES;
         [pickerLabel setTextAlignment:NSTextAlignmentCenter];
-        [pickerLabel setBackgroundColor:[UIColor clearColor]];
         pickerLabel.font = [UIFont systemFontOfSize:self.wMessageFont];
     }
     pickerLabel.textColor = self.wMessageColor;
@@ -1197,9 +1203,8 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
         }
     }
     [self removeFromSuperview];
-    [self performSelector:@selector(setUpUI:) withObject:self.superview afterDelay:0.001];
+    [self performSelector:@selector(setUpUI:) withObject:self.superview afterDelay:CGFLOAT_MIN];
 }
-
 - (NSMutableDictionary *)configDic{
     if (!_configDic) {
         NSDictionary *dic = @{

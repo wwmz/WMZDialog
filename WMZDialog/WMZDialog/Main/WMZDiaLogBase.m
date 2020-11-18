@@ -180,6 +180,7 @@
 - (UIPickerView *)pickView{
     if (!_pickView) {
         _pickView = [UIPickerView new];
+        _pickView.showsSelectionIndicator = YES;   
     }
     return _pickView;
 }

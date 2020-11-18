@@ -21,6 +21,7 @@ WMZDialog * Dialog(void);
 /*=========================================Attributes==========================================*/
 
 /*=========================================通用=================================================*/
+
 //数据源 
 WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, id,                       wData)
 //设置弹窗tag 防止快速点击重复弹出 (也可同个设置不同tag 依次弹出)
@@ -256,6 +257,8 @@ WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogClickBlock,  
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogTableClickBlock,    wEventFinish)
 //弹窗关闭事件
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogClickBlock,         wEventClose)
+//阴影关闭事件
+WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogClickBlock,         wEventShadomClose)
 //菜单点击事件
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogMenuClickBlock,     wEventMenuClick)
 //自定义日历cell

@@ -16,10 +16,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.dataArr = @[@"省",@"省市",@"省市区",@"pickview显示",@"tableview显示"];
+    self.dataArr = @[@"省",@"省市",@"省市区",@"pickview显示",@"tableview显示",@"自定义传入数据"];
 }
 
 - (void)action:(UIButton*)sender{
+    if (sender.tag == 5) {
+        [self customData];return;
+    }
     Dialog()
     .wEventMenuClickSet(^(id anyID, NSInteger section, NSInteger row) {
         NSLog(@"选中 %@ %ld %ld",anyID,section,row);
@@ -37,5 +40,41 @@
     .wStart();
 }
 
-
+//自定义传入数据
+- (void)customData{
+     Dialog()
+    //三列
+    .wLocationTypeSet(3)
+    .wDataSet([self customTree])
+    .wTypeSet(DialogTypeLocation)
+    .wStart();
+}
+//组合数据
+- (WMZTree*)customTree{
+    //需要把你的json数据组合成WMZTree结构
+    
+    //首 必要
+    WMZTree *tree = [WMZTree new];
+    //第一列 你的第一层数据
+    for (int i = 0; i<10; i++) {
+        WMZTree *oneTree = [[WMZTree alloc]initWithDetpth:1 withName:[NSString stringWithFormat:@"第一列%d",i] withID:@""];
+        //第二列
+        for (int j = 0; j<10; j++) {
+            
+            WMZTree *twoTree = [[WMZTree alloc]initWithDetpth:2 withName:[NSString stringWithFormat:@"第二列%d_%d",i,j] withID:@""];
+            [oneTree.children addObject:twoTree];
+            
+            //第三列 以此类推 无限列
+            for (int z = 0; z<10; z++) {
+                WMZTree *threeTree = [[WMZTree alloc]initWithDetpth:3 withName:[NSString stringWithFormat:@"第三列%d_%d",j,z] withID:@""];
+                [twoTree.children addObject:threeTree];
+                
+            }
+        }
+        //把第一列加进去
+        [tree.children addObject:oneTree];
+    }
+    
+    return  tree;
+}
 @end

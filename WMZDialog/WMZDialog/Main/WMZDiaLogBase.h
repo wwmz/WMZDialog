@@ -28,6 +28,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)BOOL isSelected;
 //子集
 @property(nonatomic,strong)NSMutableArray<WMZTree *> *children;
+//其他
+@property(nonatomic,strong)id data;
 
 - (instancetype)initWithDetpth:(NSInteger)depth withName:(NSString*)name  withID:(NSString*)ID;
 @end

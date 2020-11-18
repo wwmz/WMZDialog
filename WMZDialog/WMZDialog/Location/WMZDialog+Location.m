@@ -12,16 +12,21 @@
 @implementation WMZDialog (Location)
 
 - (UIView*)locationAction{
-    self.tree = [WMZTree new];
-    self.tree.depth = 0;
+    if (self.wData&&[self.wData isKindOfClass:[WMZTree class]]) {
+        self.tree = (WMZTree*)self.wData;
+        self.depth = self.wLocationType;
+    }else{
+        self.tree = [WMZTree new];
+        self.tree.depth = 0;
 
+        NSString *path = [self.dialogBundle pathForResource:@"province_data" ofType:@"xml"];
+        NSXMLParser *parser = [[NSXMLParser alloc] initWithData:[NSData dataWithContentsOfFile:path]];
+        parser.delegate = self;
 
-    NSString *path = [self.dialogBundle pathForResource:@"province_data" ofType:@"xml"];
-    NSXMLParser *parser = [[NSXMLParser alloc] initWithData:[NSData dataWithContentsOfFile:path]];
-    parser.delegate = self;
-    
-    [self.theLock lock];
-    [parser parse];
+        [self.theLock lock];
+        [parser parse];
+        
+    }
     //添加UI
     if (self.wChainType == ChainTableView) {
             UITableView *temp = nil;
