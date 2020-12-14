@@ -312,12 +312,13 @@ typedef enum : NSUInteger{
 
 ### CocoaPods  
 1. 将 cocoapods 更新至最新版本.
-2. 在 Podfile 中添加 `pod 'WMZDialog'`。  
+2. 在 Podfile 中添加 `pod 'WMZDialog',inhibit_warnings: true`。  
 3. 执行 `pod install` 或 `pod update`。
 4. 导入 #import "WMZDialog.h"。
 
 ### 注:要消除链式编程的警告 
 要在Buildding Settings 把CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF 设为NO
+Podfile里加inhibit_warnings: true 也可消除警告
 
 ### 手动安装
 
