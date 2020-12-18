@@ -16,7 +16,7 @@
     //递归计算深度
     self.depth = 0;
     if ([self.wData isKindOfClass:[NSArray class]]||[self.wData isKindOfClass:[NSMutableArray class]]){
-        if ([self.wData count]) {
+        if ([(NSArray*)self.wData count]) {
             self.depth = 1;
             self.tree = [WMZTree new];
             self.tree.depth = 0;

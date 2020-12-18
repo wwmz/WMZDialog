@@ -44,6 +44,7 @@ static NSString *selectPayViewKey = @"selectPayView"; //selectPayView的key
     downLine.frame = CGRectMake(self.wMainOffsetX, CGRectGetMaxY(self.textLabel.frame)+self.wMainOffsetY, self.wWidth-self.wMainOffsetX*2, DialogK1px);
 
     [self selectPayView:CGRectGetMaxY(downLine.frame)+self.wMainOffsetY/2 Height:Dialog_GetWNum(80)];
+    self.selectPayView.userInteractionEnabled = YES;
     [self.mainView addSubview:self.selectPayView];
     
     self.payField = [UITextField new];
@@ -118,7 +119,7 @@ static NSString *selectPayViewKey = @"selectPayView"; //selectPayView的key
     selectBtn.backgroundColor = self.wMainBackColor;
     selectBtn.frame = CGRectMake(maxWidth/2 ,0,  maxWidth/2- Dialog_GetWNum(30), height);
     [self.selectPayView addSubview:selectBtn];
-    
+
     UIButton *goBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [goBtn addTarget:self action:@selector(selectAction:) forControlEvents:UIControlEventTouchUpInside];
     [goBtn setTitle:@">" forState:UIControlStateNormal];
@@ -169,6 +170,7 @@ static NSString *selectPayViewKey = @"selectPayView"; //selectPayView的key
         }
         [weakObject.payField becomeFirstResponder];
     })
+    .wTagSet(1212)
     .wMessageSet(@"")
     .wTitleSet(@"")
     .wDataSet(self.wSonData)

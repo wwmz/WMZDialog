@@ -25,7 +25,7 @@
     shareView.frame = CGRectMake(0, 10 , self.wWidth ,  self.wHeight);
     __weak WMZDialog *WEAK = self;
     if (self.wData&&([self.wData isKindOfClass:[NSArray class]]||[self.wData isKindOfClass:[NSMutableArray class]])) {
-        for (int i = 0; i<[self.wData count]; i++) {
+        for (int i = 0; i<[(NSArray*)self.wData count]; i++) {
             NSDictionary *dic = self.wData[i];
             if (![dic isKindOfClass:[NSDictionary class]]) break;
             WMZDialogShareView *iconView = [[WMZDialogShareView alloc] initWithText:dic[@"name"] withImage:dic[@"image"]  withBlock:^(NSInteger index,id anyId) {

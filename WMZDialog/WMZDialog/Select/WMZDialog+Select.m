@@ -18,7 +18,7 @@
      [self.mainView addSubview:self.textLabel];
      self.textLabel.frame =  CGRectMake(self.wMainOffsetX,CGRectGetMaxY(self.titleLabel.frame)+ (self.wMessage.length?self.wMainOffsetY:0), self.wWidth-self.wMainOffsetX*2, [WMZDialogTool sizeForTextView:CGSizeMake(self.wWidth-self.wMainOffsetX*2, CGFLOAT_MAX) text:self.textLabel.text font:self.textLabel.font.pointSize].height);
 
-    self.tableView.frame = CGRectMake(0, CGRectGetMaxY(self.textLabel.frame)+ (self.wMessage.length||self.wTitle.length?self.wMainOffsetY:0), self.wWidth, self.wCellHeight*([self.wData count]>self.wListScrollCount?self.wListScrollCount:[self.wData count]));
+    self.tableView.frame = CGRectMake(0, CGRectGetMaxY(self.textLabel.frame)+ (self.wMessage.length||self.wTitle.length?self.wMainOffsetY:0), self.wWidth, self.wCellHeight*([(NSArray*)self.wData count]>self.wListScrollCount?self.wListScrollCount:[(NSArray*)self.wData count]));
     [self.mainView addSubview:self.tableView];
     
     if (self.wMultipleSelection) {

@@ -814,8 +814,8 @@
 		F3F4A778232B3FC9008C70B2 /* Normal */ = {
 			isa = PBXGroup;
 			children = (
-				F3F4A779232B3FC9008C70B2 /* WMZDialog+Normal.m */,
 				F3F4A77A232B3FC9008C70B2 /* WMZDialog+Normal.h */,
+				F3F4A779232B3FC9008C70B2 /* WMZDialog+Normal.m */,
 			);
 			path = Normal;
 			sourceTree = "<group>";

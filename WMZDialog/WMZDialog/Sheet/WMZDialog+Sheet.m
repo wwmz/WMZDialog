@@ -40,7 +40,7 @@
     }
     self.tableView.frame = CGRectMake(0, headView?
                                       CGRectGetMaxY(headView.frame):
-                                      ((self.wTitle&&self.wTitle.length)?CGRectGetMaxY(self.titleLabel.frame)+self.wMainOffsetY:0), self.wWidth, self.wCellHeight*([self.wData count]>self.wListScrollCount?self.wListScrollCount:[self.wData count]));
+                                      ((self.wTitle&&self.wTitle.length)?CGRectGetMaxY(self.titleLabel.frame)+self.wMainOffsetY:0), self.wWidth, self.wCellHeight*([(NSArray*)self.wData count]>self.wListScrollCount?self.wListScrollCount:[(NSArray*)self.wData count]));
     
     [self.mainView addSubview:self.tableView];
     

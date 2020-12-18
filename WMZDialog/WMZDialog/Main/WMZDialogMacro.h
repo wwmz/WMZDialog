@@ -33,16 +33,27 @@ isPhoneX;\
 
 #define  DialogWindow \
 ({\
-UIApplication *app = [UIApplication sharedApplication];     \
 UIWindow *window = nil; \
-if ([app.delegate respondsToSelector:@selector(window)]) { \
-    window =  [app.delegate window];\
-}else{    \
-    if (![app keyWindow]) { \
-        window =  app.windows.firstObject;  \
-    } \
-    window =  [app keyWindow]; \
-} \
+if (@available(iOS 13.0, *)) \
+{ \
+    for (UIWindowScene* windowScene in [UIApplication sharedApplication].connectedScenes) { \
+        if (windowScene.activationState == UISceneActivationStateForegroundActive) \
+        { \
+            for (UIWindow *currentWindow in windowScene.windows)\
+            { \
+                if (currentWindow.isKeyWindow)\
+                { \
+                    window = currentWindow; \
+                    break; \
+                }\
+            }\
+        }\
+    }\
+}\
+else \
+{ \
+    window =  [UIApplication sharedApplication].keyWindow; \
+}\
 (window); \
 })\
 
@@ -82,7 +93,7 @@ Dialog() \
 #define Device_Dialog_Height [UIScreen mainScreen].bounds.size.height
 #define Device_Dialog_Width  [UIScreen mainScreen].bounds.size.width
 #define NavigationBar_Dialog_Height (([[UIApplication sharedApplication] statusBarFrame].size.height) + 44)
-#define Dialog_GetWNum(A)  (A)/2.0*(((DialogHorizontalScreen == 1)?Device_Dialog_Height:Device_Dialog_Width)/375)
+#define Dialog_GetWNum(A)  (A)/2.0*((Device_Dialog_Width)/375)
 #define DialogColor(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 #define DialogK1px (1 / UIScreen.mainScreen.scale)
 

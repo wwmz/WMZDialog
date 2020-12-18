@@ -21,10 +21,9 @@ WMZDialog * Dialog(void);
 /*=========================================Attributes==========================================*/
 
 /*=========================================通用=================================================*/
-
-//数据源 
+////数据源
 WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, id,                       wData)
-//设置弹窗tag 防止快速点击重复弹出 (也可同个设置不同tag 依次弹出)
+//设置弹窗tag 防止快速点击重复弹出 (也可设置不同tag 依次弹出)
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, NSInteger,                wTag)
 //弹窗type
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, DialogType,               wType)
@@ -50,8 +49,6 @@ WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGFloat,           
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGFloat,                  wMainBtnHeight)
 //cell高度
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGFloat,                  wCellHeight)
-//是否将弹窗放置最底部
-WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wMainToBottom)
 //线条颜色
 WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, UIColor*,                 wLineColor)
 //线条透明度
@@ -100,6 +97,10 @@ WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,              
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wMultipleSelection)
 //选中是否打钩
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wSelectShowChecked)
+//是否将弹窗放置最底部
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wMainToBottom)
+////是否监听横竖屏 default NO
+//WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wDeviceDidChange)
 //下划线样式 default line
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, UITableViewCellSeparatorStyle,wSeparatorStyle)
 

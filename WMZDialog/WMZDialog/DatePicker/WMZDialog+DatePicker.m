@@ -271,7 +271,7 @@
         //包含正确参数
         BOOL trueCongig = YES;
         //防止越界
-        if (component+1 >= [self.wData count]) {
+        if (component+1 >= [(NSArray*)self.wData count]) {
             trueCongig = NO;
         }
         //判断date的typeConfig时候全面
@@ -286,7 +286,7 @@
         
         if (trueCongig) {
             //更新后面的所有列
-            for (NSInteger k = component+1; k<[self.wData count]; k++) {
+            for (NSInteger k = component+1; k<[(NSArray*)self.wData count]; k++) {
                 NSString *nextType = DateCongigMarr[k];
                 BOOL minLimit = YES;
                 BOOL maxLimit = YES;

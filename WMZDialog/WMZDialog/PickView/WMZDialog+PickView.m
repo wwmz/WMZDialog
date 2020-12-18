@@ -90,7 +90,7 @@
             self.wEventOKFinish(arr, nameArr);
         }else{
             NSMutableArray *mStr = [NSMutableArray new];
-            for (int i = 0; i<[self.wData count]; i++) {
+            for (int i = 0; i<[(NSArray*)self.wData count]; i++) {
                 NSArray *arr = self.wData[i];
                 NSString *str = arr [self.wPickRepeat?[self.pickView selectedRowInComponent:i]%arr.count:[self.pickView selectedRowInComponent:i]];
                 [mStr addObject:str];

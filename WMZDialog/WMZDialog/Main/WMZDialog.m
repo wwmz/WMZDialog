@@ -6,6 +6,7 @@
 //  Copyright © 2019年 wmz. All rights reserved.
 //
 #import "WMZDialog.h"
+
 @interface WMZDialog ()
 /*
  *配置
@@ -54,6 +55,7 @@ WMZDialogSetFuncImplementation(WMZDialog, BOOL,                         wMainToB
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                         wCanSelectPay)
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                 wTapViewTableViewFoot)
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                     wOpenCalanderRule)
+//WMZDialogSetFuncImplementation(WMZDialog, BOOL,                      wDeviceDidChange)
 WMZDialogSetFuncImplementation(WMZDialog, DiaPopInView,                  wTapViewType)
 WMZDialogSetFuncImplementation(WMZDialog, NSInteger,                 wListScrollCount)
 WMZDialogSetFuncImplementation(WMZDialog, NSInteger,            wTableViewSectionHead)
@@ -218,12 +220,15 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
         _wTag = 123456;
         _wListScrollCount = 8;
         _wSeparatorStyle = UITableViewCellSeparatorStyleNone;
+//        _wDeviceDidChange = YES;
     }
     return self;
 }
 - (void)addNotification{
-    //监听横竖屏
-//    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(change:) name:UIDeviceOrientationDidChangeNotification object:nil];
+//    //监听横竖屏
+//    if (self.wDeviceDidChange) {
+//        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(change:) name:UIDeviceOrientationDidChangeNotification object:nil];
+//    }
 }
 
 /*
@@ -246,7 +251,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
             }
             self.wMainToBottom = YES;
             if (self.wWidth == Dialog_GetWNum(500)) {
-                self.wWidth = Device_Dialog_Width;
+                self.wWidth = (DialogHorizontalScreen == 1)?Device_Dialog_Height:Device_Dialog_Width;
             }
             if (self.wMainBtnHeight == Dialog_GetWNum(60)) {
                 self.wMainBtnHeight = Dialog_GetWNum(88);
@@ -268,7 +273,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
             }
             self.wMainToBottom = YES;
             if (self.wWidth == Dialog_GetWNum(500)) {
-                self.wWidth = Device_Dialog_Width;
+                self.wWidth = (DialogHorizontalScreen == 1)?Device_Dialog_Height:Device_Dialog_Width;
             }
             if (self.wMainBtnHeight == Dialog_GetWNum(60)) {
                 self.wMainBtnHeight+=Dialog_GetWNum(10);
@@ -289,7 +294,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
             self.wMainToBottom = YES;
 
             if (self.wWidth == Dialog_GetWNum(500)) {
-                self.wWidth = Device_Dialog_Width;
+                self.wWidth = (DialogHorizontalScreen == 1)?Device_Dialog_Height:Device_Dialog_Width;
             }
         }
         break;
@@ -309,7 +314,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
             self.wMainToBottom = YES;
     
             if (self.wWidth == Dialog_GetWNum(500)) {
-                self.wWidth = Device_Dialog_Width;
+                self.wWidth = (DialogHorizontalScreen == 1)?Device_Dialog_Height:Device_Dialog_Width;
             }
         }
             break;
@@ -330,7 +335,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
             }
             self.wMainToBottom = YES;
             if (self.wWidth == Dialog_GetWNum(500)) {
-                self.wWidth = Device_Dialog_Width;
+                self.wWidth = (DialogHorizontalScreen == 1)?Device_Dialog_Height:Device_Dialog_Width;
             }
         }
             break;
@@ -338,7 +343,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
         {
             self.wMainToBottom = YES;
             if (self.wWidth == Dialog_GetWNum(500)) {
-                self.wWidth = Device_Dialog_Width;
+                self.wWidth = (DialogHorizontalScreen == 1)?Device_Dialog_Height:Device_Dialog_Width;
             }
         }
             break;
@@ -350,7 +355,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
             self.wMainToBottom = YES;
 
             if (self.wWidth == Dialog_GetWNum(500)) {
-                self.wWidth = Device_Dialog_Width;
+                self.wWidth = (DialogHorizontalScreen == 1)?Device_Dialog_Height:Device_Dialog_Width;
             }
             if (self.wMainBtnHeight == Dialog_GetWNum(60)) {
                 self.wMainBtnHeight+=Dialog_GetWNum(10);
@@ -423,7 +428,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
             break;
         case DialogTypeCalander:{
             if (self.wWidth == Dialog_GetWNum(500)) {
-                self.wWidth = Device_Dialog_Width;
+                self.wWidth = (DialogHorizontalScreen == 1)?Device_Dialog_Height:Device_Dialog_Width;
             }
         }
             break;
@@ -456,12 +461,10 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
 - (void)setUpUI{
     self.backgroundColor = [UIColor clearColor];
     self.frame = CGRectMake(0, 0, Device_Dialog_Width, Device_Dialog_Height);
-    if (self.wType == DialogTypePay || self.wType == DialogTypeWrite) {
-        //监听键盘出现
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-        //监听键盘出现
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-    }
+    //监听键盘出现
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    //监听键盘出现
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     if (self.wType != DialogTypeShare&&
         self.wType != DialogTypeMyView&&
         self.wType != DialogTypeTabbarMenu&&
@@ -539,7 +542,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
             }
         }
 
-        if ([self.wData count]>self.wListScrollCount) {
+        if ([(NSArray*)self.wData count]>self.wListScrollCount) {
             self.tableView.scrollEnabled = YES;
         }else{
             self.tableView.scrollEnabled = NO;
@@ -667,6 +670,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
 - (void)closeView{
     [self closeView:nil];
 }
+
 - (void)closeAction:(animalBlock)block{
     __weak WMZDialog *weakSelf = self;
     self.userInteractionEnabled = NO;
@@ -858,7 +862,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{return 0.01;}
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{return 0.01;}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.wType == DialogTypeMenusSelect || self.wType == DialogTypeLocation?[[self getMyDataArr:tableView.tag withType:0] count]:[self.wData count];
+    return self.wType == DialogTypeMenusSelect || self.wType == DialogTypeLocation?[[self getMyDataArr:tableView.tag withType:0] count]:[(NSArray*)self.wData count];
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     id data = (self.wType == DialogTypeMenusSelect || self.wType == DialogTypeLocation?[self getMyDataArr:tableView.tag withType:0]:self.wData)[indexPath.row];
@@ -1010,7 +1014,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
 }
 # pragma  mark pickView 代理
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
-    return self.tree?self.depth:[self.wData count];
+    return self.tree?self.depth:[(NSArray*)self.wData count];
 }
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
     return self.tree?[[self getMyDataArr:component+100 withType:0] count]*(self.wPickRepeat?pickViewCount:1):[self.wData[component] count]*(self.wPickRepeat?pickViewCount:1);
@@ -1047,7 +1051,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
             if ([self.wDateTimeType rangeOfString:@"dd"].location != NSNotFound &&
                 [self.wDateTimeType rangeOfString:@"yyyy"].location!= NSNotFound &&
                 [self.wDateTimeType rangeOfString:@"MM"].location!= NSNotFound ) {
-                if ([self.wData count]>2) {
+                if ([(NSArray*)self.wData count]>2) {
                     NSArray *yearArr = self.wData[component];
                     int year =[[yearArr[self.wPickRepeat?row%yearArr.count:row] stringByTrimmingCharactersInSet:nonDigits] intValue];
                     NSArray *monthArr = self.wData[component+1];
@@ -1066,7 +1070,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
             if ([self.wDateTimeType rangeOfString:@"dd"].location != NSNotFound&&
                 [self.wDateTimeType rangeOfString:@"yyyy"].location != NSNotFound&&
                 [self.wDateTimeType rangeOfString:@"MM"].location != NSNotFound) {
-                if ([self.wData count]>2) {
+                if ([(NSArray*)self.wData count]>2) {
                     NSArray *yearArr = self.wData[component-1];
                     NSInteger yearIndex = [self.pickView selectedRowInComponent:component-1];
                     int year =[[yearArr[self.wPickRepeat?yearIndex%yearArr.count:yearIndex] stringByTrimmingCharactersInSet:nonDigits] intValue];
@@ -1190,20 +1194,15 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
  */
 -(void)change:(NSNotification*)notification
 {
-    NSMutableArray *marr = [NSMutableArray new];
-    [marr addObject:self];
-    while (marr.count) {
-        UIView *view = marr.firstObject;
-        [marr removeLastObject];
-        if (view.subviews.count) {
-            for (UIView *sonView in view.subviews) {
-                 [sonView removeFromSuperview];
-                 [marr addObject:sonView];
-             }
-        }
+   UIDeviceOrientation  orient = [UIDevice currentDevice].orientation;
+    if (orient == UIDeviceOrientationLandscapeLeft ||
+        orient == UIDeviceOrientationLandscapeRight) {
+        
+    }else if (orient == UIDeviceOrientationPortrait ||
+        orient == UIDeviceOrientationPortraitUpsideDown) {
+       
     }
-    [self removeFromSuperview];
-    [self performSelector:@selector(setUpUI:) withObject:self.superview afterDelay:CGFLOAT_MIN];
+    
 }
 - (NSMutableDictionary *)configDic{
     if (!_configDic) {
