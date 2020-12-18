@@ -1,4 +1,4 @@
-# WMZDailog - 功能最多样式最多的弹窗，支持普通/微信底部/日期/地区/日历/选择/编辑/分享/菜单/自定义弹窗等,支持多种动画,链式编程调用，所有属性均可定制（pod 更新至 1.1.8，有问题加群937909825哈）
+# WMZDailog - 功能最多样式最多的弹窗，支持普通/微信底部/日期/地区/日历/选择/编辑/分享/菜单/自定义弹窗等,支持多种动画,链式编程调用，所有属性均可定制（pod 更新至 1.1.9，有问题加群937909825哈）
 
 题外
 ==============
@@ -312,12 +312,13 @@ typedef enum : NSUInteger{
 
 ### CocoaPods  
 1. 将 cocoapods 更新至最新版本.
-2. 在 Podfile 中添加 `pod 'WMZDialog'`。  
+2. 在 Podfile 中添加 `pod 'WMZDialog',inhibit_warnings: true`。  
 3. 执行 `pod install` 或 `pod update`。
 4. 导入 #import "WMZDialog.h"。
 
 ### 注:要消除链式编程的警告 
 要在Buildding Settings 把CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF 设为NO
+Podfile里加inhibit_warnings: true 也可消除警告
 
 ### 手动安装
 
@@ -364,3 +365,4 @@ ios问题交流群 937909825(有问题加群哈)
 - 20200920 cocopod 更新至 1.1.6 适配ios14 
 - 20200929 cocopod 更新至 1.1.7 时间好快又国庆了,国庆放假前更新一波 支持地区/拾取器/多级菜单 除了关于时间的默认选中用wDefaultDate,其他使用wListDefaultValue
 - 20201009 cocopod 更新至 1.1.8 修复bug
+- 20201118 cocopod 更新至 1.1.9 新增阴影点击回调 新增自定义地区数据
