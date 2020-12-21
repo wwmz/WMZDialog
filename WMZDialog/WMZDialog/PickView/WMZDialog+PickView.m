@@ -23,34 +23,62 @@
     if (self.wListDefaultValue) {
         if ([self.wData isKindOfClass:[NSArray class]]) {
             NSArray *arr = (NSArray*)self.wData;
-            [arr enumerateObjectsUsingBlock:^(NSArray*  _Nonnull sonArr, NSUInteger idx, BOOL * _Nonnull stop) {
-                if ([sonArr isKindOfClass:[NSArray class]]) {
-                    if (self.wListDefaultValue.count>idx) {
-                        id son = self.wListDefaultValue[idx];
-                        NSInteger index = NSNotFound;
-                       if ([son isKindOfClass:[NSDictionary class]]) {
-                           NSString *ID = son[@"id"];
-                           if (ID&&[ID length]) {
-                               index = [sonArr indexOfObject:ID];
-                           }
-                        }else if ([son isKindOfClass:[NSNumber class]]) {
-                            NSInteger num = [son intValue];
-                            if (sonArr.count>num) {
-                                index = num;
-                            }
-                        }else{
-                            index = [sonArr indexOfObject:son];
-                            
-                        }
-                        if (index!=NSNotFound) {
-                            [self.pickView selectRow:index inComponent:idx animated:YES];
-                        }
+            if (self.nest) {
+                [self setDefaultWithRow:(NSArray*)self.wData defaultIndex:0];
+            }else{
+                [arr enumerateObjectsUsingBlock:^(NSArray*  _Nonnull sonArr, NSUInteger idx, BOOL * _Nonnull stop) {
+                    if ([sonArr isKindOfClass:[NSArray class]]) {
+                        [self setDefaultWithRow:sonArr defaultIndex:idx];
                     }
-                }
-            }];
+                }];
+            }
         }
     }
     return self.mainView;
+}
+
+- (void)setDefaultWithRow:(NSArray*)arr defaultIndex:(NSInteger)compom{
+    if (arr&&
+        [arr isKindOfClass:[NSArray class]]&&
+        arr.count) {
+        id defaultValue = nil;
+        if ([self.wListDefaultValue isKindOfClass:[NSArray class]] &&
+            self.wListDefaultValue.count > compom) {
+            defaultValue = self.wListDefaultValue[compom];
+        }
+        if (defaultValue) {
+            NSInteger index = NSNotFound;
+            if ([defaultValue isKindOfClass:[NSNumber class]]) {
+                NSInteger num = [defaultValue intValue];
+                if (arr.count>num) {
+                    index = num;
+                }
+            }else if ([defaultValue isKindOfClass:[NSString class]]){
+                int i = 0;
+                for (id sonData in arr) {
+                    i++;
+                    if ([sonData isKindOfClass:[NSString class]]) {
+                        if ([sonData isEqualToString:defaultValue]) {
+                            index = [arr indexOfObject:sonData];break;
+                        }
+                    }else if ([sonData isKindOfClass:[NSDictionary class]]){
+                        NSString *name = sonData[@"name"];
+                        if (name && [name isKindOfClass:[NSString class]]) {
+                            if ([name isEqualToString:defaultValue]) {
+                                index = [arr indexOfObject:sonData];break;
+                            }
+                        }
+                    }
+                }
+            }else{
+                index = [arr indexOfObject:defaultValue];
+            }
+            
+            if (index!=NSNotFound) {
+                [self.pickView selectRow:index inComponent:compom animated:NO];
+            }
+        }
+    }
 }
 
 //重设确定的方法
@@ -68,37 +96,20 @@
                 strongObject.wEventOKFinish(arr, nameArr);
             }else{
                 NSMutableArray *mStr = [NSMutableArray new];
-                for (int i = 0; i<[strongObject.wData count]; i++) {
-                    NSArray *arr = strongObject.wData[i];
-                    NSString *str = arr [strongObject.wPickRepeat?[strongObject.pickView selectedRowInComponent:i]%arr.count:[strongObject.pickView selectedRowInComponent:i]];
-                    [mStr addObject:str];
+                if (!self.nest) {
+                    for (int i = 0; i<[strongObject.wData count]; i++) {
+                        NSArray *arr = strongObject.wData[i];
+                        NSString *str = arr [strongObject.wPickRepeat?[strongObject.pickView selectedRowInComponent:i]%arr.count:[strongObject.pickView selectedRowInComponent:i]];
+                        [mStr addObject:str];
+                    }
+                    strongObject.wEventOKFinish(mStr, nil);
+                }else{
+                    NSInteger index = strongObject.wPickRepeat?[strongObject.pickView selectedRowInComponent:0]%[(NSArray*)self.wData count]:[strongObject.pickView selectedRowInComponent:0];
+                    NSString *str = [(NSArray*)self.wData objectAtIndex:index];
+                    strongObject.wEventOKFinish(str, nil);
                 }
-                strongObject.wEventOKFinish(mStr, nil);
             }
         }
     }];
 }
-
-- (void)action{
-    if (self.wEventOKFinish) {
-        if (self.tree) {
-            NSArray *arr = [self getTreeSelectDataArr:YES];
-            NSMutableArray *nameArr = [NSMutableArray new];
-            for (WMZTree *tree in arr) {
-                [nameArr addObject:tree.name];
-            }
-            self.wEventOKFinish(arr, nameArr);
-        }else{
-            NSMutableArray *mStr = [NSMutableArray new];
-            for (int i = 0; i<[(NSArray*)self.wData count]; i++) {
-                NSArray *arr = self.wData[i];
-                NSString *str = arr [self.wPickRepeat?[self.pickView selectedRowInComponent:i]%arr.count:[self.pickView selectedRowInComponent:i]];
-                [mStr addObject:str];
-            }
-            self.wEventOKFinish(mStr, nil);
-        }
-    }
-}
-
-
 @end

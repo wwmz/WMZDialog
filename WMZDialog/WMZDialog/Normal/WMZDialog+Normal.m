@@ -22,6 +22,6 @@
     [self reSetMainViewFrame:CGRectMake(0, 0, self.wWidth, CGRectGetMaxY(view.frame))];
     
     return self.mainView;
-    
 }
+
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "PopVC.h"
+#import "Masonry.h"
 @interface PopVC ()
 
 @end
@@ -20,8 +21,8 @@
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.tag = 111;
     [btn setTitleColor:DialogColor(0xF4606C) forState:UIControlStateNormal];
-    [btn setTitle:@"导航弹窗" forState:UIControlStateNormal];
-    [btn addTarget:self action:@selector(onBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    [btn setTitle:@"微信右上角" forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(customWX:) forControlEvents:UIControlEventTouchUpInside];
     [btn sizeToFit];
     UIBarButtonItem *barItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
     self.navigationItem.rightBarButtonItem = barItem;
@@ -29,22 +30,6 @@
 
     self.dataArr = @[@"上",@"左",@"下",@"tableview",@"右",@"collectionView",@"scrollView",@"嵌套视图"];
 }
-
-//导航栏点击
-- (void)onBtnAction:(UIButton*)temp{
-    Dialog()
-    .wPercentAngleSet(0.9)
-    //导航栏上 新写法 旧写法传入wNavigationItem也有效
-    .wTapViewTypeSet(DiaPopInViewNavi)
-    .wTypeSet(DialogTypePop).wDataSet(@[@{@"name":@"微信",@"image":@"wallet"},
-                                        @{@"name":@"支付宝",@"image":@"wallet"},
-                                        @{@"name":@"米聊",@"image":@"wallet"},
-                                        @{@"name":@"飞信",@"image":@"wallet"},
-                                        @{@"name":@"微博",@"image":@"wallet"}])
-    .wTapViewSet(temp)
-    .wStart();
-}
-
 
 - (void)action:(UIButton*)sender{
     
@@ -79,6 +64,12 @@
 //    .wMyCellSet(^UITableViewCell *(NSIndexPath *indexPath, UITableView *tableView, id model) {
 //        return [UITableViewCell new];
 //    })
+    //弹出位置的距离 default 0
+//    .wMainOffsetYSet(10)
+    //弹出三角形的size default  CGSizeMake(Dialog_GetWNum(30), Dialog_GetWNum(20)
+//    .wAngleSizeSet(CGSizeMake(20, 15))
+    //可以设置三角形的颜色
+//    .wMainBackColorSet([UIColor orangeColor])
     //弹出动画
     .wShowAnimationSet(AninatonZoomIn)
     //消失动画
@@ -97,5 +88,99 @@
     //弹出视图
     .wTapViewSet(sender)
     .wStart();
+}
+
+
+//自定义微信例子
+- (void)customWX:(UIButton*)sender{
+    Dialog()
+    .wTypeSet(DialogTypePop)
+    //隐藏阴影
+    .wShadowAlphaSet(0.02)
+    //导航栏上 新写法 旧写法传入wNavigationItem也有效
+    .wTapViewTypeSet(DiaPopInViewNavi)
+    //三角形中心点
+    .wPercentAngleSet(0.9)
+    .wShowAnimationSet(AninatonZoomIn)
+    .wHideAnimationSet(AninatonZoomOut)
+    //距离弹出点的距离
+    .wMainOffsetYSet(10)
+    //弹出点
+    .wTapViewSet(sender)
+    //自定义cell高度
+    .wCellHeightSet(44)
+    //自定义cell(如有需要)
+    .wMyCellSet(^UITableViewCell *(NSIndexPath *indexPath, UITableView *tableView, id model) {
+        WXCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WXCell"];
+        if (!cell) {
+            cell = [[WXCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"WXCell"];
+        }
+        cell.myLine.hidden = (indexPath.row == 3);
+        cell.myImage.image = [UIImage imageNamed:model[@"image"]?:@" "];
+        cell.myLa.text = model[@"name"]?:@"";
+        return cell;
+    })
+    //自定义三角形size
+    .wAngleSizeSet(CGSizeMake(8, 8))
+    //自定义三角形背景颜色
+    .wMainBackColorSet(DialogColor(0x4d4b4d))
+    //圆角
+    .wPopViewRectCornerSet(DialogRectCornerAllCorners)
+    .wDataSet(@[
+                @{@"name":@"发起群聊",@"image":@"bbb"},
+                @{@"name":@"添加朋友",@"image":@"aaa"},
+                @{@"name":@"扫一扫",@"image":@"bbb"},
+                @{@"name":@"收付款",@"image":@"aaa"},
+    ])
+    .wStart();
+}
+@end
+
+@implementation WXCell
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        [self.contentView addSubview:self.myLa];
+        [self.contentView addSubview:self.myImage];
+        [self.contentView addSubview:self.myLine];
+        [self.myImage mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(20);
+            make.centerY.mas_equalTo(0);
+            make.size.mas_equalTo(CGSizeMake(25, 25));
+        }];
+        [self.myLa mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.myImage.mas_right).offset(10);
+            make.centerY.mas_equalTo(0);
+        }];
+        [self.myLine mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(DialogK1px);
+            make.right.mas_equalTo(0);
+            make.left.equalTo(self.myLa.mas_left);
+            make.bottom.mas_equalTo(0);
+        }];
+        self.contentView.backgroundColor  = DialogColor(0x4d4b4d);
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    return self;
+}
+- (UILabel *)myLa{
+    if (!_myLa) {
+        _myLa = [UILabel new];
+        _myLa.textColor = [UIColor whiteColor];
+        _myLa.font = [UIFont systemFontOfSize:15.0f];
+    }
+    return _myLa;
+}
+- (UIImageView *)myImage{
+    if (!_myImage) {
+        _myImage = [UIImageView new];
+    }
+    return _myImage;
+}
+- (UIView *)myLine{
+    if (!_myLine) {
+        _myLine = [UIView new];
+        _myLine.backgroundColor = [UIColor whiteColor];
+    }
+    return _myLine;
 }
 @end

@@ -18,12 +18,25 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.dataArr = @[@"2列",@"4列"];
+    self.dataArr = @[@"1列",@"2列",@"4列"];
 }
 
 -(void)action:(UIButton*)sender{
     switch (sender.tag) {
            case 0:{
+               NSDictionary *info = @{@"name":@"数据3"};
+                Dialog()
+               .wTypeSet(DialogTypePickSelect)
+               .wEventOKFinishSet(^(id anyID, id otherData) {
+                      NSLog(@"%@",anyID);
+                })
+               .wListDefaultValueSet(@[@"数据3"])  //默认
+               //一层直接传入带字典/字符串的数组 name为显示的文字 其他携带的model可以自由传入
+               .wDataSet(@[@{@"name":@"数据1"},@{@"name":@"数据2"},info,@{@"name":@"数据4"}])
+               .wStart();
+           }
+               break;
+           case 1:{
                 Dialog()
                .wEventOKFinishSet(^(id anyID, id otherData) {
                    NSLog(@"%@",anyID);
@@ -35,7 +48,7 @@
                .wStart();
            }
                break;
-           case 1:{
+           case 2:{
                Dialog()
                .wEventOKFinishSet(^(id anyID, id otherData) {
                    NSLog(@"%@",anyID);

@@ -53,9 +53,7 @@ WMZDialogSetFuncImplementation(WMZDialog, BOOL,                        wAddBotto
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                           wPickRepeat)
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                         wMainToBottom)
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                         wCanSelectPay)
-WMZDialogSetFuncImplementation(WMZDialog, BOOL,                 wTapViewTableViewFoot)
-WMZDialogSetFuncImplementation(WMZDialog, BOOL,                     wOpenCalanderRule)
-//WMZDialogSetFuncImplementation(WMZDialog, BOOL,                      wDeviceDidChange)
+WMZDialogSetFuncImplementation(WMZDialog, BOOL,                      wDeviceDidChange)
 WMZDialogSetFuncImplementation(WMZDialog, DiaPopInView,                  wTapViewType)
 WMZDialogSetFuncImplementation(WMZDialog, NSInteger,                 wListScrollCount)
 WMZDialogSetFuncImplementation(WMZDialog, NSInteger,            wTableViewSectionHead)
@@ -119,6 +117,7 @@ WMZDialogSetFuncImplementation(WMZDialog, NSString*,                       wSepa
 WMZDialogSetFuncImplementation(WMZDialog, NSDate*,                       wDefaultDate)
 WMZDialogSetFuncImplementation(WMZDialog, NSDate*,                           wMaxDate)
 WMZDialogSetFuncImplementation(WMZDialog, NSDate*,                           wMinDate)
+WMZDialogSetFuncImplementation(WMZDialog, CGSize,                          wAngleSize)
 WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                wPopViewBorderWidth)
 WMZDialogSetFuncImplementation(WMZDialog, UIColor*,               wPopViewBorderColor)
 WMZDialogSetFuncImplementation(WMZDialog, UITableViewCellSeparatorStyle,wSeparatorStyle)
@@ -216,19 +215,19 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
         _wPopViewBorderColor = _wMainBackColor;
         _wTapRect = CGRectZero;
         _wPopViewRectCorner = DialogRectCornerNone;
-        _wOpenCalanderRule = YES;
         _wTag = 123456;
         _wListScrollCount = 8;
         _wSeparatorStyle = UITableViewCellSeparatorStyleNone;
-//        _wDeviceDidChange = YES;
+        _wDeviceDidChange = YES;
+        _wAngleSize = CGSizeMake(Dialog_GetWNum(30), Dialog_GetWNum(20));
     }
     return self;
 }
 - (void)addNotification{
-//    //监听横竖屏
-//    if (self.wDeviceDidChange) {
+    //监听横竖屏
+    if (self.wDeviceDidChange) {
 //        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(change:) name:UIDeviceOrientationDidChangeNotification object:nil];
-//    }
+    }
 }
 
 /*
@@ -301,9 +300,21 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
         case DialogTypePop:
         {
              if (self.wWidth == Dialog_GetWNum(500)) {
-                  self.wWidth = Dialog_GetWNum(300);
-              }
-              self.wTextAlignment = NSTextAlignmentLeft;
+                 self.wWidth = Dialog_GetWNum(300);
+             }
+             if (self.wMainOffsetY == Dialog_GetWNum(20)) {
+                 self.wMainOffsetY = 0;
+             }
+             if (self.wData &&
+                [self.wData isKindOfClass:[NSArray class]]) {
+                 for (id data in self.wData) {
+                     if ([data isKindOfClass:[NSDictionary class]]) {
+                         if (data[@"image"]) {
+                             self.wTextAlignment = NSTextAlignmentLeft;
+                         }
+                     }
+                 }
+             }
         }
             break;
         case DialogTypeMenusSelect:
@@ -438,12 +449,6 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
             }
             break;
         }
-        case DialogTypeNornal:
-             DialogTypeSelect:
-             DialogTypeWrite:
-             DialogTypeTime:
-             DialogTypeDown:
-             break;
         default:
             break;
     }
@@ -454,7 +459,6 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
         self.wWidth = Device_Dialog_Width;
     }
 }
-
 /*
  *UI赋值
  */
@@ -507,11 +511,11 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
     self.wCloseBtn.layer.borderColor = self.wCancelColor.CGColor;
     
     self.mainView.frame = CGRectMake(0, 0, self.wWidth, Dialog_GetWNum(267));
-    self.mainView.backgroundColor = _wMainBackColor;
+    self.mainView.backgroundColor = self.wMainBackColor;
     
     self.shadowView.frame = self.bounds;
-    self.shadowView.backgroundColor = _wShadowColor;
-    self.shadowView.alpha = _wShadowAlpha;
+    self.shadowView.backgroundColor = self.wShadowColor;
+    self.shadowView.alpha = self.wShadowAlpha;
     
     if (self.wShadowCanTap) {
         self.shadowView.userInteractionEnabled = YES;
@@ -541,7 +545,6 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
                 self.tableView.wCardPresent = (self.wType == DialogTypeCardPresent);
             }
         }
-
         if ([(NSArray*)self.wData count]>self.wListScrollCount) {
             self.tableView.scrollEnabled = YES;
         }else{
@@ -551,18 +554,23 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
     
     if (self.wType == DialogTypePickSelect) {
         if (self.wData&&([self.wData isKindOfClass:[NSArray class]]||[self.wData isKindOfClass:[NSMutableArray class]])) {
+            [(NSArray*)self.wData enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                if (![obj isKindOfClass:[NSArray class]]) {
+                    *stop = YES;
+                    self.nest = YES;
+                    return;
+                }
+            }];
             self.pickView.delegate = self;
             self.pickView.dataSource = self;
         }
     }
-    
     if (self.wType == DialogTypeLocation||self.wType == DialogTypeDatePicker) {
         self.pickView.delegate = self;
         self.pickView.dataSource = self;
     }
     
     [self addSubview:self.mainView];
-    
     if (self.wMyDiaLogView) {
         [self showView:showView];
         UIView *bottomView = self.wMyDiaLogView(self.mainView);
@@ -593,7 +601,9 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
     UIView *view = showView?:DialogWindow;
     if (self.wTag) {
         self.tag = self.wTag;
-        if ([view viewWithTag:self.wTag]) return;
+        WMZDialog *existView = [view viewWithTag:self.wTag];
+        if (existView &&
+            existView.wType == self.wType) return;
     }
     [view addSubview:self];
     if (self.wShowAnimation != AninatonShowNone ) {
@@ -603,7 +613,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
     if (self.wEffectShow) {
         [self addSubview:self.effectView];
         self.shadowView.backgroundColor = [UIColor clearColor];
-        [self sendSubviewToBack:self.effectView];
+        [self insertSubview:self.effectView  belowSubview:self.mainView];
     }
     if (self.wShadowShow) {
         [self insertSubview:self.shadowView  belowSubview:self.mainView];
@@ -611,8 +621,9 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
     [self bringSubviewToFront:self.mainView];
     [self setParentVCView:0.9];
     [self dealAnamtionShowWithView:self.mainView withType:self.wShowAnimation withTime:self.wAnimationDurtion block:^{
-        weakObject.mainView.userInteractionEnabled = YES;
-        weakObject.shadowView.userInteractionEnabled = YES;
+        DialogStrongSelf(weakObject)
+        strongObject.mainView.userInteractionEnabled = YES;
+        strongObject.shadowView.userInteractionEnabled = YES;
     }];
 }
 /*
@@ -1014,19 +1025,33 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
 }
 # pragma  mark pickView 代理
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
-    return self.tree?self.depth:[(NSArray*)self.wData count];
+    return self.tree?self.depth:
+                     (!self.nest?[(NSArray*)self.wData count]:1);
 }
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
-    return self.tree?[[self getMyDataArr:component+100 withType:0] count]*(self.wPickRepeat?pickViewCount:1):[self.wData[component] count]*(self.wPickRepeat?pickViewCount:1);
+    if (self.tree) {
+        return [[self getMyDataArr:component+100 withType:0] count]*(self.wPickRepeat?pickViewCount:1);
+    }
+    if (!self.nest) {
+        return [self.wData[component] count]*(self.wPickRepeat?pickViewCount:1);
+    }else{
+        return [(NSArray*)self.wData count]*(self.wPickRepeat?pickViewCount:1);
+    }
 }
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
-    NSArray *arr = self.tree?[self getMyDataArr:component+100 withType:0]:self.wData[component];
+    NSArray *arr = self.tree?
+                   [self getMyDataArr:component+100 withType:0]:
+                   (!self.nest?self.wData[component]:self.wData);
     id data = arr[row%arr.count];
     if ([data isKindOfClass:[WMZTree class]]) {
         WMZTree *selectDic = (WMZTree*)data;
         return selectDic.name;
+    }else if ([data isKindOfClass:[NSDictionary class]]) {
+        return data[@"name"];
+    }else if ([data isKindOfClass:[NSString class]]) {
+        return data;
     }
-    return data;
+    return @"";
 }
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
     UILabel* pickerLabel = (UILabel*)view;
@@ -1197,7 +1222,10 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
    UIDeviceOrientation  orient = [UIDevice currentDevice].orientation;
     if (orient == UIDeviceOrientationLandscapeLeft ||
         orient == UIDeviceOrientationLandscapeRight) {
-        
+        [self.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [obj removeFromSuperview];
+            obj= nil;
+        }];
     }else if (orient == UIDeviceOrientationPortrait ||
         orient == UIDeviceOrientationPortraitUpsideDown) {
        

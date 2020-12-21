@@ -93,6 +93,7 @@ Dialog() \
 #define Device_Dialog_Height [UIScreen mainScreen].bounds.size.height
 #define Device_Dialog_Width  [UIScreen mainScreen].bounds.size.width
 #define NavigationBar_Dialog_Height (([[UIApplication sharedApplication] statusBarFrame].size.height) + 44)
+#define StatusBar_Dialog_Height [[UIApplication sharedApplication] statusBarFrame].size.height
 #define Dialog_GetWNum(A)  (A)/2.0*((Device_Dialog_Width)/375)
 #define DialogColor(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 #define DialogK1px (1 / UIScreen.mainScreen.scale)
@@ -190,6 +191,16 @@ typedef enum : NSUInteger{
     LoadingStyleRight,         //正确
     LoadingStyleError,         //错误
 }LoadingStyle;
+
+
+/*
+ * 优先级
+ */
+typedef enum : NSUInteger{
+    DialogLevelNormal,           //优先级普通 默认
+    DialogLevelMin,              //优先级低
+    DialogLevelMax,              //优先级高
+}DialogLevelType;
 
 /*
  * 点击

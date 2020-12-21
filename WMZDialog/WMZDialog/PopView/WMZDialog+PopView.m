@@ -14,11 +14,10 @@
 #import "WMZDialog+PopView.h"
 @implementation WMZDialog (PopView)
 - (UIView*)popViewAction{
-    
      [self.wTapView setNeedsLayout];
      [self.wTapView layoutIfNeeded];
      self.tapRect = self.wTapView.frame;
-    if (self.wTapView) {
+     if (self.wTapView) {
         if (self.wTapViewType == DiaPopInViewNormal) {
             [self dealNested:@"UIViewControllerWrapperView"];
          }
@@ -59,7 +58,6 @@
                    [arr addObject:view.superview];
                }
              }
-             
              
              if (ta) {
                  self.popInScrollView = ta;
@@ -134,141 +132,131 @@
     if(!CGRectEqualToRect(self.wTapRect, CGRectZero)) {// 两个区域不相等
         self.tapRect = self.wTapRect;
     }
-    [self.mainView addSubview:self.titleLabel];
     self.tableView.frame = CGRectMake(0, 0, self.wWidth, self.wCellHeight*([(NSArray*)self.wData count]>self.wListScrollCount?self.wListScrollCount:[(NSArray*)self.wData count]));
+    CGRect tableViewRect = self.tableView.frame;
     if (self.tableView.frame.size.height == 0 &&[(NSArray*)self.wData count]) {
-        CGRect rect = self.tableView.frame;
-        rect.size.height = self.wHeight;
-        self.tableView.frame = rect;
+        tableViewRect.size.height = self.wHeight;
     }
     [self.mainView addSubview:self.tableView];
-    CGRect rect = CGRectZero;
-    rect.size.width = self.wWidth;
-    rect.size.height = CGRectGetMaxY(self.tableView.frame);
+    CGFloat offsetY =  self.wAngleSize.height;
     DiaDirection direction = self.wDirection;
-    
-    if (direction == directionDowm) {
-        if (self.wNavigationItem||
-        self.wTapViewType == DiaPopInViewNavi) {
-            rect.origin.x = self.tapRect.origin.x*self.wPercentOrginX;
-        }else{
-            rect.origin.x = (self.tapRect.origin.x-(self.mainView.frame.size.width-self.tapRect.size.width)/2)*self.wPercentOrginX;
-        }
-        //超出屏幕方向变为上面
-        if (rect.size.height+self.wMainOffsetY+CGRectGetMaxY(self.tapRect)>Device_Dialog_Height) {
-            direction = directionUp;
-            rect.origin.y = CGRectGetMinY(self.tapRect) - self.wMainOffsetY - rect.size.height;
-        }else{
-            rect.origin.y = self.wMainOffsetY+CGRectGetMaxY(self.tapRect);
-        }
-    }
-    if (direction == directionUp) {
-        rect.origin.x = (self.tapRect.origin.x-(self.mainView.frame.size.width-self.tapRect.size.width)/2)*self.wPercentOrginX;
-        //超出屏幕方向变为下面
-        if (CGRectGetMinY(self.tapRect) -self.wMainOffsetY - rect.size.height < (isIphoneX?15:0)) {
-            direction = directionDowm;
-            rect.origin.y = self.wMainOffsetY+CGRectGetMaxY(self.tapRect);
-        }else{
-            rect.origin.y = CGRectGetMinY(self.tapRect) - self.wMainOffsetY - rect.size.height;
-        }
-    }
-    
-    if (direction == directionright) {
-        rect.origin.y = (self.tapRect.origin.y - self.mainView.frame.size.height/2)*self.wPercentOrginX;
-        //超出屏幕方向变为左面
-        if (rect.size.width+self.wMainOffsetY+CGRectGetMaxX(self.tapRect)>Device_Dialog_Width) {
-            direction = directionLeft;
-            rect.origin.x = CGRectGetMinX(self.tapRect) - self.wMainOffsetY - rect.size.width;
-        }else{
-            rect.origin.x = self.wMainOffsetY+CGRectGetMaxX(self.tapRect);
-        }
-    }
-    
-    if (direction == directionLeft) {
-        rect.origin.y = (self.tapRect.origin.y - self.mainView.frame.size.height/2) *self.wPercentOrginX;
-        //超出屏幕方向变为下面
-        if (CGRectGetMinX(self.tapRect) - self.wMainOffsetY - rect.size.width<0) {
-            direction = directionright;
-            rect.origin.x = self.wMainOffsetY+CGRectGetMaxX(self.tapRect);
-        }else{
-            rect.origin.x = CGRectGetMinX(self.tapRect) - self.wMainOffsetY - rect.size.width;
-        }
-    }
-    
-    if (direction == directionUp) {
-        rect.size.height+=self.wMainOffsetX;
-    }
-    if (direction == directionDowm) {
-        rect.size.height+=self.wMainOffsetX;
-        rect.origin.y-=self.wMainOffsetX;
-        CGRect taRect = self.tableView.frame;
-        taRect.origin.y+=self.wMainOffsetX;
-        self.tableView.frame = taRect;
-    }
-    
-    self.mainView.frame = rect;
-    
-    if (self.wNavigationItem||
-        self.wTapViewType == DiaPopInViewNavi) {
-        if (CGRectGetMaxX(self.mainView.frame)>Device_Dialog_Width) {
-            CGRect myRect = self.mainView.frame;
-            myRect.origin.x = CGRectGetMaxX(self.tapRect)-self.mainView.frame.size.width;
-            self.mainView.frame = myRect;
-        }
-        if (CGRectGetMinX(self.mainView.frame)<0) {
-            CGRect myRect = self.mainView.frame;
-            myRect.origin.x = 0;
-            self.mainView.frame = myRect;
-        }
-    }else{
-        if (direction == directionDowm || direction == directionUp) {
-            if (CGRectGetMaxX(self.mainView.frame)>Device_Dialog_Width) {
-                CGRect myRect = self.mainView.frame;
-                myRect.origin.x = CGRectGetMaxX(self.tapRect)-self.mainView.frame.size.width;
-                self.mainView.frame = myRect;
-            }
-            if (CGRectGetMinX(self.mainView.frame)<0) {
-                CGRect myRect = self.mainView.frame;
-                myRect.origin.x = 0;
-                self.mainView.frame = myRect;
-            }
-            
-        }
-        if (direction == directionLeft || direction == directionright) {
-            if (CGRectGetMaxY(self.mainView.frame)>Device_Dialog_Height) {
-                CGRect myRect = self.mainView.frame;
-                myRect.origin.y = Device_Dialog_Height-self.mainView.frame.size.height;
-                self.mainView.frame = myRect;
-            }
-            if (CGRectGetMinY(self.mainView.frame)<0) {
-                CGRect myRect = self.mainView.frame;
-                myRect.origin.y = 0;
-                self.mainView.frame = myRect;
-            }
-        }
-    }
-    
+    CGRect rect = CGRectZero;
     //箭头位置
     DiaDirection headType = 0;
     CGFloat offset = 0;
-    if (direction == directionUp) {
-        headType = directionDowm;
-        offset = self.mainView.frame.size.width*self.wPercentAngle;
+    switch (direction) {
+        case directionDowm:{
+            rect.size.width = tableViewRect.size.width;
+            tableViewRect.origin.y = offsetY;
+            rect.size.height = offsetY + tableViewRect.size.height;
+            if (self.wNavigationItem||
+            self.wTapViewType == DiaPopInViewNavi) {
+                rect.origin.x = self.tapRect.origin.x*self.wPercentOrginX;
+            }else{
+                rect.origin.x = (self.tapRect.origin.x-(rect.size.width-self.tapRect.size.width)/2)*self.wPercentOrginX;
+            }
+            if (rect.size.height + self.wMainOffsetY +CGRectGetMaxY(self.tapRect)>Device_Dialog_Height) {
+                direction = directionUp;
+                tableViewRect.origin.y = 0;
+                rect.size.height = tableViewRect.size.height + offsetY;
+                rect.origin.y = CGRectGetMinY(self.tapRect) - self.wMainOffsetY - rect.size.height;
+                headType = directionDowm;
+            }else{
+                rect.origin.y = self.wMainOffsetY + CGRectGetMaxY(self.tapRect);
+                headType = directionUp;
+            }
+            
+            offset = rect.size.width * self.wPercentAngle;
+        }
+            break;
+        case directionUp:{
+            rect.size.width = tableViewRect.size.width;
+            tableViewRect.origin.y = 0;
+            rect.size.height = offsetY + tableViewRect.size.height ;
+            
+            rect.origin.x = (self.tapRect.origin.x-(rect.size.width-self.tapRect.size.width)/2)*self.wPercentOrginX;
+            if (CGRectGetMinY(self.tapRect) - self.wMainOffsetY - rect.size.height < (isIphoneX?15:0)) {
+                direction = directionDowm;
+                tableViewRect.origin.y = offsetY;
+                rect.size.height = offsetY + tableViewRect.size.height;
+                rect.origin.y = self.wMainOffsetY + CGRectGetMaxY(self.tapRect);
+                headType = directionUp;
+            }else{
+                rect.origin.y = CGRectGetMinY(self.tapRect) - self.wMainOffsetY - rect.size.height;
+                headType = directionDowm;
+            }
+
+            offset = rect.size.width * self.wPercentAngle;
+        }
+                
+            break;
+        case directionright:{
+            rect.size.height = tableViewRect.size.height;
+            tableViewRect.origin.x = offsetY;
+            rect.size.width = tableViewRect.size.width + offsetY;
+            rect.origin.y = (self.tapRect.origin.y - (rect.size.height-self.tapRect.size.height)/2)*self.wPercentOrginX;
+            if (rect.size.width + self.wMainOffsetY + CGRectGetMaxX(self.tapRect)>Device_Dialog_Width) {
+                direction = directionLeft;
+                tableViewRect.origin.x = 0;
+                rect.size.width = tableViewRect.size.width + offsetY;
+                rect.origin.x = CGRectGetMinX(self.tapRect) - self.wMainOffsetY - rect.size.width;
+                headType = directionright;
+            }else{
+                rect.origin.x = CGRectGetMaxX(self.tapRect) + self.wMainOffsetY;
+                headType = directionLeft;
+            }
+            offset = rect.size.height*self.wPercentAngle;
+        }
+                    
+            break;
+        case directionLeft:{
+            rect.size.height = tableViewRect.size.height;
+            tableViewRect.origin.x = 0;
+            rect.size.width = tableViewRect.size.width + offsetY;
+            rect.origin.y = (self.tapRect.origin.y - (rect.size.height-self.tapRect.size.height)/2) *self.wPercentOrginX;
+            if (CGRectGetMinX(self.tapRect) - self.wMainOffsetY - rect.size.width<0) {
+                direction = directionright;
+                tableViewRect.origin.x = offsetY;
+                rect.size.width = tableViewRect.size.width + offsetY;
+                rect.origin.x = self.wMainOffsetY + CGRectGetMaxX(self.tapRect);
+                headType = directionLeft;
+            }else{
+                rect.origin.x = CGRectGetMinX(self.tapRect) - self.wMainOffsetY - rect.size.width;
+                headType = directionright;
+            }
+            offset = rect.size.height*self.wPercentAngle;
+        }
+                
+            break;
+        default:
+            break;
     }
-    if (direction == directionDowm) {
-        headType = directionUp;
-        offset = self.mainView.frame.size.width*self.wPercentAngle;
-    }
-    if (direction == directionLeft) {
-        headType = directionright;
-        offset = self.mainView.frame.size.height*self.wPercentAngle;
-    }
-    if (direction == directionright) {
-        headType = directionLeft;
-        offset = self.mainView.frame.size.height*self.wPercentAngle;
+    if (self.wNavigationItem||
+        self.wTapViewType == DiaPopInViewNavi) {
+        if (CGRectGetMaxX(rect)>Device_Dialog_Width) {
+            rect.origin.x = CGRectGetMaxX(self.tapRect)- rect.size.width;
+        }
+        if (CGRectGetMinX(rect)<0) {
+            rect.origin.x = 0;
+        }
+    }else{
+        if (CGRectGetMaxX(rect)>Device_Dialog_Width) {
+            rect.origin.x = Device_Dialog_Width - rect.size.width;
+        }
+        if (CGRectGetMinX(rect)<0) {
+            rect.origin.x = 0;
+        }
+        if (CGRectGetMaxY(rect)> (isIphoneX ? (Device_Dialog_Height - 20):Device_Dialog_Height)) {
+            rect.origin.y = (isIphoneX ? (Device_Dialog_Height - 20):Device_Dialog_Height)-rect.size.height;
+        }
+        if (CGRectGetMinY(rect)< isIphoneX? StatusBar_Dialog_Height : 0) {
+            rect.origin.y = isIphoneX? StatusBar_Dialog_Height : 0;
+        }
     }
     
-    [self.mainView addArrowBorderAt:headType offset:offset rectCorner:self.wPopViewRectCorner width:15 height:10 cornerRadius:self.wMainRadius borderWidth:self.wPopViewBorderWidth borderColor:self.wPopViewBorderColor];
+    self.mainView.frame = rect;
+    self.tableView.frame = tableViewRect;
+    [self.mainView addArrowBorderAt:headType offset:offset rectCorner:self.wPopViewRectCorner width:self.wAngleSize.width height:self.wAngleSize.height cornerRadius:self.wMainRadius borderWidth:self.wPopViewBorderWidth borderColor:self.wPopViewBorderColor];
 
     return self.mainView;
 }

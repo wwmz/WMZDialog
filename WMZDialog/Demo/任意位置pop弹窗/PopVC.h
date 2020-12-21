@@ -13,4 +13,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+
+@interface WXCell:UITableViewCell
+@property(nonatomic,strong)UILabel *myLa;
+@property(nonatomic,strong)UIImageView *myImage;
+@property(nonatomic,strong)UIView *myLine;
+@end
+
 NS_ASSUME_NONNULL_END

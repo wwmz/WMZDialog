@@ -152,13 +152,12 @@ static NSString *WMZDialogPopMaskName = @"WMZDialogPopMaskName";
            cornerRadius:(CGFloat)cornerRadius
             borderWidth:(CGFloat)borderWidth
             borderColor:(UIColor *)borderColor{
-    
     [self removeWMZDialogPop];
     CGFloat normalCornerRadius = cornerRadius;
     //只有一个mask层
     CAShapeLayer *mask = [[CAShapeLayer alloc] init];
-    mask.frame = self.bounds;
     mask.name = WMZDialogPopMaskName;
+    mask.frame = self.bounds;
     self.layer.mask = mask;
     
     UIBezierPath *path = [[UIBezierPath alloc] init];

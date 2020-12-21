@@ -97,7 +97,7 @@ static  const void *todayKey = @"todayKey";
     
     NSArray *weekTitleArray = @[@"周日",@"周一",@"周二",@"周三",@"周四",@"周五",@"周六"];
     for (int i = 0; i < weekTitleArray.count; i++) {
-        UILabel *weekTitleLable = [[UILabel alloc]initWithFrame:CGRectMake(i * ((self.wWidth/(weekTitleArray.count))), CGRectGetMaxY(titleView.frame), self.wWidth/(weekTitleArray.count ), 40)];
+        UILabel *weekTitleLable = [[UILabel alloc]initWithFrame:CGRectMake(i * ((self.wWidth/(weekTitleArray.count))), CGRectGetMaxY(titleView.frame), self.wWidth/(weekTitleArray.count), 40)];
         if (i == 0 || i == 6) {
             weekTitleLable.textColor = self.wOKColor;
         }else{
@@ -183,6 +183,7 @@ static  const void *todayKey = @"todayKey";
         cell.dateLable.textColor = DialogColor(0xD9D9D9);
         cell.chineseLable.textColor = model.wHadHolday?DialogColor(0xFFCCCC):DialogColor(0xD3D3D3);
         cell.contentView.backgroundColor = DialogColor(0xffffff);
+        [WMZDialogTool setView:cell.contentView radio:CGSizeMake(0, 0) roundingCorners:UIRectCornerAllCorners];
     }else{
         if (model.wShowCircle) {
             cell.circleLabel.text = @"●";
@@ -195,6 +196,15 @@ static  const void *todayKey = @"todayKey";
             cell.dateLable.textColor = DialogColor(0xFFFFFF);
             cell.chineseLable.textColor = DialogColor(0xFFFFFF);
             cell.contentView.backgroundColor = self.wOKColor;
+            if (model.firstModel && !model.lastModel) {
+                [WMZDialogTool setView:cell.contentView radio:CGSizeMake(20, 20) roundingCorners:UIRectCornerTopLeft|UIRectCornerBottomLeft];
+            }else if (model.lastModel && !model.firstModel) {
+                [WMZDialogTool setView:cell.contentView radio:CGSizeMake(20, 20) roundingCorners:UIRectCornerTopRight|UIRectCornerBottomRight];
+            }else if (!model.lastModel&&!model.firstModel) {
+                [WMZDialogTool setView:cell.contentView radio:CGSizeMake(0, 0) roundingCorners:UIRectCornerAllCorners];
+            }else{
+                [WMZDialogTool setView:cell.contentView radio:CGSizeMake(0, 0) roundingCorners:UIRectCornerAllCorners];
+            }
         }else{
             //今天
             if ([[NSString stringWithFormat:@"%ld-%ld-%ld",model.wYear,model.wMonth,model.wDay] isEqualToString:self.today]) {
@@ -206,6 +216,7 @@ static  const void *todayKey = @"todayKey";
                 cell.chineseLable.textColor = model.wHadHolday?[UIColor redColor]:DialogColor(0x666666);
             }
             cell.contentView.backgroundColor = DialogColor(0xffffff);
+            [WMZDialogTool setView:cell.contentView radio:CGSizeMake(0, 0) roundingCorners:UIRectCornerAllCorners];
         }
     }
     return cell;
@@ -225,20 +236,73 @@ static  const void *todayKey = @"todayKey";
     }
     
     model.wSelected = !model.wSelected;
-    
+    NSInteger deleteIndex = NSNotFound;
     if (self.wMultipleSelection) {
         if (model.wSelected) {
-            [self.selectArr addObject:model];
+            if ([self.selectArr indexOfObject:model] == NSNotFound) {
+                [self.selectArr addObject:model];
+            }
         }else{
-            if ([self.selectArr indexOfObject:model]!= NSNotFound) {
+            deleteIndex = [self.selectArr indexOfObject:model];
+            if (deleteIndex != NSNotFound) {
                 [self.selectArr removeObject:model];
             }
+        }
+        
+        if (self.selectArr.count > 2 ) {
+            [self.selectArr enumerateObjectsUsingBlock:^(CalanderModel*  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                obj.wSelected = NO;
+                model.firstModel = NO;
+                model.lastModel = NO;
+            }];
+            [self.selectArr removeAllObjects];
+            model.wSelected = YES;
+            [self.selectArr addObject:model];
+        }
+        
+        if (self.selectArr.count == 1) {
+            model.firstModel = YES;
+            model.lastModel = NO;
+        }else if (self.selectArr.count >= 2) {
+            [self.selectArr sortUsingComparator:^NSComparisonResult(CalanderModel*  _Nonnull obj1, CalanderModel*  _Nonnull obj2) {
+                 return obj1.dateTime > obj2.dateTime;
+            }];
+
+            CalanderModel *firstModel = self.selectArr.firstObject;
+            CalanderModel *lastModel = self.selectArr.lastObject;
+            firstModel.firstModel = YES;
+            firstModel.lastModel = NO;
+            lastModel.firstModel = NO;
+            lastModel.lastModel = YES;
+        
+            [self.dataArr enumerateObjectsUsingBlock:^(NSArray*  _Nonnull sectionData, NSUInteger idx, BOOL * _Nonnull stop) {
+//                NSLog(@"%@",sectionData);
+                if ([sectionData isKindOfClass:[NSArray class]]) {
+                    [sectionData enumerateObjectsUsingBlock:^(CalanderModel*  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                        if ([obj isKindOfClass:[CalanderModel class]]) {
+                            if (obj.dateTime > firstModel.dateTime &&
+                                obj.dateTime < lastModel.dateTime &&
+                                !obj.wLastMonth &&
+                                !obj.wNextMonth) {
+                                obj.wSelected = YES;
+                                obj.firstModel = NO;
+                                obj.lastModel = NO;
+                                if ([self.selectArr indexOfObject:obj] == NSNotFound) {
+                                    [self.selectArr addObject:obj];
+                                }
+                            }
+                        }
+                    }];
+                }
+            }];
+            [self.selectArr sortUsingComparator:^NSComparisonResult(CalanderModel*  _Nonnull obj1, CalanderModel*  _Nonnull obj2) {
+                 return obj1.dateTime > obj2.dateTime;
+            }];
         }
     }
     self.selecctCalanderModel = model;
     [UIView performWithoutAnimation:^{
-        NSIndexSet *reloadSet = [NSIndexSet indexSetWithIndex:indexPath.section];
-        [self.collectionView reloadSections:reloadSet];
+       [self.collectionView reloadData];
     }];
 }
 
@@ -329,7 +393,7 @@ static  const void *todayKey = @"todayKey";
                 }
             }
         }
-        if (self.wOpenCalanderRule&&!connect) {
+        if (!connect) {
             Dialog()
             .wMessageSet(@"请选择连续的时间段")
             .wTagSet(100)
@@ -341,7 +405,17 @@ static  const void *todayKey = @"todayKey";
         if (weakObject.wEventOKFinish) {
             if (weakObject.wMultipleSelection) {
                 if (weakObject.selectArr.count) {
-                    weakObject.wEventOKFinish(marrStr, marrModel);
+                    if (weakObject.selectArr.count == 1) {
+                        CalanderModel *tempModel = weakObject.selectArr.firstObject;
+                        NSString *str = [NSString stringWithFormat:@"%ld年%ld月%ld日",tempModel.wYear,tempModel.wMonth,tempModel.wDay];
+                        weakObject.wEventOKFinish(str, marrModel);
+                    }else if (weakObject.selectArr.count >= 2){
+                        CalanderModel *firstModel = weakObject.selectArr.firstObject;
+                        CalanderModel *lastModel = weakObject.selectArr.lastObject;
+                        NSString *began = [NSString stringWithFormat:@"%ld-%ld-%ld",firstModel.wYear,firstModel.wMonth,firstModel.wDay];
+                        NSString *end = [NSString stringWithFormat:@"%ld-%ld-%ld",lastModel.wYear,lastModel.wMonth,lastModel.wDay];
+                        weakObject.wEventOKFinish([NSString stringWithFormat:@"%@ - %@",began,end], marrModel);
+                    }
                 }else{
                     weakObject.wEventOKFinish(@"暂无选中", nil);
                 }

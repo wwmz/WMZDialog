@@ -99,8 +99,8 @@ WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,              
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wSelectShowChecked)
 //是否将弹窗放置最底部
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wMainToBottom)
-////是否监听横竖屏 default NO
-//WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wDeviceDidChange)
+//是否监听横竖屏 default NO
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wDeviceDidChange)
 //下划线样式 default line
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, UITableViewCellSeparatorStyle,wSeparatorStyle)
 
@@ -137,7 +137,7 @@ WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGFloat,           
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGFloat,                  wPercentOrginX)
 //弹出视图的位置 上下左右
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, DiaDirection,             wDirection)
-//弹出视图的位置 必传
+//弹出视图的位置对象 必传(如果传入wTapRect则可不传)
 WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, UIView* ,                 wTapView)
 //如果弹出视图的frame不准确 可以自行调节
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGRect,                   wTapRect)
@@ -155,6 +155,10 @@ WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGFloat,           
 WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, UIColor*,                 wPopViewBorderColor)
 //弹窗视图的圆角 可单独设置或者全部设置  默认无 和UIRectCorner用法相同 多了一个none
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, DialogRectCorner,         wPopViewRectCorner)
+//三角形的size
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGSize,                   wAngleSize)
+//可设置wMainOffsetY 调整弹出视图的y default 0
+//wMainOffsetY 
 /*=========================================dowm=======================================================================*/
 //图片的size
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGSize,                   wImageSize)
@@ -233,8 +237,6 @@ WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,              
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wOpenChineseDate)
 //隐藏日历上的按钮 default YES
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wHideCalanderBtn)
-//开启日历上连续日期检测 default YES
-WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wOpenCalanderRule)
 //展示圆点的日期 携带格式为yyyy-MM-dd的日期
 WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, NSArray*,                 wDateShowCircle)
 //注册自定义的collectionViewCell

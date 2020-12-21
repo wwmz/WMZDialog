@@ -25,7 +25,7 @@
     if (downImage) {
         size.width = self.wWidth-self.wMainOffsetX*2;
     }
-    self.textLabel.frame =  CGRectMake(self.wMainOffsetX,(downImage?CGRectGetMaxY(downImage.frame):0)+self.wMainOffsetY, size.width, size.height);
+    self.textLabel.frame =  CGRectMake(self.wMainOffsetX,(downImage?CGRectGetMaxY(downImage.frame):0)+ (self.textLabel.text.length?self.wMainOffsetY:0), size.width, size.height);
     
     [self reSetMainViewFrame:CGRectMake(0, 0,  downImage?self.wWidth:(self.textLabel.frame.size.width+self.wMainOffsetX*2), CGRectGetMaxY(self.textLabel.frame)+self.wMainOffsetY)];
 

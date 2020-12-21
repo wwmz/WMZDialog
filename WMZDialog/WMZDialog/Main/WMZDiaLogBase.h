@@ -174,6 +174,9 @@ NS_ASSUME_NONNULL_BEGIN
 *最大时间
 */
 @property(nonatomic,strong)NSMutableDictionary *maxDate;
+
+@property(nonatomic,assign)BOOL nest;
+
 /*
  *关闭
  */

@@ -39,6 +39,11 @@ WMZDialogStatementAndPropSetFuncStatement(assign, CalanderModel, NSInteger,     
 WMZDialogStatementAndPropSetFuncStatement(strong, CalanderModel, NSString*,                     wChineseDate)
 //农历详情
 WMZDialogStatementAndPropSetFuncStatement(strong, CalanderModel, NSString*,                     wDetailChineseDate)
+
+//内部属性
+@property(nonatomic,assign)BOOL firstModel;
+@property(nonatomic,assign)NSTimeInterval dateTime;
+@property(nonatomic,assign)BOOL lastModel;
 @end
 
 NS_ASSUME_NONNULL_END
