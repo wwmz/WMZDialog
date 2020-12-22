@@ -465,10 +465,13 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
 - (void)setUpUI{
     self.backgroundColor = [UIColor clearColor];
     self.frame = CGRectMake(0, 0, Device_Dialog_Width, Device_Dialog_Height);
-    //监听键盘出现
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    //监听键盘出现
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    if (self.wType == DialogTypeWrite ||
+        self.wType == DialogTypePay) {
+        //监听键盘出现
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+        //监听键盘出现
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    }
     if (self.wType != DialogTypeShare&&
         self.wType != DialogTypeMyView&&
         self.wType != DialogTypeTabbarMenu&&

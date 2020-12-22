@@ -21,7 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.dataArr = @[@"优酷(自动布局)",@"bili(自动计算)",@"饿了么(固定高度)"];
+    self.dataArr = @[@"优酷(自动布局)",@"bili(自动计算)",@"饿了么(固定高度)",@"传入一个View"];
 }
 
 -(void)action:(UIButton*)sender{
@@ -38,7 +38,19 @@
             [self elementDialog];
         }
             break;
-            
+        case 3:{
+            Dialog()
+            .wTypeSet(DialogTypeMyView)
+            .wWidthSet(300)
+            .wMyDiaLogViewSet(^UIView *(UIView *mainView) {
+                UIView *view = [[CustomView alloc] initWithFrame:CGRectMake(0, 0, 300, 250) superView:mainView];
+                mainView.layer.masksToBounds = YES;
+                mainView.layer.cornerRadius = 10;
+                return view;
+            })
+            .wStart();
+        }
+        break;
         default:
             break;
     }
@@ -224,5 +236,57 @@
      [myAlert closeView];
 }
 
+
+@end
+
+
+@implementation CustomView
+
+- (instancetype)initWithFrame:(CGRect)frame superView:(UIView*)superView{
+    if (self = [super initWithFrame:frame]) {
+        [superView addSubview:self];
+        UIImageView *image = [UIImageView new];
+        image.image = [UIImage imageNamed:@"healthy"];
+        [self addSubview:image];
+        [image mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(80).priorityHigh();
+            make.left.right.top.mas_equalTo(0);
+        }];
+              
+        UILabel *la = [UILabel new];
+        la.font = [UIFont systemFontOfSize:15.0f];
+        la.text = @"为呵护未成年人健康成长,优酷特别推出青少年模式,该模式下部分功能无法正常使用,请监护人主动选择，并设置监护密码";
+        la.numberOfLines = 0;
+        [self addSubview:la];
+        [la mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(10);
+            make.right.mas_equalTo(-10);
+            make.top.equalTo(image.mas_bottom);
+        }];
+              
+        UIButton *enter = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self addSubview:enter];
+        enter.titleLabel.font = [UIFont systemFontOfSize:14.0f];
+        [enter setTitle:@"进入青少年模式 >" forState:UIControlStateNormal];
+        [enter setTitleColor:DialogColor(0x108ee9) forState:UIControlStateNormal];
+        [enter mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_equalTo(0);
+            make.height.mas_equalTo(44).priorityHigh();
+            make.top.equalTo(la.mas_bottom);
+        }];
+              
+          UIButton *know = [UIButton buttonWithType:UIButtonTypeCustom];
+          [self addSubview:know];
+          know.titleLabel.font = [UIFont systemFontOfSize:14.0f];
+          [know setTitle:@"我知道了" forState:UIControlStateNormal];
+          [know setTitleColor:DialogColor(0x3333333) forState:UIControlStateNormal];
+          [know mas_makeConstraints:^(MASConstraintMaker *make) {
+              make.left.right.mas_equalTo(0);
+              make.height.mas_equalTo(44).priorityHigh();
+              make.top.equalTo(enter.mas_bottom);
+          }];
+    }
+    return self;
+}
 
 @end

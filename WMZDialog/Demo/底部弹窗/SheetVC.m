@@ -22,13 +22,24 @@
 -(void)action:(UIButton*)sender{
     switch (sender.tag) {
         case 0:{
-            Dialog().wTypeSet(DialogTypeSheet)
+            Dialog()
+            .wCustomMainViewSet(^(UIView *mainView) {
+                           [mainView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                               if (obj.frame.size.height == Dialog_GetWNum(20)) {
+                                   [obj removeFromSuperview];
+                                   *stop = YES;
+                                   return;
+                               }
+                           }];
+                       })
+            .wTypeSet(DialogTypeSheet)
             .wDataSet(@[@"男",@"女",@"保密"])
             .wTitleSet(@"性别选择")
             //完成操作事件
             .wEventFinishSet(^(id anyID,NSIndexPath *path, DialogType type) {
                 NSLog(@"%@",anyID);
             })
+            
             //默认选中第二个
             .wListDefaultValueSet(@[@(1)])
             //默认选中男
