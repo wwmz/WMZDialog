@@ -24,7 +24,12 @@ WMZDialogSetFuncImplementation(CalanderModel, NSString*,                     wDe
 WMZDialogSetFuncImplementation(CalanderModel, BOOL,                          wShowCircle)
 WMZDialogSetFuncImplementation(CalanderModel, UIColor*,                      wCircleColor)
 - (NSTimeInterval)dateTime{
-    _dateTime =  [self.wDate timeIntervalSince1970];
+    if (!_dateTime) {
+        _dateTime = [self.wDate timeIntervalSince1970];
+    }
     return _dateTime;
+}
+- (NSString *)description{
+    return [NSString stringWithFormat:@"%ld %d %d", self.wDay,self.firstModel,self.lastModel];
 }
 @end

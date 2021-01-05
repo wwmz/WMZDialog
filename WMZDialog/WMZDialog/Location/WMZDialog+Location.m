@@ -19,7 +19,7 @@
         self.tree = [WMZTree new];
         self.tree.depth = 0;
 
-        NSString *path = [self.dialogBundle pathForResource:@"province_data" ofType:@"xml"];
+        NSString *path = [self.dialogBundle pathForResource:self.wXMLPathName ofType:@"xml"];
         NSXMLParser *parser = [[NSXMLParser alloc] initWithData:[NSData dataWithContentsOfFile:path]];
         parser.delegate = self;
 
@@ -39,8 +39,8 @@
                 ta.dataSource = self;
                 ta.rowHeight = self.wMainBtnHeight;
                 ta.tag = 100+i;
-                ta.separatorStyle = UITableViewCellSeparatorStyleNone;
                 ta.estimatedRowHeight = 100;
+                ta.separatorStyle = UITableViewCellSeparatorStyleNone;
                 if (@available(iOS 11.0, *)) {
                     ta.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
                     ta.estimatedSectionFooterHeight = 0.01;

@@ -27,8 +27,6 @@
                 NSLog(@"%@",anyID);
             })
             .wTypeSet(DialogTypePay)
-            //出现动画
-            .wShowAnimationSet(AninationCombineOne)
             //消失动画
             .wHideAnimationSet(AninationHideCombineOne)
             //密码数量

@@ -259,3 +259,11 @@ static NSString *WMZDialogPopMaskName = @"WMZDialogPopMaskName";
     if (oldLayer) [oldLayer removeFromSuperlayer];
 }
 @end
+
+@implementation DialogButton
+
+- (void)setHighlighted:(BOOL)highlighted{
+    
+}
+
+@end

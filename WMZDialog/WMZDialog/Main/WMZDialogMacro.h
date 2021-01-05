@@ -21,16 +21,6 @@ return self;                                                                    
 };                                                                                                                      \
 }
 
-#define isIphoneX ({\
-BOOL isPhoneX = NO;\
-if (@available(iOS 11.0, *)) {\
-if ([[[UIApplication sharedApplication] delegate] window].safeAreaInsets.bottom > 0.0) {\
-isPhoneX = YES;\
-}\
-}\
-isPhoneX;\
-})
-
 #define  DialogWindow \
 ({\
 UIWindow *window = nil; \
@@ -49,6 +39,9 @@ if (@available(iOS 13.0, *)) \
             }\
         }\
     }\
+    if(!window){  \
+        window =  [UIApplication sharedApplication].keyWindow; \
+    }\
 }\
 else \
 { \
@@ -56,6 +49,17 @@ else \
 }\
 (window); \
 })\
+
+
+#define isIphoneX ({\
+BOOL isPhoneX = NO;\
+if (@available(iOS 11.0, *)) {\
+if ( DialogWindow.safeAreaInsets.bottom > 0.0) {\
+isPhoneX = YES;\
+}\
+}\
+isPhoneX;\
+})
 
 #define SuppressPerformSelectorLeakWarning(Stuff) \
 do { \
@@ -89,7 +93,7 @@ Dialog() \
     (wMenuIndicator); \
 })\
 
-#define DialogHorizontalScreen (([UIScreen mainScreen].bounds.size.width/[UIScreen mainScreen].bounds.size.height)>1.0)?YES:NO
+
 #define Device_Dialog_Height [UIScreen mainScreen].bounds.size.height
 #define Device_Dialog_Width  [UIScreen mainScreen].bounds.size.width
 #define NavigationBar_Dialog_Height (([[UIApplication sharedApplication] statusBarFrame].size.height) + 44)
@@ -193,14 +197,6 @@ typedef enum : NSUInteger{
 }LoadingStyle;
 
 
-/*
- * 优先级
- */
-typedef enum : NSUInteger{
-    DialogLevelNormal,           //优先级普通 默认
-    DialogLevelMin,              //优先级低
-    DialogLevelMax,              //优先级高
-}DialogLevelType;
 
 /*
  * 点击

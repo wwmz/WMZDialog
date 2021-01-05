@@ -17,6 +17,13 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithFrame:(CGRect)frame;
 @end
 
+@interface WMZDialogCollectionNormalCell : UICollectionViewCell
+@property (nonatomic,strong) UILabel *dateLable;
+@property (nonatomic,strong) UILabel *circleLabel;
+- (instancetype)initWithFrame:(CGRect)frame;
+@end
+
+
 @interface WMZDialogCalanderCell : WMZDialogCollectionCell
 @end
 

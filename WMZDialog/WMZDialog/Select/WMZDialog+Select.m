@@ -27,6 +27,7 @@
         [self.OKBtn removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
         [self.OKBtn addTarget:self action:@selector(mySelectAction:) forControlEvents:UIControlEventTouchUpInside];
     }else{
+        
         [self reSetMainViewFrame:CGRectMake(0, 0, self.wWidth,CGRectGetMaxY(self.tableView.frame))];
     }
 

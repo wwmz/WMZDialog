@@ -70,6 +70,8 @@
 //    .wAngleSizeSet(CGSizeMake(20, 15))
     //可以设置三角形的颜色
 //    .wMainBackColorSet([UIColor orangeColor])
+    //下划线显示
+    .wSeparatorStyleSet(UITableViewCellSeparatorStyleSingleLine)
     //弹出动画
     .wShowAnimationSet(AninatonZoomIn)
     //消失动画
@@ -97,6 +99,10 @@
     .wTypeSet(DialogTypePop)
     //隐藏阴影
     .wShadowAlphaSet(0.02)
+    //点击事件
+    .wEventFinishSet(^(id anyID, NSIndexPath *path, DialogType type) {
+        NSLog(@"%@ %@",anyID,path);
+    })
     //导航栏上 新写法 旧写法传入wNavigationItem也有效
     .wTapViewTypeSet(DiaPopInViewNavi)
     //三角形中心点

@@ -52,7 +52,7 @@
     if (sender.tag == 2) {
         //带打钩
         alert.wSelectShowCheckedSet(YES)
-             .wTextAlignmentSet(NSTextAlignmentLeft);
+        .wTextAlignmentSet(NSTextAlignmentLeft);
     }
     if (sender.tag == 1) {
         //改变出现的位置

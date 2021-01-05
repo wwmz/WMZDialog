@@ -58,6 +58,10 @@
 		F395FE26232ABC020020CFB5 /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = F395FE15232ABC010020CFB5 /* MASConstraint.m */; };
 		F395FE27232ABC020020CFB5 /* MASViewConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = F395FE17232ABC010020CFB5 /* MASViewConstraint.m */; };
 		F395FE28232ABC020020CFB5 /* MASViewAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = F395FE18232ABC010020CFB5 /* MASViewAttribute.m */; };
+		F3A49E6525A4177A0051F35B /* DialogCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F3A49E6325A4177A0051F35B /* DialogCell.m */; };
+		F3A49E6625A4177A0051F35B /* DialogCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3A49E6425A4177A0051F35B /* DialogCell.xib */; };
+		F3A49E6825A442F80051F35B /* DialogTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3A49E6725A442F80051F35B /* DialogTextCell.xib */; };
+		F3A49E6C25A443A90051F35B /* DialogCenterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3A49E6B25A443A90051F35B /* DialogCenterCell.xib */; };
 		F3CEDD3223729B780073E457 /* WMZDialogTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F3CEDD3123729B780073E457 /* WMZDialogTableView.m */; };
 		F3F4A78A232B3FC9008C70B2 /* WMZDialog+Write.m in Sources */ = {isa = PBXBuildFile; fileRef = F3F4A744232B3FC9008C70B2 /* WMZDialog+Write.m */; };
 		F3F4A78B232B3FC9008C70B2 /* WMZDialog+NaviMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = F3F4A747232B3FC9008C70B2 /* WMZDialog+NaviMenu.m */; };
@@ -209,6 +213,11 @@
 		F395FE16232ABC010020CFB5 /* ViewController+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ViewController+MASAdditions.h"; sourceTree = "<group>"; };
 		F395FE17232ABC010020CFB5 /* MASViewConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASViewConstraint.m; sourceTree = "<group>"; };
 		F395FE18232ABC010020CFB5 /* MASViewAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASViewAttribute.m; sourceTree = "<group>"; };
+		F3A49E6225A4177A0051F35B /* DialogCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DialogCell.h; sourceTree = "<group>"; };
+		F3A49E6325A4177A0051F35B /* DialogCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DialogCell.m; sourceTree = "<group>"; };
+		F3A49E6425A4177A0051F35B /* DialogCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DialogCell.xib; sourceTree = "<group>"; };
+		F3A49E6725A442F80051F35B /* DialogTextCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DialogTextCell.xib; sourceTree = "<group>"; };
+		F3A49E6B25A443A90051F35B /* DialogCenterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DialogCenterCell.xib; sourceTree = "<group>"; };
 		F3CEDD3023729B780073E457 /* WMZDialogTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMZDialogTableView.h; sourceTree = "<group>"; };
 		F3CEDD3123729B780073E457 /* WMZDialogTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMZDialogTableView.m; sourceTree = "<group>"; };
 		F3F4A743232B3FC9008C70B2 /* WMZDialog+Write.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WMZDialog+Write.h"; sourceTree = "<group>"; };
@@ -807,6 +816,11 @@
 				F3CEDD3123729B780073E457 /* WMZDialogTableView.m */,
 				F36E079E2373B354007C1E6A /* NSDate+WMZCalendarDate.h */,
 				F36E079F2373B354007C1E6A /* NSDate+WMZCalendarDate.m */,
+				F3A49E6225A4177A0051F35B /* DialogCell.h */,
+				F3A49E6325A4177A0051F35B /* DialogCell.m */,
+				F3A49E6425A4177A0051F35B /* DialogCell.xib */,
+				F3A49E6725A442F80051F35B /* DialogTextCell.xib */,
+				F3A49E6B25A443A90051F35B /* DialogCenterCell.xib */,
 			);
 			path = WMZDialogTool;
 			sourceTree = "<group>";
@@ -960,6 +974,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3A49E6825A442F80051F35B /* DialogTextCell.xib in Resources */,
+				F3A49E6625A4177A0051F35B /* DialogCell.xib in Resources */,
+				F3A49E6C25A443A90051F35B /* DialogCenterCell.xib in Resources */,
 				1871671F22A76B03001C6B41 /* LaunchScreen.storyboard in Resources */,
 				1871671C22A76B03001C6B41 /* Assets.xcassets in Resources */,
 				F3F4A797232B3FC9008C70B2 /* WMZDialog.bundle in Resources */,
@@ -1054,6 +1071,7 @@
 				F3F4A798232B3FC9008C70B2 /* WMZDialog+PickView.m in Sources */,
 				F395FE22232ABC020020CFB5 /* MASConstraintMaker.m in Sources */,
 				F3199A1E23756C4600C674C0 /* CalanderModel.m in Sources */,
+				F3A49E6525A4177A0051F35B /* DialogCell.m in Sources */,
 				F395FE23232ABC020020CFB5 /* MASLayoutConstraint.m in Sources */,
 				F3F4A79D232B3FC9008C70B2 /* WMZDialog+Normal.m in Sources */,
 			);

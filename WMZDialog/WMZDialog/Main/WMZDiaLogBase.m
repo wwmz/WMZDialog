@@ -253,5 +253,45 @@
 
 @end
 
-@implementation DialogCell
-@end
+//@implementation DialogCell
+//- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+//    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+//        [self.contentView addSubview:self.textLa];
+//        if ([reuseIdentifier isEqualToString:DialogNormalCell]) {
+//            self.textLa.frame = CGRectMake(<#CGFloat x#>, <#CGFloat y#>, <#CGFloat width#>, <#CGFloat height#>)
+//        }else if ([reuseIdentifier isEqualToString:DialogImageLeftCell]) {
+//            [self.contentView addSubview:self.iconImage];
+//        }else if ([reuseIdentifier isEqualToString:DialogImageCenterCell]) {
+//            [self.contentView addSubview:self.iconImage];
+//        }
+//        [self.contentView addSubview:self.button];
+//        [self.contentView addSubview:self.lineView];
+//    }
+//    return self;
+//}
+//- (UILabel *)textLa{
+//    if (!_textLa) {
+//        _textLa = [UILabel new];
+//        _textLa.numberOfLines = 0;
+//    }
+//    return _textLa;
+//}
+//- (UIImageView *)iconImage{
+//    if (!_iconImage) {
+//        _iconImage = [UIImageView new];
+//    }
+//    return _iconImage;
+//}
+//- (UIView *)lineView{
+//    if (!_lineView) {
+//        _lineView = [UIView new];
+//    }
+//    return _lineView;
+//}
+//- (DialogButton *)button{
+//    if (!_button) {
+//        _button = [DialogButton buttonWithType:UIButtonTypeCustom];
+//    }
+//    return _button;
+//}
+//@end

@@ -65,7 +65,7 @@
     .wCustomTableViewSet(^(UITableView *tableView) {
         tableView.bounces = NO;
     })
-    //自定义点击
+//    //自定义点击
 //    .wSelectCellSet(^(NSIndexPath *indexPath, UITableView *tableView, id model) {
 //
 //    })

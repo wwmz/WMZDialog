@@ -30,7 +30,7 @@
         NSDate *minDate = [gregorian dateByAddingComponents:dateComponents toDate:[NSDate date] options:0];
         
         Dialog()
-//        .wDefaultDateSet(minDate)   //跳转到默认日期页
+        .wDefaultDateSet(minDate)   //跳转到默认日期页
         .wMaxDateSet([NSDate date])
         .wMinDateSet(minDate)
         .wTypeSet(DialogTypeCalander)
@@ -61,7 +61,15 @@
         @{@"date":[NSDate dateWithTimeIntervalSinceNow:3*24*60*60],@"color":[UIColor cyanColor]},
         ]);
     }else if (sender.tag ==6) { //多选
-        alert.wMultipleSelectionSet(YES);
+        alert.wMultipleSelectionSet(YES)
+        .wOpenMultiZoneSet(YES)
+        .wListDefaultValueSet(@[
+        [NSDate dateWithTimeIntervalSinceNow:-3*24*60*60],
+        [NSDate date],
+        [NSDate dateWithTimeIntervalSinceNow:24*60*60],
+        [NSDate dateWithTimeIntervalSinceNow:3*24*60*60],
+        ])
+        ;
     }else if (sender.tag ==7) { //显示在底部
         alert.wMainToBottomSet(YES);
     }else if (sender.tag ==8) { //显示在底部

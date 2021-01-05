@@ -57,8 +57,6 @@ WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGFloat,           
 WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, UIColor*,                 wTitleColor)
 //内容颜色
 WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, UIColor*,                 wMessageColor)
-//嵌套弹窗的数据源
-WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, id,                       wSonData)
 //标题文本
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, NSString*,                wTitle)
 //内容文本
@@ -101,9 +99,10 @@ WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,              
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wMainToBottom)
 //是否监听横竖屏 default NO
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wDeviceDidChange)
-//下划线样式 default line
+//下划线样式 default none
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, UITableViewCellSeparatorStyle,wSeparatorStyle)
-
+//选中打钩图片 default dialog_check
+WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, UIImage*,                 wCheckImage)
 /*=========================================disappear=======================================================================*/
 //自动消失时间
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGFloat,                  wDisappelSecond)
@@ -111,6 +110,8 @@ WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGFloat,           
 /*=========================================Pay=======================================================================*/
 //距离弹窗键盘的距离
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGFloat,                  wKeyBoardMarginY)
+//嵌套弹窗的数据源
+WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, id,                       wSonData)
 //密码框数量
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, NSInteger,                wPayNum)
 //支付方式默认文本
@@ -187,6 +188,8 @@ WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, NSInteger,         
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, ChainType,                wChainType)
 //选中数据的分割符 默认‘，’
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, NSString*,                wSeparator)
+//默认地区的数据路径名称 default @"province_data"
+WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, NSString*,                wXMLPathName)
 
 /*=========================================datePicker===================================================================*/
 //时间弹窗的样式
@@ -241,6 +244,10 @@ WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,              
 WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, NSArray*,                 wDateShowCircle)
 //注册自定义的collectionViewCell
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, NSString*,                wReginerCollectionCell)
+//开启选择多个选续区域 default YES
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wOpenMultiZone)
+//cellSize default(屏幕宽度/7,屏幕宽度/7)
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGSize,                   wCalanderCellSize)
 /*=========================================Attributes==========================================*/
 
 /*=========================================Event================================================*/
@@ -256,12 +263,12 @@ WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, diaLogMyViewCallBlo
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogClickBlock,         wEventOKFinish)
 //按钮取消点击事件
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogClickBlock,         wEventCancelFinish)
+//阴影关闭事件
+WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogClickBlock,         wEventShadomClose)
 //操作完成事件
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogTableClickBlock,    wEventFinish)
 //弹窗关闭事件
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogClickBlock,         wEventClose)
-//阴影关闭事件
-WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogClickBlock,         wEventShadomClose)
 //菜单点击事件
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogMenuClickBlock,     wEventMenuClick)
 //自定义日历cell

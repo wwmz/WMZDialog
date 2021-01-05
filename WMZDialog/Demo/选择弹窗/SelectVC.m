@@ -42,6 +42,9 @@
             break;
         case 1:{
             Dialog()
+            .wEventCancelFinishSet(^(id anyID, id otherData) {
+                
+            })
             //自定义cell
             .wCustomCellSet(^UITableViewCell *(NSIndexPath *indexPath, UITableView *tableView, id model, BOOL isSelected) {
                 UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];

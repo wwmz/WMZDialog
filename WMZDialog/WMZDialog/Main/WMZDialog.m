@@ -7,7 +7,9 @@
 //
 #import "WMZDialog.h"
 
-@interface WMZDialog ()
+@interface WMZDialog (){
+    CGRect normalRect;
+}
 /*
  *配置
  */
@@ -30,6 +32,8 @@ WMZDialog * Dialog(void){
     };
 }
 - (void)setUpUI:(nullable UIView*)startView{
+    self.frame = CGRectMake(0, 0, startView?startView.bounds.size.width:Device_Dialog_Width, startView?startView.bounds.size.height:Device_Dialog_Height);
+    normalRect = self.frame;
     [self setUpDefaultParam];
     [self setUpUI];
     [self setUIdelagate:startView];
@@ -54,6 +58,8 @@ WMZDialogSetFuncImplementation(WMZDialog, BOOL,                           wPickR
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                         wMainToBottom)
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                         wCanSelectPay)
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                      wDeviceDidChange)
+WMZDialogSetFuncImplementation(WMZDialog, BOOL,                 wTapViewTableViewFoot)
+WMZDialogSetFuncImplementation(WMZDialog, BOOL,                        wOpenMultiZone)
 WMZDialogSetFuncImplementation(WMZDialog, DiaPopInView,                  wTapViewType)
 WMZDialogSetFuncImplementation(WMZDialog, NSInteger,                 wListScrollCount)
 WMZDialogSetFuncImplementation(WMZDialog, NSInteger,            wTableViewSectionHead)
@@ -114,6 +120,8 @@ WMZDialogSetFuncImplementation(WMZDialog, CGSize,                        wLoadin
 WMZDialogSetFuncImplementation(WMZDialog, UIColor*,                     wLoadingColor)
 WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                        wCellHeight)
 WMZDialogSetFuncImplementation(WMZDialog, NSString*,                       wSeparator)
+WMZDialogSetFuncImplementation(WMZDialog, NSString*,                     wXMLPathName)
+WMZDialogSetFuncImplementation(WMZDialog, CGSize,                   wCalanderCellSize)
 WMZDialogSetFuncImplementation(WMZDialog, NSDate*,                       wDefaultDate)
 WMZDialogSetFuncImplementation(WMZDialog, NSDate*,                           wMaxDate)
 WMZDialogSetFuncImplementation(WMZDialog, NSDate*,                           wMinDate)
@@ -121,6 +129,7 @@ WMZDialogSetFuncImplementation(WMZDialog, CGSize,                          wAngl
 WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                wPopViewBorderWidth)
 WMZDialogSetFuncImplementation(WMZDialog, UIColor*,               wPopViewBorderColor)
 WMZDialogSetFuncImplementation(WMZDialog, UITableViewCellSeparatorStyle,wSeparatorStyle)
+WMZDialogSetFuncImplementation(WMZDialog, UIImage*,                       wCheckImage)
 WMZDialogSetFuncImplementation(WMZDialog, DialogRectCorner,        wPopViewRectCorner)
 WMZDialogSetFuncImplementation(WMZDialog, DialogType,                           wType)
 WMZDialogSetFuncImplementation(WMZDialog, DialogShowAnination,         wShowAnimation)
@@ -220,13 +229,16 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
         _wSeparatorStyle = UITableViewCellSeparatorStyleNone;
         _wDeviceDidChange = YES;
         _wAngleSize = CGSizeMake(Dialog_GetWNum(30), Dialog_GetWNum(20));
+        _wOpenMultiZone = YES;
+        _wXMLPathName = @"province_data";
+        _wCheckImage = [UIImage imageNamed:[self.dialogBundle pathForResource:@"dialog_check" ofType:@"png"]];
     }
     return self;
 }
 - (void)addNotification{
     //监听横竖屏
     if (self.wDeviceDidChange) {
-//        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(change:) name:UIDeviceOrientationDidChangeNotification object:nil];
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(change:) name:UIDeviceOrientationDidChangeNotification object:nil];
     }
 }
 
@@ -250,7 +262,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
             }
             self.wMainToBottom = YES;
             if (self.wWidth == Dialog_GetWNum(500)) {
-                self.wWidth = (DialogHorizontalScreen == 1)?Device_Dialog_Height:Device_Dialog_Width;
+                self.wWidth = Device_Dialog_Width;
             }
             if (self.wMainBtnHeight == Dialog_GetWNum(60)) {
                 self.wMainBtnHeight = Dialog_GetWNum(88);
@@ -272,7 +284,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
             }
             self.wMainToBottom = YES;
             if (self.wWidth == Dialog_GetWNum(500)) {
-                self.wWidth = (DialogHorizontalScreen == 1)?Device_Dialog_Height:Device_Dialog_Width;
+                self.wWidth = Device_Dialog_Width;
             }
             if (self.wMainBtnHeight == Dialog_GetWNum(60)) {
                 self.wMainBtnHeight+=Dialog_GetWNum(10);
@@ -293,7 +305,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
             self.wMainToBottom = YES;
 
             if (self.wWidth == Dialog_GetWNum(500)) {
-                self.wWidth = (DialogHorizontalScreen == 1)?Device_Dialog_Height:Device_Dialog_Width;
+                self.wWidth = Device_Dialog_Width;
             }
         }
         break;
@@ -323,9 +335,8 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
                 self.wHeight = self.wCellHeight*3;
             }
             self.wMainToBottom = YES;
-    
             if (self.wWidth == Dialog_GetWNum(500)) {
-                self.wWidth = (DialogHorizontalScreen == 1)?Device_Dialog_Height:Device_Dialog_Width;
+                self.wWidth = Device_Dialog_Width;
             }
         }
             break;
@@ -346,7 +357,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
             }
             self.wMainToBottom = YES;
             if (self.wWidth == Dialog_GetWNum(500)) {
-                self.wWidth = (DialogHorizontalScreen == 1)?Device_Dialog_Height:Device_Dialog_Width;
+                self.wWidth = Device_Dialog_Width;
             }
         }
             break;
@@ -354,7 +365,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
         {
             self.wMainToBottom = YES;
             if (self.wWidth == Dialog_GetWNum(500)) {
-                self.wWidth = (DialogHorizontalScreen == 1)?Device_Dialog_Height:Device_Dialog_Width;
+                self.wWidth = Device_Dialog_Width;
             }
         }
             break;
@@ -366,7 +377,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
             self.wMainToBottom = YES;
 
             if (self.wWidth == Dialog_GetWNum(500)) {
-                self.wWidth = (DialogHorizontalScreen == 1)?Device_Dialog_Height:Device_Dialog_Width;
+                self.wWidth = Device_Dialog_Width;
             }
             if (self.wMainBtnHeight == Dialog_GetWNum(60)) {
                 self.wMainBtnHeight+=Dialog_GetWNum(10);
@@ -437,12 +448,6 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
             }
         }
             break;
-        case DialogTypeCalander:{
-            if (self.wWidth == Dialog_GetWNum(500)) {
-                self.wWidth = (DialogHorizontalScreen == 1)?Device_Dialog_Height:Device_Dialog_Width;
-            }
-        }
-            break;
         case  DialogTypeMyView:{
             if (self.wHeight == DialogHeight) {
                 self.wHeight = 0;
@@ -464,7 +469,6 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
  */
 - (void)setUpUI{
     self.backgroundColor = [UIColor clearColor];
-    self.frame = CGRectMake(0, 0, Device_Dialog_Width, Device_Dialog_Height);
     if (self.wType == DialogTypeWrite ||
         self.wType == DialogTypePay) {
         //监听键盘出现
@@ -537,7 +541,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
             self.tableView.delegate = self;
             self.tableView.dataSource = self;
             self.tableView.estimatedRowHeight = 100;
-            self.tableView.separatorStyle = self.wSeparatorStyle;;
+            self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
             if (@available(iOS 11.0, *)) {
                 self.tableView.estimatedSectionFooterHeight = 0.01;
                 self.tableView.estimatedSectionHeaderHeight = 0.01;
@@ -809,13 +813,13 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
     [self.bottomView addSubview:self.OKBtn];
     self.OKBtn.frame = CGRectMake(self.wEventCancelFinish?CGRectGetMaxX(self.cancelBtn.frame)+DialogK1px:0, CGRectGetMaxY(upLine.frame)+self.wMainOffsetX,self.wEventCancelFinish?self.wWidth/2-DialogK1px/2:self.wWidth, self.wMainBtnHeight);
     
-    CGSize OKSize = [WMZDialogTool sizeForTextView:CGSizeMake(self.wWidth - self.wMainOffsetX, CGFLOAT_MAX) text:self.wOKTitle font:self.wOKFont];
+    CGSize OKSize = [WMZDialogTool sizeForTextView:CGSizeMake(self.wWidth, CGFLOAT_MAX) text:self.wOKTitle font:self.wOKFont];
     CGSize cancelSize ;
     if (self.wEventCancelFinish) {
-        cancelSize = [WMZDialogTool sizeForTextView:CGSizeMake(self.wWidth - self.wMainOffsetX, CGFLOAT_MAX) text:self.wCancelTitle font:self.wCancelFont];
+        cancelSize = [WMZDialogTool sizeForTextView:CGSizeMake(self.wWidth, CGFLOAT_MAX) text:self.wCancelTitle font:self.wCancelFont];
     }
-    if (OKSize.width >self.OKBtn.frame.size.width - self.wMainOffsetX||
-        cancelSize.width >self.OKBtn.frame.size.width - self.wMainOffsetX) {
+    if (OKSize.width > (self.OKBtn.frame.size.width - self.wMainOffsetX * 2) ||
+        cancelSize.width > (self.OKBtn.frame.size.width - self.wMainOffsetX * 2)) {
         UIView *line = [self.bottomView viewWithTag:11111];
         if (self.wEventCancelFinish) {
             self.cancelBtn.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
@@ -855,7 +859,6 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
           
     [self.diaLogHeadView addSubview:self.titleLabel];
     self.titleLabel.frame = CGRectMake(btnWidth+2*self.wMainOffsetX, self.wMainOffsetY/2, self.wWidth-2*btnWidth-4*self.wMainOffsetX, self.wMainBtnHeight);
-    
     
     UIView *line = [UIView new];
     line.backgroundColor = DialogLineColor;
@@ -908,27 +911,31 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
     }
     DialogCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DialogCell"];
     if (!cell) {
-        cell = [[DialogCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"DialogCell"];
+        if ([data isKindOfClass:[NSDictionary class]]&&data[@"image"]) {
+            cell = self.wTextAlignment == NSTextAlignmentCenter?[DialogCell getImageCenterCell]:[DialogCell getCell];
+        }else{
+            cell = [DialogCell getTextCell];
+        }
     }
-    cell.backgroundColor = [UIColor whiteColor];
-    cell.tintColor = self.wOKColor;
-    cell.textLabel.textAlignment = self.wTextAlignment;
-    cell.textLabel.font = [UIFont systemFontOfSize:self.wMessageFont];
+    cell.contentView.backgroundColor = [UIColor whiteColor];
+    cell.textLa.textAlignment = self.wTextAlignment;
+    cell.textLa.font = [UIFont systemFontOfSize:self.wMessageFont];
     cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+    cell.button.image = self.wCheckImage;
+    if (indexPath.row == [(NSArray*)self.wData count] - 1) {
+        cell.lineView.hidden = YES;
+    }else{
+        cell.lineView.hidden = (self.wSeparatorStyle == UITableViewCellSeparatorStyleNone);
+    }
+    cell.lineView.backgroundColor = self.wLineColor;
+    cell.lineView.alpha = self.wLineAlpha;
     if ([data isKindOfClass:[WMZTree class]]) {
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         WMZTree *selectDic = (WMZTree*)data;
-        cell.textLabel.text = selectDic.name;
-        if (self.wTableViewColor.count>self.depth-1) {
-             cell.backgroundColor = self.wTableViewColor[selectDic.depth-1];
-        }
-        if (selectDic.isSelected) {
-            cell.textLabel.textColor = self.wOKColor;
-            cell.accessoryType = self.wSelectShowChecked?UITableViewCellAccessoryCheckmark:UITableViewCellAccessoryNone;
-        }else{
-            cell.textLabel.textColor = self.wMessageColor;
-            cell.accessoryType = UITableViewCellAccessoryNone;
-        }
+        cell.textLa.text = selectDic.name;
+        cell.contentView.backgroundColor = self.wTableViewColor[MIN(selectDic.depth-1, self.wTableViewColor.count - 1)];
+        cell.textLa.textColor = selectDic.isSelected?self.wOKColor:self.wMessageColor;
+        cell.button.hidden = !selectDic.isSelected;
     }else{
         if([data isKindOfClass:[NSDictionary class]]){
             NSString *iconStr = data[@"image"];
@@ -936,28 +943,24 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
             if (iconStr&&[iconStr isKindOfClass:[NSString class]]&&iconStr.length) {
                 hasImage = YES;
             }
-            UIImage *icon = [UIImage imageNamed:iconStr?:@" "];
-            cell.imageView.image = icon;
-            CGSize itemSize = CGSizeMake(hasImage?30:0, 30);
-            UIGraphicsBeginImageContextWithOptions(itemSize, NO, 0.0);
-            CGRect imageRect = CGRectMake(0, 0, itemSize.width, itemSize.height);
-            [icon drawInRect:imageRect];
-            cell.imageView.image = UIGraphicsGetImageFromCurrentImageContext();
-            UIGraphicsEndImageContext();
-            cell.textLabel.text = data[@"name"]?:@"";
-            cell.textLabel.textColor =  isSelect?self.wOKColor:self.wMessageColor;
+            cell.iconImage.image = [UIImage imageNamed:iconStr?:@" "];
+            cell.iconImage.hidden = !hasImage;
+            cell.textLa.text = data[@"name"]?:@"";
+            cell.textLa.textColor =  isSelect?self.wOKColor:self.wMessageColor;
+            cell.button.hidden = !isSelect;
         }else if([data isKindOfClass:[NSString class]]){
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            if (isSelect) {
-                cell.accessoryType = self.wSelectShowChecked?UITableViewCellAccessoryCheckmark:UITableViewCellAccessoryNone;
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                cell.textLabel.textColor = self.wOKColor;
-            }else{
-                cell.accessoryType = UITableViewCellAccessoryNone;
-                cell.textLabel.textColor = self.wMessageColor;
-            }
-            cell.textLabel.text = data;
+            cell.textLa.textColor = isSelect?self.wOKColor:self.wMessageColor;
+            cell.textLa.text = data;
+            cell.button.hidden = !isSelect;
         }
+    }
+    if (!self.wSelectShowChecked) {
+        cell.button.hidden = YES;
+    }
+    cell.tempWidth.constant = [cell.button isHidden]?0:20;
+    if (cell.leftOffset&&self.wTextAlignment == NSTextAlignmentCenter) {
+        cell.leftOffset.constant = [cell.button isHidden]?10:30;
     }
     return cell;
 }
@@ -1225,15 +1228,27 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
    UIDeviceOrientation  orient = [UIDevice currentDevice].orientation;
     if (orient == UIDeviceOrientationLandscapeLeft ||
         orient == UIDeviceOrientationLandscapeRight) {
-        [self.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            [obj removeFromSuperview];
-            obj= nil;
-        }];
-    }else if (orient == UIDeviceOrientationPortrait ||
-        orient == UIDeviceOrientationPortraitUpsideDown) {
-       
+        [self changeLeft:YES];
+    }else if (orient == UIDeviceOrientationPortrait) {
+        [self changeLeft:NO];
     }
-    
+}
+- (void)changeLeft:(BOOL)left{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        self.frame = CGRectMake(0, 0, left?normalRect.size.height:normalRect.size.width, left?normalRect.size.width:normalRect.size.height);
+        self.shadowView.frame = self.bounds;
+        CGRect frame = self.mainView.frame;
+        if (self.wMainToBottom) {
+            frame.origin.y = Device_Dialog_Height - frame.size.height;
+            self.mainView.frame = frame;
+            self.mainView.center = CGPointMake(self.center.x, self.mainView.center.y);
+        }else{
+            self.mainView.center = self.center;
+            if (self.wType == DialogTypePay || self.wType == DialogTypeWrite) {
+                [self becomeFirstResponder];
+            }
+        }
+    });
 }
 - (NSMutableDictionary *)configDic{
     if (!_configDic) {

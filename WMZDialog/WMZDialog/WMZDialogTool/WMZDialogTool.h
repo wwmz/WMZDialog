@@ -70,4 +70,8 @@ NS_ASSUME_NONNULL_BEGIN
         borderColor:(UIColor *)borderColor;
 @end
 
+@interface DialogButton : UIButton
+
+@end
+
 NS_ASSUME_NONNULL_END
