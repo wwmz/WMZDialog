@@ -312,7 +312,7 @@ typedef enum : NSUInteger{
 
 ### CocoaPods  
 1. 将 cocoapods 更新至最新版本.
-2. 在 Podfile 中添加 `pod 'WMZDialog',inhibit_warnings: true`。  
+2. 在 Podfile 中添加 `pod 'WMZDialog',inhibit_warnings: true`(可消除警告)。或    pod 'WMZDialog' , '~>1.2.3'
 3. 执行 `pod install` 或 `pod update`。
 4. 导入 #import "WMZDialog.h"。
 
@@ -369,4 +369,4 @@ ios问题交流群 937909825(有问题加群哈)
 - 20201218 cocopod 更新至 1.1.10 修复ios14无法弹出的问题
 - 20201221 cocopod 更新至 1.2.0 日历弹窗新增连续区域 pop弹窗修复bug+新增自定义三角形size
 - 20210105 cocopod 更新至 1.2.1 日历弹窗新增多个连续区域 支持横开启屏监听wDeviceDidChange 优化列表选项
-- 20210107 cocopod 更新至 1.2.2 优化选择弹窗 解决pod里没有xib文件导致报错的问题
+- 20210107 cocopod 更新至 1.2.3 优化选择弹窗 解决pod里没有xib文件导致报错的问题
