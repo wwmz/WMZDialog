@@ -1006,13 +1006,19 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
         if (!self.wMultipleSelection) {
             if (self.wType != DialogTypeCardPresent) {
                 DialogWeakSelf(self)
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [weakObject closeView:^{
-                           if (weakObject.wEventFinish) {
-                               weakObject.wEventFinish(data, indexPath,weakObject.wType);
-                           }
-                       }];
-                });
+                if (self.wAddBottomView) {
+                    if (weakObject.wEventFinish) {
+                        weakObject.wEventFinish(data, indexPath,weakObject.wType);
+                    }
+                }else{
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                          [weakObject closeView:^{
+                               if (weakObject.wEventFinish) {
+                                   weakObject.wEventFinish(data, indexPath,weakObject.wType);
+                               }
+                           }];
+                    });
+                }
             }
         }
     }

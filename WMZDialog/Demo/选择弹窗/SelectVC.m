@@ -36,6 +36,17 @@
             .wListDefaultValueSet(@[@(2)]) //默认选中第三个
 //            .wListDefaultValueSet(@[@"爬山"])   //默认选中爬山
             .wDataSet(@[@"游泳",@"打篮球",@"打羽毛球",@"爬山",@"踢足球",@"乒乓球",@"游泳",@"打篮球",@"打羽毛球",@"爬山",@"踢足球",@"乒乓球"])
+            //添加下划线
+//            .wSeparatorStyleSet(UITableViewCellSeparatorStyleSingleLine)
+//            //单选底部添加确定按钮
+//            .wAddBottomViewSet(YES)
+//            //单选底部添加取消按钮
+//            .wEventCancelFinishSet(^(id anyID, id otherData) {
+//
+//            })
+//            .wEventOKFinishSet(^(id anyID, id otherData) {
+//                NSLog(@"%@",anyID);
+//            })
             //父view
             .wStartView(self.view);
         }
@@ -66,7 +77,8 @@
             .wShowAnimationSet(AninationCombineTwo)
             .wTitleSet(@"")
             .wMessageSet(@"")
-            .wMultipleSelectionSet(YES).wSelectShowCheckedSet(YES)
+            .wMultipleSelectionSet(YES)
+            .wSelectShowCheckedSet(YES)
             .wDataSet(@[@"游泳",@"打篮球",@"打羽毛球",@"爬山",@"踢足球",@"乒乓球"])
             .wStart();
         }
