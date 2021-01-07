@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "WMZDialog"
-  s.version      = "1.2.1"
+  s.version      = "1.2.2"
   s.platform     = :ios, "8.0"
   s.requires_arc = true
   s.frameworks   = 'UIKit'
@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/wwmz/WMZDialog"
   s.author       = { "wmz" => "925457662@qq.com" }
   s.source       = { :git => "https://github.com/wwmz/WMZDialog.git", :tag => s.version.to_s }
-  s.source_files = "WMZDialog/WMZDialog/**/*.{h,m}"
+  s.source_files = "WMZDialog/WMZDialog/**/*.{h,m,xib}"
   s.resources     = "WMZDialog/WMZDialog/WMZDialog.bundle"
 end
 
