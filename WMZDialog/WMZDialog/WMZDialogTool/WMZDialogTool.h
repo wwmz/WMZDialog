@@ -45,6 +45,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)getMMSSFromSS:(NSString *)totalTime;
 //判断颜色是否相等
 + (BOOL)isEqualToColor:(UIColor*)colorA anotherColor:(UIColor*)colorB;
+//获取bundle
++ (NSBundle*)getMainBundle;
 @end
 
 @interface UIView (DialogPop)

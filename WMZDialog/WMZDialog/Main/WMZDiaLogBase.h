@@ -34,28 +34,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithDetpth:(NSInteger)depth withName:(NSString*)name  withID:(NSString*)ID;
 @end
 
-static NSString * _Nullable const DialogNormalCell =  @"DialogNormalCell";
-static NSString * _Nullable const DialogImageLeftCell =  @"DialogImageLeftCell";
-static NSString * _Nullable const DialogImageCenterCell =  @"DialogImageCenterCell";
-
-
-////defaultCell
-//@interface DialogCell:UITableViewCell
-////是否选中
-//@property(nonatomic,assign)BOOL isSelected;
-////是否选中
-//@property(nonatomic,strong)id model;
-////文本
-//@property(nonatomic,strong)UILabel *textLa;
-////图标
-//@property(nonatomic,strong)UIImageView* iconImage;
-////线
-//@property(nonatomic,strong)UIView* lineView;
-////选中图标
-//@property(nonatomic,strong)DialogButton* button;
-//@end
-
-
 @interface WMZDiaLogBase : UIView
 /*
  *标题

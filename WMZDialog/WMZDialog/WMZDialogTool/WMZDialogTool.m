@@ -139,6 +139,15 @@
    }
 }
 
+//获取bundle
++ (NSBundle*)getMainBundle{
+    NSBundle* bundle = [NSBundle bundleWithIdentifier:@"org.cocoapods.WMZDialog"];
+    if (!bundle) {
+        bundle = [NSBundle mainBundle];
+    }
+    return bundle;
+}
+
 @end
 
 static NSString *WMZDialogPopLayerKey = @"WMZDialogPopLayerKey";
