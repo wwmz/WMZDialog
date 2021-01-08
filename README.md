@@ -1,4 +1,4 @@
-# WMZDailog - 功能最多样式最多的弹窗，支持普通/微信底部/日期/地区/日历/选择/编辑/分享/菜单/自定义弹窗等,支持多种动画,链式编程调用，所有属性均可定制（pod 更新至 1.2.2，有问题加群937909825哈）
+# WMZDailog - 功能最多样式最多的弹窗，支持普通/微信底部/日期/地区/日历/选择/编辑/分享/菜单/自定义弹窗等,支持多种动画,链式编程调用，所有属性均可定制（pod 更新至 1.2.3，有问题加群937909825哈）
 
 题外
 ==============
@@ -43,7 +43,6 @@ typedef enum : NSUInteger{
     DialogTypeTabbarMenu,           //闲鱼 微博+号底部弹窗
     DialogTypeNaviMenu,             //QQ顶部弹窗
     DialogTypeLoading,              //加载框
-    DialogTypeBuyCar ,              //购物车弹窗  可自行导入WMZTags
     DialogTypeCardPresent ,         //ios13 present效果
     DialogTypeCalander,             //日历弹窗
     DialogTypeMyView,               //自定义弹窗
@@ -69,7 +68,6 @@ typedef enum : NSUInteger{
 | 顶部菜单弹窗           |![DialogTypeNaviMenu.gif](https://upload-images.jianshu.io/upload_images/9163368-6f8259333ecd64ad.gif?imageMogr2/auto-orient/strip)|
 | 底部菜单弹窗           |![DialogTypeTabbarMenu.gif](https://upload-images.jianshu.io/upload_images/9163368-79d72089a0ffc133.gif?imageMogr2/auto-orient/strip)|
 |  加载框          |![DialogTypeLoading.gif](https://upload-images.jianshu.io/upload_images/9163368-1532d3beca530dc4.gif?imageMogr2/auto-orient/strip)|
-|   购物车弹窗          |![DialogTypeBuyCar.gif](https://upload-images.jianshu.io/upload_images/9163368-f06d531733521f8b.gif?imageMogr2/auto-orient/strip)|
 |      ios13 present效果       |![DialogTypeCardPresent.gif](https://upload-images.jianshu.io/upload_images/9163368-663d6c5ce638ef12.gif?imageMogr2/auto-orient/strip)|
 |  日历弹窗       |![DialogTypeCalander.gif](https://upload-images.jianshu.io/upload_images/9163368-54cc15fc29470d59.gif?imageMogr2/auto-orient/strip)|
 |  自定义弹窗       |![DialogTypeMyView.gif](https://upload-images.jianshu.io/upload_images/9163368-5fd959fca5baad8c.gif?imageMogr2/auto-orient/strip)|
