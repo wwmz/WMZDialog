@@ -1,4 +1,4 @@
-# WMZDailog - 功能最多样式最多的弹窗，支持普通/微信底部/日期/地区/日历/选择/编辑/分享/菜单/自定义弹窗等,支持多种动画,链式编程调用，所有属性均可定制（pod 更新至 1.2.4，有问题加群937909825哈）
+# WMZDailog - 功能最多样式最多的弹窗，支持普通/微信底部/提示/加载框/日期/地区/日历/选择/编辑/分享/菜单/自定义弹窗等,支持多种动画,链式编程调用，所有属性均可定制（pod 更新至 1.2.4，有问题加群937909825哈）
 
 特性
 ==============
@@ -31,7 +31,7 @@ typedef enum : NSUInteger{
     DialogTypeShare,                //带分享的弹窗
     DialogTypeWrite,                //带编辑框的弹窗
     DialogTypeSelect,               //带选择的弹窗
-    DialogTypePickSelect,           //拾取器弹窗无嵌套
+    DialogTypePickSelect,           //拾取器弹窗
     DialogTypeTime,                 //带倒计时的弹窗
     DialogTypePop,                  //下拉列表选择弹窗
     DialogTypeDown,                 //带下载的弹窗
@@ -50,9 +50,9 @@ typedef enum : NSUInteger{
 
 | 弹窗类型                | 图片                       |
 |-----------------------|-----------------------------------------------------|
-|  默认弹窗              | ![DialogTypeNornal.gif](https://upload-images.jianshu.io/upload_images/9163368-2e12dcab8144552a.gif?imageMogr2/auto-orient/strip) |
-|  底部弹窗              | ![DialogTypeSheet.gif](https://upload-images.jianshu.io/upload_images/9163368-2533aa4927c86c62.gif?imageMogr2/auto-orient/strip) |
-|  自动消失hud弹窗              |![DialogTypeAuto.gif](https://upload-images.jianshu.io/upload_images/9163368-fa80e9d6e2f22a2d.gif?imageMogr2/auto-orient/strip)|
+|  默认弹窗              | ![DialogTypeNornal.gif](https://upload-images.jianshu.io/upload_images/9163368-8c8a36d86d973324.gif?imageMogr2/auto-orient/strip)|
+|  底部弹窗              | ![DialogTypeSheet.gif](https://upload-images.jianshu.io/upload_images/9163368-bcc819412d5e76c5.gif?imageMogr2/auto-orient/strip) |
+|  自动消失hud弹窗              |![DialogTypeAuto.gif](https://upload-images.jianshu.io/upload_images/9163368-a75a65e5db1283cd.gif?imageMogr2/auto-orient/strip)|
 |  支付密码框              | ![DialogTypePay.gif](https://upload-images.jianshu.io/upload_images/9163368-767cda14847439c0.gif?imageMogr2/auto-orient/strip)|
 |  带分享的弹窗              | ![DialogTypeShare.gif](https://upload-images.jianshu.io/upload_images/9163368-8a68f0b5607126b2.gif?imageMogr2/auto-orient/strip)|
 |  带编辑框的弹窗              | ![DialogTypeWrite.gif](https://upload-images.jianshu.io/upload_images/9163368-e3b3601ffa320216.gif?imageMogr2/auto-orient/strip) |
