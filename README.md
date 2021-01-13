@@ -1,8 +1,4 @@
-# WMZDailog - 功能最多样式最多的弹窗，支持普通/微信底部/日期/地区/日历/选择/编辑/分享/菜单/自定义弹窗等,支持多种动画,链式编程调用，所有属性均可定制（pod 更新至 1.2.2，有问题加群937909825哈）
-
-题外
-==============
-(如果有什么其他有趣的弹窗可以截图给我,我抽时间增加此样式)~ ~
+# WMZDailog - 功能最多样式最多的弹窗，支持普通/微信底部/提示/加载框/日期/地区/日历/选择/编辑/分享/菜单/自定义弹窗等,支持多种动画,链式编程调用，所有属性均可定制（pod 更新至 1.2.4，有问题加群937909825哈）
 
 特性
 ==============
@@ -11,6 +7,9 @@
 - 支持单选/多选
 - 支持地区1/2/3级联动
 - 支持无限级联动
+- 支持加载框
+- 支持提示框
+- 支持横竖屏
 - 支持时间选择(年月日时分秒自由组合+最大最小时间限制)
 - 支持支持多种动画
 - 支持所有字体颜色/字体大小的设置
@@ -32,7 +31,7 @@ typedef enum : NSUInteger{
     DialogTypeShare,                //带分享的弹窗
     DialogTypeWrite,                //带编辑框的弹窗
     DialogTypeSelect,               //带选择的弹窗
-    DialogTypePickSelect,           //拾取器弹窗无嵌套
+    DialogTypePickSelect,           //拾取器弹窗
     DialogTypeTime,                 //带倒计时的弹窗
     DialogTypePop,                  //下拉列表选择弹窗
     DialogTypeDown,                 //带下载的弹窗
@@ -43,7 +42,6 @@ typedef enum : NSUInteger{
     DialogTypeTabbarMenu,           //闲鱼 微博+号底部弹窗
     DialogTypeNaviMenu,             //QQ顶部弹窗
     DialogTypeLoading,              //加载框
-    DialogTypeBuyCar ,              //购物车弹窗  可自行导入WMZTags
     DialogTypeCardPresent ,         //ios13 present效果
     DialogTypeCalander,             //日历弹窗
     DialogTypeMyView,               //自定义弹窗
@@ -52,26 +50,25 @@ typedef enum : NSUInteger{
 
 | 弹窗类型                | 图片                       |
 |-----------------------|-----------------------------------------------------|
-|  默认弹窗              | ![DialogTypeNornal.gif](https://upload-images.jianshu.io/upload_images/9163368-2e12dcab8144552a.gif?imageMogr2/auto-orient/strip) |
-|  底部弹窗              | ![DialogTypeSheet.gif](https://upload-images.jianshu.io/upload_images/9163368-2533aa4927c86c62.gif?imageMogr2/auto-orient/strip) |
-|  自动消失hud弹窗              |![DialogTypeAuto.gif](https://upload-images.jianshu.io/upload_images/9163368-fa80e9d6e2f22a2d.gif?imageMogr2/auto-orient/strip)|
+|  默认弹窗              | ![DialogTypeNornal.gif](https://upload-images.jianshu.io/upload_images/9163368-8c8a36d86d973324.gif?imageMogr2/auto-orient/strip)|
+|  底部弹窗              | ![DialogTypeSheet.gif](https://upload-images.jianshu.io/upload_images/9163368-bcc819412d5e76c5.gif?imageMogr2/auto-orient/strip) |
+|  自动消失hud弹窗              |![DialogTypeAuto.gif](https://upload-images.jianshu.io/upload_images/9163368-a75a65e5db1283cd.gif?imageMogr2/auto-orient/strip)|
 |  支付密码框              | ![DialogTypePay.gif](https://upload-images.jianshu.io/upload_images/9163368-767cda14847439c0.gif?imageMogr2/auto-orient/strip)|
 |  带分享的弹窗              | ![DialogTypeShare.gif](https://upload-images.jianshu.io/upload_images/9163368-8a68f0b5607126b2.gif?imageMogr2/auto-orient/strip)|
 |  带编辑框的弹窗              | ![DialogTypeWrite.gif](https://upload-images.jianshu.io/upload_images/9163368-e3b3601ffa320216.gif?imageMogr2/auto-orient/strip) |
-|  带选择的弹窗             | ![DialogTypeSelect.gif](https://upload-images.jianshu.io/upload_images/9163368-364449b8093391aa.gif?imageMogr2/auto-orient/strip) |
+|  带选择的弹窗             | ![DialogTypeSelect.gif](https://upload-images.jianshu.io/upload_images/9163368-c095979faf7da4f9.gif?imageMogr2/auto-orient/strip) |
 |  拾取器弹窗             | ![DialogTypePickSelect.gif](https://upload-images.jianshu.io/upload_images/9163368-0532f85530352d04.gif?imageMogr2/auto-orient/strip)|
 |  带倒计时的弹窗             | ![DialogTypeTime.gif](https://upload-images.jianshu.io/upload_images/9163368-ee7369998dd6d31a.gif?imageMogr2/auto-orient/strip)|
-|  下拉列表选择弹窗            |![DialogTypePop.gif](https://upload-images.jianshu.io/upload_images/9163368-09d4edcd949bc7cd.gif?imageMogr2/auto-orient/strip)|
+|  下拉列表选择弹窗            |![DialogTypePop.gif](https://upload-images.jianshu.io/upload_images/9163368-4063027ccdaf179a.gif?imageMogr2/auto-orient/strip)|
 |  带下载的弹窗             |![DialogTypeDown.gif](https://upload-images.jianshu.io/upload_images/9163368-73435002a47fba68.gif?imageMogr2/auto-orient/strip)|
 |  下拉无限级菜单弹窗          |![DialogTypeMenusSelect.gif](https://upload-images.jianshu.io/upload_images/9163368-ba777c81f258bc95.gif?imageMogr2/auto-orient/strip)|
 |  地区弹窗          |![DialogTypeLocation.gif](https://upload-images.jianshu.io/upload_images/9163368-443ae1d45ab85eaa.gif?imageMogr2/auto-orient/strip)|
 |  日期选择弹窗          |![DialogTypeDatePicker.gif](https://upload-images.jianshu.io/upload_images/9163368-87e47adc2a96d01e.gif?imageMogr2/auto-orient/strip)|
 | 顶部菜单弹窗           |![DialogTypeNaviMenu.gif](https://upload-images.jianshu.io/upload_images/9163368-6f8259333ecd64ad.gif?imageMogr2/auto-orient/strip)|
 | 底部菜单弹窗           |![DialogTypeTabbarMenu.gif](https://upload-images.jianshu.io/upload_images/9163368-79d72089a0ffc133.gif?imageMogr2/auto-orient/strip)|
-|  加载框          |![DialogTypeLoading.gif](https://upload-images.jianshu.io/upload_images/9163368-1532d3beca530dc4.gif?imageMogr2/auto-orient/strip)|
-|   购物车弹窗          |![DialogTypeBuyCar.gif](https://upload-images.jianshu.io/upload_images/9163368-f06d531733521f8b.gif?imageMogr2/auto-orient/strip)|
-|      ios13 present效果       |![DialogTypeCardPresent.gif](https://upload-images.jianshu.io/upload_images/9163368-663d6c5ce638ef12.gif?imageMogr2/auto-orient/strip)|
-|  日历弹窗       |![DialogTypeCalander.gif](https://upload-images.jianshu.io/upload_images/9163368-54cc15fc29470d59.gif?imageMogr2/auto-orient/strip)|
+|  加载框          |![DialogTypeLoading.gif](https://upload-images.jianshu.io/upload_images/9163368-2cd96f99245809cb.gif?imageMogr2/auto-orient/strip)|
+|  ios13 present效果  |![DialogTypeCardPresent.gif](https://upload-images.jianshu.io/upload_images/9163368-663d6c5ce638ef12.gif?imageMogr2/auto-orient/strip)|
+|  日历弹窗       |![DialogTypeCalander.gif](https://upload-images.jianshu.io/upload_images/9163368-39f704f1b01e0acf.gif?imageMogr2/auto-orient/strip)|
 |  自定义弹窗       |![DialogTypeMyView.gif](https://upload-images.jianshu.io/upload_images/9163368-5fd959fca5baad8c.gif?imageMogr2/auto-orient/strip)|
 
 
@@ -312,7 +309,7 @@ typedef enum : NSUInteger{
 
 ### CocoaPods  
 1. 将 cocoapods 更新至最新版本.
-2. 在 Podfile 中添加 `pod 'WMZDialog',inhibit_warnings: true`(可消除警告)。或    pod 'WMZDialog' , '~>1.2.3'
+2. 在 Podfile 中添加 `pod 'WMZDialog',inhibit_warnings: true`(可消除警告)。或    pod 'WMZDialog' , '~>1.2.4'
 3. 执行 `pod install` 或 `pod update`。
 4. 导入 #import "WMZDialog.h"。
 
@@ -370,3 +367,4 @@ ios问题交流群 937909825(有问题加群哈)
 - 20201221 cocopod 更新至 1.2.0 日历弹窗新增连续区域 pop弹窗修复bug+新增自定义三角形size
 - 20210105 cocopod 更新至 1.2.1 日历弹窗新增多个连续区域 支持横开启屏监听wDeviceDidChange 优化列表选项
 - 20210107 cocopod 更新至 1.2.3 优化选择弹窗 解决pod里没有xib文件导致报错的问题
+- 20210113 cocopod 更新至 1.2.4 优化静态库xib问题 LoadingType优化 可作为项目的loading框使用
