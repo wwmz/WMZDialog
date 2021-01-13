@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/wwmz/WMZDialog"
   s.author       = { "wmz" => "925457662@qq.com" }
   s.source       = { :git => "https://github.com/wwmz/WMZDialog.git", :tag => s.version.to_s }
-  s.source_files = "WMZDialog/WMZDialog/**/*.{h,m,xib}"
+  s.source_files = "WMZDialog/WMZDialog/**/*.{h,m}"
   s.resources     = "WMZDialog/WMZDialog/WMZDialog.bundle"
 end
 
