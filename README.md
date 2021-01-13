@@ -66,9 +66,8 @@ typedef enum : NSUInteger{
 |  日期选择弹窗          |![DialogTypeDatePicker.gif](https://upload-images.jianshu.io/upload_images/9163368-87e47adc2a96d01e.gif?imageMogr2/auto-orient/strip)|
 | 顶部菜单弹窗           |![DialogTypeNaviMenu.gif](https://upload-images.jianshu.io/upload_images/9163368-6f8259333ecd64ad.gif?imageMogr2/auto-orient/strip)|
 | 底部菜单弹窗           |![DialogTypeTabbarMenu.gif](https://upload-images.jianshu.io/upload_images/9163368-79d72089a0ffc133.gif?imageMogr2/auto-orient/strip)|
-|  加载框          |![DialogTypeLoading.gif](https://upload-images.jianshu.io/upload_images/9163368-2cd96f99245809cb.gif?imageMogr2/auto-orient/strip)
-|
-|      ios13 present效果       |![DialogTypeCardPresent.gif](https://upload-images.jianshu.io/upload_images/9163368-663d6c5ce638ef12.gif?imageMogr2/auto-orient/strip)|
+|  加载框          |![DialogTypeLoading.gif](https://upload-images.jianshu.io/upload_images/9163368-2cd96f99245809cb.gif?imageMogr2/auto-orient/strip)|
+|  ios13 present效果  |![DialogTypeCardPresent.gif](https://upload-images.jianshu.io/upload_images/9163368-663d6c5ce638ef12.gif?imageMogr2/auto-orient/strip)|
 |  日历弹窗       |![DialogTypeCalander.gif](https://upload-images.jianshu.io/upload_images/9163368-39f704f1b01e0acf.gif?imageMogr2/auto-orient/strip)|
 |  自定义弹窗       |![DialogTypeMyView.gif](https://upload-images.jianshu.io/upload_images/9163368-5fd959fca5baad8c.gif?imageMogr2/auto-orient/strip)|
 
