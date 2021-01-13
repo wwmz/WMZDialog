@@ -56,19 +56,20 @@ typedef enum : NSUInteger{
 |  支付密码框              | ![DialogTypePay.gif](https://upload-images.jianshu.io/upload_images/9163368-767cda14847439c0.gif?imageMogr2/auto-orient/strip)|
 |  带分享的弹窗              | ![DialogTypeShare.gif](https://upload-images.jianshu.io/upload_images/9163368-8a68f0b5607126b2.gif?imageMogr2/auto-orient/strip)|
 |  带编辑框的弹窗              | ![DialogTypeWrite.gif](https://upload-images.jianshu.io/upload_images/9163368-e3b3601ffa320216.gif?imageMogr2/auto-orient/strip) |
-|  带选择的弹窗             | ![DialogTypeSelect.gif](https://upload-images.jianshu.io/upload_images/9163368-364449b8093391aa.gif?imageMogr2/auto-orient/strip) |
+|  带选择的弹窗             | ![DialogTypeSelect.gif](https://upload-images.jianshu.io/upload_images/9163368-c095979faf7da4f9.gif?imageMogr2/auto-orient/strip) |
 |  拾取器弹窗             | ![DialogTypePickSelect.gif](https://upload-images.jianshu.io/upload_images/9163368-0532f85530352d04.gif?imageMogr2/auto-orient/strip)|
 |  带倒计时的弹窗             | ![DialogTypeTime.gif](https://upload-images.jianshu.io/upload_images/9163368-ee7369998dd6d31a.gif?imageMogr2/auto-orient/strip)|
-|  下拉列表选择弹窗            |![DialogTypePop.gif](https://upload-images.jianshu.io/upload_images/9163368-09d4edcd949bc7cd.gif?imageMogr2/auto-orient/strip)|
+|  下拉列表选择弹窗            |![DialogTypePop.gif](https://upload-images.jianshu.io/upload_images/9163368-4063027ccdaf179a.gif?imageMogr2/auto-orient/strip)|
 |  带下载的弹窗             |![DialogTypeDown.gif](https://upload-images.jianshu.io/upload_images/9163368-73435002a47fba68.gif?imageMogr2/auto-orient/strip)|
 |  下拉无限级菜单弹窗          |![DialogTypeMenusSelect.gif](https://upload-images.jianshu.io/upload_images/9163368-ba777c81f258bc95.gif?imageMogr2/auto-orient/strip)|
 |  地区弹窗          |![DialogTypeLocation.gif](https://upload-images.jianshu.io/upload_images/9163368-443ae1d45ab85eaa.gif?imageMogr2/auto-orient/strip)|
 |  日期选择弹窗          |![DialogTypeDatePicker.gif](https://upload-images.jianshu.io/upload_images/9163368-87e47adc2a96d01e.gif?imageMogr2/auto-orient/strip)|
 | 顶部菜单弹窗           |![DialogTypeNaviMenu.gif](https://upload-images.jianshu.io/upload_images/9163368-6f8259333ecd64ad.gif?imageMogr2/auto-orient/strip)|
 | 底部菜单弹窗           |![DialogTypeTabbarMenu.gif](https://upload-images.jianshu.io/upload_images/9163368-79d72089a0ffc133.gif?imageMogr2/auto-orient/strip)|
-|  加载框          |![DialogTypeLoading.gif](https://upload-images.jianshu.io/upload_images/9163368-1532d3beca530dc4.gif?imageMogr2/auto-orient/strip)|
+|  加载框          |![DialogTypeLoading.gif](https://upload-images.jianshu.io/upload_images/9163368-2cd96f99245809cb.gif?imageMogr2/auto-orient/strip)
+|
 |      ios13 present效果       |![DialogTypeCardPresent.gif](https://upload-images.jianshu.io/upload_images/9163368-663d6c5ce638ef12.gif?imageMogr2/auto-orient/strip)|
-|  日历弹窗       |![DialogTypeCalander.gif](https://upload-images.jianshu.io/upload_images/9163368-54cc15fc29470d59.gif?imageMogr2/auto-orient/strip)|
+|  日历弹窗       |![DialogTypeCalander.gif](https://upload-images.jianshu.io/upload_images/9163368-39f704f1b01e0acf.gif?imageMogr2/auto-orient/strip)|
 |  自定义弹窗       |![DialogTypeMyView.gif](https://upload-images.jianshu.io/upload_images/9163368-5fd959fca5baad8c.gif?imageMogr2/auto-orient/strip)|
 
 
@@ -309,7 +310,7 @@ typedef enum : NSUInteger{
 
 ### CocoaPods  
 1. 将 cocoapods 更新至最新版本.
-2. 在 Podfile 中添加 `pod 'WMZDialog',inhibit_warnings: true`(可消除警告)。或    pod 'WMZDialog' , '~>1.2.3'
+2. 在 Podfile 中添加 `pod 'WMZDialog',inhibit_warnings: true`(可消除警告)。或    pod 'WMZDialog' , '~>1.2.4'
 3. 执行 `pod install` 或 `pod update`。
 4. 导入 #import "WMZDialog.h"。
 
