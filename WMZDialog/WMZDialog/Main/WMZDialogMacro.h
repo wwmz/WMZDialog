@@ -167,6 +167,7 @@ typedef enum : NSUInteger{
     AninatonShowBottom,            //由上往下
     AninatonShowLeft,              //由右往左
     AninatonShowRight,             //由左往右
+    AninatonShowScaleFade,         //先放大后恢复+透明度变化
     AninationCombineOne,           //组合动画缩小变大
     AninationCombineTwo,           //组合动画旋转
     
@@ -184,6 +185,7 @@ typedef enum : NSUInteger{
     AninatonHideBottom,            //由往下
     AninatonHideLeft,              //往左
     AninatonHideRight,             //往右
+    AninatonHideScaleFade,         //先放大后消失+透明度变化
     AninationHideCombineOne        //组合动画旋转变小
 }DialogHideAnination;
 
@@ -194,6 +196,7 @@ typedef enum : NSUInteger{
     LoadingStyleWait = 0,      //等待
     LoadingStyleRight,         //正确
     LoadingStyleError,         //错误
+    LoadingStyleSystem,        //系统
 }LoadingStyle;
 
 

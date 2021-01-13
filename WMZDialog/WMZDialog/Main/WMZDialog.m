@@ -10,9 +10,7 @@
 @interface WMZDialog (){
     CGRect normalRect;
 }
-/*
- *配置
- */
+//配置
 @property(nonatomic,strong)NSMutableDictionary *configDic;
 @end
 @implementation WMZDialog
@@ -60,6 +58,8 @@ WMZDialogSetFuncImplementation(WMZDialog, BOOL,                         wCanSele
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                      wDeviceDidChange)
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                 wTapViewTableViewFoot)
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                        wOpenMultiZone)
+WMZDialogSetFuncImplementation(WMZDialog, BOOL,                         wHideExistTop)
+WMZDialogSetFuncImplementation(WMZDialog, BOOL,                            wShowClose)
 WMZDialogSetFuncImplementation(WMZDialog, DiaPopInView,                  wTapViewType)
 WMZDialogSetFuncImplementation(WMZDialog, NSInteger,                 wListScrollCount)
 WMZDialogSetFuncImplementation(WMZDialog, NSInteger,            wTableViewSectionHead)
@@ -160,7 +160,6 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomCloseBtn,       wCustomClo
 WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTextView,       wCustomTextView)
 WMZDialogSetFuncImplementation(WMZDialog, DialogCustomImageView,     wCustomImageView)
 WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTableView)
-
 - (instancetype)init{
     if (self = [super init]) {
         _wType = DialogTypeNornal;
@@ -230,23 +229,23 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
         _wDeviceDidChange = YES;
         _wAngleSize = CGSizeMake(Dialog_GetWNum(30), Dialog_GetWNum(20));
         _wOpenMultiZone = YES;
-        _wXMLPathName = @"province_data";
+        _wXMLPathName = [self.dialogBundle pathForResource:@"province_data" ofType:@"xml"];
         _wCheckImage = [UIImage imageNamed:[self.dialogBundle pathForResource:@"dialog_check" ofType:@"png"]];
     }
     return self;
 }
+/*
+ *监听横竖屏
+ */
 - (void)addNotification{
-    //监听横竖屏
     if (self.wDeviceDidChange) {
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(change:) name:UIDeviceOrientationDidChangeNotification object:nil];
     }
 }
-
 /*
  *根据type设置默认属性
  */
 - (void)setUpDefaultParam{
-    
     if (self.wListDefaultValue&&[self.wListDefaultValue isKindOfClass:[NSArray class]]) {
         self.tempArr = [NSMutableArray arrayWithArray:self.wListDefaultValue];
         if (self.tempArr.count>1&&!self.wMultipleSelection) {
@@ -254,7 +253,6 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
             self.tempArr = [NSMutableArray arrayWithArray:temp];
         }
     }
-    
     switch (self.wType) {
         case DialogTypeSheet:{
             if (self.wHeight == DialogHeight) {
@@ -415,8 +413,18 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
         }
             break;
         case DialogTypeLoading:{
-            self.wShadowAlpha = 0.2;
-            self.wWidth = self.wLoadingSize.width*1.5;
+            if (self.wWidth == Dialog_GetWNum(500)) {
+                 self.wWidth = self.wLoadingSize.width*2.5;
+            }
+            if (self.wWidth < self.wLoadingSize.width) {
+                self.wWidth = self.wLoadingSize.width;
+            }
+            if ([WMZDialogTool isEqualToColor:self.wMainBackColor anotherColor:DialogColor(0xFFFFFF)]) {
+                self.wMainBackColor = DialogColor(0x333333);
+            }
+            if ([WMZDialogTool isEqualToColor:self.wTitleColor anotherColor:DialogColor(0x333333)]) {
+                self.wTitleColor = DialogColor(0xffffff);
+            }
         }
              break;
         case DialogTypeAuto:{
@@ -457,6 +465,8 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
         default:
             break;
     }
+
+    
     if (self.wHeight > Device_Dialog_Height&&self.wType!=DialogTypeCardPresent) {
         self.wHeight = Device_Dialog_Height;
     }
@@ -530,8 +540,9 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
         [self.shadowView addGestureRecognizer:tap];
     }
 }
-
-//设置UI代理
+/*
+ *设置UI代理
+ */
 - (void)setUIdelagate:(nullable UIView*)showView{
     if (self.wType == DialogTypeSelect ||
         self.wType == DialogTypeSheet ||
@@ -579,6 +590,10 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
     
     [self addSubview:self.mainView];
     if (self.wMyDiaLogView) {
+        if (self.wHeight == DialogHeight) {
+            self.wHeight = 0;
+        }
+        
         [self showView:showView];
         UIView *bottomView = self.wMyDiaLogView(self.mainView);
         [self.mainView layoutIfNeeded];
@@ -624,6 +639,12 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
     }
     if (self.wShadowShow) {
         [self insertSubview:self.shadowView  belowSubview:self.mainView];
+        if (self.wShowAnimation != AninatonShowNone) {
+            self.shadowView.alpha = 0;
+            [UIView animateWithDuration:0.3 animations:^{
+                self.shadowView.alpha = self.wShadowAlpha;
+            }];
+        }
     }
     [self bringSubviewToFront:self.mainView];
     [self setParentVCView:0.9];
@@ -645,12 +666,12 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
     if (self.wType == DialogTypeShare||self.wType == DialogTypeTabbarMenu||self.wType == DialogTypeNaviMenu) {
         WMZDialogAnimation *animation = [WMZDialogAnimation new];
         if (self.wEffectShow) {
-            [UIView animateWithDuration:self.wAnimationDurtion animations:^{
+            [UIView animateWithDuration:0.3 animations:^{
                 self.effectView.alpha = 0;
             }];
         }
         if (self.wShadowShow) {
-            [UIView animateWithDuration:self.wAnimationDurtion animations:^{
+            [UIView animateWithDuration:0.3 animations:^{
                 self.shadowView.alpha = 0;
             }];
         }
@@ -688,7 +709,6 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
 - (void)closeView{
     [self closeView:nil];
 }
-
 - (void)closeAction:(animalBlock)block{
     __weak WMZDialog *weakSelf = self;
     self.userInteractionEnabled = NO;
@@ -716,8 +736,31 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
          }
         [self removeFromSuperview];
     }
-    
 }
++ (void)closeWithshowView:(nullable UIView*)showView block:(nullable animalBlock)block{
+    [WMZDialog closeWithshowView:showView tag:0 block:block];
+}
++ (void)closeWithshowView:(nullable UIView*)showView tag:(NSInteger)tag block:(nullable animalBlock)block{
+    UIView *view = showView?:DialogWindow;
+    WMZDialog *dialog = nil;
+    for (WMZDialog *sonView in view.subviews) {
+        if ([sonView isKindOfClass:[WMZDialog class]]) {
+            if (tag) {
+                if (sonView.tag == tag) {
+                    dialog = sonView;
+                    break;
+                }
+            }else{
+                dialog = sonView;
+                break;
+            }
+        }
+    }
+    if (dialog) {
+        [dialog closeView:block];;
+    }
+}
+
 /*
  *缩放底部控制器
  */
@@ -841,6 +884,9 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
  *添加顶部
  */
 - (UIView*)addTopView{
+    if (self.wHideExistTop) {
+       self.diaLogHeadView = nil; return self.diaLogHeadView;
+    }
     if (self.diaLogHeadView) return self.diaLogHeadView;
     CGFloat btnWidth = 50;
     self.diaLogHeadView = [UIView new];
@@ -866,7 +912,9 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
     [self.diaLogHeadView addSubview:line];
     return self.diaLogHeadView;
 }
-//阴影点击
+/*
+ *阴影点击
+ */
 - (void)shadomClick{
     [self closeView];
     if (self.wEventShadomClose) {
@@ -909,10 +957,16 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
     if (self.wMyCell) {
         return self.wMyCell(indexPath,self.tableView,data);
     }
-    DialogCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DialogCell"];
+    NSString *cellID = @"DialogCell";
+    if ([data isKindOfClass:[NSDictionary class]]&&data[@"image"]) {
+        cellID = (self.wTextAlignment == NSTextAlignmentCenter?@"DialogCenterCell":@"DialogCell");
+    }else{
+        cellID = @"DialogTextCell";
+    }
+    DialogCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     if (!cell) {
         if ([data isKindOfClass:[NSDictionary class]]&&data[@"image"]) {
-            cell = self.wTextAlignment == NSTextAlignmentCenter?[DialogCell getImageCenterCell]:[DialogCell getCell];
+            cell = (self.wTextAlignment == NSTextAlignmentCenter?[DialogCell getImageCenterCell]:[DialogCell getCell]);
         }else{
             cell = [DialogCell getTextCell];
         }
@@ -1021,12 +1075,6 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
                 }
             }
         }
-    }
-}
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
-        [cell setSeparatorInset:UIEdgeInsetsZero];
     }
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -1161,7 +1209,9 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
         }
     }
 }
-//数据处理  type 1返回tree对象
+/*
+ *数据处理  type 1返回tree对象
+ */
 - (id)getMyDataArr:(NSInteger )tableViewTag withType:(NSInteger)type{
     if (tableViewTag==100) {
         return type?self.tree:self.tree.children;
@@ -1239,6 +1289,9 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
         [self changeLeft:NO];
     }
 }
+/*
+*横竖屏改变frame
+*/
 - (void)changeLeft:(BOOL)left{
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.frame = CGRectMake(0, 0, left?normalRect.size.height:normalRect.size.width, left?normalRect.size.width:normalRect.size.height);

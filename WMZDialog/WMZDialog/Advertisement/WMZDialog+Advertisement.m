@@ -10,7 +10,7 @@
 
 @implementation WMZDialog (Advertisement)
 -(UIView*)advertisementAction{
-    
+
     UIImageView *image = [UIImageView new];
     image.image = [UIImage imageNamed:self.wImageName];
     image.frame = CGRectMake((self.wWidth-self.wImageSize.width)/2, 0, self.wImageSize.width, self.wImageSize.height);

@@ -10,10 +10,10 @@
 #import "WMZDialog+Share.h"
 @implementation WMZDialog (Share)
 - (UIView*)shareAction{
+    
     [self.mainView addSubview:self.titleLabel];
     self.titleLabel.frame = CGRectMake(self.wMainOffsetX, self.wMainOffsetY, self.wWidth-self.wMainOffsetX*2, [WMZDialogTool sizeForTextView:CGSizeMake(self.wWidth-self.wMainOffsetX*2, CGFLOAT_MAX) text:self.titleLabel.text font:self.titleLabel.font.pointSize].height);
 
-    
     UIView *upLine = [UIView new];
     [self.mainView addSubview:upLine];
     upLine.alpha = self.wLineAlpha;

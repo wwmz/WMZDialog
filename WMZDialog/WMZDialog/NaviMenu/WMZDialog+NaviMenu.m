@@ -13,10 +13,10 @@
 
 @implementation WMZDialog (NaviMenu)
 - (UIView*)naviMenuAction{
+    
     self.wCloseBtn.layer.borderWidth = 0;
     [self.mainView addSubview:self.wCloseBtn];
     self.wCloseBtn.frame = CGRectMake(self.wWidth-60, 20, 60, self.wMainBtnHeight);
-
     
     UIScrollView *shareView = [UIScrollView new];
     shareView.tag = 10086;

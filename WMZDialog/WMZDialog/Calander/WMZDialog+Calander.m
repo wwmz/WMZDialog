@@ -62,6 +62,7 @@ static  const void *todayKey = @"todayKey";
         self.wDateShowCircle = [NSArray arrayWithArray:arr];
     }
     
+
     self.diaLogHeadView = [self addTopView];
     [self.OKBtn addTarget:self action:@selector(calanderOKAction) forControlEvents:UIControlEventTouchUpInside];
 
@@ -72,7 +73,6 @@ static  const void *todayKey = @"todayKey";
     self.textLabel.frame = CGRectMake((self.wWidth-100)/2 , 0, 100, 30);
     self.textLabel.textAlignment = NSTextAlignmentCenter;
     titleView.frame = CGRectMake(0, 0, self.wWidth, self.wMessage.length?self.textLabel.frame.size.height:40);
-
     
     NSString *left = [self.dialogBundle pathForResource:@"dia_right" ofType:@"png"];
     NSString *right = [self.dialogBundle pathForResource:@"dia_left" ofType:@"png"];
@@ -113,7 +113,7 @@ static  const void *todayKey = @"todayKey";
         weekTitleLable.textAlignment = NSTextAlignmentCenter;
         [headView addSubview:weekTitleLable];
     }
-    headView.frame = CGRectMake(0, CGRectGetMaxY(self.diaLogHeadView.frame), self.wWidth, 40+titleView.frame.size.height);
+    headView.frame = CGRectMake(0, self.diaLogHeadView?CGRectGetMaxY(self.diaLogHeadView.frame):0, self.wWidth, 40+titleView.frame.size.height);
     [self.mainView addSubview:headView];
     
     if (CGSizeEqualToSize(self.wCalanderCellSize, CGSizeZero)){
@@ -236,9 +236,6 @@ static  const void *todayKey = @"todayKey";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     CalanderModel *model = self.dataArr[indexPath.section][indexPath.row];
     if (![self checkModel:model]) return;
-    if (self.wCalanderCellClick) {
-        self.wCalanderCellClick(indexPath,collectionView,model);
-    }
     if (model.wLastMonth||model.wNextMonth) return;
     if (!self.wMultipleSelection) {
         if (self.selecctCalanderModel!=model) {
@@ -262,10 +259,15 @@ static  const void *todayKey = @"todayKey";
         [self changeSelect:model];
         
     }
+    if (self.wCalanderCellClick) {
+        self.wCalanderCellClick(indexPath,collectionView,model);
+    }
     self.selecctCalanderModel = model;
     [UIView performWithoutAnimation:^{
        [self.collectionView reloadData];
     }];
+    
+    
 }
 
 - (void)changeSelect:(CalanderModel*)model{
@@ -629,10 +631,18 @@ static  const void *todayKey = @"todayKey";
                 [self.wListDefaultValue enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                         if ([obj isKindOfClass:[NSNumber class]]) {
                             if ([obj doubleValue] == model.dateTime) {
-                                model.wSelectedSet(YES);
-                                if ([self.selectArr indexOfObject:model] == NSNotFound) {
-                                    [self.selectArr addObject:model];
-                                    count += 1;
+                                if (self.wMultipleSelection) {
+                                    model.wSelectedSet(YES);
+                                    if ([self.selectArr indexOfObject:model] == NSNotFound) {
+                                        [self.selectArr addObject:model];
+                                        count += 1;
+                                    }
+                                }else{
+                                    if (self.selecctCalanderModel) {
+                                        self.selecctCalanderModel.wSelectedSet(NO);
+                                    }
+                                    model.wSelectedSet(YES);
+                                    self.selecctCalanderModel = model;
                                 }
                             }
                         }else if ([obj isKindOfClass:[NSDate class]]) {
@@ -640,20 +650,36 @@ static  const void *todayKey = @"todayKey";
                             NSInteger month = [NSDate month:obj];
                             NSInteger day = [NSDate day:obj];
                              if ([[NSString stringWithFormat:@"%ld-%ld-%ld",model.wYear,model.wMonth,model.wDay] isEqualToString:[NSString stringWithFormat:@"%ld-%ld-%ld",year,month,day]]) {
-                                model.wSelectedSet(YES);
-                                if ([self.selectArr indexOfObject:model] == NSNotFound) {
-                                     [self.selectArr addObject:model];
-                                    count += 1;
-                                }
+                                 if (self.wMultipleSelection) {
+                                     model.wSelectedSet(YES);
+                                     if ([self.selectArr indexOfObject:model] == NSNotFound) {
+                                          [self.selectArr addObject:model];
+                                         count += 1;
+                                     }
+                                 }else{
+                                     if (self.selecctCalanderModel) {
+                                         self.selecctCalanderModel.wSelectedSet(NO);
+                                     }
+                                     model.wSelectedSet(YES);
+                                     self.selecctCalanderModel = model;
+                                 }
                             }
                         }else if ([obj isKindOfClass:[NSString class]]) {
                             if ([[NSString stringWithFormat:@"%ld-%ld-%ld",model.wYear,model.wMonth,model.wDay] isEqualToString:obj]) {
+                                if (self.wMultipleSelection) {
                                    model.wSelectedSet(YES);
-                                  if ([self.selectArr indexOfObject:model] == NSNotFound) {
-                                      [self.selectArr addObject:model];
-                                      count += 1;
-                                  }
-                              }
+                                    if ([self.selectArr indexOfObject:model] == NSNotFound) {
+                                        [self.selectArr addObject:model];
+                                        count += 1;
+                                    }
+                                }else{
+                                    if (self.selecctCalanderModel) {
+                                        self.selecctCalanderModel.wSelectedSet(NO);
+                                    }
+                                    model.wSelectedSet(YES);
+                                    self.selecctCalanderModel = model;
+                                }
+                            }
                            }
                        }];
                     if (count) {

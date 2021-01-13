@@ -33,3 +33,12 @@
     return NO;
 }
 @end
+
+
+@implementation WMZDialogButton
+
+- (void)setHighlighted:(BOOL)highlighted{
+    
+}
+
+@end

@@ -32,7 +32,6 @@ typedef NS_ENUM(NSInteger, DiaDirection) {
 NS_ASSUME_NONNULL_BEGIN
 
 @interface WMZDialogTool : NSObject
-
 //获取当前VC
 + (UIViewController *)getCurrentVC;
 //16进制颜色
@@ -48,6 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
 //获取bundle
 + (NSBundle*)getMainBundle;
 @end
+
 
 @interface UIView (DialogPop)
 /**

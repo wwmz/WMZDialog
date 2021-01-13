@@ -16,7 +16,6 @@ static NSString *selectPayViewKey = @"selectPayView"; //selectPayView的key
 @implementation WMZDialog (Pay)
 - (UIView *)payAction{
 
-
     UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [closeBtn setTitle:@"X" forState:UIControlStateNormal];
     [closeBtn setTitleColor:self.wCancelColor forState:UIControlStateNormal];

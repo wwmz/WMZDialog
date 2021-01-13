@@ -26,6 +26,11 @@
             .wMessageSet(@"自动消失")
             //自动消失时间 默认1.5
             .wDisappelSecondSet(1)
+            //自定义属性
+            .wMainOffsetXSet(15)
+            .wMainOffsetYSet(15)
+            .wShowAnimationSet(AninatonShowScaleFade)
+            .wHideAnimationSet(AninatonHideScaleFade)
             .wStart();
         }
             break;

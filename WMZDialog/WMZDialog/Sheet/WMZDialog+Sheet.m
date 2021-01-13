@@ -11,6 +11,7 @@
 #import "WMZDialog+Sheet.h"
 @implementation WMZDialog (Sheet)
 - (UIView*)sheetAction{
+        
     UIView *headView = nil;
     BOOL hadBottomCancel = NO;
     if (self.wMultipleSelection) {

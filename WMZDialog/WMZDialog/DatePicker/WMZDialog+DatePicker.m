@@ -17,7 +17,7 @@
 @implementation WMZDialog (DatePicker)
 
 - (UIView*)datePickerAction{
-
+    
     self.wData = [NSMutableArray new];
     NSCalendar *calendar = [NSCalendar currentCalendar];
     unsigned unitFlags = NSCalendarUnitDay | NSCalendarUnitMonth |  NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
@@ -123,7 +123,7 @@
     self.diaLogHeadView = [self addTopView];
     [self.OKBtn addTarget:self action:@selector(PickDateOKAction:) forControlEvents:UIControlEventTouchUpInside];
 
-    self.pickView.frame =  CGRectMake(0, CGRectGetMaxY(self.diaLogHeadView.frame), self.wWidth, self.wHeight);
+    self.pickView.frame =  CGRectMake(0, self.diaLogHeadView?CGRectGetMaxY(self.diaLogHeadView.frame):0, self.wWidth, self.wHeight);
     [self.mainView addSubview:self.pickView];
         
     [self reSetMainViewFrame:CGRectMake(0,0,self.wWidth, CGRectGetMaxY(self.pickView.frame))];

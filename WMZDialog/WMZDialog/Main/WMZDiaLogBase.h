@@ -42,15 +42,15 @@ NS_ASSUME_NONNULL_BEGIN
 /*
  *确定按钮
  */
-@property(nonatomic,strong)UIButton *OKBtn;
+@property(nonatomic,strong)WMZDialogButton *OKBtn;
 /*
  *取消按钮
  */
-@property(nonatomic,strong)UIButton *cancelBtn;
+@property(nonatomic,strong)WMZDialogButton *cancelBtn;
 /*
  *关闭按钮
  */
-@property(nonatomic,strong)UIButton *wCloseBtn;
+@property(nonatomic,strong)WMZDialogButton *wCloseBtn;
 /*
  *主要文本
  */
@@ -86,7 +86,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*
  *顶部
  */
-@property(nonatomic,strong)UIView *diaLogHeadView;
+@property(nonatomic,strong,nullable)UIView *diaLogHeadView;
 /*
  *毛玻璃
  */
@@ -168,15 +168,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic,assign)BOOL nest;
 
-/*
- *关闭
- */
-- (void)closeView;
-/*
- *开始
- */
-- (void)showView:(nullable UIView*)showView;
-- (void)closeView:(nullable animalBlock)block;
 /*
  *添加底部
  */

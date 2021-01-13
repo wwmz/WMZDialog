@@ -9,7 +9,7 @@
 #import "WMZDialog+CardPresent.h"
 @implementation WMZDialog (CardPresent)
 - (UIView*)cardPresentAction{
-    
+        
     UIView *headView = nil;
     if (self.wParentHeadView) {
         headView =  self.wParentHeadView(self.mainView,self.tableView);

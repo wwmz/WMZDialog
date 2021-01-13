@@ -12,6 +12,7 @@
 @implementation WMZDialog (Location)
 
 - (UIView*)locationAction{
+    
     if (self.wData&&[self.wData isKindOfClass:[WMZTree class]]) {
         self.tree = (WMZTree*)self.wData;
         self.depth = self.wLocationType;
@@ -19,8 +20,7 @@
         self.tree = [WMZTree new];
         self.tree.depth = 0;
 
-        NSString *path = [self.dialogBundle pathForResource:self.wXMLPathName ofType:@"xml"];
-        NSXMLParser *parser = [[NSXMLParser alloc] initWithData:[NSData dataWithContentsOfFile:path]];
+        NSXMLParser *parser = [[NSXMLParser alloc] initWithData:[NSData dataWithContentsOfFile:self.wXMLPathName]];
         parser.delegate = self;
 
         [self.theLock lock];
@@ -59,7 +59,7 @@
         self.diaLogHeadView = [self addTopView];
         [self.OKBtn addTarget:self action:@selector(locationPickOKAction:) forControlEvents:UIControlEventTouchUpInside];
         
-        self.pickView.frame =  CGRectMake(0, CGRectGetMaxY(self.diaLogHeadView.frame), self.wWidth, self.wHeight);
+        self.pickView.frame =  CGRectMake(0, self.diaLogHeadView?CGRectGetMaxY(self.diaLogHeadView.frame):0, self.wWidth, self.wHeight);
         [self.mainView addSubview:self.pickView];
         [self reSetMainViewFrame:CGRectMake(0,0,self.wWidth, CGRectGetMaxY(self.pickView.frame))];
         //设置只有一半圆角

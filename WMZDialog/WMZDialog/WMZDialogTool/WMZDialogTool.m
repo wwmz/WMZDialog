@@ -141,10 +141,7 @@
 
 //获取bundle
 + (NSBundle*)getMainBundle{
-    NSBundle* bundle = [NSBundle bundleWithIdentifier:@"org.cocoapods.WMZDialog"];
-    if (!bundle) {
-        bundle = [NSBundle mainBundle];
-    }
+    NSBundle* bundle = [NSBundle bundleWithPath:[[NSBundle bundleForClass:[WMZDialogTool class]] pathForResource:@"WMZDialog" ofType:@"bundle"]];
     return bundle;
 }
 

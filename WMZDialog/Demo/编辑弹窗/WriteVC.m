@@ -41,7 +41,12 @@
         }
             break;
         case 1:{
-            Dialog().wTypeSet(DialogTypeWrite)
+            Dialog()
+            .wTypeSet(DialogTypeWrite)
+            //增加取消按钮
+            .wEventCancelFinishSet(^(id anyID, id otherData) {
+                
+            })
             .wEventOKFinishSet(^(id anyID, id otherData) {
                 NSLog(@"%@",anyID);
             })

@@ -18,10 +18,35 @@ WMZDialog * Dialog(void);
 @property(nonatomic,copy,readonly) WMZDialog *(^wStart)(void);
 //开始 带父视图
 @property(nonatomic,copy,readonly) WMZDialog *(^wStartView)(UIView *parentView);
+/*
+* @brief 手动弹出视图
+* @param showView 父视图 nil 则为默认window
+*/
+- (void)showView:(nullable UIView*)showView;
+
+/*
+* @brief 手动关闭
+*/
+- (void)closeView;
+
+/*
+* @brief 手动关闭
+* @param block 动画结束回调
+*/
+- (void)closeView:(nullable animalBlock)block;
+
+/*
+* @brief 手动关闭 类方法
+* @param UIView 父视图 nil 则为window
+* @param block 动画结束回调
+*/
++ (void)closeWithshowView:(nullable UIView*)showView block:(nullable animalBlock)block;
++ (void)closeWithshowView:(nullable UIView*)showView tag:(NSInteger)tag block:(nullable animalBlock)block;
+
 /*=========================================Attributes==========================================*/
 
 /*=========================================通用=================================================*/
-////数据源
+//数据源
 WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, id,                       wData)
 //设置弹窗tag 防止快速点击重复弹出 (也可设置不同tag 依次弹出)
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, NSInteger,                wTag)
@@ -97,8 +122,12 @@ WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,              
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wSelectShowChecked)
 //是否将弹窗放置最底部
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wMainToBottom)
-//是否监听横竖屏 default NO
+//是否监听横竖屏 default YES
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wDeviceDidChange)
+//是否添加底部确定取消按钮
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wAddBottomView)
+//隐藏已经存在的头部确定视图
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wHideExistTop)
 //下划线样式 default none
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, UITableViewCellSeparatorStyle,wSeparatorStyle)
 //选中打钩图片 default dialog_check
@@ -170,9 +199,7 @@ WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, UIColor*,          
 //进度条运动的颜色
 WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, UIColor*,                 wTrackTintColor)
 
-/*=========================================custom=======================================================================*/
-//是否添加底部确定取消按钮
-WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wAddBottomView)
+
 
 /*=========================================menu=======================================================================*/
 //tableview的颜色
@@ -216,6 +243,8 @@ WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, LoadingStyle,      
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGSize,                   wLoadingSize)
 //加载框线条颜色
 WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, UIColor*,                 wLoadingColor)
+//显示右上角关闭按钮 default NO
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wShowClose)
 
 /*=========================================cardParent==============================================================*/
 //滑动到顶部继续滑动可关闭 default YES
@@ -433,8 +462,6 @@ wCalanderCell        自定义日历cell                     -                  
 wCalanderCellClick   自定义日历点击                      -                     -                     -                      -
 
 =========================================参数说明==========================================================================*/
-
-- (void)showView:(nullable UIView*)showView;
 
 @end
 

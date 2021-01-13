@@ -12,7 +12,6 @@
 #import "WMZDialog+MenusSelect.h"
 @implementation WMZDialog (MenusSelect)
 - (UIView*)menusSelectAction{
-    
     //递归计算深度
     self.depth = 0;
     if ([self.wData isKindOfClass:[NSArray class]]||[self.wData isKindOfClass:[NSMutableArray class]]){

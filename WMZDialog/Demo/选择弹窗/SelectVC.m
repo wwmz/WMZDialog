@@ -75,8 +75,8 @@
 //            .wListDefaultValueSet(@[@"打篮球",@"爬山"])  //默认选中  也可以传入字典 显示值key为@"name" 
             //出现动画
             .wShowAnimationSet(AninationCombineTwo)
-            .wTitleSet(@"")
-            .wMessageSet(@"")
+            .wTitleSet(@"标题")
+            .wMessageSet(@"提示")
             .wMultipleSelectionSet(YES)
             .wSelectShowCheckedSet(YES)
             .wDataSet(@[@"游泳",@"打篮球",@"打羽毛球",@"爬山",@"踢足球",@"乒乓球"])

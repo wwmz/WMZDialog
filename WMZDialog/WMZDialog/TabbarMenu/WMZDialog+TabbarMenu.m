@@ -10,7 +10,7 @@
 
 @implementation WMZDialog (TabbarMenu)
 - (UIView*)tabbarMenuAction{
-
+    
     self.mainView.backgroundColor = [UIColor clearColor];
     self.wCloseBtn.backgroundColor = [UIColor clearColor];
     UIScrollView *shareView = [UIScrollView new];

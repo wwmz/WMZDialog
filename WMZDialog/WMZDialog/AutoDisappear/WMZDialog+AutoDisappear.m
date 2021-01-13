@@ -10,6 +10,9 @@
 
 @implementation WMZDialog (AutoDisappear)
 - (UIView*)autoDisappealAction{
+    if (self.wShowAnimation == AninatonShowNone) {
+        self.wShowAnimation = AninatonShowScaleFade;
+    }
     CGFloat scale = 0.8;
     UIImageView *downImage = nil;
     if (self.wImageName&&self.wImageName.length) {

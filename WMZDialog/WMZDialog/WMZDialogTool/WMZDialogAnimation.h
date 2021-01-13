@@ -34,6 +34,10 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)combineShowTwoAnimationWithView:(UIView*)view duration:(NSTimeInterval)duration;
 //消失组合动画 样式1
 -(void)combineHideOneAnimationWithView:(UIView*)view duration:(NSTimeInterval)duration;
+//先放大后恢复
+-(void)scaleShowAninationWithView:(UIView*)view duration:(NSTimeInterval)duration;
+//放大
+-(void)scaleHideAninationWithView:(UIView*)view duration:(NSTimeInterval)duration;
 //垂直移动出现
 -(void)verticalMoveShowAnimationWithView:(UIView*)view duration:(NSTimeInterval)duration top:(BOOL)top;
 //垂直移移动消失

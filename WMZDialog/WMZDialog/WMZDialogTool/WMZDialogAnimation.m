@@ -112,8 +112,8 @@
     animation.toValue = [NSNumber numberWithFloat: M_PI*2]; // 终止角度
     
     CABasicAnimation *showViewAnn = [CABasicAnimation animationWithKeyPath:@"opacity"];
-    showViewAnn.fromValue = [NSNumber numberWithFloat:0.0];
-    showViewAnn.toValue = [NSNumber numberWithFloat:1.0];
+    showViewAnn.fromValue = [NSNumber numberWithFloat:1];
+    showViewAnn.toValue = [NSNumber numberWithFloat:0];
 
     CAAnimationGroup *group = [CAAnimationGroup animation];
     group.duration = duration;
@@ -192,6 +192,8 @@
     CAAnimationGroup *group = [CAAnimationGroup animation];
     group.animations = @[animation,positionAnima];
     group.delegate = self;
+    group.removedOnCompletion = NO;
+    group.fillMode = kCAFillModeForwards;
     [view.layer addAnimation:group forKey:nil];
     
     
@@ -248,6 +250,45 @@
     group.fillMode = kCAFillModeForwards;
     group.delegate = self;
     [view.layer addAnimation:group forKey:nil];
+}
+
+
+- (void)scaleShowAninationWithView:(UIView*)view duration:(NSTimeInterval)duration{
+    CABasicAnimation *scale = [CABasicAnimation animation];
+    scale.keyPath = @"transform.scale";
+    scale.fromValue = [NSNumber numberWithFloat:1.25];
+    scale.toValue = [NSNumber numberWithFloat:1.0];
+
+    CABasicAnimation *showViewAnn = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    showViewAnn.fromValue = [NSNumber numberWithFloat:0.5];
+    showViewAnn.toValue = [NSNumber numberWithFloat:1];
+
+    CAAnimationGroup *group = [CAAnimationGroup animation];
+    group.animations = @[scale, showViewAnn];
+    group.duration = duration/2;
+    group.delegate = self;
+    group.removedOnCompletion = NO;
+    group.fillMode = kCAFillModeForwards;
+    [view.layer addAnimation:group forKey:nil];
+}
+
+- (void)scaleHideAninationWithView:(UIView*)view duration:(NSTimeInterval)duration{
+     CABasicAnimation *scale = [CABasicAnimation animation];
+     scale.keyPath = @"transform.scale";
+     scale.fromValue = [NSNumber numberWithFloat:1];
+     scale.toValue = [NSNumber numberWithFloat:1.25];
+
+     CABasicAnimation *showViewAnn = [CABasicAnimation animationWithKeyPath:@"opacity"];
+     showViewAnn.fromValue = [NSNumber numberWithFloat:1];
+     showViewAnn.toValue = [NSNumber numberWithFloat:0];
+
+     CAAnimationGroup *group = [CAAnimationGroup animation];
+     group.animations = @[scale, showViewAnn];
+     group.duration = duration/2;
+     group.delegate = self;
+     group.removedOnCompletion = NO;
+     group.fillMode = kCAFillModeForwards;
+     [view.layer addAnimation:group forKey:nil];
 }
 
 /*
@@ -460,6 +501,10 @@ void loadingAnimation(UIView* view,NSTimeInterval duration,UIColor *color,CGFloa
     anima3.repeatCount = MAXFLOAT;
     [view.layer addAnimation:anima3 forKey:@"rotaionAniamtion"];
 }
+
+
+
+
 //垂直移动出现
 -(void) verticalMoveShowAnimationWithView:(UIView*)view duration:(NSTimeInterval)duration top:(BOOL)top{
     CGRect rect = view.frame;

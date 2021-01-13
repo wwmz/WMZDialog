@@ -16,10 +16,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.dataArr = @[@"普通日历",@"纵向滚动",@"显示操作",@"隐藏农历",@"显示圆点",@"显示自定义颜色圆点",@"多选",@"显示在底部",@"自定义(设置不可选)",@"最大值最小值"];
+    self.dataArr = @[@"普通日历",@"纵向滚动",@"显示操作",@"隐藏农历",@"显示圆点",@"显示自定义颜色圆点",@"多选",@"显示在底部",@"自定义(设置不可选)",@"最大值最小值",@"固定显示不弹窗"];
 }
 
 - (void)action:(UIButton*)sender{
+    
+    //固定显示不弹窗
+    if (sender.tag == 10) {
+        Dialog()
+        .wTypeSet(DialogTypeCalander)
+        .wShadowShowSet(NO)
+        .wHideExistTopSet(YES)
+        .wStartView(self.view);
+        return;
+    }
     
     //最大值最小值
     if (sender.tag == 9) {
@@ -61,7 +71,8 @@
         @{@"date":[NSDate dateWithTimeIntervalSinceNow:3*24*60*60],@"color":[UIColor cyanColor]},
         ]);
     }else if (sender.tag ==6) { //多选
-        alert.wMultipleSelectionSet(YES)
+        alert
+        .wMultipleSelectionSet(YES)
         .wOpenMultiZoneSet(YES)
         .wListDefaultValueSet(@[
         [NSDate dateWithTimeIntervalSinceNow:-3*24*60*60],

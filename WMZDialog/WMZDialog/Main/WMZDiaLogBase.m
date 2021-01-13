@@ -34,6 +34,8 @@
         [animal landscapeMoveShowAnimationWithView:view duration:time right:NO];
     }else if (type == AninatonShowRight) {
         [animal landscapeMoveShowAnimationWithView:view duration:time right:YES];
+    }else if (type == AninatonShowScaleFade) {
+        [animal scaleShowAninationWithView:view duration:time];
     }else if (type == AninatonZoomInCombin) {
         [animal zoomInBigToNormalAnimationWithView:view duration:time];
     }
@@ -62,6 +64,8 @@
         [animal landscapeMoveHideAnimationWithView:view duration:time right:NO];
     }else if (type == AninatonHideRight) {
         [animal landscapeMoveHideAnimationWithView:view duration:time right:YES];
+    }else if (type == AninatonHideScaleFade) {
+        [animal scaleHideAninationWithView:view duration:time];
     }
     if (block) {
         animal.block = ^{
@@ -100,8 +104,6 @@
     return firstSelectTree;
 }
 - (BOOL)updateAlertTypeDownProgress:(CGFloat)value{return YES;}
-- (void)closeView{}
-- (void)closeView:(nullable animalBlock)block{}
 - (UIView*)addBottomView:(CGFloat)maxY{return [UIView new];}
 - (void)reSetMainViewFrame:(CGRect)frame{};
 - (void)getDepth:(NSArray*)arr withTree:(WMZTree*)treePoint withDepth:(NSInteger)depth{}
@@ -109,7 +111,6 @@
 - (void)updateMenuChildrenDataWithSection:(NSInteger)section  withUpdateChildren:(BOOL)update withData:(NSArray*)data{}
 - (UIView*)addTopView{return [UIView new];}
 - (void)scrollToToday{};
-- (void)showView:(nullable UIView*)showView{};
 - (id)getMyDataArr:(NSInteger )tableViewTag withType:(NSInteger)type{return  nil;}
 
 
@@ -139,16 +140,16 @@
     return _textLabel;
 }
 
--(UIButton *)cancelBtn{
+-(WMZDialogButton *)cancelBtn{
     if (!_cancelBtn) {
-        _cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _cancelBtn = [WMZDialogButton buttonWithType:UIButtonTypeCustom];
     }
     return _cancelBtn;
 }
 
--(UIButton *)OKBtn{
+-(WMZDialogButton *)OKBtn{
     if (!_OKBtn) {
-        _OKBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _OKBtn = [WMZDialogButton buttonWithType:UIButtonTypeCustom];
     }
     return _OKBtn;
 }
@@ -185,9 +186,9 @@
     return _pickView;
 }
 
-- (UIButton *)wCloseBtn{
+- (WMZDialogButton *)wCloseBtn{
     if (!_wCloseBtn) {
-        _wCloseBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _wCloseBtn = [WMZDialogButton buttonWithType:UIButtonTypeCustom];
     }
     return _wCloseBtn;
 }

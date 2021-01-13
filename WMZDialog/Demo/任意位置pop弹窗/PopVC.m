@@ -85,7 +85,7 @@
                 @{@"name":@"微信",@"image":@"wallet"},
                 @{@"name":@"支付宝",@"image":@"aaa"},
                 @{@"name":@"米聊",@"image":@"bbb"},
-                @{@"name":@"微信1",@"image":@"wallet"},
+                @{@"name":@"微信1",@"image":@"wallet"},                
                 ])
     //弹出视图
     .wTapViewSet(sender)
