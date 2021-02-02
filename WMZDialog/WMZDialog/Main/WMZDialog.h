@@ -82,6 +82,8 @@ WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGFloat,           
 WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, UIColor*,                 wTitleColor)
 //内容颜色
 WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, UIColor*,                 wMessageColor)
+//sheet底部颜色
+WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, UIColor*,                 wBottomLineColor)
 //标题文本
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, NSString*,                wTitle)
 //内容文本
@@ -132,6 +134,8 @@ WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,              
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, UITableViewCellSeparatorStyle,wSeparatorStyle)
 //选中打钩图片 default dialog_check
 WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, UIImage*,                 wCheckImage)
+//开启键盘监听 自动偏移在键盘上部 default NO
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wOpenKeyBoard)
 /*=========================================disappear=======================================================================*/
 //自动消失时间
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGFloat,                  wDisappelSecond)
@@ -187,6 +191,8 @@ WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, UIColor*,          
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, DialogRectCorner,         wPopViewRectCorner)
 //三角形的size
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGSize,                   wAngleSize)
+//三角形的顶部圆角 default 0
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGFloat,                  wAngleRadio)
 //可设置wMainOffsetY 调整弹出视图的y default 0
 //wMainOffsetY 
 /*=========================================dowm=======================================================================*/
@@ -245,7 +251,8 @@ WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGSize,            
 WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, UIColor*,                 wLoadingColor)
 //显示右上角关闭按钮 default NO
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wShowClose)
-
+//加载框线条宽度 default 2.5f
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGFloat,                   wLoadingWidth)
 /*=========================================cardParent==============================================================*/
 //滑动到顶部继续滑动可关闭 default YES
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wOpenScrollClose)

@@ -57,8 +57,8 @@
             filePath = "WMZDialog/WMZDialog/Main/WMZDialog.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "859"
-            endingLineNumber = "859"
+            startingLineNumber = "864"
+            endingLineNumber = "864"
             landmarkName = "-addBottomView:"
             landmarkType = "7">
          </BreakpointContent>
@@ -76,6 +76,38 @@
             startingLineNumber = "217"
             endingLineNumber = "217"
             landmarkName = "-collectionView:cellForItemAtIndexPath:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D87501AB-9B11-45E8-B875-DBC35799CA2E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WMZDialog/WMZDialog/WMZDialogTool/WMZDialogTool.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "182"
+            endingLineNumber = "182"
+            landmarkName = "-addArrowBorderAt:offset:rectCorner:width:height:cornerRadius:borderWidth:borderColor:angleRadio:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0B053D6D-B994-4386-9C09-0E8C0FCD0D4A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WMZDialog/WMZDialog/WMZDialogTool/WMZDialogTool.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "187"
+            endingLineNumber = "187"
+            landmarkName = "-addArrowBorderAt:offset:rectCorner:width:height:cornerRadius:borderWidth:borderColor:angleRadio:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

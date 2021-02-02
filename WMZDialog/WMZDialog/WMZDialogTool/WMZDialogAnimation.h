@@ -72,8 +72,8 @@ void rightAnimation(UIView* view,NSTimeInterval duration,UIColor *color,CGFloat 
 void errorAnimation(UIView* view,NSTimeInterval duration,UIColor *color,CGFloat width);
 //加载
 void loadingAnimation(UIView* view,NSTimeInterval duration,UIColor *color,CGFloat width);
-
-
+//loading动画
+void newLoadingAnimation(UIView* view,CAShapeLayer *lineLayer,NSTimeInterval duration);
 
 
 @end

@@ -256,8 +256,10 @@
     
     self.mainView.frame = rect;
     self.tableView.frame = tableViewRect;
-    [self.mainView addArrowBorderAt:headType offset:offset rectCorner:self.wPopViewRectCorner width:self.wAngleSize.width height:self.wAngleSize.height cornerRadius:self.wMainRadius borderWidth:self.wPopViewBorderWidth borderColor:self.wPopViewBorderColor];
-
+    [self.mainView addArrowBorderAt:headType offset:offset rectCorner:self.wPopViewRectCorner width:self.wAngleSize.width height:self.wAngleSize.height cornerRadius:self.wMainRadius borderWidth:self.wPopViewBorderWidth borderColor:self.wPopViewBorderColor angleRadio:self.wAngleRadio];
+    if (self.wCustomMainView) {
+        self.wCustomMainView(self.mainView);
+    }
     return self.mainView;
 }
 //处理嵌套问题

@@ -12,6 +12,9 @@
 @implementation WMZDialog (Sheet)
 - (UIView*)sheetAction{
         
+    if (self.wBottomLineColor) {
+        self.wBottomLineColor = self.tableView.backgroundColor;
+    }
     UIView *headView = nil;
     BOOL hadBottomCancel = NO;
     if (self.wMultipleSelection) {
@@ -48,7 +51,7 @@
     if (!headView||self.wEventCancelFinish) {
         if (self.wCancelTitle&&self.wCancelTitle.length) {
             UIView *emptyView =  [UIView new];
-            emptyView.backgroundColor = self.tableView.backgroundColor;
+            emptyView.backgroundColor =  self.wBottomLineColor;
             emptyView.frame = CGRectMake(0, CGRectGetMaxY(self.tableView.frame), self.wWidth, Dialog_GetWNum(20));
             [self.mainView addSubview:emptyView];
             

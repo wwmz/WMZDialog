@@ -61,6 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param cornerRadius 圆角半径，<=0不设圆角
  @param borderWidth 边框宽度
  @param borderColor 边框颜色
+ @param angleRadio 三角形区域圆角弧度
  */
 - (void)addArrowBorderAt:(DiaDirection)direction
         offset:(CGFloat)offset
@@ -69,7 +70,8 @@ NS_ASSUME_NONNULL_BEGIN
         height:(CGFloat)height
         cornerRadius:(CGFloat)cornerRadius
         borderWidth:(CGFloat)borderWidth
-        borderColor:(UIColor *)borderColor;
+        borderColor:(UIColor *)borderColor
+        angleRadio:(CGFloat)angleRadio;
 @end
 
 @interface DialogButton : UIButton

@@ -41,8 +41,8 @@
         case 3:{
             Dialog()
             .wTypeSet(DialogTypeMyView)
-            .wWidthSet(300)
             .wMyDiaLogViewSet(^UIView *(UIView *mainView) {
+                mainView.layer.masksToBounds = YES;
                 UIView *view = [[CustomView alloc] initWithFrame:CGRectMake(0, 0, 300, 250) superView:mainView];
                 mainView.layer.masksToBounds = YES;
                 mainView.layer.cornerRadius = 10;

@@ -37,6 +37,7 @@ WMZDialog * Dialog(void){
     [self setUIdelagate:startView];
     [self addNotification];
 }
+WMZDialogSetFuncImplementation(WMZDialog, BOOL,                         wOpenKeyBoard)
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                    wMultipleSelection)
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                    wSelectShowChecked)
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                      wOpenScrollClose)
@@ -64,6 +65,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DiaPopInView,                  wTapVie
 WMZDialogSetFuncImplementation(WMZDialog, NSInteger,                 wListScrollCount)
 WMZDialogSetFuncImplementation(WMZDialog, NSInteger,            wTableViewSectionHead)
 WMZDialogSetFuncImplementation(WMZDialog, NSArray*,                   wDateShowCircle)
+WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                        wAngleRadio)
 WMZDialogSetFuncImplementation(WMZDialog, UIView* ,                          wTapView)
 WMZDialogSetFuncImplementation(WMZDialog, NSTimeInterval,           wAnimationDurtion)
 WMZDialogSetFuncImplementation(WMZDialog, UIColor*,                       wTitleColor)
@@ -78,6 +80,7 @@ WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                    wDisappelS
 WMZDialogSetFuncImplementation(WMZDialog, UIColor*,                        wLineColor)
 WMZDialogSetFuncImplementation(WMZDialog, NSString*,                         wOKTitle)
 WMZDialogSetFuncImplementation(WMZDialog, NSString*,                     wCancelTitle)
+WMZDialogSetFuncImplementation(WMZDialog, UIColor*,                  wBottomLineColor)
 WMZDialogSetFuncImplementation(WMZDialog, UIColor*,                          wOKColor)
 WMZDialogSetFuncImplementation(WMZDialog, UIColor*,                      wCancelColor)
 WMZDialogSetFuncImplementation(WMZDialog, NSString*,                           wTitle)
@@ -126,6 +129,7 @@ WMZDialogSetFuncImplementation(WMZDialog, NSDate*,                       wDefaul
 WMZDialogSetFuncImplementation(WMZDialog, NSDate*,                           wMaxDate)
 WMZDialogSetFuncImplementation(WMZDialog, NSDate*,                           wMinDate)
 WMZDialogSetFuncImplementation(WMZDialog, CGSize,                          wAngleSize)
+WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                      wLoadingWidth)
 WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                wPopViewBorderWidth)
 WMZDialogSetFuncImplementation(WMZDialog, UIColor*,               wPopViewBorderColor)
 WMZDialogSetFuncImplementation(WMZDialog, UITableViewCellSeparatorStyle,wSeparatorStyle)
@@ -227,10 +231,11 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
         _wListScrollCount = 8;
         _wSeparatorStyle = UITableViewCellSeparatorStyleNone;
         _wDeviceDidChange = YES;
-        _wAngleSize = CGSizeMake(Dialog_GetWNum(30), Dialog_GetWNum(20));
+        _wAngleSize = CGSizeMake(Dialog_GetWNum(24), Dialog_GetWNum(16));
         _wOpenMultiZone = YES;
         _wXMLPathName = [self.dialogBundle pathForResource:@"province_data" ofType:@"xml"];
         _wCheckImage = [UIImage imageNamed:[self.dialogBundle pathForResource:@"dialog_check" ofType:@"png"]];
+        _wLoadingWidth = 2.5f;
     }
     return self;
 }
@@ -425,6 +430,9 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
             if ([WMZDialogTool isEqualToColor:self.wTitleColor anotherColor:DialogColor(0x333333)]) {
                 self.wTitleColor = DialogColor(0xffffff);
             }
+            if (self.wDisappelSecond == 1.5) {
+                self.wDisappelSecond = 0;
+            }
         }
              break;
         case DialogTypeAuto:{
@@ -480,7 +488,8 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
 - (void)setUpUI{
     self.backgroundColor = [UIColor clearColor];
     if (self.wType == DialogTypeWrite ||
-        self.wType == DialogTypePay) {
+        self.wType == DialogTypePay ||
+        self.wOpenKeyBoard) {
         //监听键盘出现
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
         //监听键盘出现
@@ -598,6 +607,9 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
         UIView *bottomView = self.wMyDiaLogView(self.mainView);
         [self.mainView layoutIfNeeded];
         [bottomView layoutIfNeeded];
+        if (self.wWidth< bottomView.frame.size.width) {
+            self.wWidth = bottomView.frame.size.width;
+        }
         BOOL customHeight = (self.wHeight>0);
         if (self.wAddBottomView) {
             UIView *addBottomView  = [self addBottomView:CGRectGetMaxY(bottomView.frame)+self.wMainOffsetY];
@@ -927,7 +939,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{return 0.01;}
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{return 0.01;}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.wType == DialogTypeMenusSelect || self.wType == DialogTypeLocation?[[self getMyDataArr:tableView.tag withType:0] count]:[(NSArray*)self.wData count];
+    return self.wType == DialogTypeMenusSelect || self.wType == DialogTypeLocation?[(NSArray*)[self getMyDataArr:tableView.tag withType:0] count]:[(NSArray*)self.wData count];
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     id data = (self.wType == DialogTypeMenusSelect || self.wType == DialogTypeLocation?[self getMyDataArr:tableView.tag withType:0]:self.wData)[indexPath.row];
@@ -1090,10 +1102,10 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
 }
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
     if (self.tree) {
-        return [[self getMyDataArr:component+100 withType:0] count]*(self.wPickRepeat?pickViewCount:1);
+        return [(NSArray*)[self getMyDataArr:component+100 withType:0] count]*(self.wPickRepeat?pickViewCount:1);
     }
     if (!self.nest) {
-        return [self.wData[component] count]*(self.wPickRepeat?pickViewCount:1);
+        return [(NSArray*)self.wData[component] count]*(self.wPickRepeat?pickViewCount:1);
     }else{
         return [(NSArray*)self.wData count]*(self.wPickRepeat?pickViewCount:1);
     }

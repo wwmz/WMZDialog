@@ -97,8 +97,8 @@
             }else{
                 NSMutableArray *mStr = [NSMutableArray new];
                 if (!self.nest) {
-                    for (int i = 0; i<[strongObject.wData count]; i++) {
-                        NSArray *arr = strongObject.wData[i];
+                    for (int i = 0; i<[(NSArray*)strongObject.wData count]; i++) {
+                        NSArray *arr = [(NSArray*)strongObject.wData objectAtIndex:i];
                         NSString *str = arr [strongObject.wPickRepeat?[strongObject.pickView selectedRowInComponent:i]%arr.count:[strongObject.pickView selectedRowInComponent:i]];
                         [mStr addObject:str];
                     }

@@ -112,8 +112,8 @@
     animation.toValue = [NSNumber numberWithFloat: M_PI*2]; // 终止角度
     
     CABasicAnimation *showViewAnn = [CABasicAnimation animationWithKeyPath:@"opacity"];
-    showViewAnn.fromValue = [NSNumber numberWithFloat:1];
-    showViewAnn.toValue = [NSNumber numberWithFloat:0];
+    showViewAnn.fromValue = [NSNumber numberWithFloat:0];
+    showViewAnn.toValue = [NSNumber numberWithFloat:1];
 
     CAAnimationGroup *group = [CAAnimationGroup animation];
     group.duration = duration;
@@ -502,6 +502,14 @@ void loadingAnimation(UIView* view,NSTimeInterval duration,UIColor *color,CGFloa
     [view.layer addAnimation:anima3 forKey:@"rotaionAniamtion"];
 }
 
+void newLoadingAnimation(UIView* view,CAShapeLayer *lineLayer,NSTimeInterval duration){
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath: @"strokeEnd"];
+    animation.fromValue = @0 ;
+    animation.toValue = @1 ;
+    animation.duration = duration ;
+    [lineLayer addAnimation:animation forKey :@"strokeEnd"];
+    [view.layer addSublayer:lineLayer];
+}
 
 
 

@@ -157,7 +157,8 @@ static NSString *WMZDialogPopMaskName = @"WMZDialogPopMaskName";
                  height:(CGFloat)height
            cornerRadius:(CGFloat)cornerRadius
             borderWidth:(CGFloat)borderWidth
-            borderColor:(UIColor *)borderColor{
+            borderColor:(UIColor *)borderColor
+             angleRadio:(CGFloat)angleRadio{
     [self removeWMZDialogPop];
     CGFloat normalCornerRadius = cornerRadius;
     //只有一个mask层
@@ -167,8 +168,8 @@ static NSString *WMZDialogPopMaskName = @"WMZDialogPopMaskName";
     self.layer.mask = mask;
     
     UIBezierPath *path = [[UIBezierPath alloc] init];
-    
     CGFloat minX = 0, minY = 0, maxX = self.bounds.size.width, maxY = self.bounds.size.height;
+    CGFloat bgWith = angleRadio*2.5;
     if (direction == directionUp) {
         minY = height;
     }else if (direction == directionright){
@@ -182,7 +183,11 @@ static NSString *WMZDialogPopMaskName = @"WMZDialogPopMaskName";
     [path moveToPoint:CGPointMake(minX+cornerRadius, minY)];
     if (direction == directionUp) {
         [path addLineToPoint:CGPointMake(offset-width/2, minY)];
-        [path addLineToPoint:CGPointMake(offset, minY-height)];
+        if (angleRadio) {
+            [path addArcWithCenter:CGPointMake(offset, minY - bgWith) radius:angleRadio startAngle:M_PI_4 * 5 endAngle:M_PI_4*7 clockwise:YES];
+        }else{
+            [path addLineToPoint:CGPointMake(offset, minY-height)];
+        }
         [path addLineToPoint:CGPointMake(offset+width/2, minY)];
     }
     [path addLineToPoint:CGPointMake(maxX-cornerRadius, minY)];
@@ -197,7 +202,11 @@ static NSString *WMZDialogPopMaskName = @"WMZDialogPopMaskName";
     //右边
     if (direction == directionright) {
         [path addLineToPoint:CGPointMake(maxX, offset-width/2)];
-        [path addLineToPoint:CGPointMake(maxX+height, offset)];
+        if (angleRadio) {
+            [path addArcWithCenter:CGPointMake(maxX + height, offset) radius:angleRadio startAngle:M_PI_4*3 endAngle:M_PI_4*5 clockwise:YES];
+        }else{
+            [path addLineToPoint:CGPointMake(maxX+height, offset)];
+        }
         [path addLineToPoint:CGPointMake(maxX, offset+width/2)];
     }
     [path addLineToPoint:CGPointMake(maxX, maxY-cornerRadius)];
@@ -212,7 +221,11 @@ static NSString *WMZDialogPopMaskName = @"WMZDialogPopMaskName";
     //下边
     if (direction == directionDowm) {
         [path addLineToPoint:CGPointMake(offset-width/2, maxY)];
-        [path addLineToPoint:CGPointMake(offset, maxY+height)];
+        if (angleRadio) {
+            [path addArcWithCenter:CGPointMake(offset, maxY + bgWith) radius:angleRadio startAngle:M_PI_4*3 endAngle:M_PI_4 clockwise:NO];
+        }else{
+            [path addLineToPoint:CGPointMake(offset, maxY+height)];
+        }
         [path addLineToPoint:CGPointMake(offset+width/2, maxY)];
     }
     [path addLineToPoint:CGPointMake(minX+cornerRadius, maxY)];
@@ -227,7 +240,11 @@ static NSString *WMZDialogPopMaskName = @"WMZDialogPopMaskName";
     //右边
     if (direction == directionLeft) {
         [path addLineToPoint:CGPointMake(minX, offset-width/2)];
-        [path addLineToPoint:CGPointMake(minX-height, offset)];
+        if (angleRadio) {
+            [path addArcWithCenter:CGPointMake(minX - height, offset) radius:angleRadio startAngle:M_PI_4*3 endAngle:M_PI_4*5 clockwise:YES];
+        }else{
+            [path addLineToPoint:CGPointMake(minX-height, offset)];
+        }
         [path addLineToPoint:CGPointMake(minX, offset+width/2)];
     }
     [path addLineToPoint:CGPointMake(minX, minY+cornerRadius)];

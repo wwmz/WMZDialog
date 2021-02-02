@@ -196,6 +196,7 @@ typedef enum : NSUInteger{
     LoadingStyleWait = 0,      //等待
     LoadingStyleRight,         //正确
     LoadingStyleError,         //错误
+    LoadingStyleInfo,          //信息
     LoadingStyleSystem,        //系统
 }LoadingStyle;
 

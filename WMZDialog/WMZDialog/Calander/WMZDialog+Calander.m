@@ -171,7 +171,7 @@ static  const void *todayKey = @"todayKey";
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return [[self.dataArr objectAtIndex:section] count];
+    return [(NSArray*)[self.dataArr objectAtIndex:section] count];
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
