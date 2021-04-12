@@ -8,6 +8,8 @@
 
 #ifndef WMZDialogMacro_h
 #define WMZDialogMacro_h
+
+
 //implicit retain of 'self'改为NO
 #define WMZDialogStatementAndPropSetFuncStatement(propertyModifier,className, propertyPointerType, propertyName)           \
 @property(nonatomic,propertyModifier)propertyPointerType  propertyName;                                                 \
@@ -200,6 +202,14 @@ typedef enum : NSUInteger{
     LoadingStyleSystem,        //系统
 }LoadingStyle;
 
+/*
+ * 优先级
+ */
+typedef enum : NSUInteger{
+    DialogLevelHigh = 999,
+    DialogLevelMiddle = 500,
+    DialogLevelLow = 0,
+}DialogLevel;
 
 
 /*

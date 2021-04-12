@@ -9,6 +9,7 @@
 
 @interface WMZDialog (){
     CGRect normalRect;
+    CGRect beforeRect;
 }
 //配置
 @property(nonatomic,strong)NSMutableDictionary *configDic;
@@ -32,6 +33,7 @@ WMZDialog * Dialog(void){
 - (void)setUpUI:(nullable UIView*)startView{
     self.frame = CGRectMake(0, 0, startView?startView.bounds.size.width:Device_Dialog_Width, startView?startView.bounds.size.height:Device_Dialog_Height);
     normalRect = self.frame;
+    beforeRect = CGRectZero;
     [self setUpDefaultParam];
     [self setUpUI];
     [self setUIdelagate:startView];
@@ -62,6 +64,7 @@ WMZDialogSetFuncImplementation(WMZDialog, BOOL,                        wOpenMult
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                         wHideExistTop)
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                            wShowClose)
 WMZDialogSetFuncImplementation(WMZDialog, DiaPopInView,                  wTapViewType)
+WMZDialogSetFuncImplementation(WMZDialog, DialogLevel,                         wLevel)
 WMZDialogSetFuncImplementation(WMZDialog, NSInteger,                 wListScrollCount)
 WMZDialogSetFuncImplementation(WMZDialog, NSInteger,            wTableViewSectionHead)
 WMZDialogSetFuncImplementation(WMZDialog, NSArray*,                   wDateShowCircle)
@@ -227,7 +230,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
         _wPopViewBorderColor = _wMainBackColor;
         _wTapRect = CGRectZero;
         _wPopViewRectCorner = DialogRectCornerNone;
-        _wTag = 123456;
+        _wTag = 12345;
         _wListScrollCount = 8;
         _wSeparatorStyle = UITableViewCellSeparatorStyleNone;
         _wDeviceDidChange = YES;
@@ -251,6 +254,12 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
  *根据type设置默认属性
  */
 - (void)setUpDefaultParam{
+    if (self.wLevel < 0 ) {
+        self.wLevel = 0;
+    }
+    if (self.wLevel > 999) {
+        self.wLevel = 999;
+    }
     if (self.wListDefaultValue&&[self.wListDefaultValue isKindOfClass:[NSArray class]]) {
         self.tempArr = [NSMutableArray arrayWithArray:self.wListDefaultValue];
         if (self.tempArr.count>1&&!self.wMultipleSelection) {
@@ -639,7 +648,8 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
         if (existView &&
             existView.wType == self.wType) return;
     }
-    [view addSubview:self];
+    
+    [WMZDialogManage.shareInstance addDialog:self cover:NO superView:view];
     if (self.wShowAnimation != AninatonShowNone ) {
         self.mainView.userInteractionEnabled = NO;
         self.shadowView.userInteractionEnabled = NO;
@@ -674,7 +684,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
     if (self.wType == DialogTypePay || self.wType == DialogTypeWrite) {
         [self.mainView endEditing:YES];
     }
-    __weak WMZDialog *weak = self;
+    DialogWeakSelf(self)
     if (self.wType == DialogTypeShare||self.wType == DialogTypeTabbarMenu||self.wType == DialogTypeNaviMenu) {
         WMZDialogAnimation *animation = [WMZDialogAnimation new];
         if (self.wEffectShow) {
@@ -696,17 +706,17 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
         }
         [animation rotationClockwiseAnimationWithView:self.wCloseBtn duration:self.wAnimationDurtion];
         animation.block = ^{
-            [weak.wCloseBtn removeFromSuperview];
+            DialogStrongSelf(weakObject)
+            [strongObject.wCloseBtn removeFromSuperview];
         };
         UIScrollView *sc = [self.mainView viewWithTag:10086];
         springHideAnimation(sc, self.wAnimationDurtion, [sc subviews], ^{
-           if (weak.wEventClose) {
-               weak.wEventClose(@"关闭", nil);
-           }
+            DialogStrongSelf(weakObject)
+            [strongObject closeBlock];
             if (block) {
                 block();
             }
-            [weak removeFromSuperview];
+            [strongObject removeFromSuperview];
         });
         
     }else{
@@ -722,7 +732,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
     [self closeView:nil];
 }
 - (void)closeAction:(animalBlock)block{
-    __weak WMZDialog *weakSelf = self;
+    DialogWeakSelf(self)
     self.userInteractionEnabled = NO;
     if (self.wHideAnimation) {
          if (self.wShadowShow) {
@@ -731,24 +741,28 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
              }];
         }
         [self dealAnamtionHideWithView:self.mainView withType:self.wHideAnimation withTime:self.wAnimationDurtion block:^{
-            if (weakSelf.wEventClose) {
-                weakSelf.wEventClose(@"关闭", nil);
-            }
+            DialogStrongSelf(weakObject)
+            [strongObject closeBlock];
             if (block) {
                 block();
             }
-            [weakSelf removeFromSuperview];
+            [strongObject removeFromSuperview];
         }];
     }else{
          if (block) {
              block();
          }
-         if (self.wEventClose) {
-             self.wEventClose(@"关闭", nil);
-         }
+        [self closeBlock];
         [self removeFromSuperview];
     }
 }
+- (void)closeBlock{
+    if (self.wEventClose) {
+        self.wEventClose(@"关闭", nil);
+    }
+    [WMZDialogManage.shareInstance deleteDialog:self];
+}
+
 + (void)closeWithshowView:(nullable UIView*)showView block:(nullable animalBlock)block{
     [WMZDialog closeWithshowView:showView tag:0 block:block];
 }
@@ -808,7 +822,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
         
     }else{
         center = self.center;
-        self.mainView.frame =frame;
+        self.mainView.frame = frame;
     }
     self.mainView.center = center;
     if (self.wCustomTitleLa) {
@@ -1256,15 +1270,28 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
     CGRect endFrame = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     self.keyBoardHeight = endFrame.size.height;
     CGRect frame = self.mainView.frame;
+    if (CGRectEqualToRect(beforeRect, CGRectZero)) {
+        beforeRect = frame;
+    }
     frame.origin.y = Device_Dialog_Height-(endFrame.size.height+self.mainView.frame.size.height+DialogK1px+self.wKeyBoardMarginY);
-    self.mainView.frame = frame;
+    NSTimeInterval animationDuration = [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    [UIView animateWithDuration:animationDuration animations:^{
+        self.mainView.frame = frame;
+    }];
 }
 /*
  *键盘将要消失
  */
 - (void)keyboardWillHide:(NSNotification *)notification{
+    if (CGRectEqualToRect(beforeRect, CGRectZero)) {
+        return;
+    }
     self.keyBoardHeight = 0;
-    self.mainView.center = self.center;
+    NSDictionary *userInfo = notification.userInfo;
+    NSTimeInterval animationDuration = [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    [UIView animateWithDuration:animationDuration animations:^{
+        self.mainView.frame = beforeRect;
+    }];
 }
 /*
  *取消
@@ -1349,4 +1376,9 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
     }
     return _configDic;
 }
+
+- (NSString *)description{
+    return [NSString stringWithFormat:@"%ld %ld",self.wTag,self.wLevel];
+}
+
 @end

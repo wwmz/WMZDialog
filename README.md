@@ -369,3 +369,4 @@ ios问题交流群 937909825(有问题加群哈)
 - 20210107 cocopod 更新至 1.2.3 优化选择弹窗 解决pod里没有xib文件导致报错的问题
 - 20210113 cocopod 更新至 1.2.4 优化静态库xib问题 LoadingType优化 可作为项目的loading框使用
 - 20210202 cocopod 更新至 1.2.5 优化LoadingType 又是一年过年了 真快
+- 20210412 cocopod 更新至 1.2.6 新增wLevel属性可管理多个弹窗的层级, 加入WMZDialogManage管理类

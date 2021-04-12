@@ -58,7 +58,10 @@
 		F395FE26232ABC020020CFB5 /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = F395FE15232ABC010020CFB5 /* MASConstraint.m */; };
 		F395FE27232ABC020020CFB5 /* MASViewConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = F395FE17232ABC010020CFB5 /* MASViewConstraint.m */; };
 		F395FE28232ABC020020CFB5 /* MASViewAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = F395FE18232ABC010020CFB5 /* MASViewAttribute.m */; };
+		F39B73EA2624323D0000B91F /* MuchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F39B73E92624323D0000B91F /* MuchVC.m */; };
+		F39B73F3262435C70000B91F /* CustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = F39B73F2262435C70000B91F /* CustomView.m */; };
 		F3A49E6525A4177A0051F35B /* DialogCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F3A49E6325A4177A0051F35B /* DialogCell.m */; };
+		F3BF0A93262043D900FE5F9C /* WMZDialogManage.m in Sources */ = {isa = PBXBuildFile; fileRef = F3BF0A92262043D900FE5F9C /* WMZDialogManage.m */; };
 		F3CEDD3223729B780073E457 /* WMZDialogTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F3CEDD3123729B780073E457 /* WMZDialogTableView.m */; };
 		F3F4A78A232B3FC9008C70B2 /* WMZDialog+Write.m in Sources */ = {isa = PBXBuildFile; fileRef = F3F4A744232B3FC9008C70B2 /* WMZDialog+Write.m */; };
 		F3F4A78B232B3FC9008C70B2 /* WMZDialog+NaviMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = F3F4A747232B3FC9008C70B2 /* WMZDialog+NaviMenu.m */; };
@@ -210,8 +213,14 @@
 		F395FE16232ABC010020CFB5 /* ViewController+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ViewController+MASAdditions.h"; sourceTree = "<group>"; };
 		F395FE17232ABC010020CFB5 /* MASViewConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASViewConstraint.m; sourceTree = "<group>"; };
 		F395FE18232ABC010020CFB5 /* MASViewAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASViewAttribute.m; sourceTree = "<group>"; };
+		F39B73E82624323D0000B91F /* MuchVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MuchVC.h; sourceTree = "<group>"; };
+		F39B73E92624323D0000B91F /* MuchVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MuchVC.m; sourceTree = "<group>"; };
+		F39B73F1262435C70000B91F /* CustomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomView.h; sourceTree = "<group>"; };
+		F39B73F2262435C70000B91F /* CustomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomView.m; sourceTree = "<group>"; };
 		F3A49E6225A4177A0051F35B /* DialogCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DialogCell.h; sourceTree = "<group>"; };
 		F3A49E6325A4177A0051F35B /* DialogCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DialogCell.m; sourceTree = "<group>"; };
+		F3BF0A91262043D900FE5F9C /* WMZDialogManage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMZDialogManage.h; sourceTree = "<group>"; };
+		F3BF0A92262043D900FE5F9C /* WMZDialogManage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMZDialogManage.m; sourceTree = "<group>"; };
 		F3CEDD3023729B780073E457 /* WMZDialogTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMZDialogTableView.h; sourceTree = "<group>"; };
 		F3CEDD3123729B780073E457 /* WMZDialogTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMZDialogTableView.m; sourceTree = "<group>"; };
 		F3F4A743232B3FC9008C70B2 /* WMZDialog+Write.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WMZDialog+Write.h"; sourceTree = "<group>"; };
@@ -287,6 +296,7 @@
 		184C26792305439C00679FCA /* Demo */ = {
 			isa = PBXGroup;
 			children = (
+				F39B73E72624322B0000B91F /* 优先级多个弹窗 */,
 				F32F6BF8253FF2B3002DE0C8 /* Swift调用 */,
 				F3120DEC2440735F00CF7CB7 /* iOS13Present弹窗 */,
 				F3120DCD244065AD00CF7CB7 /* 编辑弹窗 */,
@@ -448,6 +458,8 @@
 			children = (
 				F3120DE92440733300CF7CB7 /* CustomVC.h */,
 				F3120DEA2440733300CF7CB7 /* CustomVC.m */,
+				F39B73F1262435C70000B91F /* CustomView.h */,
+				F39B73F2262435C70000B91F /* CustomView.m */,
 			);
 			path = "自定义弹窗";
 			sourceTree = "<group>";
@@ -594,6 +606,8 @@
 				F335AAE123B09508001BBC87 /* WMZDiaLogBase.h */,
 				F335AAE423B09508001BBC87 /* WMZDiaLogBase.m */,
 				F335AAE323B09508001BBC87 /* WMZDialogMacro.h */,
+				F3BF0A91262043D900FE5F9C /* WMZDialogManage.h */,
+				F3BF0A92262043D900FE5F9C /* WMZDialogManage.m */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -648,6 +662,15 @@
 				F395FE18232ABC010020CFB5 /* MASViewAttribute.m */,
 			);
 			path = Masonry;
+			sourceTree = "<group>";
+		};
+		F39B73E72624322B0000B91F /* 优先级多个弹窗 */ = {
+			isa = PBXGroup;
+			children = (
+				F39B73E82624323D0000B91F /* MuchVC.h */,
+				F39B73E92624323D0000B91F /* MuchVC.m */,
+			);
+			path = "优先级多个弹窗";
 			sourceTree = "<group>";
 		};
 		F3F4A741232B3FC9008C70B2 /* WMZDialog */ = {
@@ -998,6 +1021,7 @@
 				F3F4A791232B3FC9008C70B2 /* WMZDialog+Location.m in Sources */,
 				F3120DCC24405ECC00CF7CB7 /* ShareVC.m in Sources */,
 				F3120DEF2440736C00CF7CB7 /* PresentVC.m in Sources */,
+				F39B73F3262435C70000B91F /* CustomView.m in Sources */,
 				F3120DB4244058C800CF7CB7 /* BaseVC.m in Sources */,
 				F3F4A78F232B3FC9008C70B2 /* WMZDialog+AutoDisappear.m in Sources */,
 				F3120DC024405C4200CF7CB7 /* SheetVC.m in Sources */,
@@ -1011,6 +1035,7 @@
 				F3F4A78B232B3FC9008C70B2 /* WMZDialog+NaviMenu.m in Sources */,
 				F3F4A799232B3FC9008C70B2 /* WMZDialogShareView.m in Sources */,
 				F395FE26232ABC020020CFB5 /* MASConstraint.m in Sources */,
+				F39B73EA2624323D0000B91F /* MuchVC.m in Sources */,
 				F3F4A790232B3FC9008C70B2 /* WMZDialog+Down.m in Sources */,
 				F3120DA92440581C00CF7CB7 /* CollectionViewPopDemo.m in Sources */,
 				F3120DA72440581C00CF7CB7 /* LocationVC.m in Sources */,
@@ -1030,6 +1055,7 @@
 				F3120DD0244065CB00CF7CB7 /* WriteVC.m in Sources */,
 				F335AAE623B09508001BBC87 /* WMZDiaLogBase.m in Sources */,
 				F395FE27232ABC020020CFB5 /* MASViewConstraint.m in Sources */,
+				F3BF0A93262043D900FE5F9C /* WMZDialogManage.m in Sources */,
 				F3120DDC24406DF500CF7CB7 /* DownVC.m in Sources */,
 				F3120DB02440581C00CF7CB7 /* DateTimeVC.m in Sources */,
 				F3120DAF2440581C00CF7CB7 /* ViewController.m in Sources */,

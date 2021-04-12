@@ -50,6 +50,8 @@ WMZDialog * Dialog(void);
 WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, id,                       wData)
 //设置弹窗tag 防止快速点击重复弹出 (也可设置不同tag 依次弹出)
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, NSInteger,                wTag)
+//设置弹窗的层级 层级高的在上层 可传入NSInteger 范围在0-999之间 必须同一父级才有效
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, DialogLevel,              wLevel)
 //弹窗type
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, DialogType,               wType)
 //弹窗出现的动画

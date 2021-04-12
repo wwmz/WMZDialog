@@ -15,6 +15,7 @@
 #import "NSDate+WMZCalendarDate.h"
 #import "CalanderModel.h"
 #import "DialogCell.h"
+#import "WMZDialogManage.h"
 NS_ASSUME_NONNULL_BEGIN
 //树形节点model
 @interface WMZTree:NSObject

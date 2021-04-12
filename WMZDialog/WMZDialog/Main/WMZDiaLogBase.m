@@ -232,7 +232,6 @@
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
 @end
 
 @implementation WMZTree
