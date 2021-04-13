@@ -74,7 +74,12 @@ static NSString *oneLineHeightKey = @"oneLineHeight"; //oneLineHeight的key
     //行数
     NSInteger line = 1;
     NSString *mainText = @"";
-    
+    if([text isEqualToString:@"\n"] && self.wWirteTextMaxLine == 1){
+        [textView resignFirstResponder];
+        [self closeView];
+        return NO;
+    }
+
     if ([text isEqual:@""]) {
         if (![textView.text isEqualToString:@""]) {
             mainText = [textView.text substringToIndex:[textView.text length] - 1];
@@ -123,15 +128,6 @@ static NSString *oneLineHeightKey = @"oneLineHeight"; //oneLineHeight的key
     return YES;
 }
 
-//点击Return键键盘退出
-- (void)textViewDidEndEditing:(UITextView *)textView {
-    if (textView == self.writeView) {
-        if (self.wWirteTextMaxLine == 1) {
-            [self.writeView resignFirstResponder];
-            [self closeView];
-        }
-    }
-}
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wobjc-protocol-method-implementation"
@@ -139,6 +135,7 @@ static NSString *oneLineHeightKey = @"oneLineHeight"; //oneLineHeight的key
  *确定的点击事件
  */
 - (void)writeOKAction:(UIButton*)btn{
+    NSLog(@"点击");
     [self.writeView resignFirstResponder];
     DialogWeakSelf(self)
     [self closeView:^{
