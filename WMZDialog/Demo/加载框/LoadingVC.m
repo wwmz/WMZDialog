@@ -106,7 +106,7 @@
             //动画时间
             .wAnimationDurtionSet(1)
             //消失时间
-            .wDisappelSecondSet(1.5)
+            .wDisappelSecondSet(1.6)
             //加载框大小
             .wLoadingSizeSet(CGSizeMake(50, 50))
             .wStart();
@@ -141,7 +141,8 @@
     .wTitleSet(text)
     .wTypeSet(DialogTypeLoading)
     .wLoadingTypeSet(LoadingStyleWait)
-    .wShadowAlphaSet(0)
+    .wShadowAlphaSet(0.01)
+    .wShowCloseSet(NO)
     .wHideAnimationSet(AninatonHideNone)
     .wAnimationDurtionSet(1)
     .wLoadingSizeSet(CGSizeMake(50, 50))
@@ -153,5 +154,5 @@
 + (void)hideHudInView:(UIView*)view{
     [WMZDialog closeWithshowView:view tag:222 block:nil];
 }
-
 @end
+

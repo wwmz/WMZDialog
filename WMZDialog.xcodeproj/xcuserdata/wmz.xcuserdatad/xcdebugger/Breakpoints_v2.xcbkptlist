@@ -57,8 +57,8 @@
             filePath = "WMZDialog/WMZDialog/Calander/WMZDialog+Calander.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "217"
-            endingLineNumber = "217"
+            startingLineNumber = "216"
+            endingLineNumber = "216"
             landmarkName = "-collectionView:cellForItemAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -92,22 +92,6 @@
             startingLineNumber = "187"
             endingLineNumber = "187"
             landmarkName = "-addArrowBorderAt:offset:rectCorner:width:height:cornerRadius:borderWidth:borderColor:angleRadio:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "84B3569E-DE23-419C-86ED-1D466153E048"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WMZDialog/WMZDialog/Main/WMZDialog.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "715"
-            endingLineNumber = "715"
-            landmarkName = "-closeView:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -1,11 +1,11 @@
-# WMZDailog - 功能最多样式最多的弹窗，支持普通/微信底部/提示/加载框/日期/地区/日历/选择/编辑/分享/菜单/自定义弹窗等,支持多种动画,链式编程调用，所有属性均可定制（pod 更新至 1.2.6）
+# WMZDailog - 功能最多样式最多的弹窗，支持普通/微信底部/提示/加载框/日期/地区/日历/选择/编辑/分享/菜单/吐司/自定义弹窗等,支持多种动画,链式编程调用，所有属性均可定制（pod 更新至 1.2.7）
 
 特性
 ==============
 - 链式语法 结构优雅
 - 支持任意位置视图的弹窗(包括滚动视图)
 - 支持单选/多选
-- 支持地区1/2/3级联动
+- 支持地区1/2/3级联动(自定义地区数据)
 - 支持无限级联动
 - 支持加载框
 - 支持提示框
@@ -20,6 +20,7 @@
 - 支持默认选中
 - 支持所有列表cell样式的自定义
 - 支持自定义弹窗
+- 支持优先级
 
 ## 调用枚举说明
 ```
@@ -44,6 +45,7 @@ typedef enum : NSUInteger{
     DialogTypeLoading,              //加载框
     DialogTypeCardPresent ,         //ios13 present效果
     DialogTypeCalander,             //日历弹窗
+    DialogTypeToast,                //吐司
     DialogTypeMyView,               //自定义弹窗
 }DialogType;
 ```
@@ -254,52 +256,32 @@ typedef enum : NSUInteger{
                 .wDataSet(@[@"游泳",@"打篮球",@"打羽毛球",@"爬山",@"踢足球",@"乒乓球"])
                 .wStart();
 
-### 自定义弹窗(优酷) 更多自定义弹窗看demo
-	
-     myAlert = Dialog()
+### 自定义弹窗(优酷) 更多自定义弹窗看demo  
+    	
+    Dialog()
     .wTypeSet(DialogTypeMyView)
-    //关闭事件 此时要置为不然会内存泄漏
-    .wEventCloseSet(^(id anyID, id otherData) {
-        myAlert = nil;
-    })
-    .wShowAnimationSet(AninatonZoomIn)
-    .wHideAnimationSet(AninatonZoomOut)
     .wMyDiaLogViewSet(^UIView *(UIView *mainView) {
-        UIImageView *image = [UIImageView new];
-        image.image = [UIImage imageNamed:@"healthy"];
-        image.frame = CGRectMake(0, 0, mainView.frame.size.width, 80);
-        [mainView addSubview:image];
-        
-        UILabel *la = [UILabel new];
-        la.font = [UIFont systemFontOfSize:15.0f];
-        la.text = @"为呵护未成年人健康成长,优酷特别推出青少年模式,该模式下部分功能无法正常使用,请监护人主动选择，并设置监护密码";
-        la.numberOfLines = 0;
-        la.frame = CGRectMake(10, CGRectGetMaxY(image.frame), mainView.frame.size.width-20, 100);
-        [mainView addSubview:la];
-        
-        UIButton *enter = [UIButton buttonWithType:UIButtonTypeCustom];
-        [mainView addSubview:enter];
-        enter.titleLabel.font = [UIFont systemFontOfSize:14.0f];
-        enter.frame = CGRectMake(0, CGRectGetMaxY(la.frame), mainView.frame.size.width, 44);
-        [enter setTitle:@"进入青少年模式 >" forState:UIControlStateNormal];
-        [enter setTitleColor:DialogColor(0x108ee9) forState:UIControlStateNormal];
-        [enter addTarget:WEAK action:@selector(youkuAction:) forControlEvents:UIControlEventTouchUpInside];
-        
-        UIButton *know = [UIButton buttonWithType:UIButtonTypeCustom];
-        [mainView addSubview:know];
-        know.titleLabel.font = [UIFont systemFontOfSize:14.0f];
-        know.frame = CGRectMake(0, CGRectGetMaxY(enter.frame), mainView.frame.size.width, 44);
-        [know setTitle:@"我知道了" forState:UIControlStateNormal];
-        [know setTitleColor:DialogColor(0x3333333) forState:UIControlStateNormal];
-        [know addTarget:WEAK action:@selector(youkuAction:) forControlEvents:UIControlEventTouchUpInside];
-        
+        mainView.layer.masksToBounds = YES;
+        UIView *view = [[CustomView alloc] initWithFrame:CGRectMake(0, 0, 300, 250) superView:mainView];
         mainView.layer.masksToBounds = YES;
         mainView.layer.cornerRadius = 10;
-        return know;
+        return view;
     })
     .wStart();
 
-### 其他模式看demo
+### 常见问题（开始收录）
+     1 如何改变位置？
+    .wCustomMainViewSet(^(UIView *mainView) {
+        CGRect rect = mainView.frame;
+        rect.origin.x = 30;
+        rect.origin.y = 100;
+        mainView.frame = rect;
+    })
+    2 默认是开启横竖屏监听的如果有问题可以把wDeviceDidChange设为NO
+    3 多个弹窗优先级可以设置wLevel(同个父级有效)
+    4 默认弹窗wStart是在window层 如果要设置不同层可以用wStartView(传入父view)
+
+
 
 ### 依赖
 无任何依赖 
@@ -309,7 +291,7 @@ typedef enum : NSUInteger{
 
 ### CocoaPods  
 1. 将 cocoapods 更新至最新版本.
-2. 在 Podfile 中添加 `pod 'WMZDialog',inhibit_warnings: true`(可消除警告)。或    pod 'WMZDialog' , '~>1.2.6'
+2. 在 Podfile 中添加 `pod 'WMZDialog',inhibit_warnings: true`(可消除警告)。或    pod 'WMZDialog' , '~>1.2.7'
 3. 执行 `pod install` 或 `pod update`。
 4. 导入 #import "WMZDialog.h"。
 
@@ -369,3 +351,4 @@ WMZDialog 使用 MIT 许可证，详情见 [LICENSE](LICENSE) 文件。
 - 20210113 cocopod 更新至 1.2.4 优化静态库xib问题 LoadingType优化 可作为项目的loading框使用
 - 20210202 cocopod 更新至 1.2.5 优化LoadingType 又是一年过年了 真快
 - 20210412 cocopod 更新至 1.2.6 新增wLevel属性可管理多个弹窗的层级, 加入WMZDialogManage管理类
+- 20210412 cocopod 更新至 1.2.7 新增DialogTypeToast类型 修复若干问题

@@ -138,10 +138,16 @@ WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, UITableViewCellSepa
 WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, UIImage*,                 wCheckImage)
 //开启键盘监听 自动偏移在键盘上部 default NO
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wOpenKeyBoard)
+//底部确定取消按钮中间横线充满 default NO
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wFillBottomLine)
 /*=========================================disappear=======================================================================*/
 //自动消失时间
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGFloat,                  wDisappelSecond)
 
+
+/*=========================================disappear=======================================================================*/
+//toastPosition
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, DialogToastPosition,      wToastPosition)
 /*=========================================Pay=======================================================================*/
 //距离弹窗键盘的距离
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGFloat,                  wKeyBoardMarginY)

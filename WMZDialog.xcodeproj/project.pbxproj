@@ -45,6 +45,8 @@
 		F32F6BFE253FF2E2002DE0C8 /* SwiftVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32F6BFD253FF2E2002DE0C8 /* SwiftVC.swift */; };
 		F335AAE523B09508001BBC87 /* WMZDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = F335AAE023B09508001BBC87 /* WMZDialog.m */; };
 		F335AAE623B09508001BBC87 /* WMZDiaLogBase.m in Sources */ = {isa = PBXBuildFile; fileRef = F335AAE423B09508001BBC87 /* WMZDiaLogBase.m */; };
+		F34036B72631111A008B0EC9 /* WMZDialog+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = F34036B62631111A008B0EC9 /* WMZDialog+Toast.m */; };
+		F34036BE26311301008B0EC9 /* ToastVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F34036BD26311301008B0EC9 /* ToastVC.m */; };
 		F35480CC23714BDD00605C77 /* WMZDialog+CardPresent.m in Sources */ = {isa = PBXBuildFile; fileRef = F35480CB23714BDD00605C77 /* WMZDialog+CardPresent.m */; };
 		F36E079A2373B0A8007C1E6A /* WMZDialog+Calander.m in Sources */ = {isa = PBXBuildFile; fileRef = F36E07992373B0A8007C1E6A /* WMZDialog+Calander.m */; };
 		F36E07A02373B354007C1E6A /* NSDate+WMZCalendarDate.m in Sources */ = {isa = PBXBuildFile; fileRef = F36E079F2373B354007C1E6A /* NSDate+WMZCalendarDate.m */; };
@@ -182,6 +184,10 @@
 		F335AAE223B09508001BBC87 /* WMZDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMZDialog.h; sourceTree = "<group>"; };
 		F335AAE323B09508001BBC87 /* WMZDialogMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMZDialogMacro.h; sourceTree = "<group>"; };
 		F335AAE423B09508001BBC87 /* WMZDiaLogBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMZDiaLogBase.m; sourceTree = "<group>"; };
+		F34036B52631111A008B0EC9 /* WMZDialog+Toast.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WMZDialog+Toast.h"; sourceTree = "<group>"; };
+		F34036B62631111A008B0EC9 /* WMZDialog+Toast.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WMZDialog+Toast.m"; sourceTree = "<group>"; };
+		F34036BC26311301008B0EC9 /* ToastVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ToastVC.h; sourceTree = "<group>"; };
+		F34036BD26311301008B0EC9 /* ToastVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ToastVC.m; sourceTree = "<group>"; };
 		F35480CA23714BDD00605C77 /* WMZDialog+CardPresent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WMZDialog+CardPresent.h"; sourceTree = "<group>"; };
 		F35480CB23714BDD00605C77 /* WMZDialog+CardPresent.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WMZDialog+CardPresent.m"; sourceTree = "<group>"; };
 		F36E07982373B0A8007C1E6A /* WMZDialog+Calander.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WMZDialog+Calander.h"; sourceTree = "<group>"; };
@@ -296,6 +302,7 @@
 		184C26792305439C00679FCA /* Demo */ = {
 			isa = PBXGroup;
 			children = (
+				F34036BB263112ED008B0EC9 /* 吐司弹窗 */,
 				F39B73E72624322B0000B91F /* 优先级多个弹窗 */,
 				F32F6BF8253FF2B3002DE0C8 /* Swift调用 */,
 				F3120DEC2440735F00CF7CB7 /* iOS13Present弹窗 */,
@@ -612,6 +619,24 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
+		F34036B4263110ED008B0EC9 /* Toast */ = {
+			isa = PBXGroup;
+			children = (
+				F34036B52631111A008B0EC9 /* WMZDialog+Toast.h */,
+				F34036B62631111A008B0EC9 /* WMZDialog+Toast.m */,
+			);
+			path = Toast;
+			sourceTree = "<group>";
+		};
+		F34036BB263112ED008B0EC9 /* 吐司弹窗 */ = {
+			isa = PBXGroup;
+			children = (
+				F34036BC26311301008B0EC9 /* ToastVC.h */,
+				F34036BD26311301008B0EC9 /* ToastVC.m */,
+			);
+			path = "吐司弹窗";
+			sourceTree = "<group>";
+		};
 		F35480C923714BC000605C77 /* CardPresent */ = {
 			isa = PBXGroup;
 			children = (
@@ -699,6 +724,7 @@
 				F3F4A787232B3FC9008C70B2 /* Share */,
 				F35480C923714BC000605C77 /* CardPresent */,
 				F36E07972373B09A007C1E6A /* Calander */,
+				F34036B4263110ED008B0EC9 /* Toast */,
 			);
 			path = WMZDialog;
 			sourceTree = "<group>";
@@ -1047,6 +1073,7 @@
 				F36E07A02373B354007C1E6A /* NSDate+WMZCalendarDate.m in Sources */,
 				F3120DBA244058E700CF7CB7 /* NormalVC.m in Sources */,
 				F3120DDF24406F7600CF7CB7 /* AdvertisementVC.m in Sources */,
+				F34036B72631111A008B0EC9 /* WMZDialog+Toast.m in Sources */,
 				F3F4A795232B3FC9008C70B2 /* WMZDialog+time.m in Sources */,
 				F32F6BFE253FF2E2002DE0C8 /* SwiftVC.swift in Sources */,
 				F3F4A794232B3FC9008C70B2 /* WMZDialog+Pay.m in Sources */,
@@ -1081,6 +1108,7 @@
 				F3CEDD3223729B780073E457 /* WMZDialogTableView.m in Sources */,
 				F395FE1F232ABC020020CFB5 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				F3F4A79E232B3FC9008C70B2 /* WMZDialog+Advertisement.m in Sources */,
+				F34036BE26311301008B0EC9 /* ToastVC.m in Sources */,
 				F3F4A7A2232B3FC9008C70B2 /* WMZDialog+Share.m in Sources */,
 				F3F4A798232B3FC9008C70B2 /* WMZDialog+PickView.m in Sources */,
 				F395FE22232ABC020020CFB5 /* MASConstraintMaker.m in Sources */,

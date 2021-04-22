@@ -72,11 +72,13 @@ static  const void *todayKey = @"todayKey";
     [titleView addSubview:self.textLabel];
     self.textLabel.frame = CGRectMake((self.wWidth-100)/2 , 0, 100, 30);
     self.textLabel.textAlignment = NSTextAlignmentCenter;
+    UITapGestureRecognizer *textTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(textAction)];
+    self.textLabel.userInteractionEnabled = YES;
+    [self.textLabel addGestureRecognizer:textTap];
     titleView.frame = CGRectMake(0, 0, self.wWidth, self.wMessage.length?self.textLabel.frame.size.height:40);
     
     NSString *left = [self.dialogBundle pathForResource:@"dia_right" ofType:@"png"];
     NSString *right = [self.dialogBundle pathForResource:@"dia_left" ofType:@"png"];
-    NSString *today = [self.dialogBundle pathForResource:@"dia_today" ofType:@"png"];
     UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     leftBtn.frame = CGRectMake(CGRectGetMinX(self.textLabel.frame)-self.wMainOffsetX*2 - 40, 0, 40, titleView.frame.size.height);
     [leftBtn setImage:[UIImage imageWithContentsOfFile:left] forState:UIControlStateNormal];
@@ -87,17 +89,10 @@ static  const void *todayKey = @"todayKey";
     [rightBtn setImage:[UIImage imageWithContentsOfFile:right] forState:UIControlStateNormal];
     rightBtn.frame = CGRectMake(CGRectGetMaxX(self.textLabel.frame)+self.wMainOffsetX*2, 0, 40, titleView.frame.size.height);
     
-    UIButton *todayBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [todayBtn addTarget:self action:@selector(scrollToToday) forControlEvents:UIControlEventTouchUpInside];
-    [todayBtn setImage:[UIImage imageWithContentsOfFile:today] forState:UIControlStateNormal];
-    todayBtn.frame = CGRectMake(titleView.frame.size.width-40-self.wMainOffsetX, 0, 40, titleView.frame.size.height);
-    
     [titleView addSubview:leftBtn];
-    [titleView addSubview:rightBtn];
-    [titleView addSubview:todayBtn];
+    [titleView addSubview:rightBtn];;
     [headView addSubview:titleView];
     leftBtn.hidden = self.wHideCalanderBtn;
-    todayBtn.hidden = self.wHideCalanderBtn;
     rightBtn.hidden = self.wHideCalanderBtn;
     
     NSArray *weekTitleArray = @[@"周日",@"周一",@"周二",@"周三",@"周四",@"周五",@"周六"];
@@ -143,7 +138,14 @@ static  const void *todayKey = @"todayKey";
     if (@available(iOS 11.0, *)) {
         self.collectionView.contentInsetAdjustmentBehavior = NO;
     }
-    
+    [self setUpDays];
+    [self reSetMainViewFrame:CGRectMake(0,0,self.wWidth, CGRectGetMaxY(self.collectionView.frame))];
+    [WMZDialogTool setView:self.mainView radio:CGSizeMake(self.wMainRadius,self.wMainRadius) roundingCorners:UIRectCornerTopLeft |UIRectCornerTopRight];
+    return self.mainView;
+}
+
+- (void)setUpDays{
+    self.dataArr = [NSMutableArray new];
     for (int i = 0; i <NumberMounthes ; i++ ) {
         NSMutableArray *array = [NSMutableArray new];
         [self.dataArr addObject:array];
@@ -165,9 +167,6 @@ static  const void *todayKey = @"todayKey";
     
     [self scrollIndexPath:NumberMounthes shouldReloadData:YES animal:NO first:YES];
     self.currentIndex = NumberMounthes;
-    [self reSetMainViewFrame:CGRectMake(0,0,self.wWidth, CGRectGetMaxY(self.collectionView.frame))];
-    [WMZDialogTool setView:self.mainView radio:CGSizeMake(self.wMainRadius,self.wMainRadius) roundingCorners:UIRectCornerTopLeft |UIRectCornerTopRight];
-    return self.mainView;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
@@ -519,13 +518,6 @@ static  const void *todayKey = @"todayKey";
     [self scrollIndexPath:self.currentIndex shouldReloadData:NO animal:YES first:NO];
 
 }
-
-//回到今天
-- (void)scrollToToday{
-    [self scrollIndexPath:NumberMounthes shouldReloadData:NO animal:YES first:NO];
-}
-
-
 //更新数据
 - (void)updateDateYear:(NSInteger)year Month:(NSInteger)month index:(NSInteger)index{
     if (self.dataArr.count <= index) return;
@@ -711,6 +703,31 @@ static  const void *todayKey = @"todayKey";
     }else{
         [self.collectionView setContentOffset:CGPointMake(self.collectionView.frame.size.width*section, 0) animated:animal];
     }
+}
+
+//选择年份
+- (void)textAction{
+    DialogWeakSelf(self)
+    Dialog()
+    .wEventOKFinishSet(^(id anyID, id otherData) {
+        DialogStrongSelf(weakObject)
+        if (anyID &&
+            [anyID isKindOfClass:NSArray.class] &&
+            [(NSArray*)anyID count]) {
+            strongObject.currentYear = [((NSArray*)anyID)[0] integerValue];
+            strongObject.currentMonth = [((NSArray*)anyID)[1] integerValue];
+            strongObject.currentDay = [((NSArray*)anyID)[2] integerValue];
+            [strongObject setUpDays];
+        }
+    })
+    .wOKColorSet(self.wOKColor)
+    .wCancelColorSet(self.wCancelColor)
+//    .wLevelSet(DialogLevelHigh)
+    .wTypeSet(444)
+    .wTitleSet(@"选择日期")
+    .wTypeSet(DialogTypeDatePicker)
+    .wDateTimeTypeSet(@"yyyy年MM月dd日")
+    .wStartView(self.superview);
 }
 
 

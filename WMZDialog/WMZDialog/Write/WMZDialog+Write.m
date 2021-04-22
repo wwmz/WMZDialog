@@ -28,13 +28,12 @@ static NSString *oneLineHeightKey = @"oneLineHeight"; //oneLineHeight的key
     
     
     [self.mainView addSubview:self.writeView];
-    self.writeView.frame = CGRectMake(self.wMainOffsetX,CGRectGetMaxY(self.textLabel.frame)+self.wMainOffsetY, self.wWidth-self.wMainOffsetX*2, [WMZDialogTool sizeForTextView:CGSizeMake(self.wWidth-self.wMainOffsetX*2, CGFLOAT_MAX) text:self.wWriteDefaultText?:@"占位" font:self.writeView.font.pointSize].height+22.0);
+    self.writeView.frame = CGRectMake(self.wMainOffsetX,CGRectGetMaxY(self.textLabel.frame)+self.wMainOffsetY, self.wWidth-self.wMainOffsetX*2, [WMZDialogTool sizeForTextView:CGSizeMake(self.wWidth-self.wMainOffsetX*2, CGFLOAT_MAX) text:(self.wWriteDefaultText && self.wWriteDefaultText.length)? self.wWriteDefaultText:@"占位" font:self.writeView.font.pointSize].height+22.0);
     if (self.wWriteDefaultText) {
         self.writeView.text = self.wWriteDefaultText;
     }
     
     self.oneLineHeight = @([self sizeForTextView:CGSizeMake(self.writeView.contentSize.width , CGFLOAT_MAX) WithText:@"测试"]);
-    
     
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(3, 4, self.wWidth-self.wMainOffsetX*2-6, [WMZDialogTool sizeForTextView:CGSizeMake(self.wWidth-self.wMainOffsetX*2, CGFLOAT_MAX) text:@"占位" font:self.writeView.font.pointSize].height+10)];
     label.enabled = NO;
@@ -135,7 +134,6 @@ static NSString *oneLineHeightKey = @"oneLineHeight"; //oneLineHeight的key
  *确定的点击事件
  */
 - (void)writeOKAction:(UIButton*)btn{
-    NSLog(@"点击");
     [self.writeView resignFirstResponder];
     DialogWeakSelf(self)
     [self closeView:^{

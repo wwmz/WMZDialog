@@ -63,8 +63,10 @@ WMZDialogSetFuncImplementation(WMZDialog, BOOL,                 wTapViewTableVie
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                        wOpenMultiZone)
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                         wHideExistTop)
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                            wShowClose)
+WMZDialogSetFuncImplementation(WMZDialog, BOOL,                       wFillBottomLine)
 WMZDialogSetFuncImplementation(WMZDialog, DiaPopInView,                  wTapViewType)
 WMZDialogSetFuncImplementation(WMZDialog, DialogLevel,                         wLevel)
+WMZDialogSetFuncImplementation(WMZDialog, DialogToastPosition,         wToastPosition)
 WMZDialogSetFuncImplementation(WMZDialog, NSInteger,                 wListScrollCount)
 WMZDialogSetFuncImplementation(WMZDialog, NSInteger,            wTableViewSectionHead)
 WMZDialogSetFuncImplementation(WMZDialog, NSArray*,                   wDateShowCircle)
@@ -444,9 +446,14 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
             }
         }
              break;
-        case DialogTypeAuto:{
+        case DialogTypeAuto:
+        case DialogTypeToast:{
             if (self.wWidth == Dialog_GetWNum(500)) {
-                self.wWidth = Dialog_GetWNum(400);
+                if (self.wType == DialogTypeToast) {
+                    self.wWidth = Device_Dialog_Width - 2 * self.wMainOffsetX;
+                }else{
+                    self.wWidth = Dialog_GetWNum(400);
+                }
             }
             self.wShadowShow = NO;
             if ([WMZDialogTool isEqualToColor:self.wMainBackColor anotherColor:DialogColor(0xFFFFFF)]) {
@@ -482,8 +489,6 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
         default:
             break;
     }
-
-    
     if (self.wHeight > Device_Dialog_Height&&self.wType!=DialogTypeCardPresent) {
         self.wHeight = Device_Dialog_Height;
     }
@@ -569,13 +574,6 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
         if (self.wData&&([self.wData isKindOfClass:[NSArray class]]||[self.wData isKindOfClass:[NSMutableArray class]])) {
             self.tableView.delegate = self;
             self.tableView.dataSource = self;
-            self.tableView.estimatedRowHeight = 100;
-            self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-            if (@available(iOS 11.0, *)) {
-                self.tableView.estimatedSectionFooterHeight = 0.01;
-                self.tableView.estimatedSectionHeaderHeight = 0.01;
-                self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-            }
             if (self.wType == DialogTypeCardPresent) {
                 self.tableView.wOpenScrollClose = self.wOpenScrollClose;
                 self.tableView.wCardPresent = (self.wType == DialogTypeCardPresent);
@@ -587,7 +585,6 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
             self.tableView.scrollEnabled = NO;
         }
     }
-    
     if (self.wType == DialogTypePickSelect) {
         if (self.wData&&([self.wData isKindOfClass:[NSArray class]]||[self.wData isKindOfClass:[NSMutableArray class]])) {
             [(NSArray*)self.wData enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -829,7 +826,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
         self.wCustomTitleLa(self.titleLabel);
     }
     if (self.wCustomMessageLa) {
-        self.wCustomTitleLa(self.textLabel);
+        self.wCustomMessageLa(self.textLabel);
     }
     if (self.wCustomOKBtn) {
         self.wCustomOKBtn(self.OKBtn);
@@ -840,11 +837,11 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
     if (self.wCustomCloseBtn) {
         self.wCustomCloseBtn(self.wCloseBtn);
     }
-    if (self.wCustomMainView) {
-        self.wCustomMainView(self.mainView);
-    }
     if (self.wCustomTableView) {
         self.wCustomTableView(self.tableView);
+    }
+    if (self.wCustomMainView) {
+        self.wCustomMainView(self.mainView);
     }
 }
 /*
@@ -866,7 +863,6 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
     [self.bottomView addSubview:upLine];
     upLine.backgroundColor = self.wLineColor;
     upLine.frame = CGRectMake(0, 0, self.wWidth, DialogK1px);
-    
     if (self.wEventCancelFinish) {
         [self.bottomView addSubview:self.cancelBtn];
         self.cancelBtn.frame = CGRectMake(0, CGRectGetMaxY(upLine.frame)+self.wMainOffsetX, self.wWidth/2-DialogK1px/2, self.wMainBtnHeight);
@@ -876,7 +872,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
         Line.tag = 11111;
         [self.bottomView addSubview:Line];
         Line.backgroundColor = self.wLineColor;
-        Line.frame = CGRectMake(CGRectGetMaxX(self.cancelBtn.frame), self.cancelBtn.frame.origin.y, DialogK1px, self.wMainBtnHeight);
+        Line.frame = CGRectMake(CGRectGetMaxX(self.cancelBtn.frame),  self.wFillBottomLine?CGRectGetMaxY(upLine.frame): self.cancelBtn.frame.origin.y, DialogK1px, self.wMainBtnHeight + (self.wFillBottomLine?self.wMainOffsetX * 2:0));
     }
     
     [self.bottomView addSubview:self.OKBtn];
@@ -895,7 +891,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
             self.cancelBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
             self.cancelBtn.frame = CGRectMake(self.wMainOffsetX, CGRectGetMaxY(upLine.frame)+self.wMainOffsetX, self.wWidth  - self.wMainOffsetX*2, cancelSize.height);
             if (line) {
-                line.frame = CGRectMake(0, CGRectGetMaxY(self.cancelBtn.frame)+self.wMainOffsetX, self.wWidth, DialogK1px);
+                line.frame = CGRectMake(0, CGRectGetMaxY(self.cancelBtn.frame) + (self.wFillBottomLine?0:self.wMainOffsetX), self.wWidth, DialogK1px);
             }
         }
         self.OKBtn.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
@@ -1371,14 +1367,10 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
             @(DialogTypeLoading):@"loadingAction",
             @(DialogTypeCardPresent):@"cardPresentAction",
             @(DialogTypeCalander):@"calanderAction",
+            @(DialogTypeToast):@"toastAction",
         };
         _configDic = [NSMutableDictionary dictionaryWithDictionary:dic];
     }
     return _configDic;
 }
-
-- (NSString *)description{
-    return [NSString stringWithFormat:@"%ld %ld",self.wTag,self.wLevel];
-}
-
 @end

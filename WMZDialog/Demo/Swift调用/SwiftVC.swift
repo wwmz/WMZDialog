@@ -9,10 +9,11 @@
 import UIKit
 
 class SwiftVC: BaseVC {
-
+ 
+    var text = ""
     override func viewDidLoad() {
         super.viewDidLoad()
-     self.dataArr = ["默认","选择","日期"]
+     self.dataArr = ["默认","选择","日期","编辑"]
 
     }
     override func action(_ sender: UIButton) {
@@ -43,6 +44,17 @@ class SwiftVC: BaseVC {
                 print("点击确定",anyId as Any,otherData as Any);
             })
             .wTypeSet()(DialogTypeDatePicker);
+            _ = dialog.wStart()
+        }else if sender.tag == 3 {
+            let dialog:WMZDialog = Dialog()
+            dialog.wTypeSet()(DialogTypeWrite)
+                .wEventOKFinishSet()({(anyId:Any?,otherData:Any?)in
+                print("点击确定",anyId as Any);
+            })
+                .wPlaceholderSet()("请输入名称")
+                .wWirteKeyBoardTypeSet()(.numbersAndPunctuation)
+                .wWirteTextMaxLineSet()(2)
+                .wWriteDefaultTextSet()(text)
             _ = dialog.wStart()
         }
     }

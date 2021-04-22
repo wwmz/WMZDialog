@@ -12,7 +12,7 @@
 @implementation WMZDialog (Sheet)
 - (UIView*)sheetAction{
         
-    if (self.wBottomLineColor) {
+    if (!self.wBottomLineColor) {
         self.wBottomLineColor = self.tableView.backgroundColor;
     }
     UIView *headView = nil;

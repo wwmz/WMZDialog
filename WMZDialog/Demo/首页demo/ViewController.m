@@ -22,9 +22,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.arr =@[@"普通弹窗",@"底部弹窗",@"自动消失弹窗",@"支付弹窗",@"分享弹窗",@"自适应编辑弹窗",@"选择弹窗",@"拾取器弹窗",@"倒计时弹窗",@"任意位置弹出列表",@"下载弹窗",@"下拉无限级菜单弹窗",@"广告弹窗",@"地区弹窗",@"日期时间弹窗",@"底部菜单弹窗",@"顶部菜单弹窗",@"加载框",@"ios13Present弹窗",@"日历弹窗",@"自定义弹窗",@"swift示范",@"优先级多个弹窗"];
+    self.arr =@[@"普通弹窗",@"底部弹窗",@"自动消失弹窗",@"吐司弹窗",@"支付弹窗",@"分享弹窗",@"自适应编辑弹窗",@"选择弹窗",@"拾取器弹窗",@"倒计时弹窗",@"任意位置弹出列表",@"下载弹窗",@"下拉无限级菜单弹窗",@"广告弹窗",@"地区弹窗",@"日期时间弹窗",@"底部菜单弹窗",@"顶部菜单弹窗",@"加载框",@"ios13Present弹窗",@"日历弹窗",@"自定义弹窗",@"swift示范",@"优先级多个弹窗"];
 
-    self.vcArr = @[@"NormalVC",@"SheetVC",@"AutoDisappealVC",@"PayVC",@"ShareVC",@"WriteVC",@"SelectVC",@"PickVC",@"TimeVC",@"PopVC",@"DownVC",@"MenusSelectVC",@"AdvertisementVC",@"LocationVC",@"DateTimeVC",@"TabbarMenuVC",@"NaviMenuVC",@"LoadingVC",@"PresentVC",@"CalanderVC",@"CustomVC",@"",@"MuchVC"];
+    self.vcArr = @[@"NormalVC",@"SheetVC",@"AutoDisappealVC",@"ToastVC",@"PayVC",@"ShareVC",@"WriteVC",@"SelectVC",@"PickVC",@"TimeVC",@"PopVC",@"DownVC",@"MenusSelectVC",@"AdvertisementVC",@"LocationVC",@"DateTimeVC",@"TabbarMenuVC",@"NaviMenuVC",@"LoadingVC",@"PresentVC",@"CalanderVC",@"CustomVC",@"",@"MuchVC"];
 
     self.tableView =  [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     self.tableView.delegate = self;

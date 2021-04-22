@@ -95,11 +95,21 @@ Dialog() \
     (wMenuIndicator); \
 })\
 
+#define DialogIsIphoneX ({\
+BOOL isPhoneX = NO;\
+if (@available(iOS 11.0, *)) {\
+if ([[[UIApplication sharedApplication] delegate] window].safeAreaInsets.bottom > 0.0) {\
+isPhoneX = YES;\
+}\
+}\
+isPhoneX;\
+})
 
 #define Device_Dialog_Height [UIScreen mainScreen].bounds.size.height
 #define Device_Dialog_Width  [UIScreen mainScreen].bounds.size.width
 #define NavigationBar_Dialog_Height (([[UIApplication sharedApplication] statusBarFrame].size.height) + 44)
 #define StatusBar_Dialog_Height [[UIApplication sharedApplication] statusBarFrame].size.height
+#define DialogTabBarHeight (DialogIsIphoneX ? (49.f+34.f) : 49.f)
 #define Dialog_GetWNum(A)  (A)/2.0*((Device_Dialog_Width)/375)
 #define DialogColor(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 #define DialogK1px (1 / UIScreen.mainScreen.scale)
@@ -130,8 +140,8 @@ typedef enum : NSUInteger{
     DialogTypeLoading,              //加载框
     DialogTypeCardPresent ,         //ios13 present效果
     DialogTypeCalander,             //日历弹窗
+    DialogTypeToast,                //吐司
     DialogTypeMyView,               //自定义弹窗
-
 }DialogType;
 
 
@@ -210,6 +220,14 @@ typedef enum : NSUInteger{
     DialogLevelMiddle = 500,
     DialogLevelLow = 0,
 }DialogLevel;
+
+/*
+ * 优先级
+ */
+typedef enum : NSUInteger{
+    DialogToastTop = 0,
+    DialogToastBottom,
+}DialogToastPosition;
 
 
 /*

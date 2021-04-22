@@ -174,6 +174,13 @@
         _tableView =  [[WMZDialogTableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
         _tableView.scrollsToTop = NO;
         [_tableView setSeparatorColor:DialogLineColor];
+        _tableView.estimatedRowHeight = 100;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        if (@available(iOS 11.0, *)) {
+            _tableView.estimatedSectionFooterHeight = 0.01;
+            _tableView.estimatedSectionHeaderHeight = 0.01;
+            _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        }
     }
     return _tableView;
 }
@@ -232,6 +239,9 @@
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{}
+- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{}
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{}
 @end
 
 @implementation WMZTree

@@ -30,7 +30,6 @@
             .wEventFinishSet(^(id anyID,NSIndexPath *path, DialogType type) {
                 NSLog(@"%@",anyID);
             })
-            
             //默认选中第二个
             .wListDefaultValueSet(@[@(1)])
             //默认选中男
@@ -61,6 +60,8 @@
             .wEventOKFinishSet(^(id anyID, id otherData) {
                 NSLog(@"确定 %@",anyID);
             })
+            //自定义底部中间线颜色
+            .wBottomLineColorSet(UIColor.whiteColor)
             .wDataSet(@[@"男",@"女",@"保密"])
             .wMultipleSelectionSet(YES)
             .wShowAnimationSet(AninatonShowTop)
