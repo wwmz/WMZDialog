@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "WMZDialog"
-  s.version      = "1.2.7"
+  s.version      = "1.3.0"
   s.platform     = :ios, "9.0"
   s.requires_arc = true
   s.frameworks   = 'UIKit'

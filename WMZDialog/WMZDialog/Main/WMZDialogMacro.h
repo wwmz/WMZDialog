@@ -10,7 +10,6 @@
 #define WMZDialogMacro_h
 
 
-//implicit retain of 'self'改为NO
 #define WMZDialogStatementAndPropSetFuncStatement(propertyModifier,className, propertyPointerType, propertyName)           \
 @property(nonatomic,propertyModifier)propertyPointerType  propertyName;                                                 \
 - (className * (^) (propertyPointerType propertyName)) propertyName##Set;
@@ -18,7 +17,7 @@
 #define WMZDialogSetFuncImplementation(className, propertyPointerType, propertyName)                                       \
 - (className * (^) (propertyPointerType propertyName))propertyName##Set{                                                \
 return ^(propertyPointerType propertyName) {                                                                            \
-_##propertyName = propertyName;                                                                                         \
+self->_##propertyName = propertyName;                                                                                   \
 return self;                                                                                                            \
 };                                                                                                                      \
 }
