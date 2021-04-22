@@ -1286,7 +1286,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
     NSDictionary *userInfo = notification.userInfo;
     NSTimeInterval animationDuration = [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     [UIView animateWithDuration:animationDuration animations:^{
-        self.mainView.frame = beforeRect;
+        self.mainView.frame = self->beforeRect;
     }];
 }
 /*
@@ -1329,7 +1329,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
 */
 - (void)changeLeft:(BOOL)left{
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        self.frame = CGRectMake(0, 0, left?normalRect.size.height:normalRect.size.width, left?normalRect.size.width:normalRect.size.height);
+        self.frame = CGRectMake(0, 0, left?self->normalRect.size.height:self->normalRect.size.width, left?self->normalRect.size.width:self->normalRect.size.height);
         self.shadowView.frame = self.bounds;
         CGRect frame = self.mainView.frame;
         if (self.wMainToBottom) {

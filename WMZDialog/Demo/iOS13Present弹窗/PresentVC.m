@@ -22,6 +22,7 @@
 }
 
 -(void)action:(UIButton*)sender{
+    DialogWeakSelf(self)
     switch (sender.tag) {
         case 0:{
             Dialog()
@@ -48,13 +49,9 @@
         }
         break;
         case 1:{
-           __weak PresentVC *WEAK = self;
-          myAlert = Dialog().wTypeSet(DialogTypeCardPresent)
-         .wEventCloseSet(^(id anyID, id otherData) {
-           myAlert = nil;
-          })
+           Dialog().wTypeSet(DialogTypeCardPresent)
          //自定义头部
-         .wParentHeadViewSet(^UIView *(UIView *mainView,UITableView *tableView) {
+          .wParentHeadViewSet(^UIView *(UIView *mainView,UITableView *tableView) {
              UIView *headView = [UIView new];
              headView.frame = CGRectMake(0, 0, mainView.frame.size.width, 50);
 
@@ -73,6 +70,7 @@
          })
          //自定义底部
          .wParentBottomViewSet(^UIView *(UIView *mainView,UITableView *tableView) {
+             DialogStrongSelf(weakObject)
              UIView *bottomView = [UIView new];
              bottomView.frame = CGRectMake(0, 0, mainView.frame.size.width, Device_Dialog_Height-100);
              
@@ -93,7 +91,7 @@
              [bottomView addSubview:text];
              
              UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-             [btn addTarget:WEAK action:@selector(youkuAction:) forControlEvents:UIControlEventTouchUpInside];
+             [btn addTarget:strongObject action:@selector(youkuAction:) forControlEvents:UIControlEventTouchUpInside];
              btn.layer.cornerRadius = 5;
              btn.layer.masksToBounds = YES;
              [btn setTitle:@"OK" forState:UIControlStateNormal];
@@ -108,18 +106,15 @@
         }
         break;
         case 2:{
-           __weak PresentVC *WEAK = self;
-          myAlert = Dialog().wTypeSet(DialogTypeCardPresent)
-         .wEventCloseSet(^(id anyID, id otherData) {
-            myAlert = nil;
-          })
+           Dialog().wTypeSet(DialogTypeCardPresent)
          //自定义头部
          .wParentHeadViewSet(^UIView *(UIView *mainView,UITableView *tableView) {
+             DialogStrongSelf(weakObject)
             UIView *headView = [UIView new];
             headView.frame = CGRectMake(0, 0, mainView.frame.size.width, 50);
             
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-            [btn addTarget:WEAK action:@selector(youkuAction:) forControlEvents:UIControlEventTouchUpInside];
+            [btn addTarget:strongObject action:@selector(youkuAction:) forControlEvents:UIControlEventTouchUpInside];
             [btn setTitle:@"X" forState:UIControlStateNormal];
             [btn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
             btn.frame = CGRectMake(10, headView.frame.size.height*0.15, headView.frame.size.height*0.7, headView.frame.size.height*0.7);
