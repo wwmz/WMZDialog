@@ -19,7 +19,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-     self.dataArr = @[@"单行输入",@"多行输入"];
+     self.dataArr = @[@"单行输入",@"多行输入",@"输入规则",@"手动校验关闭"];
 }
 
 -(void)action:(UIButton*)sender{
@@ -61,6 +61,35 @@
             .wStart();
         }
             break;
+        case 2:{
+            Dialog()
+            .wTypeSet(DialogTypeWrite)
+            //输入规则
+            .wRegularSet(@{@"reguler":@"^1+[3578]+\\d{9}",@"regulerTip":@"手机号格式错误"})
+            .wWirteKeyBoardTypeSet(UIKeyboardTypePhonePad)
+            .wStart();
+            break;
+        }
+        case 3:{
+            Dialog()
+            .wTypeSet(DialogTypeWrite)
+            //关闭库内的自动关闭
+            .wAutoCloseSet(NO)
+            .wEventOKFinishSet(^(id anyID, id otherData) {
+                //模拟
+                if (anyID &&
+                    [anyID isKindOfClass:NSString.class]) {
+                    if ([(NSString*)anyID length]) {
+                        //手动调用类方法关闭
+                        [WMZDialog closeWithshowView:nil block:nil];
+                    }else{
+                        AlertAuto(@"输入不能为空")
+                    }
+                }
+            })
+            .wStart();
+            break;
+        }
         default:
             break;
     }

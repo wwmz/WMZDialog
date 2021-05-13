@@ -55,6 +55,7 @@ WMZDialogSetFuncImplementation(WMZDialog, BOOL,                         wShadowC
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                           wShadowShow)
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                           wEffectShow)
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                        wAddBottomView)
+WMZDialogSetFuncImplementation(WMZDialog, BOOL,                            wAutoClose)
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                           wPickRepeat)
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                         wMainToBottom)
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                         wCanSelectPay)
@@ -85,6 +86,7 @@ WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                    wDisappelS
 WMZDialogSetFuncImplementation(WMZDialog, UIColor*,                        wLineColor)
 WMZDialogSetFuncImplementation(WMZDialog, NSString*,                         wOKTitle)
 WMZDialogSetFuncImplementation(WMZDialog, NSString*,                     wCancelTitle)
+WMZDialogSetFuncImplementation(WMZDialog, NSDictionary*,                     wRegular)
 WMZDialogSetFuncImplementation(WMZDialog, UIColor*,                  wBottomLineColor)
 WMZDialogSetFuncImplementation(WMZDialog, UIColor*,                          wOKColor)
 WMZDialogSetFuncImplementation(WMZDialog, UIColor*,                      wCancelColor)
@@ -241,6 +243,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
         _wXMLPathName = [self.dialogBundle pathForResource:@"province_data" ofType:@"xml"];
         _wCheckImage = [UIImage imageNamed:[self.dialogBundle pathForResource:@"dialog_check" ofType:@"png"]];
         _wLoadingWidth = 2.5f;
+        _wAutoClose = YES;
     }
     return self;
 }
@@ -643,6 +646,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
         self.tag = self.wTag;
         WMZDialog *existView = [view viewWithTag:self.wTag];
         if (existView &&
+            [existView isKindOfClass:WMZDialog.class] &&
             existView.wType == self.wType) return;
     }
     
@@ -677,6 +681,13 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
 *关闭
 */
 - (void)closeView:(nullable animalBlock)block{
+    if (!self.wAutoClose){
+        if (block) {
+            block();
+        }
+        return;;
+    }
+    
     self.close = YES;
     if (self.wType == DialogTypePay || self.wType == DialogTypeWrite) {
         [self.mainView endEditing:YES];
@@ -780,6 +791,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
         }
     }
     if (dialog) {
+        dialog.wAutoClose = YES;
         [dialog closeView:block];;
     }
 }
@@ -1083,14 +1095,15 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
             if (self.wType != DialogTypeCardPresent) {
                 DialogWeakSelf(self)
                 if (self.wAddBottomView) {
-                    if (weakObject.wEventFinish) {
-                        weakObject.wEventFinish(data, indexPath,weakObject.wType);
+                    if (self.wEventFinish) {
+                        self.wEventFinish(data, indexPath,weakObject.wType);
                     }
                 }else{
                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                          [weakObject closeView:^{
-                               if (weakObject.wEventFinish) {
-                                   weakObject.wEventFinish(data, indexPath,weakObject.wType);
+                          [self closeView:^{
+                              DialogStrongSelf(weakObject)
+                               if (strongObject.wEventFinish) {
+                                   strongObject.wEventFinish(data, indexPath,weakObject.wType);
                                }
                            }];
                     });
@@ -1295,8 +1308,9 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
 - (void)cancelAction:(UIButton*)btn{
     DialogWeakSelf(self)
     [self closeView:^{
-        if (weakObject.wEventCancelFinish) {
-            weakObject.wEventCancelFinish(@"取消",nil);
+        DialogStrongSelf(weakObject)
+        if (strongObject.wEventCancelFinish) {
+            strongObject.wEventCancelFinish(@"取消",nil);
         }
     }];
 }
@@ -1306,8 +1320,9 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
 - (void)OKAction:(UIButton*)btn{
     DialogWeakSelf(self)
     [self closeView:^{
-        if (weakObject.wEventOKFinish) {
-            weakObject.wEventOKFinish(@"确定",nil);
+        DialogStrongSelf(weakObject)
+        if (strongObject.wEventOKFinish) {
+            strongObject.wEventOKFinish(@"确定",nil);
         }
     }];
 }

@@ -359,13 +359,14 @@
 - (void)PickDateOKAction:(UIButton*)btn{
     DialogWeakSelf(self)
     [self closeView:^{
-        if (weakObject.wEventOKFinish) {
+        DialogStrongSelf(weakObject)
+        if (strongObject.wEventOKFinish) {
            NSMutableArray *mArr = [NSMutableArray new];
            NSMutableArray *orginArr = [NSMutableArray new];
-           NSMutableString *dateStr = [NSMutableString stringWithString:weakObject.wDateTimeType];
-           for (int i = 0; i<[weakObject.wData count]; i++) {
-           NSArray *arr = weakObject.wData[i];
-           NSString *str = arr [weakObject.wPickRepeat?[weakObject.pickView selectedRowInComponent:i]%arr.count:[weakObject.pickView selectedRowInComponent:i]];
+           NSMutableString *dateStr = [NSMutableString stringWithString:strongObject.wDateTimeType];
+           for (int i = 0; i<[strongObject.wData count]; i++) {
+           NSArray *arr = strongObject.wData[i];
+           NSString *str = arr [strongObject.wPickRepeat?[strongObject.pickView selectedRowInComponent:i]%arr.count:[strongObject.pickView selectedRowInComponent:i]];
            [orginArr addObject:str];
            NSCharacterSet* nonDigits =[[NSCharacterSet decimalDigitCharacterSet] invertedSet];
            NSString * remainSecond = [str stringByTrimmingCharactersInSet:nonDigits];
@@ -374,7 +375,7 @@
             
            NSMutableArray *containArr = [NSMutableArray new];
             for (NSString *str in DateCongigMarr) {
-                if ([weakObject.wDateTimeType rangeOfString:str].location!=NSNotFound) {
+                if ([strongObject.wDateTimeType rangeOfString:str].location!=NSNotFound) {
                     [containArr addObject:str];
                 }
             }
@@ -384,7 +385,7 @@
                 [dateStr replaceCharactersInRange:[dateStr rangeOfString:containStr] withString:value];
             }
          
-           weakObject.wEventOKFinish(mArr, dateStr);
+            strongObject.wEventOKFinish(mArr, dateStr);
         }
     }];
 }

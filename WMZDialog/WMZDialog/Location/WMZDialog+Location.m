@@ -154,17 +154,18 @@
 - (void)locationPickOKAction:(UIButton*)btn{
     DialogWeakSelf(self)
     [weakObject closeView:^{
-        if (weakObject.wEventOKFinish) {
-            NSArray *arr = [weakObject getTreeSelectDataArr:(weakObject.wChainType == ChainTableView)?NO:YES];
+        DialogStrongSelf(weakObject)
+        if (strongObject.wEventOKFinish) {
+            NSArray *arr = [strongObject getTreeSelectDataArr:(strongObject.wChainType == ChainTableView)?NO:YES];
             NSMutableString *string = [NSMutableString stringWithString:@""];
             for (WMZTree *tree in arr) {
                 if (!string.length) {
                     [string appendString:tree.name];
                 }else{
-                    [string appendFormat:@"%@", [NSString stringWithFormat:@"%@%@",weakObject.wSeparator,tree.name]];
+                    [string appendFormat:@"%@", [NSString stringWithFormat:@"%@%@",strongObject.wSeparator,tree.name]];
                 }
             }
-           weakObject.wEventOKFinish(arr, string);
+            strongObject.wEventOKFinish(arr, string);
         }
     }];
 }

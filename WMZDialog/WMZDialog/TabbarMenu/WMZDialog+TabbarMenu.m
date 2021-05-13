@@ -51,16 +51,18 @@
 
 
 - (void)imageAction1:(NSInteger)tag withAny:(id)any{
-    [self closeView];
-    
     NSInteger section = tag / (self.wColumnCount * self.wRowCount) ;
     NSInteger row = tag%(self.wColumnCount * self.wRowCount) ;
-    if (self.wEventFinish) {
-        self.wEventFinish(any,nil,self.wType);
-    }
-    if (self.wEventMenuClick) {
-        self.wEventMenuClick(any, row, section);
-    }
+    DialogWeakSelf(self)
+    [self closeView:^{
+        DialogStrongSelf(weakObject)
+        if (strongObject.wEventFinish) {
+            strongObject.wEventFinish(any,nil,strongObject.wType);
+        }
+        if (strongObject.wEventMenuClick) {
+            strongObject.wEventMenuClick(any, row, section);
+        }
+    }];
     
 }
 @end

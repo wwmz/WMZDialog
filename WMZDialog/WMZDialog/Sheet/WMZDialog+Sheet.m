@@ -71,8 +71,9 @@
 - (void)sheetSelectAction:(UIButton*)sender{
     DialogWeakSelf(self)
     [self closeView:^{
-        if (weakObject.wEventOKFinish) {
-            weakObject.wEventOKFinish(weakObject.selectArr, weakObject.pathArr);
+        DialogStrongSelf(weakObject)
+        if (strongObject.wEventOKFinish) {
+            strongObject.wEventOKFinish(strongObject.selectArr, strongObject.pathArr);
         }
     }];
 }

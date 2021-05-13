@@ -134,11 +134,25 @@ static NSString *oneLineHeightKey = @"oneLineHeight"; //oneLineHeight的key
  *确定的点击事件
  */
 - (void)writeOKAction:(UIButton*)btn{
+    
+    if (self.wRegular && [self.wRegular isKindOfClass:NSDictionary.class]) {
+        NSString *regular = self.wRegular[@"reguler"];
+        NSString *regulerTip = self.wRegular[@"regulerTip"];
+        if (regular) {
+            NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regular];
+            BOOL isMatch = [pred evaluateWithObject:self.writeView.text];
+            if (!isMatch) {
+                AlertAuto(regulerTip?:@"输入格式有误")
+                return;
+            }
+        }
+    }
     [self.writeView resignFirstResponder];
     DialogWeakSelf(self)
     [self closeView:^{
-        if (weakObject.wEventOKFinish) {
-            weakObject.wEventOKFinish(weakObject.writeView.text,nil);
+        DialogStrongSelf(weakObject)
+        if (strongObject.wEventOKFinish) {
+            strongObject.wEventOKFinish(strongObject.writeView.text,nil);
         }
     }];
 }

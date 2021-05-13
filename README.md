@@ -1,4 +1,4 @@
-# WMZDailog - 功能最多样式最多的弹窗，支持普通/微信底部/提示/加载框/日期/地区/日历/选择/编辑/分享/菜单/吐司/自定义弹窗等,支持多种动画,链式编程调用，所有属性均可定制（pod 更新至 1.3.0）
+# WMZDailog - 功能最多样式最多的弹窗，支持普通/微信底部/提示/加载框/日期/地区/日历/选择/编辑/分享/菜单/吐司/自定义弹窗等,支持多种动画,链式编程调用，所有属性均可定制（pod 更新至 1.3.1）
 
 特性
 ==============
@@ -291,7 +291,7 @@ typedef enum : NSUInteger{
 
 ### CocoaPods  
 1. 将 cocoapods 更新至最新版本.
-2. 在 Podfile 中添加    pod 'WMZDialog' , '~>1.3.0'
+2. 在 Podfile 中添加    pod 'WMZDialog' , '~>1.3.1'
 3. 执行 `pod install` 或 `pod update`。
 4. 导入 #import "WMZDialog.h"。
 
@@ -348,4 +348,7 @@ WMZDialog 使用 MIT 许可证，详情见 [LICENSE](LICENSE) 文件。
 - 20210113 cocopod 更新至 1.2.4 优化静态库xib问题 LoadingType优化 可作为项目的loading框使用
 - 20210202 cocopod 更新至 1.2.5 优化LoadingType 又是一年过年了 真快
 - 20210412 cocopod 更新至 1.2.6 新增wLevel属性可管理多个弹窗的层级, 加入WMZDialogManage管理类
-- 20210412 cocopod 更新至 1.3.0 新增DialogTypeToast类型 修复若干问题（消除警告 建议更新至此）
+- 20210501 cocopod 更新至 1.3.0 新增DialogTypeToast类型 修复若干问题（消除警告 建议更新至此）
+- 20210513 cocopod 更新至 1.3.1 
+(1)新增通用wAutoClose属性 响应库内的自动关闭 default YES 如果设为NO则需要自己调用手动关闭的类方法 closeWithshowView 
+(2) writeType新增 wRegular属性  正则校验规则 default nil  例如 可传入 @{@"reguler":@"^1+[3578]+\\d{9}",@"reguletTip":@"请输入正确的手机号"}

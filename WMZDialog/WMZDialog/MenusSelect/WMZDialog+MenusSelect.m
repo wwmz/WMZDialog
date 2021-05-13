@@ -81,7 +81,7 @@
         for (NSDictionary *dic in arr) {
             WMZTree *tree = [[WMZTree alloc]initWithDetpth:depth+1 withName:dic[@"name"]?:@"" withID:dic[@"id"]?:@""];
             [treePoint.children addObject:tree];
-            if (dic[@"children"]&&([dic[@"children"] isKindOfClass:[NSArray class]]||[dic[@"children"] isKindOfClass:[NSMutableArray class]])&&[dic[@"children"] count]) {
+            if (dic[@"children"]&&([dic[@"children"] isKindOfClass:[NSArray class]]||[dic[@"children"] isKindOfClass:[NSMutableArray class]])&&[(NSArray*)dic[@"children"] count]) {
                 [self getDepth:dic[@"children"] withTree:tree withDepth:depth+1];
                 
             }

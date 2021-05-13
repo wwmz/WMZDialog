@@ -140,6 +140,8 @@ WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, UIImage*,          
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wOpenKeyBoard)
 //底部确定取消按钮中间横线充满 default NO
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wFillBottomLine)
+//响应库内的自动关闭 default YES 如果设为NO则需要自己调用手动关闭的类方法 closeWithshowView
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wAutoClose)
 /*=========================================disappear=======================================================================*/
 //自动消失时间
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGFloat,                  wDisappelSecond)
@@ -171,6 +173,8 @@ WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, NSInteger,         
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, NSInteger,                wWirteTextMaxNum)
 //键盘类型
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, UIKeyboardType,           wWirteKeyBoardType)
+//正则校验规则 default nil  例如 可传入 @{@"reguler":@"^1+[3578]+\\d{9}",@"reguletTip":@"请输入正确的手机号"}
+WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, NSDictionary*,            wRegular)
 
 /*=========================================Pop=======================================================================*/
 //弹出的气泡位置
@@ -260,7 +264,7 @@ WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, UIColor*,          
 //显示右上角关闭按钮 default NO
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wShowClose)
 //加载框线条宽度 default 2.5f
-WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGFloat,                   wLoadingWidth)
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGFloat,                  wLoadingWidth)
 /*=========================================cardParent==============================================================*/
 //滑动到顶部继续滑动可关闭 default YES
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wOpenScrollClose)

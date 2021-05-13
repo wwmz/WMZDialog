@@ -65,6 +65,7 @@
 		F3A49E6525A4177A0051F35B /* DialogCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F3A49E6325A4177A0051F35B /* DialogCell.m */; };
 		F3BF0A93262043D900FE5F9C /* WMZDialogManage.m in Sources */ = {isa = PBXBuildFile; fileRef = F3BF0A92262043D900FE5F9C /* WMZDialogManage.m */; };
 		F3CEDD3223729B780073E457 /* WMZDialogTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F3CEDD3123729B780073E457 /* WMZDialogTableView.m */; };
+		F3D4290C264CFC7500CDE2BF /* AutoDisappealVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F3D4290B264CFC7500CDE2BF /* AutoDisappealVC.m */; };
 		F3F4A78A232B3FC9008C70B2 /* WMZDialog+Write.m in Sources */ = {isa = PBXBuildFile; fileRef = F3F4A744232B3FC9008C70B2 /* WMZDialog+Write.m */; };
 		F3F4A78B232B3FC9008C70B2 /* WMZDialog+NaviMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = F3F4A747232B3FC9008C70B2 /* WMZDialog+NaviMenu.m */; };
 		F3F4A78D232B3FC9008C70B2 /* WMZDialog+Loading.m in Sources */ = {isa = PBXBuildFile; fileRef = F3F4A74A232B3FC9008C70B2 /* WMZDialog+Loading.m */; };
@@ -229,6 +230,8 @@
 		F3BF0A92262043D900FE5F9C /* WMZDialogManage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMZDialogManage.m; sourceTree = "<group>"; };
 		F3CEDD3023729B780073E457 /* WMZDialogTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMZDialogTableView.h; sourceTree = "<group>"; };
 		F3CEDD3123729B780073E457 /* WMZDialogTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMZDialogTableView.m; sourceTree = "<group>"; };
+		F3D4290A264CFC7500CDE2BF /* AutoDisappealVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoDisappealVC.h; sourceTree = "<group>"; };
+		F3D4290B264CFC7500CDE2BF /* AutoDisappealVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoDisappealVC.m; sourceTree = "<group>"; };
 		F3F4A743232B3FC9008C70B2 /* WMZDialog+Write.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WMZDialog+Write.h"; sourceTree = "<group>"; };
 		F3F4A744232B3FC9008C70B2 /* WMZDialog+Write.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WMZDialog+Write.m"; sourceTree = "<group>"; };
 		F3F4A746232B3FC9008C70B2 /* WMZDialog+NaviMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WMZDialog+NaviMenu.h"; sourceTree = "<group>"; };
@@ -302,6 +305,7 @@
 		184C26792305439C00679FCA /* Demo */ = {
 			isa = PBXGroup;
 			children = (
+				F3D42909264CFC7500CDE2BF /* 自动消失弹窗 */,
 				F34036BB263112ED008B0EC9 /* 吐司弹窗 */,
 				F39B73E72624322B0000B91F /* 优先级多个弹窗 */,
 				F32F6BF8253FF2B3002DE0C8 /* Swift调用 */,
@@ -698,6 +702,15 @@
 			path = "优先级多个弹窗";
 			sourceTree = "<group>";
 		};
+		F3D42909264CFC7500CDE2BF /* 自动消失弹窗 */ = {
+			isa = PBXGroup;
+			children = (
+				F3D4290A264CFC7500CDE2BF /* AutoDisappealVC.h */,
+				F3D4290B264CFC7500CDE2BF /* AutoDisappealVC.m */,
+			);
+			path = "自动消失弹窗";
+			sourceTree = "<group>";
+		};
 		F3F4A741232B3FC9008C70B2 /* WMZDialog */ = {
 			isa = PBXGroup;
 			children = (
@@ -1070,6 +1083,7 @@
 				F36E079A2373B0A8007C1E6A /* WMZDialog+Calander.m in Sources */,
 				F3F4A79B232B3FC9008C70B2 /* WMZDialogAnimation.m in Sources */,
 				F3120DA82440581C00CF7CB7 /* MenusSelectVC.m in Sources */,
+				F3D4290C264CFC7500CDE2BF /* AutoDisappealVC.m in Sources */,
 				F36E07A02373B354007C1E6A /* NSDate+WMZCalendarDate.m in Sources */,
 				F3120DBA244058E700CF7CB7 /* NormalVC.m in Sources */,
 				F3120DDF24406F7600CF7CB7 /* AdvertisementVC.m in Sources */,

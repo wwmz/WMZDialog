@@ -149,8 +149,9 @@ static NSString *selectPayViewKey = @"selectPayView"; //selectPayView的key
     if (textField.text.length==self.wPayNum) {
         [self.payField resignFirstResponder];
         [self closeView:^{
-            if (weakObject.wEventFinish) {
-                weakObject.wEventFinish(textField.text,nil,weakObject.wType);
+            DialogStrongSelf(weakObject)
+            if (strongObject.wEventFinish) {
+                strongObject.wEventFinish(textField.text,nil,strongObject.wType);
             }
         }];
     }
@@ -167,7 +168,7 @@ static NSString *selectPayViewKey = @"selectPayView"; //selectPayView的key
            UIButton *selectBtn = [strongObject.selectPayView viewWithTag:222];
            [selectBtn setTitle:anyID forState:UIControlStateNormal];
         }
-        [weakObject.payField becomeFirstResponder];
+        [strongObject.payField becomeFirstResponder];
     })
     .wTagSet(1212)
     .wMessageSet(@"")

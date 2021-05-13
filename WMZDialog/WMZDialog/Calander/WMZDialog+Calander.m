@@ -453,14 +453,15 @@ static  const void *todayKey = @"todayKey";
         }];
     }
     [self closeView:^{
-        if (weakObject.wEventOKFinish) {
-            if (weakObject.wMultipleSelection) {
-                if (weakObject.selectArr.count) {
-                    if (weakObject.selectArr.count == 1) {
-                        CalanderModel *tempModel = weakObject.selectArr.firstObject;
+        DialogStrongSelf(weakObject)
+        if (strongObject.wEventOKFinish) {
+            if (strongObject.wMultipleSelection) {
+                if (strongObject.selectArr.count) {
+                    if (strongObject.selectArr.count == 1) {
+                        CalanderModel *tempModel = strongObject.selectArr.firstObject;
                         NSString *str = [NSString stringWithFormat:@"%ld年%ld月%ld日",tempModel.wYear,tempModel.wMonth,tempModel.wDay];
-                        weakObject.wEventOKFinish(str, marrModel);
-                    }else if (weakObject.selectArr.count >= 2){
+                        strongObject.wEventOKFinish(str, marrModel);
+                    }else if (strongObject.selectArr.count >= 2){
                         if (self.wOpenMultiZone) {
                             [self.pathArr enumerateObjectsUsingBlock:^(NSArray *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                                 if ([obj isKindOfClass:[NSArray class]]) {
@@ -477,23 +478,23 @@ static  const void *todayKey = @"todayKey";
                                     }
                                 }
                             }];
-                            weakObject.wEventOKFinish(rangeArr, self.pathArr);
+                            strongObject.wEventOKFinish(rangeArr, self.pathArr);
                         }else{
-                            CalanderModel *firstModel = weakObject.selectArr.firstObject;
-                            CalanderModel *lastModel = weakObject.selectArr.lastObject;
+                            CalanderModel *firstModel = strongObject.selectArr.firstObject;
+                            CalanderModel *lastModel = strongObject.selectArr.lastObject;
                             NSString *began = [NSString stringWithFormat:@"%ld-%ld-%ld",firstModel.wYear,firstModel.wMonth,firstModel.wDay];
                             NSString *end = [NSString stringWithFormat:@"%ld-%ld-%ld",lastModel.wYear,lastModel.wMonth,lastModel.wDay];
-                            weakObject.wEventOKFinish([NSString stringWithFormat:@"%@ - %@",began,end], marrModel);
+                            strongObject.wEventOKFinish([NSString stringWithFormat:@"%@ - %@",began,end], marrModel);
                         }
                     }
                 }else{
-                    weakObject.wEventOKFinish(@"暂无选中", nil);
+                    strongObject.wEventOKFinish(@"暂无选中", nil);
                 }
             }else{
-                if (weakObject.selecctCalanderModel) {
-                    weakObject.wEventOKFinish([NSString stringWithFormat:@"%ld-%ld-%ld",weakObject.selecctCalanderModel.wYear,weakObject.selecctCalanderModel.wMonth,weakObject.selecctCalanderModel.wDay], weakObject.selecctCalanderModel);
+                if (strongObject.selecctCalanderModel) {
+                    strongObject.wEventOKFinish([NSString stringWithFormat:@"%ld-%ld-%ld",strongObject.selecctCalanderModel.wYear,strongObject.selecctCalanderModel.wMonth,strongObject.selecctCalanderModel.wDay], strongObject.selecctCalanderModel);
                 }else{
-                    weakObject.wEventOKFinish(@"暂无选中", nil);
+                    strongObject.wEventOKFinish(@"暂无选中", nil);
                 }
             }
         };

@@ -77,6 +77,15 @@ Dialog() \
 .wMessageSet(str) \
 .wStart();  \
 
+
+//提供宏定义快捷调用
+#define AlertAuto(str) \
+Dialog() \
+.wLevelSet(DialogLevelHigh)\
+.wMessageSet(str) \
+.wTypeSet(DialogTypeAuto) \
+.wStart();  \
+
 //ios13暗黑模式颜色
 #define DialogDarkColor(light,dark)    \
 ({\

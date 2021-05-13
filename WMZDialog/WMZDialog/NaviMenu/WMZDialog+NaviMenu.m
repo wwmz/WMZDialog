@@ -53,11 +53,12 @@
     NSInteger row = tag%(self.wColumnCount * self.wRowCount) ;
     DialogWeakSelf(self)
     [self closeView:^{
-        if (weakObject.wEventFinish) {
-            weakObject.wEventFinish(any,nil,weakObject.wType);
+        DialogStrongSelf(weakObject)
+        if (strongObject.wEventFinish) {
+            strongObject.wEventFinish(any,nil,strongObject.wType);
         }
-        if (weakObject.wEventMenuClick) {
-            weakObject.wEventMenuClick(any, row, section);
+        if (strongObject.wEventMenuClick) {
+            strongObject.wEventMenuClick(any, row, section);
         }
     }];
 }

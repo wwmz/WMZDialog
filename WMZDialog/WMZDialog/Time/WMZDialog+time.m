@@ -36,8 +36,9 @@
     if (seconds == 0) {
         DialogWeakSelf(self)
         [self closeView:^{
-            if (weakObject.wEventFinish) {
-                weakObject.wEventFinish(@"ok",nil, weakObject.wType);
+            DialogStrongSelf(weakObject)
+            if (strongObject.wEventFinish) {
+                strongObject.wEventFinish(@"ok",nil, strongObject.wType);
             }
         }];
     }

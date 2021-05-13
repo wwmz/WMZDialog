@@ -38,12 +38,13 @@
 - (void)mySelectAction:(UIButton*)btn{
     DialogWeakSelf(self)
     [self closeView:^{
-        if (weakObject.wEventOKFinish) {
+        DialogStrongSelf(weakObject)
+        if (strongObject.wEventOKFinish) {
             if (self.wMultipleSelection) {
-                weakObject.wEventOKFinish(weakObject.selectArr, weakObject.pathArr);
+                strongObject.wEventOKFinish(strongObject.selectArr, strongObject.pathArr);
             }else{
-                weakObject.wEventOKFinish(weakObject.selectArr.count?weakObject.selectArr.firstObject:nil,
-                                          weakObject.pathArr.count?weakObject.pathArr.firstObject:nil);
+                strongObject.wEventOKFinish(strongObject.selectArr.count?strongObject.selectArr.firstObject:nil,
+                                          strongObject.pathArr.count?strongObject.pathArr.firstObject:nil);
                 
             }
         }
