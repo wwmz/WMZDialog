@@ -50,7 +50,7 @@ WMZDialog * Dialog(void);
 WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, id,                       wData)
 //设置弹窗tag 防止快速点击重复弹出 (也可设置不同tag 依次弹出)
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, NSInteger,                wTag)
-//设置弹窗的层级 层级高的在上层 可传入NSInteger 范围在0-999之间 必须同一父级才有效
+//设置弹窗的层级 层级高的在上层 可传入NSInteger 范围在0-999之间 必须同一父级才有效 default DialogLevelHigh
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, DialogLevel,              wLevel)
 //弹窗type
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, DialogType,               wType)
@@ -126,7 +126,7 @@ WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,              
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wSelectShowChecked)
 //是否将弹窗放置最底部
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wMainToBottom)
-//是否监听横竖屏 default YES
+//是否监听横竖屏 default NO
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wDeviceDidChange)
 //是否添加底部确定取消按钮
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wAddBottomView)

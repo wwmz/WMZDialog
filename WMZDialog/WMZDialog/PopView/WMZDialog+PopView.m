@@ -175,7 +175,7 @@
             rect.size.height = offsetY + tableViewRect.size.height ;
             
             rect.origin.x = (self.tapRect.origin.x-(rect.size.width-self.tapRect.size.width)/2)*self.wPercentOrginX;
-            if (CGRectGetMinY(self.tapRect) - self.wMainOffsetY - rect.size.height < (isIphoneX?15:0)) {
+            if (CGRectGetMinY(self.tapRect) - self.wMainOffsetY - rect.size.height < (DialogIsIphoneX?15:0)) {
                 direction = directionDowm;
                 tableViewRect.origin.y = offsetY;
                 rect.size.height = offsetY + tableViewRect.size.height;
@@ -246,11 +246,11 @@
         if (CGRectGetMinX(rect)<0) {
             rect.origin.x = 0;
         }
-        if (CGRectGetMaxY(rect)> (isIphoneX ? (Device_Dialog_Height - 20):Device_Dialog_Height)) {
-            rect.origin.y = (isIphoneX ? (Device_Dialog_Height - 20):Device_Dialog_Height)-rect.size.height;
+        if (CGRectGetMaxY(rect)> (DialogIsIphoneX ? (Device_Dialog_Height - 20):Device_Dialog_Height)) {
+            rect.origin.y = (DialogIsIphoneX ? (Device_Dialog_Height - 20):Device_Dialog_Height)-rect.size.height;
         }
-        if (CGRectGetMinY(rect)< isIphoneX? StatusBar_Dialog_Height : 0) {
-            rect.origin.y = isIphoneX? StatusBar_Dialog_Height : 0;
+        if (CGRectGetMinY(rect)< DialogIsIphoneX? StatusBar_Dialog_Height : 0) {
+            rect.origin.y = DialogIsIphoneX? StatusBar_Dialog_Height : 0;
         }
     }
     

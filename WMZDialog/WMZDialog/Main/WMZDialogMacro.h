@@ -52,16 +52,6 @@ else \
 })\
 
 
-#define isIphoneX ({\
-BOOL isPhoneX = NO;\
-if (@available(iOS 11.0, *)) {\
-if ( DialogWindow.safeAreaInsets.bottom > 0.0) {\
-isPhoneX = YES;\
-}\
-}\
-isPhoneX;\
-})
-
 #define SuppressPerformSelectorLeakWarning(Stuff) \
 do { \
 _Pragma("clang diagnostic push") \
@@ -81,7 +71,6 @@ Dialog() \
 //提供宏定义快捷调用
 #define AlertAuto(str) \
 Dialog() \
-.wLevelSet(DialogLevelHigh)\
 .wMessageSet(str) \
 .wTypeSet(DialogTypeAuto) \
 .wStart();  \
@@ -236,42 +225,30 @@ typedef enum : NSUInteger{
     DialogToastTop = 0,
     DialogToastBottom,
 }DialogToastPosition;
-
-
 /*
  * 点击
  */
 typedef void (^DialogClickBlock)(id anyID,id otherData);
-
 /*
  * 多列表点击
  */
 typedef void (^DialogMenuClickBlock)(id anyID,NSInteger section,NSInteger row);
-
 /*
  * 带tableview的点击
  */
 typedef void (^DialogTableClickBlock)(id anyID,NSIndexPath *path,DialogType type);
-
 /*
  * UITableViewCell的block
  */
 typedef UITableViewCell* (^diaLogCellCallBlock)(NSIndexPath *indexPath,UITableView* tableView,id model);
-
-
-
 /*
  * UITableViewCell点击的block
  */
 typedef void (^diaLogCellSelectlock)(NSIndexPath *indexPath,UITableView* tableView,id model);
-
 /*
  * UITableViewCell的block
  */
 typedef UITableViewCell* (^diaLogCustomCellBlock)(NSIndexPath *indexPath,UITableView* tableView,id model,BOOL isSelected);
-
-
-
 /*
  * collectionCell的block
  */
@@ -281,17 +258,14 @@ typedef UICollectionViewCell* (^DiaLogCollectionCellBlock)(NSIndexPath *indexPat
 * collectionCell的点击方法
 */
 typedef void (^DiaLogCollectionClickBlock)(NSIndexPath *indexPath,UICollectionView* collection,id model);
-
 /*
  * 自定义弹窗
  */
 typedef UIView* (^diaLogMyViewCallBlock)(UIView* mainView);
-
 /*
  * 自定义presrnt ios13视图
  */
 typedef UIView* (^diaLogPresentCallBlock)(UIView* mainView,UITableView *tableView);
-
 /*
 * 自定义View
 */

@@ -237,13 +237,14 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
         _wTag = 12345;
         _wListScrollCount = 8;
         _wSeparatorStyle = UITableViewCellSeparatorStyleNone;
-        _wDeviceDidChange = YES;
+        _wDeviceDidChange = NO;
         _wAngleSize = CGSizeMake(Dialog_GetWNum(24), Dialog_GetWNum(16));
         _wOpenMultiZone = YES;
         _wXMLPathName = [self.dialogBundle pathForResource:@"province_data" ofType:@"xml"];
         _wCheckImage = [UIImage imageNamed:[self.dialogBundle pathForResource:@"dialog_check" ofType:@"png"]];
         _wLoadingWidth = 2.5f;
         _wAutoClose = YES;
+        _wLevel = DialogLevelHigh;
     }
     return self;
 }
@@ -507,9 +508,8 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
     if (self.wType == DialogTypeWrite ||
         self.wType == DialogTypePay ||
         self.wOpenKeyBoard) {
-        //监听键盘出现
+        //监听键盘
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-        //监听键盘出现
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     }
     if (self.wType != DialogTypeShare&&
@@ -529,7 +529,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
     self.titleLabel.text = _wTitle;
     self.titleLabel.font = [UIFont systemFontOfSize:_wTitleFont];
     self.titleLabel.textColor =  _wTitleColor;
-
+    
     self.textLabel.text = _wMessage;
     self.textLabel.font = [UIFont systemFontOfSize:_wMessageFont];
     self.textLabel.textColor =  _wMessageColor;
@@ -818,7 +818,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTabl
     CGPoint center = CGPointZero;
     if (self.wMainToBottom) {
         frame.origin.y = Device_Dialog_Height- CGRectGetMaxY(frame);
-        if (isIphoneX) {
+        if (DialogIsIphoneX) {
             frame.origin.y -= 15;
             frame.size.height += 15;
             UIView *view =  [UIView new];

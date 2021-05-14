@@ -101,13 +101,10 @@ NS_ASSUME_NONNULL_BEGIN
  *转化为树形数据
  */
 @property(nonatomic,strong)WMZTree *tree;
-
-
 /*
  *树形数据深度
  */
 @property (nonatomic, assign) NSInteger depth;
-
 /*
  *加锁
  */
@@ -120,22 +117,18 @@ NS_ASSUME_NONNULL_BEGIN
  *选中的数组
  */
 @property (nonatomic, strong) NSMutableArray *selectArr;
-
 /*
  *选中的path数组
  */
 @property (nonatomic, strong) NSMutableArray *pathArr;
-
 /*
  *占位数组
  */
 @property (nonatomic, strong) NSMutableArray *tempArr;
-
 /*
  *数据数组
  */
 @property (nonatomic, strong) NSMutableArray *dataArr;
-
 /*
  *bundle
  */
@@ -148,7 +141,6 @@ NS_ASSUME_NONNULL_BEGIN
  *初始point
  */
 @property (nonatomic, assign)CGPoint normalPoint;
-
 /*
  *在可滑动视图上
  */
@@ -157,7 +149,6 @@ NS_ASSUME_NONNULL_BEGIN
 *pop点击的frame 如果pop位置不准确可以改变此
 */
 @property(nonatomic,assign)CGRect tapRect;
-
 /*
 *最小时间
 */
@@ -168,23 +159,18 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSMutableDictionary *maxDate;
 
 @property(nonatomic,assign)BOOL nest;
-
 /*
  *添加底部
  */
 - (UIView*)addBottomView:(CGFloat)maxY;
-
 /*
 *添加顶部
 */
 - (UIView*)addTopView;
-
 /*
  *重新设置mainView的frame 如果不是在底部默认居中
  */
 - (void)reSetMainViewFrame:(CGRect)frame;
-
-
 /*
  * 更新下载进度条
  *
@@ -192,8 +178,6 @@ NS_ASSUME_NONNULL_BEGIN
  *
  */
 - (BOOL)updateAlertTypeDownProgress:(CGFloat)value;
-
-
 /*
  * 更新下拉菜单数据 用于外部传入数据 只更新下一列的数据 下下列的数据不变
  *
