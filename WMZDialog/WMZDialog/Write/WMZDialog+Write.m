@@ -8,8 +8,8 @@
 //
 
 #import "WMZDialog+Write.h"
-static NSString *writeViewKey = @"writeView"; //passView的key
-static NSString *oneLineHeightKey = @"oneLineHeight"; //oneLineHeight的key
+static const NSString *writeViewKey = @"writeView"; //passView的key
+static const NSString *oneLineHeightKey = @"oneLineHeight"; //oneLineHeight的key
 @interface WMZDialog()<UITextViewDelegate>
 @property (nonatomic, retain) NSNumber *oneLineHeight;
 @property (nonatomic, retain) UITextView *writeView;

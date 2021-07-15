@@ -70,6 +70,23 @@
 //    .wAngleSizeSet(CGSizeMake(20, 15))
     //可以设置三角形的颜色
 //    .wMainBackColorSet([UIColor orangeColor])
+    
+     ///如果需要背景为图片的时候
+//    .wCustomMainViewSet(^(UIView *mainView) {
+//        mainView.layer.contents = (id)[UIImage imageNamed:@"healthy"].CGImage;
+//        for (WMZDialogTableView *view in [mainView subviews]) {
+//            if ([view isKindOfClass:WMZDialogTableView.class]) {
+//                view.backgroundColor = UIColor.clearColor;
+//                [view layoutIfNeeded];
+//                for (UITableViewCell *cell in view.visibleCells) {
+//                    cell.contentView.backgroundColor = UIColor.clearColor;
+//                    cell.backgroundColor = UIColor.clearColor;
+//                }
+//                break;;
+//            }
+//        }
+//    })
+    
     //下划线显示
     .wSeparatorStyleSet(UITableViewCellSeparatorStyleSingleLine)
     //弹出动画

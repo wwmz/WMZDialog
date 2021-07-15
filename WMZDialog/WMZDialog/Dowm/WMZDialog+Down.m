@@ -7,7 +7,7 @@
 //
 
 #import "WMZDialog+Down.h"
-static NSString *progressViewKey = @"progressView"; //progressView的key
+static const NSString *progressViewKey = @"progressView"; //progressView的key
 @interface WMZDialog()
 @property(nonnull,retain)UIProgressView *progressView;
 @end

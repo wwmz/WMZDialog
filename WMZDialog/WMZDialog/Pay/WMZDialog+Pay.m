@@ -7,8 +7,8 @@
 //
 
 #import "WMZDialog+Pay.h"
-static NSString *passViewKey = @"passView"; //passView的key
-static NSString *selectPayViewKey = @"selectPayView"; //selectPayView的key
+static const NSString *passViewKey = @"passView"; //passView的key
+static const NSString *selectPayViewKey = @"selectPayView"; //selectPayView的key
 @interface WMZDialog ()<UITextFieldDelegate>
 @property (nonatomic, retain) UIView *passView;
 @property (nonatomic, retain) UIView *selectPayView;
