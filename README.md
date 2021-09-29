@@ -323,7 +323,7 @@ typedef enum : NSUInteger{
 
 ### CocoaPods  
 1. 将 cocoapods 更新至最新版本.
-2. 在 Podfile 中添加    pod 'WMZDialog' , '~>1.3.3'
+2. 在 Podfile 中添加    pod 'WMZDialog' , '~>1.4.0'
 3. 执行 `pod install` 或 `pod update`。
 4. 导入 #import "WMZDialog.h"。
 
@@ -385,3 +385,4 @@ WMZDialog 使用 MIT 许可证，详情见 [LICENSE](LICENSE) 文件。
 (1)新增通用wAutoClose属性 响应库内的自动关闭 default YES 如果设为NO则需要自己调用手动关闭的类方法 closeWithshowView 
 (2) writeType新增 wRegular属性  正则校验规则 default nil  例如 可传入 @{@"reguler":@"^1+[3578]+\\d{9}",@"reguletTip":@"请输入正确的手机号"}
 - 20210514 cocopod 更新至 1.3.2 修改wDidChange和wLevel默认值
+- 20210929 cocopod 更新至 1.4.0 新增暗黑模式 适配ios15 底层修改 
