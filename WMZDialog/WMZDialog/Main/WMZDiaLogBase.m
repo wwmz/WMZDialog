@@ -9,12 +9,11 @@
 #import "WMZDiaLogBase.h"
 
 @interface WMZDiaLogBase ()<CAAnimationDelegate>
+@property (nonatomic, copy, readwrite) NSDictionary <NSNumber* , NSString*> *configDic;
 @end
 
 @implementation WMZDiaLogBase
-
-
-- (void)dealAnamtionShowWithView:(UIView*)view withType:(DialogShowAnination)type withTime:(NSTimeInterval)time block:(animalBlock)block{
+- (void)dealAnamtionShowWithView:(UIView*)view withType:(DialogShowAnination)type withTime:(NSTimeInterval)time block:(AnimalBlock)block{
     WMZDialogAnimation *animal = [WMZDialogAnimation new];
     if (type == AninatonCurverOn) {
         [animal curverOnAnimationWithView:view duration:time];
@@ -46,7 +45,7 @@
     }
 }
 
-- (void)dealAnamtionHideWithView:(UIView*)view withType:(DialogHideAnination)type withTime:(NSTimeInterval)time block:(animalBlock)block{
+- (void)dealAnamtionHideWithView:(UIView*)view withType:(DialogHideAnination)type withTime:(NSTimeInterval)time block:(AnimalBlock)block{
     WMZDialogAnimation *animal = [WMZDialogAnimation new];
     if (type == AninatonCurverOff) {
         [animal curverOffAnimationWithView:view duration:time];
@@ -73,94 +72,49 @@
         };
     }
 }
+#pragma -mark 更新下载进度条
+- (BOOL)updateAlertTypeDownProgress:(CGFloat)value{
+    if ([self.mainView conformsToProtocol:@protocol(WMZCustomPrototol)] &&
+        [self.mainView respondsToSelector:@selector(mz_changeValue:)])
+        return [self.mainView mz_changeValue:@(value)];
+    return NO;
+}
 
-//获取tree选中的数据
-- (NSArray*)getTreeSelectDataArr:(BOOL)first{
-    self.selectArr = [NSMutableArray new];
-    WMZTree *forTree = self.tree;
+- (void)updateMenuChildrenDataWithSection:(NSInteger)section  withUpdateChildren:(BOOL)update withData:(NSArray*)data{
     
-    while (forTree.children.count) {
-        forTree = [self getTreeData:forTree first:first];
-        if (forTree) {
-            [self.selectArr addObject:forTree];
-        }
-    }
-    
-    return self.selectArr;
-}
-- (WMZTree*)getTreeData:(WMZTree*)tree first:(BOOL)first{
-    WMZTree *firstSelectTree = nil;
-    for (int i = 0; i<tree.children.count; i++) {
-        WMZTree *sonTree = tree.children[i];
-        //默认第一个
-        if (i == 0) {
-            firstSelectTree = sonTree;
-        }
-        if (sonTree.isSelected) {
-            firstSelectTree = sonTree;
-            break;
-        }
-    }
-    return firstSelectTree;
-}
-- (BOOL)updateAlertTypeDownProgress:(CGFloat)value{return YES;}
-- (UIView*)addBottomView:(CGFloat)maxY{return [UIView new];}
-- (void)reSetMainViewFrame:(CGRect)frame{};
-- (void)getDepth:(NSArray*)arr withTree:(WMZTree*)treePoint withDepth:(NSInteger)depth{}
-- (void)selectWithTableView:(UITableView *)tableView withIndexPath:(NSIndexPath*)indexPath{}
-- (void)updateMenuChildrenDataWithSection:(NSInteger)section  withUpdateChildren:(BOOL)update withData:(NSArray*)data{}
-- (UIView*)addTopView{return [UIView new];}
-- (void)scrollToToday{};
-- (id)getMyDataArr:(NSInteger )tableViewTag withType:(NSInteger)type{return  nil;}
-
-
-- (NSBundle *)dialogBundle{
-    if (!_dialogBundle) {
-        _dialogBundle = [NSBundle bundleWithPath:[[NSBundle bundleForClass:[WMZDiaLogBase class]] pathForResource:@"WMZDialog" ofType:@"bundle"]];
-        
-    }
-    return _dialogBundle;
 }
 
-- (UILabel *)titleLabel{
-    if (!_titleLabel) {
-        _titleLabel = [UILabel new];
-        _titleLabel.textAlignment = NSTextAlignmentCenter;
-        _titleLabel.numberOfLines = 0;
-    }
-    return _titleLabel;
+/// 键盘将要出现
+- (void)keyboardWillShow:(NSNotification *)notification {
+    NSDictionary *userInfo = notification.userInfo;
+    CGRect endFrame = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    self.keyBoardHeight = endFrame.size.height;
+    CGRect frame = self.mainView.frame;
+    if (CGRectEqualToRect(self.beforeRect, CGRectZero))  self.beforeRect = frame;
+    frame.origin.y = DialogScreenH - (endFrame.size.height + self.mainView.frame.size.height + DialogK1px + self.param.wKeyBoardMarginY);
+    NSTimeInterval animationDuration = [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    [UIView animateWithDuration:animationDuration animations:^{
+        self.mainView.frame = frame;
+    }];
 }
 
-- (UILabel *)textLabel{
-    if (!_textLabel) {
-        _textLabel = [UILabel new];
-        _textLabel.textAlignment = NSTextAlignmentCenter;
-        _textLabel.numberOfLines = 0;
-    }
-    return _textLabel;
+/// 键盘将要消失
+- (void)keyboardWillHide:(NSNotification *)notification{
+    if (CGRectEqualToRect(self.beforeRect, CGRectZero))  return;
+    self.keyBoardHeight = 0;
+    NSDictionary *userInfo = notification.userInfo;
+    NSTimeInterval animationDuration = [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    [UIView animateWithDuration:animationDuration animations:^{
+        self.mainView.frame = self.beforeRect;
+    }];
 }
 
--(WMZDialogButton *)cancelBtn{
-    if (!_cancelBtn) {
-        _cancelBtn = [WMZDialogButton buttonWithType:UIButtonTypeCustom];
-    }
-    return _cancelBtn;
-}
-
--(WMZDialogButton *)OKBtn{
-    if (!_OKBtn) {
-        _OKBtn = [WMZDialogButton buttonWithType:UIButtonTypeCustom];
-    }
-    return _OKBtn;
-}
-
-- (UIView *)mainView{
+- (WMZDialogNormal *)mainView{
     if (!_mainView) {
-        _mainView = [UIView new];
+        _mainView = WMZDialogNormal.new;
     }
     return _mainView;
 }
-
 
 - (UIView *)shadowView{
     if (!_shadowView) {
@@ -169,96 +123,59 @@
     return _shadowView;
 }
 
-- (WMZDialogTableView *)tableView{
-    if (!_tableView) {
-        _tableView =  [[WMZDialogTableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
-        _tableView.scrollsToTop = NO;
-        [_tableView setSeparatorColor:DialogLineColor];
-        _tableView.estimatedRowHeight = 100;
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        if (@available(iOS 11.0, *)) {
-            _tableView.estimatedSectionFooterHeight = 0.01;
-            _tableView.estimatedSectionHeaderHeight = 0.01;
-            _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-        }
-    }
-    return _tableView;
-}
-
-- (UIPickerView *)pickView{
-    if (!_pickView) {
-        _pickView = [UIPickerView new];
-        _pickView.showsSelectionIndicator = YES;   
-    }
-    return _pickView;
-}
-
-- (WMZDialogButton *)wCloseBtn{
-    if (!_wCloseBtn) {
-        _wCloseBtn = [WMZDialogButton buttonWithType:UIButtonTypeCustom];
-    }
-    return _wCloseBtn;
-}
-
 - (UIVisualEffectView *)effectView{
     if (!_effectView) {
-        UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+        UIBlurEffectStyle style = UIBlurEffectStyleLight;
+        if (@available(iOS 13.0, *) ) {
+            BOOL isDark = (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark);
+            if (isDark && self.wOpenDark) style = UIBlurEffectStyleDark;
+        }
+        UIBlurEffect *effect = [UIBlurEffect effectWithStyle:style];
         _effectView= [[UIVisualEffectView alloc] initWithEffect:effect];
         _effectView.frame = self.bounds;
     }
     return _effectView;
 }
 
-- (NSMutableArray *)selectArr{
-    if (!_selectArr) {
-        _selectArr = [NSMutableArray new];
+- (WMZDialogParam *)param{
+    if (!_param) {
+        _param = WMZDialogParam.new;
     }
-    return _selectArr;
+    return _param;
 }
 
-- (NSMutableArray *)pathArr{
-    if (!_pathArr) {
-        _pathArr = [NSMutableArray new];
+- (NSDictionary<NSNumber *,NSString *> *)configDic{
+    if (!_configDic) {
+        _configDic = @{
+            @(DialogTypeNornal):@"WMZDialogNormalView",
+            @(DialogTypeSheet):@"WMZDialogSelectView",
+            @(DialogTypeAuto):@"WMZDialogNormalView",
+            @(DialogTypePay):@"WMZDialogEditView",
+            @(DialogTypeShare):@"WMZDialogNormalView",
+            @(DialogTypeWrite):@"WMZDialogEditView",
+            @(DialogTypeSelect):@"WMZDialogSelectView",
+            @(DialogTypeDown):@"WMZDialogNormalView",
+            @(DialogTypePop):@"WMZDialogSelectView",
+            @(DialogTypePickSelect):@"WMZDialogSelectView",
+            @(DialogTypeMenusSelect):@"WMZDialogSelectView",
+            @(DialogTypeAdvertisement):@"WMZDialogNormalView",
+            @(DialogTypeLocation):@"WMZDialogSelectView",
+            @(DialogTypeDatePicker):@"WMZDialogDateView",
+            @(DialogTypeTabbarMenu):@"WMZDialogNormalView",
+            @(DialogTypeNaviMenu):@"WMZDialogNormalView",
+            @(DialogTypeLoading):@"WMZDialogNormalView",
+            @(DialogTypeCardPresent):@"WMZDialogSelectView",
+            @(DialogTypeCalander):@"WMZDialogDateView",
+            @(DialogTypeToast):@"WMZDialogNormalView",
+        };
     }
-    return _pathArr;
+    return _configDic;
 }
 
-- (NSMutableArray *)tempArr{
-    if (!_tempArr) {
-        _tempArr = [NSMutableArray new];
-    }
-    return _tempArr;
-}
-
-- (NSMutableArray *)dataArr{
-    if (!_dataArr) {
-        _dataArr = [NSMutableArray new];
-    }
-    return _dataArr;
-}
 - (void)dealloc{
+    NSLog(@"dialog xiaos");
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{}
-- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{}
-- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{}
-@end
-
-@implementation WMZTree
-- (instancetype)initWithDetpth:(NSInteger)depth withName:(NSString*)name  withID:(NSString*)ID{
-    if (self = [super init]) {
-        _depth = depth;
-        _name = name;
-        _ID = ID;
-    }
-    return self;
-}
-
-- (NSMutableArray<WMZTree *> *)children{
-    if (!_children) {
-        _children = [NSMutableArray new];
-    }
-    return _children;
-}
 
 @end
+

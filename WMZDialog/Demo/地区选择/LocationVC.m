@@ -25,7 +25,7 @@
     }
     Dialog()
     .wEventMenuClickSet(^(id anyID, NSInteger section, NSInteger row) {
-        NSLog(@"选中 %@ %ld %ld",anyID,section,row);
+        NSLog(@"选中 %@ %ld %ld",anyID,(long)section,(long)row);
     })
     .wEventOKFinishSet(^(id anyID, id otherData) {
         NSLog(@"选中 %@ %@",anyID,otherData);
@@ -50,23 +50,23 @@
     .wStart();
 }
 //组合数据
-- (WMZTree*)customTree{
-    //需要把你的json数据组合成WMZTree结构
+- (WMZDialogTree*)customTree{
+    //需要把你的json数据组合成WMZDialogTree结构
     
     //首 必要
-    WMZTree *tree = [WMZTree new];
+    WMZDialogTree *tree = [WMZDialogTree new];
     //第一列 你的第一层数据
     for (int i = 0; i<10; i++) {
-        WMZTree *oneTree = [[WMZTree alloc]initWithDetpth:1 withName:[NSString stringWithFormat:@"第一列%d",i] withID:@""];
+        WMZDialogTree *oneTree = [[WMZDialogTree alloc]initWithDetpth:1 withName:[NSString stringWithFormat:@"第一列%d",i] withID:@""];
         //第二列
         for (int j = 0; j<10; j++) {
             
-            WMZTree *twoTree = [[WMZTree alloc]initWithDetpth:2 withName:[NSString stringWithFormat:@"第二列%d_%d",i,j] withID:@""];
+            WMZDialogTree *twoTree = [[WMZDialogTree alloc]initWithDetpth:2 withName:[NSString stringWithFormat:@"第二列%d_%d",i,j] withID:@""];
             [oneTree.children addObject:twoTree];
             
             //第三列 以此类推 无限列
             for (int z = 0; z<10; z++) {
-                WMZTree *threeTree = [[WMZTree alloc]initWithDetpth:3 withName:[NSString stringWithFormat:@"第三列%d_%d",j,z] withID:@""];
+                WMZDialogTree *threeTree = [[WMZDialogTree alloc]initWithDetpth:3 withName:[NSString stringWithFormat:@"第三列%d_%d",j,z] withID:@""];
                 [twoTree.children addObject:threeTree];
                 
             }

@@ -33,7 +33,7 @@
 - (void)viewOne{
      UIView *back = [UIView new];
      back.backgroundColor = randomColor1;
-     back.frame = CGRectMake(0, 100, Device_Dialog_Width, Device_Dialog_Height/3-120);
+     back.frame = CGRectMake(0, 100, DialogScreenW, DialogScreenH/3-120);
      [self.view addSubview:back];
      UIButton *btn1 = [UIButton buttonWithType:UIButtonTypeCustom];
      btn1.tag = 998;
@@ -49,7 +49,7 @@
 - (void)viewTwo{
     UIView *back = [UIView new];
      back.backgroundColor = randomColor1;
-     back.frame = CGRectMake(0, Device_Dialog_Height/3, Device_Dialog_Width, Device_Dialog_Height/3-120);
+     back.frame = CGRectMake(0, DialogScreenH/3, DialogScreenW, DialogScreenH/3-120);
      [self.view addSubview:back];
      UIView *back1 = [UIView new];
      back1.backgroundColor = [UIColor orangeColor];
@@ -69,7 +69,7 @@
 - (void)viewThree{
      UIView *back = [UIView new];
      back.backgroundColor = randomColor1;
-     back.frame = CGRectMake(0, Device_Dialog_Height*0.6, Device_Dialog_Width, Device_Dialog_Height/3-120);
+     back.frame = CGRectMake(0, DialogScreenH*0.6, DialogScreenW, DialogScreenH/3-120);
      [self.view addSubview:back];
      UIView *back1 = [UIView new];
      back1.backgroundColor = [UIColor orangeColor];

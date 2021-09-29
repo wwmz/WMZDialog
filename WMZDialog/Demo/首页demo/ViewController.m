@@ -10,11 +10,12 @@
 #import "WMZDialog.h"
 #import "BaseVC.h"
 #import "WMZDialog-Swift.h"
+#import "Masonry.h"
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
-@property(nonatomic,strong)NSString *name;
-@property(nonatomic,strong)UITableView *tableView;
-@property(nonatomic,strong)NSArray *arr;
-@property(nonatomic,strong)NSArray *vcArr;
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) NSArray *arr;
+@property (nonatomic, strong) NSArray *vcArr;
 @end
 
 @implementation ViewController
@@ -22,11 +23,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.arr =@[@"普通弹窗",@"底部弹窗",@"自动消失弹窗",@"吐司弹窗",@"支付弹窗",@"分享弹窗",@"自适应编辑弹窗",@"选择弹窗",@"拾取器弹窗",@"倒计时弹窗",@"任意位置弹出列表",@"下载弹窗",@"下拉无限级菜单弹窗",@"广告弹窗",@"地区弹窗",@"日期时间弹窗",@"底部菜单弹窗",@"顶部菜单弹窗",@"加载框",@"ios13Present弹窗",@"日历弹窗",@"自定义弹窗",@"swift示范",@"优先级多个弹窗"];
+    self.arr =@[@"普通弹窗",@"底部弹窗",@"自动消失弹窗",@"吐司弹窗",@"支付弹窗",@"分享弹窗",@"自适应编辑弹窗",@"选择弹窗",@"拾取器弹窗",@"任意位置弹出列表",@"下载弹窗",@"下拉无限级菜单弹窗",@"广告弹窗",@"地区弹窗",@"日期时间弹窗",@"底部菜单弹窗",@"顶部菜单弹窗",@"加载框",@"ios13Present弹窗",@"日历弹窗",@"自定义弹窗",@"swift示范",@"优先级多个弹窗",@"新自定义弹窗（实现协议）",@"暗黑模式(跟随系统变化)"];
 
-    self.vcArr = @[@"NormalVC",@"SheetVC",@"AutoDisappealVC",@"ToastVC",@"PayVC",@"ShareVC",@"WriteVC",@"SelectVC",@"PickVC",@"TimeVC",@"PopVC",@"DownVC",@"MenusSelectVC",@"AdvertisementVC",@"LocationVC",@"DateTimeVC",@"TabbarMenuVC",@"NaviMenuVC",@"LoadingVC",@"PresentVC",@"CalanderVC",@"CustomVC",@"",@"MuchVC"];
+    self.vcArr = @[@"NormalVC",@"SheetVC",@"AutoDisappealVC",@"ToastVC",@"PayVC",@"ShareVC",@"WriteVC",@"SelectVC",@"PickVC",@"PopVC",@"DownVC",@"MenusSelectVC",@"AdvertisementVC",@"LocationVC",@"DateTimeVC",@"TabbarMenuVC",@"NaviMenuVC",@"LoadingVC",@"PresentVC",@"CalanderVC",@"CustomVC",@"",@"MuchVC",@"NewCustomVC",@"DarkVC"];
 
-    self.tableView =  [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+    self.tableView =  [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.estimatedRowHeight = 50;
@@ -38,6 +39,13 @@
     self.tableView.rowHeight = 50;
     [self.view addSubview:self.tableView];
     self.view.backgroundColor = [UIColor whiteColor];
+}
+
+- (void)updateViewConstraints{
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(0);
+    }];
+    [super updateViewConstraints];
 }
 
 //展示所有属性
@@ -69,10 +77,6 @@
 //    .wSelectCellSet(^(NSIndexPath *indexPath, UITableView *tableView, id model) {
 //
 //    })
-    //自定义cell内容
-    .wMyCellSet(^UITableViewCell *(NSIndexPath *indexPath, UITableView *tableView, id model) {
-        return [UITableViewCell new];
-    })
     //自定义cell内容 带选中select
     .wCustomCellSet(^UITableViewCell *(NSIndexPath *indexPath, UITableView *tableView, id model, BOOL isSelected) {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
@@ -93,7 +97,7 @@
     
     //下拉无限级菜单选中事件
     .wEventMenuClickSet( ^(id anyID, NSInteger section, NSInteger row) {
-        NSLog(@"菜单点击方法 当前选中值:%@ 当前选中列:%ld 当前选中行:%ld",anyID,section,row);
+        NSLog(@"菜单点击方法 当前选中值:%@ 当前选中列:%ld 当前选中行:%ld",anyID,(long)section,(long)row);
     })
     //关闭事件
     .wEventCloseSet(^(id anyID, id otherData) {
@@ -126,13 +130,13 @@
     //键盘类型
     .wWirteKeyBoardTypeSet(UIKeyboardTypeDefault)
     //宽度
-    .wWidthSet(Dialog_GetWNum(500))
+    .wWidthSet(DialogRealW(500))
     //高度
-    .wHeightSet(Dialog_GetWNum(300))
+    .wHeightSet(DialogRealW(300))
     //自动消失时间
     .wDisappelSecondSet(1.5f)
     //按钮的高度
-    .wMainBtnHeightSet(Dialog_GetWNum(60))
+    .wMainBtnHeightSet(DialogRealW(60))
     //确定按钮文本
     .wOKTitleSet(@"确定")
     //取消按钮文本
@@ -150,9 +154,9 @@
     //线的颜色
     .wLineColorSet(DialogColor(0x333333))
     //主视图间的x轴间距
-    .wMainOffsetYSet(Dialog_GetWNum(20))
+    .wMainOffsetYSet(DialogRealW(20))
     //主视图间的y轴间距
-    .wMainOffsetXSet(Dialog_GetWNum(15))
+    .wMainOffsetXSet(DialogRealW(15))
     //线的透明度
     .wLineAlphaSet(0.5f)
     //标题的文本大小
@@ -168,7 +172,7 @@
     //遮罩层的颜色
     .wShadowColorSet(DialogColor(0x333333))
     //主视图距离弹出键盘的距离
-    .wKeyBoardMarginYSet(Dialog_GetWNum(80))
+    .wKeyBoardMarginYSet(DialogRealW(80))
     //支付密码的长度
     .wPayNumSet(6)
     //默认支付选择方式
@@ -192,7 +196,7 @@
     //弹出视图的方向
     .wDirectionSet(directionUp)
     //显示图片的大小
-    .wImageSizeSet(CGSizeMake(Dialog_GetWNum(500), Dialog_GetWNum(500)))
+    .wImageSizeSet(CGSizeMake(DialogRealW(500), DialogRealW(500)))
     //图片地址
     .wImageNameSet(@"advise")
     //进度条闲置的颜色
@@ -227,20 +231,10 @@
     .wStart();
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    return nil;}
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-    return nil;}
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 30;}
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 0.01;}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return  1;}
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return self.arr.count;}
-- (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    return self.arr[section];}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSString *data = self.arr[indexPath.section];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"myCell"];
@@ -252,9 +246,9 @@
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == self.arr.count - 2) {
+    if ([self.vcArr[indexPath.section] isEqualToString:@""]) {
         SwiftVC *VC = [SwiftVC new];
-        VC.name = @"swift示范";
+        VC.name = self.arr[indexPath.section];
         VC.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:VC animated:YES];
     }else{

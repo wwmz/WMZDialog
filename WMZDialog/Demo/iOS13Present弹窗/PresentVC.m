@@ -22,7 +22,7 @@
 }
 
 -(void)action:(UIButton*)sender{
-    DialogWeakSelf(self)
+    @DialogWeakify(self)
     switch (sender.tag) {
         case 0:{
             Dialog()
@@ -41,7 +41,7 @@
             .wParentBottomViewSet(^UIView *(UIView *mainView,UITableView *tableView) {
                 UILabel *la = [UILabel new];
                 la.textAlignment = NSTextAlignmentCenter;
-                la.frame = CGRectMake(0, 0, mainView.frame.size.width, Device_Dialog_Height-88);
+                la.frame = CGRectMake(0, 0, mainView.frame.size.width, DialogScreenH-88);
                 la.text = @"这是一个空视图,可自定义任何视图";
                 return la;
             })
@@ -62,7 +62,7 @@
              [headView addSubview:la];
              
              UIView *line = [UIView new];
-             line.backgroundColor = DialogLineColor;
+             line.backgroundColor =  DialogColor(0xeeeeee) ;
              line.frame = CGRectMake(0, headView.frame.size.height, headView.frame.size.width, 0.3);
              [headView addSubview:line];
              
@@ -70,9 +70,9 @@
          })
          //自定义底部
          .wParentBottomViewSet(^UIView *(UIView *mainView,UITableView *tableView) {
-             DialogStrongSelf(weakObject)
+             @DialogStrongify(self)
              UIView *bottomView = [UIView new];
-             bottomView.frame = CGRectMake(0, 0, mainView.frame.size.width, Device_Dialog_Height-100);
+             bottomView.frame = CGRectMake(0, 0, mainView.frame.size.width, DialogScreenH-100);
              
              UILabel *la = [UILabel new];
              la.textAlignment = NSTextAlignmentCenter;
@@ -91,7 +91,7 @@
              [bottomView addSubview:text];
              
              UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-             [btn addTarget:strongObject action:@selector(youkuAction:) forControlEvents:UIControlEventTouchUpInside];
+             [btn addTarget:self action:@selector(youkuAction:) forControlEvents:UIControlEventTouchUpInside];
              btn.layer.cornerRadius = 5;
              btn.layer.masksToBounds = YES;
              [btn setTitle:@"OK" forState:UIControlStateNormal];
@@ -109,12 +109,12 @@
            Dialog().wTypeSet(DialogTypeCardPresent)
          //自定义头部
          .wParentHeadViewSet(^UIView *(UIView *mainView,UITableView *tableView) {
-             DialogStrongSelf(weakObject)
+             @DialogStrongify(self)
             UIView *headView = [UIView new];
             headView.frame = CGRectMake(0, 0, mainView.frame.size.width, 50);
             
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-            [btn addTarget:strongObject action:@selector(youkuAction:) forControlEvents:UIControlEventTouchUpInside];
+            [btn addTarget:self action:@selector(youkuAction:) forControlEvents:UIControlEventTouchUpInside];
             [btn setTitle:@"X" forState:UIControlStateNormal];
             [btn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
             btn.frame = CGRectMake(10, headView.frame.size.height*0.15, headView.frame.size.height*0.7, headView.frame.size.height*0.7);
@@ -127,7 +127,7 @@
             [headView addSubview:la];
             
             UIView *line = [UIView new];
-            line.backgroundColor = DialogLineColor;
+            line.backgroundColor =  DialogColor(0xeeeeee) ;
             line.frame = CGRectMake(0, headView.frame.size.height, headView.frame.size.width, 0.3);
             [headView addSubview:line];
             
@@ -135,10 +135,10 @@
         })
          //自定义底部
           .wParentBottomViewSet(^UIView *(UIView *mainView,UITableView *tableView) {
-              tableView.frame = CGRectMake(0, 0, mainView.frame.size.width, Device_Dialog_Height - 200);
+              tableView.frame = CGRectMake(0, 0, mainView.frame.size.width, DialogScreenH - 200);
               
               UIView *headView = [UIView new];
-              headView.backgroundColor = DialogColor(0xeeeeee);
+              headView.backgroundColor = DialogDarkColor(DialogColor(0xeeeeee),DialogColor(0x363536));
               headView.frame = CGRectMake(0, 0, mainView.frame.size.width, 35);
               UILabel *la = [UILabel new];
               la.frame = CGRectMake(15, 0, mainView.frame.size.width-30, 35);
@@ -149,7 +149,7 @@
               return tableView;
           })
          //自定义cell
-         .wMyCellSet(^UITableViewCell *(NSIndexPath *indexPath, UITableView *tableView, commentModel *model) {
+        .wCustomCellSet(^UITableViewCell *(NSIndexPath *indexPath, UITableView *tableView, id model, BOOL isSelected){
              commentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"commentCell"];
              if (!cell) {
                  cell =  [[commentCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"commentCell"];

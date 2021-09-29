@@ -25,7 +25,7 @@
 
 
 - (void)action:(UIButton*)sender{
-    DialogWeakSelf(self)
+    @DialogWeakify(self)
     alert =  Dialog();
     id data = nil;
     if (sender.tag == 0) {
@@ -42,9 +42,9 @@
     //下拉无限级菜单选中事件
     .wEventMenuClickSet( ^(id anyID, NSInteger section, NSInteger row) {
         //外部更新数据
-        DialogStrongSelf(weakObject)
-        [strongObject selectMenu:section withRow:row];
-        NSLog(@"菜单点击方法 当前选中值:%@ 当前选中列:%ld 当前选中行:%ld",anyID,section,row);
+      @DialogStrongify(self)
+      [self selectMenu:section withRow:row];
+      NSLog(@"菜单点击方法 当前选中值:%@ 当前选中列:%ld 当前选中行:%ld",anyID,(long)section,(long)row);
     })
     .wTypeSet(DialogTypeMenusSelect)
     .wDataSet(data);
@@ -69,15 +69,15 @@
         
         [alert updateMenuChildrenDataWithSection:section+1 withUpdateChildren:NO withData:@[
                                                                                             @{
-                                                                                                @"name":[NSString stringWithFormat:@"好借好还就1111%ld_%ld",section+1,row],
+                                                                                                @"name":[NSString stringWithFormat:@"好借好还就1111%ld_%ld",(long)section+1,(long)row],
                                                                                                 @"id":@"111",
                                                                                                 },
                                                                                             @{
-                                                                                                @"name":[NSString stringWithFormat:@"%ld_%ld",section+1,row],
+                                                                                                @"name":[NSString stringWithFormat:@"%ld_%ld",(long)section+1,(long)row],
                                                                                                 @"id":@"112",
                                                                                                 },
                                                                                             @{
-                                                                                                @"name":[NSString stringWithFormat:@"%ld_%ld",section+1,row],
+                                                                                                @"name":[NSString stringWithFormat:@"%ld_%ld",(long)section+1,(long)row],
                                                                                                 @"id":@"113",
                                                                                                 },
                                                                                             ]];

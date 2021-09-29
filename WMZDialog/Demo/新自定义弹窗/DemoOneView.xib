@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="DemoOneView">
+            <rect key="frame" x="0.0" y="0.0" width="344" height="333"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="healthy" translatesAutoresizingMaskIntoConstraints="NO" id="CVn-jx-45S">
+                    <rect key="frame" x="0.0" y="0.0" width="344" height="150"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="150" id="5SS-7i-UO9"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z8r-JN-GbO">
+                    <rect key="frame" x="309" y="3" width="32" height="31"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="x">
+                        <color key="baseForegroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
+                    </buttonConfiguration>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="青少年模式" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aKD-Bz-FyK">
+                    <rect key="frame" x="128.5" y="165" width="87" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="748" text="精选自然科普,人文历史,热门动等有趣有用视频,合理控制观看市场,无广告放心看" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OuL-9t-1Dw">
+                    <rect key="frame" x="15" y="201" width="314" height="33.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.3411764706" green="0.3411764706" blue="0.3411764706" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="开启青少年模式&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pgv-pm-E8D">
+                    <rect key="frame" x="117.5" y="244.5" width="109" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.94509803920000002" green="0.34901960780000002" blue="0.30588235289999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yEK-Hz-g4N">
+                    <rect key="frame" x="15" y="281.5" width="314" height="31.5"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="filled" title="我知道了">
+                        <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="baseBackgroundColor" systemColor="systemOrangeColor"/>
+                    </buttonConfiguration>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="pgv-pm-E8D" firstAttribute="top" secondItem="OuL-9t-1Dw" secondAttribute="bottom" constant="10" id="D8P-6X-LSz"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="yEK-Hz-g4N" secondAttribute="bottom" constant="20" id="Hws-r2-BTH"/>
+                <constraint firstItem="yEK-Hz-g4N" firstAttribute="leading" secondItem="OuL-9t-1Dw" secondAttribute="leading" id="IqT-in-rnQ"/>
+                <constraint firstAttribute="trailing" secondItem="Z8r-JN-GbO" secondAttribute="trailing" constant="3" id="Y1U-MG-nXv"/>
+                <constraint firstItem="OuL-9t-1Dw" firstAttribute="top" secondItem="aKD-Bz-FyK" secondAttribute="bottom" constant="15" id="aJN-jg-db1"/>
+                <constraint firstItem="yEK-Hz-g4N" firstAttribute="trailing" secondItem="OuL-9t-1Dw" secondAttribute="trailing" id="agK-6i-mk3"/>
+                <constraint firstItem="CVn-jx-45S" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="atE-dz-vys"/>
+                <constraint firstItem="pgv-pm-E8D" firstAttribute="centerX" secondItem="OuL-9t-1Dw" secondAttribute="centerX" id="bWn-Qe-iAu"/>
+                <constraint firstItem="CVn-jx-45S" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="chz-4f-f28"/>
+                <constraint firstItem="OuL-9t-1Dw" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="duv-sV-1km"/>
+                <constraint firstItem="Z8r-JN-GbO" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="3" id="gzQ-Os-OH4"/>
+                <constraint firstItem="OuL-9t-1Dw" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="15" id="nvZ-Tw-wcm"/>
+                <constraint firstItem="aKD-Bz-FyK" firstAttribute="top" secondItem="CVn-jx-45S" secondAttribute="bottom" constant="15" id="skS-SA-GbU"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="CVn-jx-45S" secondAttribute="trailing" id="t4Z-pA-Bm5"/>
+                <constraint firstItem="yEK-Hz-g4N" firstAttribute="top" secondItem="pgv-pm-E8D" secondAttribute="bottom" constant="20" id="tPO-ES-C4S"/>
+                <constraint firstItem="aKD-Bz-FyK" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="wpd-8I-YIE"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="OuL-9t-1Dw" secondAttribute="trailing" constant="15" id="zY6-aF-gpN"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="closeBTN" destination="Z8r-JN-GbO" id="p2j-l6-JqS"/>
+                <outlet property="confirmBTN" destination="yEK-Hz-g4N" id="Wsj-Wz-dum"/>
+            </connections>
+            <point key="canvasLocation" x="81.159420289855078" y="305.69196428571428"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="healthy" width="338" height="148"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

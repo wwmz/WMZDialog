@@ -17,17 +17,31 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-     self.dataArr = @[@"2行4列(单页)",@"3行两列(翻页)"];
+     self.dataArr = @[@"一行",@"2行4列(单页)",@"3行两列(翻页)"];
 }
 
 -(void)action:(UIButton*)sender{
     switch (sender.tag) {
         case 0:{
+            WMZDialogParam *param = WMZDialogParam.new;
+            param.wType = DialogTypeShare;
+            param.wEventMenuClick = ^(id anyID, NSInteger section, NSInteger row) {
+                
+            };
+            param.wData = @[
+                @{@"name":@"微信",@"image":@"wallet"},
+                @{@"name":@"支付宝",@"image":@"aaa"},
+    ];
+            param.wRowCount = 1;
+            param.wColumnCount = 4;
+            Dialog().wStartParam(param);
+        }
+            break;
+        case 1:{
             Dialog()
             .wTypeSet(DialogTypeShare)
-            .wTitleSet(@"分享")
             .wEventMenuClickSet(^(id anyID, NSInteger section, NSInteger row) {
-                NSLog(@"%@ %ld %ld",anyID,section,row);
+                NSLog(@"%@ %ld %ld",anyID,(long)section,(long)row);
             })
             .wDataSet(@[
                         @{@"name":@"微信",@"image":@"wallet"},
@@ -44,12 +58,12 @@
             .wStart();
         }
             break;
-        case 1:{
+        case 2:{
              Dialog()
             .wTypeSet(DialogTypeShare)
             .wTitleSet(@"分享")
             .wEventMenuClickSet(^(id anyID, NSInteger section, NSInteger row) {
-                NSLog(@"%@ %ld %ld",anyID,section,row);
+                NSLog(@"%@ %ld %ld",anyID,(long)section,(long)row);
             })
             .wDataSet(@[
                            @{@"name":@"微信",@"image":@"wallet"},

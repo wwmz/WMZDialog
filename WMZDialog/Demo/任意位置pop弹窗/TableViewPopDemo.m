@@ -128,11 +128,11 @@
 
 - (UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     UITableViewHeaderFooterView *head = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"UITableViewHeaderView"];
-    head.frame = CGRectMake(0, 0, Device_Dialog_Width, 50);
+    head.frame = CGRectMake(0, 0, DialogScreenW, 50);
     head.tag = section;
     head.contentView.backgroundColor = randomColor1;
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(Device_Dialog_Width-200, 0, 100, 50);
+    btn.frame = CGRectMake(DialogScreenW-200, 0, 100, 50);
     btn.titleLabel.font = [UIFont systemFontOfSize:14];
     btn.tag = section;
     [head addSubview:btn];
@@ -143,11 +143,11 @@
 
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UITableViewHeaderFooterView *head = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"UITableViewFooterView"];
-    head.frame = CGRectMake(0, 0, Device_Dialog_Width, 50);
+    head.frame = CGRectMake(0, 0, DialogScreenW, 50);
     head.tag = section;
     head.contentView.backgroundColor = randomColor1;
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(Device_Dialog_Width-200, 0, 100, 50);
+    btn.frame = CGRectMake(DialogScreenW-200, 0, 100, 50);
     btn.titleLabel.font = [UIFont systemFontOfSize:14];
     btn.tag = section;
     [head addSubview:btn];
@@ -170,9 +170,9 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
     cell.textLabel.font = [UIFont systemFontOfSize:14.0f];
-    cell.textLabel.text = [NSString stringWithFormat:@"%ld-%ldTableViewCell点我弹出",indexPath.section,indexPath.row];
+    cell.textLabel.text = [NSString stringWithFormat:@"%ld-%ldTableViewCell点我弹出",(long)indexPath.section,(long)indexPath.row];
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(Device_Dialog_Width-200, 15, 80, 50);
+    btn.frame = CGRectMake(DialogScreenW-200, 15, 80, 50);
     [cell.contentView addSubview:btn];
     [btn setTitle:@"点我弹出" forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(cellBtnTap:) forControlEvents:UIControlEventTouchUpInside];

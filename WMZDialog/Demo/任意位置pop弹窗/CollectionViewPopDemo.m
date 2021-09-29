@@ -107,7 +107,7 @@ static NSString *const CollectionViewCell = @"CollectionViewCell";
     if (kind == UICollectionElementKindSectionHeader){
         UICollectionReusableView *head = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:CollectionViewHeadView forIndexPath:indexPath];
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        btn.frame = CGRectMake(Device_Dialog_Width-200, 0, Device_Dialog_Width/3, 50);
+        btn.frame = CGRectMake(DialogScreenW-200, 0, DialogScreenW/3, 50);
         btn.tag = indexPath.section;
         [head addSubview:btn];
         [btn setTitle:@"头部点我弹出" forState:UIControlStateNormal];
@@ -117,7 +117,7 @@ static NSString *const CollectionViewCell = @"CollectionViewCell";
     }else{
         UICollectionReusableView *head = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:CollectionViewFootView forIndexPath:indexPath];
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        btn.frame = CGRectMake(Device_Dialog_Width-200, 0, Device_Dialog_Width/3, 50);
+        btn.frame = CGRectMake(DialogScreenW-200, 0, DialogScreenW/3, 50);
         btn.tag = indexPath.section;
         [head addSubview:btn];
         [btn setTitle:@"尾部点我弹出" forState:UIControlStateNormal];
@@ -129,20 +129,20 @@ static NSString *const CollectionViewCell = @"CollectionViewCell";
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
-    return CGSizeMake(Device_Dialog_Width,50);
+    return CGSizeMake(DialogScreenW,50);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section{
-    return CGSizeMake(Device_Dialog_Width,50);
+    return CGSizeMake(DialogScreenW,50);
 }
 
 
 - (UICollectionView *)collectionView{
     if (!_collectionView) {
         UICollectionViewFlowLayout *flow = [UICollectionViewFlowLayout new];
-        flow.itemSize = CGSizeMake(Device_Dialog_Width/2 - 30, 100);
+        flow.itemSize = CGSizeMake(DialogScreenW/2 - 30, 100);
         flow.minimumLineSpacing = 10;
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 100, Device_Dialog_Width, Device_Dialog_Height-100) collectionViewLayout:flow];
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 100, DialogScreenW, DialogScreenH-100) collectionViewLayout:flow];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.backgroundColor = [UIColor whiteColor];

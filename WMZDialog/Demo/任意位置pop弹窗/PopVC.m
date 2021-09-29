@@ -66,7 +66,7 @@
 //    })
     //弹出位置的距离 default 0
 //    .wMainOffsetYSet(10)
-    //弹出三角形的size default  CGSizeMake(Dialog_GetWNum(30), Dialog_GetWNum(20)
+    //弹出三角形的size default  CGSizeMake(DialogRealW(30), DialogRealW(20)
 //    .wAngleSizeSet(CGSizeMake(20, 15))
     //可以设置三角形的颜色
 //    .wMainBackColorSet([UIColor orangeColor])
@@ -133,7 +133,7 @@
     //自定义cell高度
     .wCellHeightSet(44)
     //自定义cell(如有需要)
-    .wMyCellSet(^UITableViewCell *(NSIndexPath *indexPath, UITableView *tableView, id model) {
+    .wCustomCellSet(^UITableViewCell *(NSIndexPath *indexPath, UITableView *tableView, id model, BOOL isSelected){
         WXCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WXCell"];
         if (!cell) {
             cell = [[WXCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"WXCell"];

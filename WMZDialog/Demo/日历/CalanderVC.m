@@ -16,121 +16,150 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.dataArr = @[@"普通日历",@"纵向滚动",@"显示操作",@"隐藏农历",@"显示圆点",@"显示自定义颜色圆点",@"多选",@"显示在底部",@"自定义(设置不可选)",@"最大值最小值",@"固定显示不弹窗"];
+    self.dataArr = @[@"普通日历",@"纵向滚动",@"显示操作",@"隐藏农历",@"显示圆点自定义颜色",@"多选",@"多选(多块区域)",@"显示在底部",@"自定义",@"最大值最小值"];
 }
 
 - (void)action:(UIButton*)sender{
     
-    //固定显示不弹窗
-    if (sender.tag == 10) {
-        Dialog()
-        .wTypeSet(DialogTypeCalander)
-        .wShadowShowSet(NO)
-        .wHideExistTopSet(YES)
-        .wStartView(self.view);
-        return;
-    }
-    
-    //最大值最小值
-    if (sender.tag == 9) {
-        
-        NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-        NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
-        [dateComponents setMonth:-1];
-        NSDate *minDate = [gregorian dateByAddingComponents:dateComponents toDate:[NSDate date] options:0];
-        
-        Dialog()
-        .wDefaultDateSet(minDate)   //跳转到默认日期页
-        .wMaxDateSet([NSDate date])
-        .wMinDateSet(minDate)
-        .wTypeSet(DialogTypeCalander)
-        .wHideCalanderBtnSet(NO)
-        .wStart();
-        return;
-    }
-    
-    
-    WMZDialog *alert =
-    Dialog()
-    .wTypeSet(DialogTypeCalander);
-
-    if (sender.tag == 2) {  //显示操作
-        //隐藏日历上的按钮
-        alert.wHideCalanderBtnSet(NO);
-    }else if (sender.tag == 3) { //隐藏农历
-        alert.wOpenChineseDateSet(NO);
-    }else if (sender.tag == 1) { //纵向滚动
-        alert.wDirectionVerticalSet(YES);
-    }else if (sender.tag == 4) { //默认带圆点
-        alert.wDateShowCircleSet(@[[NSDate dateWithTimeIntervalSinceNow:-3*24*60*60],[NSDate date],[NSDate dateWithTimeIntervalSinceNow:24*60*60],[NSDate dateWithTimeIntervalSinceNow:3*24*60*60]]);
-    }else if (sender.tag == 5) { //显示自定义颜色圆点
-        alert.wDateShowCircleSet(@[
-        @{@"date":[NSDate dateWithTimeIntervalSinceNow:-3*24*60*60],@"color":[UIColor redColor]},
-        @{@"date":[NSDate date]},
-        @{@"date":[NSDate dateWithTimeIntervalSinceNow:24*60*60],@"color":[UIColor greenColor]},
-        @{@"date":[NSDate dateWithTimeIntervalSinceNow:3*24*60*60],@"color":[UIColor cyanColor]},
-        ]);
-    }else if (sender.tag ==6) { //多选
-        alert
-        .wMultipleSelectionSet(YES)
-        .wOpenMultiZoneSet(YES)
-        .wListDefaultValueSet(@[
-        [NSDate dateWithTimeIntervalSinceNow:-3*24*60*60],
-        [NSDate date],
-        [NSDate dateWithTimeIntervalSinceNow:24*60*60],
-        [NSDate dateWithTimeIntervalSinceNow:3*24*60*60],
-        ])
-        ;
-    }else if (sender.tag ==7) { //显示在底部
-        alert.wMainToBottomSet(YES);
-    }else if (sender.tag ==8) { //显示在底部
-        alert
-        //自定义宽度
-        .wWidthSet(320)
-        //注册cell
-        .wReginerCollectionCellSet(@"MyCalanderCell")
-        //自定义cell
-        .wCalanderCellSet(^UICollectionViewCell *(NSIndexPath *indexPath, UICollectionView *collection, CalanderModel* model) {
-            MyCalanderCell *cell = [collection dequeueReusableCellWithReuseIdentifier:@"MyCalanderCell" forIndexPath:indexPath];
-            cell.dateLable.text = [NSString stringWithFormat:@"%ld",model.wDay];
-            cell.dateLable.backgroundColor = [UIColor whiteColor];
-            //上个月和下个月的数据
-            if (model.wLastMonth||model.wNextMonth) {
-                cell.dateLable.textColor = DialogColor(0x999999);
-            }else{
-                //选中改变背景颜色
-                if (model.wSelected) {
-                    cell.dateLable.backgroundColor = DialogColor(0x0096ff);
+    switch (sender.tag) {
+        case 0:{
+            Dialog().wTypeSet(DialogTypeCalander).wStart();
+        }
+            break;
+        case 1:{
+            Dialog()
+            /// 纵向滚动
+            .wDirectionVerticalSet(YES)
+            .wTypeSet(DialogTypeCalander)
+            .wStart();
+        }
+            break;
+        case 2:{
+            Dialog()
+            /// 显示操作
+            .wHideCalanderBtnSet(NO)
+            .wTypeSet(DialogTypeCalander)
+            .wStart();
+        }
+            break;
+        case 3:{
+            Dialog()
+            /// 隐藏农历
+            .wOpenChineseDateSet(NO)
+            .wTypeSet(DialogTypeCalander)
+            .wStart();
+        }
+            break;
+        case 4:{
+            Dialog()
+            .wTypeSet(DialogTypeCalander)
+            .wDateShowCircleSet(@[
+            @{@"date":[NSDate dateWithTimeIntervalSinceNow:-3*24*60*60],@"color":[UIColor redColor]},
+            @{@"date":[NSDate date]},
+            @{@"date":[NSDate dateWithTimeIntervalSinceNow:24*60*60],@"color":[UIColor greenColor]},
+            @{@"date":[NSDate dateWithTimeIntervalSinceNow:3*24*60*60],@"color":[UIColor cyanColor]},
+            ])
+            .wStart();
+        }
+            break;
+        case 5:{
+            Dialog()
+            .wTypeSet(DialogTypeCalander)
+            /// 多选
+            .wMultipleSelectionSet(YES)
+            /// 关闭多选多块区域 有连续性 
+            .wOpenMultiZoneSet(NO)
+            /// 主题色
+            .wOKColorSet(DialogColor(0x0096ff))
+            /// 默认选中
+            .wListDefaultValueSet(@[
+                [NSDate dateWithTimeIntervalSinceNow:-3*24*60*60],
+                [NSDate date],
+                [NSDate dateWithTimeIntervalSinceNow:24*60*60],
+                [NSDate dateWithTimeIntervalSinceNow:3*24*60*60],
+                ])
+            .wStart();
+        }
+            break;
+        case 6:{
+            Dialog()
+            .wTypeSet(DialogTypeCalander)
+            /// 多选
+            .wMultipleSelectionSet(YES)
+            /// 开启多选多块区域
+            .wOpenMultiZoneSet(YES)
+            /// 中间区域透明度0.4 默认为1 不透明
+            .wLimitAlphaSet(0.4)
+            /// 主题色
+            .wOKColorSet(DialogColor(0x0096ff))
+            /// 默认选中
+            .wListDefaultValueSet(@[
+                [NSDate dateWithTimeIntervalSinceNow:-3*24*60*60],
+                [NSDate date],
+                [NSDate dateWithTimeIntervalSinceNow:24*60*60],
+                [NSDate dateWithTimeIntervalSinceNow:2*24*60*60],
+                [NSDate dateWithTimeIntervalSinceNow:3*24*60*60],
+                [NSDate dateWithTimeIntervalSinceNow:6*24*60*60],
+                ])
+            .wStart();
+        }
+            break;
+        case 7:{
+            Dialog()
+            /// 显示在底部
+            .wMainToBottomSet(YES)
+            .wTypeSet(DialogTypeCalander)
+            .wStart();
+        }
+            break;
+        case 8:{
+            Dialog()
+            .wTypeSet(DialogTypeCalander)
+            //自定义宽度
+            .wWidthSet(320)
+            //注册cell
+            .wReginerCollectionCellSet(@"MyCalanderCell")
+            //自定义cell
+            .wCalanderCellSet(^UICollectionViewCell *(NSIndexPath *indexPath, UICollectionView *collection, WMZCalanderModel* model) {
+                MyCalanderCell *cell = [collection dequeueReusableCellWithReuseIdentifier:@"MyCalanderCell" forIndexPath:indexPath];
+                cell.dateLable.text = [NSString stringWithFormat:@"%ld",(long)model.wDay];
+//                cell.dateLable.backgroundColor = [UIColor whiteColor];
+                //上个月和下个月的数据
+                if (model.wLastMonth||model.wNextMonth) {
+                    cell.dateLable.textColor = DialogDarkColor(DialogColor(0x999999), DialogColor(0x333333));
+                }else{
+                    //选中改变背景颜色
+                    if (model.wSelected) {
+                        cell.dateLable.backgroundColor = DialogColor(0x0096ff);
+                    }
+                    cell.dateLable.textColor = DialogDarkColor(DialogColor(0x333333), DialogColor(0xffffff));;
                 }
-                cell.dateLable.textColor = DialogColor(0x333333);
-            }
-            int maxResult = [NSDate compareOneDay:model.wDate withAnotherDay:[NSDate date]];
-            if (maxResult == 1) {
-                cell.dateLable.textColor = [UIColor lightGrayColor];
-            }
-            return cell;
-        })
-        //自定义点击方法
-        .wCalanderCellClickSet(^(NSIndexPath *indexPath, UICollectionView *collection, id model) {})
-        .wMaxDateSet([NSDate date])
-        .wStart();
-        return;
+                return cell;
+            })
+            //自定义点击方法
+            .wCalanderCellClickSet(^(NSIndexPath *indexPath, UICollectionView *collection, id model) {})
+            .wMaxDateSet([NSDate date])
+            .wStart();
+        }
+            break;
+        case 9:{   ///使用param 例子
+            NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+            NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+            [dateComponents setMonth:-1];
+            NSDate *minDate = [gregorian dateByAddingComponents:dateComponents toDate:[NSDate date] options:0];
+            
+            WMZDialogParam *param = WMZDialogParam.new;
+            param.wDefaultDate = minDate;
+            param.wMaxDate = [NSDate date];
+            param.wMinDate = minDate;
+            param.wType = DialogTypeCalander;
+            param.wHideCalanderBtn = NO;
+            Dialog().wStartParam(param);
+        }
+            break;
+        default:
+            break;
     }
-    
-    alert
-    .wTitleSet(@"日历")
-    //确定的点击方法
-    .wEventOKFinishSet(^(id anyID, id otherData) {
-        NSLog(@"%@ %@",anyID,otherData);
-    })
-    //开启滚动 default YES
-    .wCalanderCanScrollSet(YES)
-    //标题颜色
-    .wMessageColorSet(DialogColor(0x0096ff))
-    //改变主题色
-    .wOKColorSet(DialogColor(0x0096ff))
-    .wStart();
-
 }
 
 

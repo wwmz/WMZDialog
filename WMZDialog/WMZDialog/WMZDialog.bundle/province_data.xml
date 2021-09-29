@@ -2989,7 +2989,7 @@
       <district name="澜沧拉祜族自治县" zipcode="530828" />
       <district name="西盟佤族自治县" zipcode="530829" />
     </city>
-    <city name="昭通市" zipcode="530900">
+    <city name="临沧市" zipcode="530900">
       <district name="临翔区" zipcode="530902" />
       <district name="凤庆县" zipcode="530921" />
       <district name="云县" zipcode="530922" />
@@ -3642,6 +3642,7 @@
       <district name="双河市" zipcode="659007" />
       <district name="可克达拉市" zipcode="659008" />
       <district name="昆玉市" zipcode="659009" />
+      <district name="胡杨和市" zipcode="659010" />
     </city>
   </province>
   

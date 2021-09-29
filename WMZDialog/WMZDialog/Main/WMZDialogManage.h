@@ -5,15 +5,32 @@
 //  Created by wmz on 2021/4/9.
 //  Copyright © 2021 wmz. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+
 NS_ASSUME_NONNULL_BEGIN
 @interface WMZDialogManage : NSObject
-@property(nonatomic,strong)NSMutableDictionary *dialogInfo;
-+ (instancetype)shareInstance;
-- (void)addDialog:(id)dialog cover:(BOOL)cover superView:(UIView*)superView;
+/// 当前显示的弹窗组
+@property (nonatomic, strong) NSMutableDictionary <NSNumber*,UIView*>*dialogInfo;
+/// 暗黑模式配色
+@property (nonatomic, strong) NSMutableDictionary <NSString* , UIColor*> *darkColorInfo;
+
+/// 当前正在显示的弹窗
+- (id)currentDialog:(UIView*)normalView;
+
+/// 添加弹窗
+/// @param dialog 弹窗视图
+/// @param cover 是否覆盖内存缓存
+/// @param superView 父类
+- (void)addDialog:(id)dialog
+            cover:(BOOL)cover
+        superView:(UIView*)superView;
+
+/// 删除弹窗
+/// @param dialog 弹窗视图
 - (void)deleteDialog:(id)dialog;
+
++ (instancetype)shareInstance;
+
 @end
 
 NS_ASSUME_NONNULL_END

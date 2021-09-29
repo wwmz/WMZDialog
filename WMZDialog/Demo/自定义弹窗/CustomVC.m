@@ -43,7 +43,7 @@
             .wTypeSet(DialogTypeMyView)
             .wMyDiaLogViewSet(^UIView *(UIView *mainView) {
                 mainView.layer.masksToBounds = YES;
-                UIView *view = [[CustomView alloc] initWithFrame:CGRectMake(0, 0, 300, 250) superView:mainView];
+                UIView *view = [[CustomView alloc] initWithFrame:CGRectMake(0, 0, 400, 250) superView:mainView];
                 mainView.layer.masksToBounds = YES;
                 mainView.layer.cornerRadius = 10;
                 return view;
@@ -100,7 +100,7 @@
         [mainView addSubview:know];
         know.titleLabel.font = [UIFont systemFontOfSize:14.0f];
         [know setTitle:@"我知道了" forState:UIControlStateNormal];
-        [know setTitleColor:DialogColor(0x3333333) forState:UIControlStateNormal];
+        [know setTitleColor:DialogDarkColor(DialogColor(0x3333333), DialogColor(0xffffff)) forState:UIControlStateNormal];
         [know addTarget:WEAK action:@selector(youkuAction:) forControlEvents:UIControlEventTouchUpInside];
         [know mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(0);
@@ -128,7 +128,7 @@
     .wTypeSet(DialogTypeMyView)
     .wShowAnimationSet(AninatonCounterclockwise)
     .wHideAnimationSet(AninatonClockwise)
-    .wWidthSet(Device_Dialog_Width*0.85)
+    .wWidthSet(DialogScreenW*0.85)
     .wMyDiaLogViewSet(^UIView *(UIView *mainView) {
 
         UILabel *la = [UILabel new];
@@ -142,7 +142,6 @@
         UITextView *textView = [UITextView new];
         textView.editable = NO;
         textView.frame = CGRectMake(0, CGRectGetMaxY(la.frame)+15, mainView.frame.size.width, 120);
-        textView.textColor = DialogColor(0x666666);
         textView.font = [UIFont systemFontOfSize:16.0];
         textView.text = @"  本协议是用户（下称“用户”或“您”）与哔哩哔哩之间的协议，哔哩哔哩将按照本协议约定之内容为您提供服务。“哔哩哔哩”是指哔哩哔哩和/或其相关服务可能存在的运营关联单位。若您不同意本协议中所述任何条款或其后对协议条款的修改，请您不要使用哔哩哔哩提供的相关服务。您的使用行为将视作对本协议全部条款的完全接受";
         [mainView addSubview:textView];
@@ -176,7 +175,7 @@
 
 //饿了么  //固定高度
 - (void)elementDialog{
-    DialogWeakSelf(self)
+    @DialogWeakify(self)
     myAlert =
     Dialog()
     //重设frame 如果需要改变frame
@@ -189,11 +188,11 @@
     //固定高度
     .wHeightSet(350)
     .wTypeSet(DialogTypeMyView)
-    .wWidthSet(Device_Dialog_Width*0.8)
+    .wWidthSet(DialogScreenW*0.8)
     .wShowAnimationSet(AninatonZoomInCombin)
     .wHideAnimationSet(AninatonZoomOut)
     .wMyDiaLogViewSet(^UIView *(UIView *mainView) {
-        DialogStrongSelf(weakObject)
+        @DialogStrongify(self)
         UIImageView *image = [UIImageView new];
         image.image = [UIImage imageNamed:@"down_tyx"];
         image.frame = CGRectMake((mainView.frame.size.width-70)/2, 15, 70, 70);
@@ -208,7 +207,6 @@
         
         UILabel *text = [UILabel new];
         text.numberOfLines = 0;
-        text.textColor = DialogColor(0x333333);
         text.font = [UIFont systemFontOfSize:15.0f];
         text.text = @"1.首页改版升级,找到心仪的频道更健康。(逐步开放中)\n2.订单页视觉升级,新增附近常卖模块。(大量开放中)";
         text.textAlignment = NSTextAlignmentCenter;
@@ -221,7 +219,7 @@
         know.frame = CGRectMake(20, CGRectGetMaxY(text.frame)+15, mainView.frame.size.width-40, 44);
         [know setTitle:@"参加内侧" forState:UIControlStateNormal];
         know.backgroundColor = DialogColor(0x108ee9);
-        [know addTarget:strongObject action:@selector(elementAction:) forControlEvents:UIControlEventTouchUpInside];
+        [know addTarget:self action:@selector(elementAction:) forControlEvents:UIControlEventTouchUpInside];
         
         mainView.layer.masksToBounds = YES;
         mainView.layer.cornerRadius = 10;

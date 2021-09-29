@@ -75,7 +75,7 @@
     .wDateTimeTypeSet(mdic[@(sender.tag)])
     .wPickRepeatSet(sender.tag == 6?YES:NO)
     .wTypeSet(DialogTypeDatePicker)
-    .wMessageColorSet(sender.tag == 5?[UIColor redColor]:[UIColor blackColor])
+    .wMessageColorSet(sender.tag == 5?[UIColor redColor]:DialogDarkColor(DialogColor(0x333333), DialogColor(0xffffff)))
     .wMessageFontSet(sender.tag == 5?18:16)
     .wStart();
     

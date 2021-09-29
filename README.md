@@ -1,4 +1,4 @@
-# WMZDailog - 功能最多样式最多的弹窗，支持普通/微信底部/提示/加载框/日期/地区/日历/选择/编辑/分享/菜单/吐司/自定义弹窗等,支持多种动画,链式编程调用，所有属性均可定制（pod 更新至 1.3.2）
+# WMZDailog - 功能最多样式最多的弹窗，支持普通/微信底部/提示/加载框/日期/地区/日历/选择/编辑/分享/菜单/吐司/自定义弹窗等,支持多种动画,链式编程调用，所有属性均可定制（pod 更新至 1.4.0）
 
 特性
 ==============
@@ -21,6 +21,7 @@
 - 支持所有列表cell样式的自定义
 - 支持自定义弹窗
 - 支持多弹窗优先级
+- 支持自定义深色模式
 
 ## 调用枚举说明
 ```
@@ -258,18 +259,49 @@ typedef enum : NSUInteger{
 
 ### 自定义弹窗(优酷) 更多自定义弹窗看demo  
     	
+     Dialog()
+     .wTypeSet(DialogTypeMyView)
+     .wMyDiaLogViewSet(^UIView *(UIView *mainView) {
+         mainView.layer.masksToBounds = YES;
+         UIView *view = [[CustomView alloc] initWithFrame:CGRectMake(0, 0, 300, 250) superView:mainView];
+         mainView.layer.masksToBounds = YES;
+         mainView.layer.cornerRadius = 10;
+         return view;
+     })
+     .wStart();
+    
+### 自定义弹窗传入实现WMZCustomPrototol协议的UIView
+        
+     Dialog()
+     .wOpenKeyBoardSet(YES)
+     .wCustomView(DemoTwoView.new)
+     .wStart();
+    
+### 传入param
+
+     WMZDialogParam *param = WMZDialogParam.new;
+     param.wType = DialogTypeShare;
+     param.wEventMenuClick = ^(id anyID, NSInteger section, NSInteger row) {
+                
+     };
+     param.wData = @[
+         @{@"name":@"微信",@"image":@"wallet"},
+         @{@"name":@"支付宝",@"image":@"aaa"},
+     ];
+     param.wRowCount = 1;
+     param.wColumnCount = 4;
+     Dialog().wStartParam(param);
+
+### 暗黑模式
+
     Dialog()
-    .wTypeSet(DialogTypeMyView)
-    .wMyDiaLogViewSet(^UIView *(UIView *mainView) {
-        mainView.layer.masksToBounds = YES;
-        UIView *view = [[CustomView alloc] initWithFrame:CGRectMake(0, 0, 300, 250) superView:mainView];
-        mainView.layer.masksToBounds = YES;
-        mainView.layer.cornerRadius = 10;
-        return view;
-    })
-    .wStart();
+    .wTypeSet(DialogTypeSheet)
+    .wDataSet(@[@"男",@"女",@"保密"])
+    .wDarkMode(nil)
+    .wStartView(self.view);
 
 ### 常见问题（开始收录）
+
      1 如何改变位置？
     .wCustomMainViewSet(^(UIView *mainView) {
         CGRect rect = mainView.frame;
@@ -291,7 +323,7 @@ typedef enum : NSUInteger{
 
 ### CocoaPods  
 1. 将 cocoapods 更新至最新版本.
-2. 在 Podfile 中添加    pod 'WMZDialog' , '~>1.3.2'
+2. 在 Podfile 中添加    pod 'WMZDialog' , '~>1.3.3'
 3. 执行 `pod install` 或 `pod update`。
 4. 导入 #import "WMZDialog.h"。
 

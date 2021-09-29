@@ -16,7 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-     self.dataArr = @[@"单选",@"多选",@"多选(底部取消)",@"传字典"];
+     self.dataArr = @[@"单选",@"多选",@"多选(底部取消)",@"传字典",@"微信底部弹窗"];
 }
 
 -(void)action:(UIButton*)sender{
@@ -34,6 +34,8 @@
             .wListDefaultValueSet(@[@(1)])
             //默认选中男
 //            .wListDefaultValueSet(@[@"男"])
+            /// 开启暗黑模式
+            .wDarkMode(nil)
             .wStart();
         }
             break;
@@ -61,7 +63,7 @@
                 NSLog(@"确定 %@",anyID);
             })
             //自定义底部中间线颜色
-            .wBottomLineColorSet(UIColor.whiteColor)
+            .wBottomLineColorSet(DialogDarkColor(DialogColor(0xffffff), DialogColor(0x191919)))
             .wDataSet(@[@"男",@"女",@"保密"])
             .wMultipleSelectionSet(YES)
             .wShowAnimationSet(AninatonShowTop)
@@ -82,7 +84,25 @@
             .wStart();
         }
             break;
-            
+        case 4:{
+            Dialog()
+            .wTypeSet(DialogTypeSheet)
+            .wShowAnimationSet(AninatonShowTop)
+            .wHideAnimationSet(AninatonHideTop)
+            .wAnimationDurtionSet(0.3)
+            .wMainRadiusSet(10)
+            .wDataSet(@[@"发送给朋友",@"合拍",@"投诉"])
+            /// 添加下划线
+            .wSeparatorStyleSet(UITableViewCellSeparatorStyleSingleLine)
+            /// 下划线透明度
+            .wLineAlphaSet(0.5)
+            /// 下划线颜色
+//            .wLineColorSet(UIColor.redColor)
+            /// cell高度
+            .wCellHeightSet(50)
+            .wStart();
+        }
+            break;
         default:
             break;
     }

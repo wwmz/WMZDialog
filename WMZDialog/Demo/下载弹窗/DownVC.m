@@ -22,6 +22,7 @@
 -(void)action:(UIButton*)sender{
     //使用
     WMZDialog *alert = Dialog()
+    .wTitleSet(@"正在下载")
     .wTypeSet(DialogTypeDown)
     .wImageNameSet(@"down_tyx")
     .wEventFinishSet(^(id anyID, NSIndexPath *path, DialogType type) {

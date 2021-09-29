@@ -7,11 +7,12 @@
 //
 
 #import "WMZDialogManage.h"
+#import "WMZDialogParam.h"
+
 static WMZDialogManage* dialogManage = nil;
 @implementation WMZDialogManage
-//单例
-+ (instancetype)shareInstance
-{
+
++ (instancetype)shareInstance{
     static dispatch_once_t onceToken ;
     dispatch_once(&onceToken, ^{
         dialogManage = [[super allocWithZone:NULL] init];
@@ -28,9 +29,7 @@ static WMZDialogManage* dialogManage = nil;
     }
     if (key) {
         if ([self.dialogInfo objectForKey:key]) {
-            if (cover) {
-                [self.dialogInfo setObject:dialog forKey:key];
-            }
+            if (cover) [self.dialogInfo setObject:dialog forKey:key];
         }else{
             [self.dialogInfo setObject:dialog forKey:key];
         }
@@ -44,9 +43,9 @@ static WMZDialogManage* dialogManage = nil;
         if (dialogArr.count > 0) {
             if (level == 999) { 
                 [superView insertSubview:dialog aboveSubview:dialogArr.lastObject];
-            } else  if (level == 0) {
+            }else if (level == 0) {
                 [superView insertSubview:dialog belowSubview:dialogArr.firstObject];
-            } else {
+            }else {
                 UIView *lastDialog = nil;
                 if (dialogArr.count == 1) {
                     lastDialog = dialogArr.firstObject;
@@ -87,6 +86,7 @@ static WMZDialogManage* dialogManage = nil;
         }
     }
 }
+
 - (void)deleteDialog:(id)dialog{
     id key = nil;
     if ([dialog isKindOfClass:NSClassFromString(@"WMZDialog")]) {
@@ -99,12 +99,28 @@ static WMZDialogManage* dialogManage = nil;
     }
 }
 
-+ (id)allocWithZone:(struct _NSZone *)zone
-{
-    return WMZDialogManage.shareInstance ;
+- (id)currentDialog:(UIView*)normalView{
+    if ([normalView.superview isKindOfClass:NSClassFromString(@"WMZDialog")]) return normalView.superview;
+    return nil;
 }
-- (id)copyWithZone:(struct _NSZone *)zone
-{
-    return  WMZDialogManage.shareInstance ;
+
+- (NSMutableDictionary<NSString *,UIColor *> *)darkColorInfo{
+    if (!_darkColorInfo) {
+        _darkColorInfo = [NSMutableDictionary dictionaryWithDictionary:@{
+            DialogDarkMainColor:DialogColor(0x191919),
+            DialogDarkC2:DialogColor(0x373637),
+            DialogDarkC3:DialogColor(0x2c2c2c),
+        }];
+    }
+    return _darkColorInfo;
 }
+
++ (id)allocWithZone:(struct _NSZone *)zone{
+    return WMZDialogManage.shareInstance;
+}
+
+- (id)copyWithZone:(struct _NSZone *)zone{
+    return  WMZDialogManage.shareInstance;
+}
+
 @end

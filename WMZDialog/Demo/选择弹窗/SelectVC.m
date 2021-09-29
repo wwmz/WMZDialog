@@ -62,7 +62,7 @@
                 if (!cell) {
                     cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
                 }
-                cell.textLabel.textColor = isSelected?[UIColor redColor]:[UIColor blackColor];
+                cell.textLabel.textColor = isSelected?[UIColor redColor]:DialogDarkColor(UIColor.blackColor, UIColor.whiteColor);
                 cell.textLabel.text = model;
                 cell.detailTextLabel.text = @"自定义cell";
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;

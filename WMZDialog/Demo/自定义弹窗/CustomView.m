@@ -47,7 +47,7 @@
           [self addSubview:know];
           know.titleLabel.font = [UIFont systemFontOfSize:14.0f];
           [know setTitle:@"我知道了" forState:UIControlStateNormal];
-          [know setTitleColor:DialogColor(0x3333333) forState:UIControlStateNormal];
+          [know setTitleColor:DialogDarkColor(DialogColor(0x3333333), DialogColor(0xffffff)) forState:UIControlStateNormal];
           [know mas_makeConstraints:^(MASConstraintMaker *make) {
               make.left.right.mas_equalTo(0);
               make.height.mas_equalTo(44).priorityHigh();

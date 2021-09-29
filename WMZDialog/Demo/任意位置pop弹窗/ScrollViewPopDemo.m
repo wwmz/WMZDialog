@@ -24,12 +24,12 @@
     UIScrollView *sc = [UIScrollView new];
     sc.frame = self.view.bounds;
     [self.view addSubview:sc];
-    sc.contentSize = CGSizeMake(Device_Dialog_Width, Device_Dialog_Height*1.5);
+    sc.contentSize = CGSizeMake(DialogScreenW, DialogScreenH*1.5);
     
     UIButton *tmp = nil;
     for (int i = 0; i<10; i++) {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        btn.frame = CGRectMake((Device_Dialog_Width-120)/2, !tmp?100:(CGRectGetMaxY(tmp.frame)+60), 120, 50);
+        btn.frame = CGRectMake((DialogScreenW-120)/2, !tmp?100:(CGRectGetMaxY(tmp.frame)+60), 120, 50);
         [sc addSubview:btn];
         btn.backgroundColor = randomColor1;
         [btn setTitle:@"点我弹出" forState:UIControlStateNormal];
@@ -38,7 +38,7 @@
         [sc addSubview:btn];
     }
     if (tmp) {
-        sc.contentSize = CGSizeMake(Device_Dialog_Width, CGRectGetMaxY(tmp.frame)+60);
+        sc.contentSize = CGSizeMake(DialogScreenW, CGRectGetMaxY(tmp.frame)+60);
     }
 }
 

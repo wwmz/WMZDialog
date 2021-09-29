@@ -23,7 +23,11 @@
 -(void)action:(UIButton*)sender{
     switch (sender.tag) {
         case 0:{
-            Dialog().wTypeSet(DialogTypeNornal).wStart();
+            Dialog()
+            .wTitleSet(@"标题")
+            .wMessageSet(@"内容")
+            .wTypeSet(DialogTypeNornal)
+            .wStart();
         }
             break;
         case 1:{

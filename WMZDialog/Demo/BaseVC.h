@@ -12,8 +12,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BaseVC : UIViewController
-@property(nonatomic,strong)NSArray *dataArr;
-@property(nonatomic,copy)NSString *name;
+@property (nonatomic, strong) NSArray *dataArr;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, assign) CGFloat btnWidth;
 -(void)action:(UIButton*)sender;
 @end
 
