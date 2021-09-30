@@ -52,7 +52,4 @@
     return _btnWidth;
 }
 
-- (void)dealloc{
-    NSLog(@"vc xiaos");
-}
 @end

@@ -65,6 +65,9 @@
         case 5:{
             Dialog()
             .wTypeSet(DialogTypeCalander)
+            .wEventOKFinishSet(^(id anyID, id otherData) {
+                
+            })
             /// 多选
             .wMultipleSelectionSet(YES)
             /// 关闭多选多块区域 有连续性 

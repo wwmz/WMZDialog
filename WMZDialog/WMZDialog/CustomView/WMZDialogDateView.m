@@ -187,7 +187,6 @@
           
 
           self.headView = [self addTopView];
-          [self.OKBtn addTarget:self action:@selector(calanderOKAction) forControlEvents:UIControlEventTouchUpInside];
 
           UIView *headView = [UIView new];
           
@@ -493,8 +492,8 @@
 
 /// 确定事件
 - (void)confirmAction:(WMZDialogButton*)sender{
+    @DialogWeakify(self)
     if (self.param.wType == DialogTypeDatePicker) {
-        @DialogWeakify(self)
         [[WMZDialogManage.shareInstance currentDialog:self] closeView:^{
           @DialogStrongify(self)
           if (self.param.wEventOKFinish) {
@@ -523,7 +522,64 @@
             self.param.wEventOKFinish(mArr, dateStr);
         }
      }];
-   }
+    }else if(self.param.wType == DialogTypeCalander){
+        NSMutableArray *marrStr = [NSMutableArray new];
+        NSMutableArray *marrModel = [NSMutableArray new];
+        NSMutableArray *rangeArr = [NSMutableArray new];
+        if (self.param.wMultipleSelection&&self.selectArr.count>0) {
+            [self.selectArr enumerateObjectsUsingBlock:^(WMZCalanderModel*  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                [marrStr addObject:obj.dateStr];
+                [marrModel addObject:obj];
+            }];
+        }
+        [[WMZDialogManage.shareInstance currentDialog:self] closeView:^{
+            @DialogStrongify(self)
+            if (self.param.wEventOKFinish) {
+                if (self.param.wMultipleSelection) {
+                    if (self.selectArr.count) {
+                        if (self.selectArr.count == 1) {
+                            WMZCalanderModel *tempModel = self.selectArr.firstObject;
+                            NSString *str = tempModel.dateStr;
+                            self.param.wEventOKFinish(str, marrModel);
+                        }else if (self.selectArr.count >= 2){
+                            if (self.param.wOpenMultiZone) {
+                                [self.pathArr enumerateObjectsUsingBlock:^(NSArray *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                                    if ([obj isKindOfClass:[NSArray class]]) {
+                                        if (obj.count == 1) {
+                                            WMZCalanderModel *tempModel = obj.firstObject;
+                                            NSString *rangeStr =  tempModel.dateStr;
+                                            [rangeArr addObject:rangeStr];
+                                        }else if (obj.count >= 2){
+                                            WMZCalanderModel *firstModel = obj.firstObject;
+                                            WMZCalanderModel *lastModel = obj.lastObject;
+                                            NSString *beganStr = firstModel.dateStr;
+                                            NSString *endStr =  lastModel.dateStr;
+                                            [rangeArr addObject:[NSString stringWithFormat:@"%@ - %@",beganStr,endStr]];
+                                        }
+                                    }
+                                }];
+                                self.param.wEventOKFinish(rangeArr, self.pathArr);
+                            }else{
+                                WMZCalanderModel *firstModel = self.selectArr.firstObject;
+                                WMZCalanderModel *lastModel = self.selectArr.lastObject;
+                                NSString *began = firstModel.dateStr;
+                                NSString *end = lastModel.dateStr;
+                                self.param.wEventOKFinish([NSString stringWithFormat:@"%@ - %@",began,end], marrModel);
+                            }
+                        }
+                    }else{
+                        self.param.wEventOKFinish(@"暂无选中", nil);
+                    }
+                }else{
+                    if (self.selecctWMZCalanderModel) {
+                        self.param.wEventOKFinish(self.selecctWMZCalanderModel.dateStr, self.selecctWMZCalanderModel);
+                    }else{
+                        self.param.wEventOKFinish(@"暂无选中", nil);
+                    }
+                }
+            };
+        }];
+    }
 }
 
 #pragma -mark 日历
@@ -826,67 +882,6 @@
             [self.collectionView reloadData];
         }];
     }
-}
-
-/// 确定
-- (void)calanderOKAction{
-    @DialogWeakify(self)
-    NSMutableArray *marrStr = [NSMutableArray new];
-    NSMutableArray *marrModel = [NSMutableArray new];
-    NSMutableArray *rangeArr = [NSMutableArray new];
-    if (self.param.wMultipleSelection&&self.selectArr.count>0) {
-        [self.selectArr enumerateObjectsUsingBlock:^(WMZCalanderModel*  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            [marrStr addObject:obj.dateStr];
-            [marrModel addObject:obj];
-        }];
-    }
-    [[WMZDialogManage.shareInstance currentDialog:self] closeView:^{
-        @DialogStrongify(self)
-        if (self.param.wEventOKFinish) {
-            if (self.param.wMultipleSelection) {
-                if (self.selectArr.count) {
-                    if (self.selectArr.count == 1) {
-                        WMZCalanderModel *tempModel = self.selectArr.firstObject;
-                        NSString *str = tempModel.dateStr;
-                        self.param.wEventOKFinish(str, marrModel);
-                    }else if (self.selectArr.count >= 2){
-                        if (self.param.wOpenMultiZone) {
-                            [self.pathArr enumerateObjectsUsingBlock:^(NSArray *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                                if ([obj isKindOfClass:[NSArray class]]) {
-                                    if (obj.count == 1) {
-                                        WMZCalanderModel *tempModel = obj.firstObject;
-                                        NSString *rangeStr =  tempModel.dateStr;
-                                        [rangeArr addObject:rangeStr];
-                                    }else if (obj.count >= 2){
-                                        WMZCalanderModel *firstModel = obj.firstObject;
-                                        WMZCalanderModel *lastModel = obj.lastObject;
-                                        NSString *beganStr = firstModel.dateStr;
-                                        NSString *endStr =  lastModel.dateStr;
-                                        [rangeArr addObject:[NSString stringWithFormat:@"%@ - %@",beganStr,endStr]];
-                                    }
-                                }
-                            }];
-                            self.param.wEventOKFinish(rangeArr, self.pathArr);
-                        }else{
-                            WMZCalanderModel *firstModel = self.selectArr.firstObject;
-                            WMZCalanderModel *lastModel = self.selectArr.lastObject;
-                            NSString *began = firstModel.dateStr;
-                            NSString *end = lastModel.dateStr;
-                            self.param.wEventOKFinish([NSString stringWithFormat:@"%@ - %@",began,end], marrModel);
-                        }
-                    }
-                }else{
-                    self.param.wEventOKFinish(@"暂无选中", nil);
-                }
-            }else{
-                if (self.selecctWMZCalanderModel) {
-                    self.param.wEventOKFinish(self.selecctWMZCalanderModel.dateStr, self.selecctWMZCalanderModel);
-                }else{
-                    self.param.wEventOKFinish(@"暂无选中", nil);
-                }
-            }
-        };
-    }];
 }
 
 /// lastValue

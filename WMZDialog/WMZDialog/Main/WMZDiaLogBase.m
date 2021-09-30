@@ -173,7 +173,6 @@
 }
 
 - (void)dealloc{
-    NSLog(@"dialog xiaos");
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 

@@ -137,7 +137,7 @@
         }
         lastView.backgroundColor = self.param.wInputBackGroundColor;
         [self addBottomView:CGRectGetMaxY(lastView.frame) + self.param.wMainOffsetY];
-        [self.OKBtn removeTarget:self action:NSSelectorFromString(@"OKAction:") forControlEvents:UIControlEventTouchUpInside];
+        [self.OKBtn removeTarget:self action:NSSelectorFromString(@"confirmAction:") forControlEvents:UIControlEventTouchUpInside];
         [self.OKBtn addTarget:self action:@selector(writeOKAction:) forControlEvents:UIControlEventTouchUpInside];
         if (self.param.wCustomTextView) {
             self.param.wCustomTextView(self.writeView);

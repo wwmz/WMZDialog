@@ -79,7 +79,6 @@ DialogDarkColorKey const DialogDarkC4 = @"WMZDialogDarkC4";
     param.wTag = 12345;
     param.wListScrollCount = left ? 5 : 8;
     param.wSeparatorStyle = UITableViewCellSeparatorStyleNone;
-    param.wDeviceDidChange = NO;
     param.wAngleSize = CGSizeMake(DialogRealW(24), DialogRealW(16));
     param.wOpenMultiZone = YES;
     param.wXMLPathName = [[NSBundle bundleWithPath:[[NSBundle bundleForClass:[WMZDialogParam class]] pathForResource:@"WMZDialog" ofType:@"bundle"]] pathForResource:@"province_data" ofType:@"xml"];

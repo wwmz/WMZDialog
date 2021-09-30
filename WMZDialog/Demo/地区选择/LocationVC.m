@@ -43,6 +43,9 @@
 //自定义传入数据
 - (void)customData{
      Dialog()
+        .wEventOKFinishSet(^(id anyID, id otherData) {
+            NSLog(@"选中 %@ %@",anyID,otherData);
+        })
     //三列
     .wLocationTypeSet(3)
     .wDataSet([self customTree])

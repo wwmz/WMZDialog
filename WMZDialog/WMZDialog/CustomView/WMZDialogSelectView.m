@@ -38,8 +38,6 @@
             if (self.param.wAddBottomView ||
                self.param.wMultipleSelection) {
                [self addBottomView:CGRectGetMaxY(self.tableView.frame)];
-               [self.OKBtn removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
-               [self.OKBtn addTarget:self action:@selector(selectAction:) forControlEvents:UIControlEventTouchUpInside];
             }
         }
             break;
@@ -53,8 +51,6 @@
             if (!self.param.wBottomLineColor) self.param.wBottomLineColor = self.param.wLineColor;
             if (self.param.wMultipleSelection) {
                 [self addTopView];
-                [self.OKBtn removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
-                [self.OKBtn addTarget:self action:@selector(selectAction:) forControlEvents:UIControlEventTouchUpInside];
             }else{
                 if (DialogStrIsNotEmpty(self.param.wTitle)) {
                     [self addSubview:self.titleLabel];
@@ -318,7 +314,6 @@
             }
             
             [self addTopView];
-            [self.OKBtn addTarget:self action:@selector(pickOKAction:) forControlEvents:UIControlEventTouchUpInside];
             self.pickView.frame =  CGRectMake(0, self.headView?CGRectGetMaxY(self.headView.frame):0, self.param.wWidth, self.param.wHeight);
             [self addSubview:self.pickView];
             
@@ -372,7 +367,6 @@
             }else{
                 self.param.wPickRepeat = NO;
                 self.headView = [self addTopView];
-                [self.OKBtn addTarget:self action:@selector(locationPickOKAction:) forControlEvents:UIControlEventTouchUpInside];
                 self.pickView.frame =  CGRectMake(0, self.headView?CGRectGetMaxY(self.headView.frame):0, self.param.wWidth, self.param.wHeight);
                 [self addSubview:self.pickView];
             }
@@ -552,70 +546,64 @@
     return YES;
 }
 
-/// Sheet/select点击事件
-- (void)selectAction:(WMZDialogButton*)sender{
+/// 确定事件
+- (void)confirmAction:(WMZDialogButton*)sender{
     @DialogWeakify(self)
-    [[[WMZDialogManage shareInstance] currentDialog:self] closeView:^{
-        @DialogStrongify(self)
-        if (self.param.wEventOKFinish)
-            self.param.wEventOKFinish(self.selectArr, self.pathArr);
-    }];
-}
-
-/// pickView确定方法
-- (void)pickOKAction:(WMZDialogButton*)btn{
-    @DialogWeakify(self)
-    [[WMZDialogManage.shareInstance currentDialog:self] closeView:^{
-        @DialogStrongify(self)
-        if (self.param.wEventOKFinish) {
-            if (self.tree) {
-                NSArray *arr = [self getTreeSelectDataArr:YES];
-                NSMutableArray *nameArr = [NSMutableArray new];
+    if (self.param.wType == DialogTypeLocation) {
+        [[WMZDialogManage.shareInstance currentDialog:self] closeView:^{
+            @DialogStrongify(self)
+            if (self.param.wEventOKFinish) {
+                NSArray *arr = [self getTreeSelectDataArr:(self.param.wChainType == ChainTableView)?NO:YES];
+                NSMutableString *string = [NSMutableString stringWithString:@""];
                 for (WMZDialogTree *tree in arr) {
-                    [nameArr addObject:tree.name];
-                }
-                self.param.wEventOKFinish(arr, nameArr);
-            }else{
-                NSMutableArray *mStr = [NSMutableArray new];
-                if (!self.nest) {
-                    if (DialogIsArray(self.param.wData)) {
-                        for (int i = 0; i<[(NSArray*)self.param.wData count]; i++) {
-                            NSArray *arr = [(NSArray*)self.param.wData objectAtIndex:i];
-                            if (DialogIsArray(arr)) {
-                                NSString *str = arr [self.param.wPickRepeat?[self.pickView selectedRowInComponent:i]%arr.count:[self.pickView selectedRowInComponent:i]];
-                                [mStr addObject:str];
-                            }
-                        }
-                        self.param.wEventOKFinish(mStr, nil);
+                    if (!string.length) {
+                        [string appendString:tree.name];
+                    }else{
+                        [string appendFormat:@"%@", [NSString stringWithFormat:@"%@%@",self.param.wSeparator,tree.name]];
                     }
+                }
+                self.param.wEventOKFinish(arr, string);
+            }
+        }];
+    }else if (self.param.wType == DialogTypePickSelect){
+        [[WMZDialogManage.shareInstance currentDialog:self] closeView:^{
+            @DialogStrongify(self)
+            if (self.param.wEventOKFinish) {
+                if (self.tree) {
+                    NSArray *arr = [self getTreeSelectDataArr:YES];
+                    NSMutableArray *nameArr = [NSMutableArray new];
+                    for (WMZDialogTree *tree in arr) {
+                        [nameArr addObject:tree.name];
+                    }
+                    self.param.wEventOKFinish(arr, nameArr);
                 }else{
-                    NSInteger index = self.param.wPickRepeat?[self.pickView selectedRowInComponent:0]%[(NSArray*)self.param.wData count]:[self.pickView selectedRowInComponent:0];
-                    NSString *str = [(NSArray*)self.param.wData objectAtIndex:index];
-                    self.param.wEventOKFinish(str, nil);
+                    NSMutableArray *mStr = [NSMutableArray new];
+                    if (!self.nest) {
+                        if (DialogIsArray(self.param.wData)) {
+                            for (int i = 0; i<[(NSArray*)self.param.wData count]; i++) {
+                                NSArray *arr = [(NSArray*)self.param.wData objectAtIndex:i];
+                                if (DialogIsArray(arr)) {
+                                    NSString *str = arr [self.param.wPickRepeat?[self.pickView selectedRowInComponent:i]%arr.count:[self.pickView selectedRowInComponent:i]];
+                                    [mStr addObject:str];
+                                }
+                            }
+                            self.param.wEventOKFinish(mStr, nil);
+                        }
+                    }else{
+                        NSInteger index = self.param.wPickRepeat?[self.pickView selectedRowInComponent:0]%[(NSArray*)self.param.wData count]:[self.pickView selectedRowInComponent:0];
+                        NSString *str = [(NSArray*)self.param.wData objectAtIndex:index];
+                        self.param.wEventOKFinish(str, nil);
+                    }
                 }
             }
-        }
-    }];
-}
-
-/// LOCATION确定方法
-- (void)locationPickOKAction:(UIButton*)btn{
-    @DialogWeakify(self)
-    [[WMZDialogManage.shareInstance currentDialog:self] closeView:^{
-        @DialogStrongify(self)
-        if (self.param.wEventOKFinish) {
-            NSArray *arr = [self getTreeSelectDataArr:(self.param.wChainType == ChainTableView)?NO:YES];
-            NSMutableString *string = [NSMutableString stringWithString:@""];
-            for (WMZDialogTree *tree in arr) {
-                if (!string.length) {
-                    [string appendString:tree.name];
-                }else{
-                    [string appendFormat:@"%@", [NSString stringWithFormat:@"%@%@",self.param.wSeparator,tree.name]];
-                }
-            }
-            self.param.wEventOKFinish(arr, string);
-        }
-    }];
+        }];
+    }else if (self.param.wType == DialogTypeSheet || self.param.wType == DialogTypeSelect){
+        [[[WMZDialogManage shareInstance] currentDialog:self] closeView:^{
+            @DialogStrongify(self)
+            if (self.param.wEventOKFinish)
+                self.param.wEventOKFinish(self.selectArr, self.pathArr);
+        }];
+    }
 }
 
 /// 处理嵌套问题
