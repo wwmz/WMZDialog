@@ -1,4 +1,4 @@
-# WMZDailog - 功能最多样式最多的弹窗，支持普通/微信底部/提示/加载框/日期/地区/日历/选择/编辑/分享/菜单/吐司/自定义弹窗等,支持多种动画,链式编程调用，所有属性均可定制（pod 更新至 1.4.0）
+# WMZDailog - 功能最多样式最多的弹窗，支持普通/微信底部/提示/加载框/日期/地区/日历/选择/编辑/分享/菜单/吐司/自定义弹窗等,支持多种动画,链式编程调用，所有属性均可定制（pod 更新至 1.4.2）
 
 特性
 ==============
@@ -303,12 +303,14 @@ typedef enum : NSUInteger{
 ### 常见问题（开始收录）
 
      1 如何改变位置？
+     (1) version < 1.4.2
     .wCustomMainViewSet(^(UIView *mainView) {
         CGRect rect = mainView.frame;
         rect.origin.x = 30;
         rect.origin.y = 100;
         mainView.frame = rect;
     })
+     (2) version > 1.4.2 (wPoint)
     2 默认是开启横竖屏监听的如果有问题可以把wDeviceDidChange设为NO
     3 多个弹窗优先级可以设置wLevel(同个父级有效)
     4 默认弹窗wStart是在window层 如果要设置不同层可以用wStartView(传入父view)
@@ -323,7 +325,7 @@ typedef enum : NSUInteger{
 
 ### CocoaPods  
 1. 将 cocoapods 更新至最新版本.
-2. 在 Podfile 中添加    pod 'WMZDialog' , '~>1.4.0'
+2. 在 Podfile 中添加    pod 'WMZDialog' , '~>1.4.2'
 3. 执行 `pod install` 或 `pod update`。
 4. 导入 #import "WMZDialog.h"。
 
@@ -386,3 +388,4 @@ WMZDialog 使用 MIT 许可证，详情见 [LICENSE](LICENSE) 文件。
 (2) writeType新增 wRegular属性  正则校验规则 default nil  例如 可传入 @{@"reguler":@"^1+[3578]+\\d{9}",@"reguletTip":@"请输入正确的手机号"}
 - 20210514 cocopod 更新至 1.3.2 修改wDidChange和wLevel默认值
 - 20210929 cocopod 更新至 1.4.0 新增暗黑模式 适配ios15 底层修改 
+- 20211018 cocopod 更新至 1.4.2 新增wPoint自定义位置

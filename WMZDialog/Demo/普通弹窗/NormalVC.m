@@ -17,7 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.dataArr = @[@"普通弹窗",@"取消按钮",@"文字过多换行"];
+    self.dataArr = @[@"普通弹窗",@"取消按钮",@"文字过多换行",@"自定义位置"];
 }
 
 -(void)action:(UIButton*)sender{
@@ -63,6 +63,17 @@
             .wOKColorSet([UIColor orangeColor])
             .wCancelColorSet([UIColor redColor])
             .wStartView(self.view);
+        }
+            break;
+            
+        case 3:{
+            Dialog()
+            .wTitleSet(@"标题")
+            .wMessageSet(@"内容")
+            /// 自定义位置
+            .wPointSet(CGPointMake(30, DialogStatusH))
+            .wTypeSet(DialogTypeNornal)
+            .wStart();
         }
             break;
             

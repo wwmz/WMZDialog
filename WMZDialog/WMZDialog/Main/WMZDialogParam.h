@@ -128,6 +128,8 @@ FOUNDATION_EXPORT DialogDarkColorKey const DialogDarkC3;
 @property (nonatomic, assign) BOOL wFillBottomLine;
 /// 响应库内的自动关闭 default YES 如果设为NO则需要自己调用手动关闭的类方法 closeWithshowView
 @property (nonatomic, assign) BOOL wAutoClose;
+/// 自定义位置 default使用系统
+@property (nonatomic, assign) CGPoint wPoint;
 
 #pragma -mark Toast/Auto
 /// 自动消失时间

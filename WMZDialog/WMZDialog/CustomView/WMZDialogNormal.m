@@ -47,6 +47,13 @@
         self.closeBtn.tag = 666;
         self.closeBtn.layer.borderWidth = DialogK1px;
         self.closeBtn.layer.borderColor = param.wCancelColor.CGColor;
+        
+        if (self.param.wCustomTitleLa) self.param.wCustomTitleLa(self.titleLabel);
+        if (self.param.wCustomMessageLa) self.param.wCustomMessageLa(self.textLabel);
+        if (self.param.wCustomOKBtn) self.param.wCustomOKBtn(self.OKBtn);
+        if (self.param.wCustomCancelBtn) self.param.wCustomCancelBtn(self.cancelBtn);
+        if (self.param.wCustomCloseBtn) self.param.wCustomCloseBtn(self.closeBtn);
+        if (self.param.wCustomImageView) self.param.wCustomImageView(self.iconIV);
     }
     [super setParam:param];
 }

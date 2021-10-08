@@ -134,7 +134,6 @@
             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(advertTapAction:)];
             [self.iconIV addGestureRecognizer:tap];
             [self addSubview:self.iconIV];
-            if (self.param.wCustomImageView) self.param.wCustomImageView(self.iconIV);
             self.closeBtn.frame = CGRectMake((self.param.wWidth-self.param.wMainBtnHeight) / 2, CGRectGetMaxY(self.iconIV.frame)+self.param.wMainOffsetY, self.param.wMainBtnHeight, self.param.wMainBtnHeight);
             [self.closeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             self.closeBtn.layer.cornerRadius = self.param.wMainBtnHeight / 2;

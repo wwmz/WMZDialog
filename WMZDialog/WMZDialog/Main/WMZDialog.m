@@ -34,6 +34,7 @@ WMZDialogSetFuncImplementation(WMZDialog, BOOL,                         wHideExi
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                            wShowClose)
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                       wFillBottomLine)
 WMZDialogSetFuncImplementation(WMZDialog, DiaPopInView,                  wTapViewType)
+WMZDialogSetFuncImplementation(WMZDialog, CGPoint,                             wPoint)
 WMZDialogSetFuncImplementation(WMZDialog, DialogLevel,                         wLevel)
 WMZDialogSetFuncImplementation(WMZDialog, DialogToastPosition,         wToastPosition)
 WMZDialogSetFuncImplementation(WMZDialog, NSInteger,                 wListScrollCount)
@@ -339,9 +340,13 @@ WMZDialog * Dialog(void){
             if ([self.mainView respondsToSelector:@selector(mz_changeValue:)])
                 [self.mainView mz_changeValue:self.param.wData];
         }
-        
-        if (self.param.wCustomMainView) self.param.wCustomMainView(self.mainView);
     }
+    if (!CGPointEqualToPoint(self.param.wPoint, CGPointMake(-999, -999))) {
+        CGRect rect = self.mainView.frame;
+        rect.origin = self.param.wPoint;
+        self.mainView.frame = rect;
+    }
+    if (self.param.wCustomMainView) self.param.wCustomMainView(self.mainView);
 }
 
 /// 开始

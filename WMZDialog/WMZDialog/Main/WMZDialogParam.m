@@ -87,6 +87,7 @@ DialogDarkColorKey const DialogDarkC4 = @"WMZDialogDarkC4";
     param.wAutoClose = YES;
     param.wLevel = DialogLevelHigh;
     param.wLimitAlpha = 1;
+    param.wPoint = CGPointMake(-999, -999);
     [self setDefaultColorPropertiess:param];
 }
 

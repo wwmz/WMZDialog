@@ -15,7 +15,6 @@
 @synthesize pickView = _pickView;
 
 - (void)setParam:(WMZDialogParam *)param{
-//    [super setParam:param];
     if (DialogIsArray(param.wListDefaultValue)) {
         self.tempArr = [NSMutableArray arrayWithArray:param.wListDefaultValue];
         if (self.tempArr.count>1 &&
@@ -33,6 +32,10 @@
             self.tableView.scrollEnabled = NO;
         }
     }
+    
+    
+    if (self.param.wCustomTableView) self.param.wCustomTableView(self.tableView);
+    
     [super setParam:param];
 }
 
