@@ -1,5 +1,6 @@
 # WMZDailog - 功能最多样式最多的弹窗，支持普通/微信底部/提示/加载框/日期/地区/日历/选择/编辑/分享/菜单/吐司/自定义弹窗等,支持多种动画,链式编程调用，所有属性均可定制
-[![CocoaPods Compatible](https://img.shields.io/cocoapods/v/WMZDialog.svg)]
+(https://img.shields.io/cocoapods/v/WMZDialog.svg)]
+[![CocoaPods Compatible]】
 特性
 ==============
 - 链式语法 结构优雅
@@ -325,7 +326,7 @@ typedef enum : NSUInteger{
 
 ### CocoaPods  
 1. 将 cocoapods 更新至最新版本.
-2. 在 Podfile 中添加    pod 'WMZDialog' , '~>1.4.2'
+2. 在 Podfile 中添加    pod 'WMZDialog'
 3. 执行 `pod install` 或 `pod update`。
 4. 导入 #import "WMZDialog.h"。
 
