@@ -40,14 +40,14 @@
             CGFloat scale = 0.8;
             if (DialogStrIsNotEmpty(self.param.wImageName)) {
                 self.iconIV.image = [UIImage imageNamed:self.param.wImageName];
-                self.iconIV.frame = CGRectMake((self.param.wWidth - self.param.wImageSize.width * scale) / 2, self.param.wMainOffsetY, self.param.wImageSize.width * scale , self.param.wImageSize.height * scale);
+                self.iconIV.frame = CGRectMake((self.param.wAutoMaxWidth - self.param.wImageSize.width * scale) / 2, self.param.wMainOffsetY, self.param.wImageSize.width * scale , self.param.wImageSize.height * scale);
                 self.iconIV.layer.masksToBounds = YES;
                 self.iconIV.layer.cornerRadius = self.param.wImageSize.width * scale / 2;
                 [self addSubview:self.iconIV];
             }
             [self addSubview:self.textLabel];
-            CGSize size = [WMZDialogUntils sizeForTextView:CGSizeMake(self.param.wWidth - self.param.wMainOffsetX * 2, CGFLOAT_MAX) text:self.textLabel.text font:self.textLabel.font];
-            if (DialogStrIsNotEmpty(self.param.wImageName)) size.width = self.param.wWidth - self.param.wMainOffsetX * 2;
+            CGSize size = [WMZDialogUntils sizeForTextView:CGSizeMake(self.param.wAutoMaxWidth - self.param.wMainOffsetX * 2, CGFLOAT_MAX) text:self.textLabel.text font:self.textLabel.font];
+            if (DialogStrIsNotEmpty(self.param.wImageName)) size.width = self.param.wAutoMaxWidth - self.param.wMainOffsetX * 2;
             self.textLabel.frame =  CGRectMake(self.param.wMainOffsetX,(DialogStrIsNotEmpty(self.param.wImageName)? CGRectGetMaxY(self.iconIV.frame):0) + (self.textLabel.text.length?self.param.wMainOffsetY : 0), size.width, size.height);
         }
             break;

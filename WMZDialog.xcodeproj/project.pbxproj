@@ -44,7 +44,6 @@
 		F32F6BFE253FF2E2002DE0C8 /* SwiftVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32F6BFD253FF2E2002DE0C8 /* SwiftVC.swift */; };
 		F335AAE523B09508001BBC87 /* WMZDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = F335AAE023B09508001BBC87 /* WMZDialog.m */; };
 		F335AAE623B09508001BBC87 /* WMZDiaLogBase.m in Sources */ = {isa = PBXBuildFile; fileRef = F335AAE423B09508001BBC87 /* WMZDiaLogBase.m */; };
-		F34036BE26311301008B0EC9 /* ToastVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F34036BD26311301008B0EC9 /* ToastVC.m */; };
 		F36B038026A86660002901DB /* WMZDialogSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = F36B037F26A86660002901DB /* WMZDialogSelectView.m */; };
 		F384F62C270414DD007ECEC8 /* DarkVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F384F62B270414DD007ECEC8 /* DarkVC.m */; };
 		F395FE1F232ABC020020CFB5 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = F395FE01232ABC010020CFB5 /* NSLayoutConstraint+MASDebugAdditions.m */; };
@@ -173,8 +172,6 @@
 		F335AAE223B09508001BBC87 /* WMZDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMZDialog.h; sourceTree = "<group>"; };
 		F335AAE323B09508001BBC87 /* WMZDialogMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMZDialogMacro.h; sourceTree = "<group>"; };
 		F335AAE423B09508001BBC87 /* WMZDiaLogBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMZDiaLogBase.m; sourceTree = "<group>"; };
-		F34036BC26311301008B0EC9 /* ToastVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ToastVC.h; sourceTree = "<group>"; };
-		F34036BD26311301008B0EC9 /* ToastVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ToastVC.m; sourceTree = "<group>"; };
 		F36B037E26A86660002901DB /* WMZDialogSelectView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMZDialogSelectView.h; sourceTree = "<group>"; };
 		F36B037F26A86660002901DB /* WMZDialogSelectView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMZDialogSelectView.m; sourceTree = "<group>"; };
 		F36B038126A86DB1002901DB /* WMZCustomPrototol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMZCustomPrototol.h; sourceTree = "<group>"; };
@@ -280,7 +277,6 @@
 				F384F629270414D1007ECEC8 /* 暗黑模式 */,
 				F3B1456B2702C3B900D33B82 /* 新自定义弹窗 */,
 				F3D42909264CFC7500CDE2BF /* 自动消失弹窗 */,
-				F34036BB263112ED008B0EC9 /* 吐司弹窗 */,
 				F39B73E72624322B0000B91F /* 优先级多个弹窗 */,
 				F32F6BF8253FF2B3002DE0C8 /* Swift调用 */,
 				F3120DEC2440735F00CF7CB7 /* iOS13Present弹窗 */,
@@ -587,15 +583,6 @@
 				F3B145592702C02100D33B82 /* WMZDialogParam.m */,
 			);
 			path = Main;
-			sourceTree = "<group>";
-		};
-		F34036BB263112ED008B0EC9 /* 吐司弹窗 */ = {
-			isa = PBXGroup;
-			children = (
-				F34036BC26311301008B0EC9 /* ToastVC.h */,
-				F34036BD26311301008B0EC9 /* ToastVC.m */,
-			);
-			path = "吐司弹窗";
 			sourceTree = "<group>";
 		};
 		F384F629270414D1007ECEC8 /* 暗黑模式 */ = {
@@ -926,7 +913,6 @@
 				F3D5CE8A26A2C56800CF7CDF /* WMZDialogNormal.m in Sources */,
 				F3120DAB2440581C00CF7CB7 /* TableViewPopDemo.m in Sources */,
 				F395FE1F232ABC020020CFB5 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
-				F34036BE26311301008B0EC9 /* ToastVC.m in Sources */,
 				F395FE22232ABC020020CFB5 /* MASConstraintMaker.m in Sources */,
 				F384F62C270414DD007ECEC8 /* DarkVC.m in Sources */,
 				F395FE23232ABC020020CFB5 /* MASLayoutConstraint.m in Sources */,

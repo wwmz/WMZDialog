@@ -214,6 +214,9 @@ DialogDarkColorKey const DialogDarkC4 = @"WMZDialogDarkC4";
                     self.wWidth = DialogRealW(400);
                 }
             }
+            if (self.wType == DialogTypeAuto && !self.wAutoMaxWidth)
+                self.wAutoMaxWidth = self.wWidth;
+            
             self.wShadowShow = NO;
             if (CGColorEqualToColor(self.wMainBackColor.CGColor, DialogColor(0xFFFFFF).CGColor))
                 self.wMainBackColor = DialogColor(0x333333);

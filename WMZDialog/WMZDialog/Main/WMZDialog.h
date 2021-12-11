@@ -121,6 +121,8 @@ WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGFloat,           
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wShadowCanTap)
 /// 遮罩层是否显示
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wShadowShow)
+/// v1.4.3显示主视图的阴影  default NO
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wMainShadowShow)
 /// 毛玻璃是否显示 优先级大于遮罩层
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wEffectShow)
 /// 多选
@@ -148,12 +150,13 @@ WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,              
 /// 自定义位置 default使用系统
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGPoint,                  wPoint)
 
-/*=========================================disappear=======================================================================*/
+/*=========================================aoto=======================================================================*/
 /// 自动消失时间
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGFloat,                  wDisappelSecond)
+/// v1.4.3 最大宽度 默认等于wWidth
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGFloat,                  wAutoMaxWidth)
 
-
-/*=========================================disappear=======================================================================*/
+/*=========================================aoto=======================================================================*/
 /// toastPosition
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, DialogToastPosition,      wToastPosition)
 /*=========================================Pay=======================================================================*/
@@ -230,7 +233,7 @@ WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, UIColor*,          
 
 
 /*=========================================menu=======================================================================*/
-/// tableview的颜色
+/// tableview的颜色 有tableViewCell的时候取数组的第一个 可改变背景颜色
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, NSArray* ,                wTableViewColor)
 /// cell文本居中样式
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, NSTextAlignment,          wTextAlignment)
@@ -357,6 +360,8 @@ WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogCustomTextVie
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogCustomImageView,wCustomImageView)
 /// 自定义tableview
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogCustomTableView,wCustomTableView)
+/// v1.4.3 自定义修改主视图阴影 非底部阴影
+WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogCustomMainShadomLayer,wCustomMainShadom)
 /*=========================================CustomView================================================*/
 @end
 

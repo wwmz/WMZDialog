@@ -33,6 +33,7 @@ WMZDialogSetFuncImplementation(WMZDialog, BOOL,                        wOpenMult
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                         wHideExistTop)
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                            wShowClose)
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                       wFillBottomLine)
+WMZDialogSetFuncImplementation(WMZDialog, BOOL,                       wMainShadowShow)
 WMZDialogSetFuncImplementation(WMZDialog, DiaPopInView,                  wTapViewType)
 WMZDialogSetFuncImplementation(WMZDialog, CGPoint,                             wPoint)
 WMZDialogSetFuncImplementation(WMZDialog, DialogLevel,                         wLevel)
@@ -75,6 +76,7 @@ WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                       wMessag
 WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                       wShadowAlpha)
 WMZDialogSetFuncImplementation(WMZDialog, NSInteger,                             wTag)
 WMZDialogSetFuncImplementation(WMZDialog, NSInteger,                          wPayNum)
+WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                      wAutoMaxWidth)
 WMZDialogSetFuncImplementation(WMZDialog, NSString*,             wDefaultSelectPayStr)
 WMZDialogSetFuncImplementation(WMZDialog, UIColor*,                    wMainBackColor)
 WMZDialogSetFuncImplementation(WMZDialog, UIColor* ,            wInputBackGroundColor)
@@ -142,6 +144,7 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomCloseBtn,       wCustomClo
 WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTextView,       wCustomTextView)
 WMZDialogSetFuncImplementation(WMZDialog, DialogCustomImageView,     wCustomImageView)
 WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTableView)
+WMZDialogSetFuncImplementation(WMZDialog, DialogCustomMainShadomLayer,wCustomMainShadom)
 
 WMZDialog * Dialog(void){
     return  [WMZDialog  new];
@@ -341,12 +344,50 @@ WMZDialog * Dialog(void){
                 [self.mainView mz_changeValue:self.param.wData];
         }
     }
+    
+    if (self.param.wMainShadowShow && self.param.wType != DialogTypeCardPresent) {
+        CGRect rect = self.mainView.frame;
+        UIView *shadowView = [[UIView alloc]initWithFrame:rect];
+        [self addSubview:shadowView];
+        shadowView.layer.shadowColor = [UIColor blackColor].CGColor;
+        shadowView.layer.shadowOffset = CGSizeMake(5, 5);
+        shadowView.layer.shadowOpacity = 0.5;
+        shadowView.layer.shadowRadius = 9.0;
+        shadowView.layer.cornerRadius = 9.0;
+        shadowView.clipsToBounds = NO;
+        
+        if (self.param.wCustomMainShadom)
+            self.param.wCustomMainShadom(shadowView.layer);
+        
+        [shadowView addSubview:self.mainView];
+        self.mainView.frame = shadowView.bounds;
+    }
+    
     if (!CGPointEqualToPoint(self.param.wPoint, CGPointMake(-999, -999))) {
         CGRect rect = self.mainView.frame;
         rect.origin = self.param.wPoint;
         self.mainView.frame = rect;
     }
+    if (self.param.wCustomTitleLa && [self.mainView valueForKey:@"titleLabel"])
+        self.param.wCustomTitleLa([self.mainView valueForKey:@"titleLabel"]);
+    if (self.param.wCustomMessageLa && [self.mainView valueForKey:@"textLabel"])
+        self.param.wCustomMessageLa([self.mainView valueForKey:@"textLabel"]);
+    if (self.param.wCustomOKBtn && [self.mainView valueForKey:@"OKBtn"])
+        self.param.wCustomOKBtn([self.mainView valueForKey:@"OKBtn"]);
+    if (self.param.wCustomCancelBtn && [self.mainView valueForKey:@"cancelBtn"])
+        self.param.wCustomCancelBtn([self.mainView valueForKey:@"cancelBtn"]);
+    if (self.param.wCustomCloseBtn && [self.mainView valueForKey:@"closeBtn"])
+        self.param.wCustomCloseBtn([self.mainView valueForKey:@"closeBtn"]);
+    if (self.param.wCustomImageView && [self.mainView valueForKey:@"iconIV"])
+        self.param.wCustomImageView([self.mainView valueForKey:@"iconIV"]);
+    if (self.param.wCustomTableView && [self.mainView valueForKey:@"tableView"]){
+        WMZDialogTableView *tableView = [self.mainView valueForKey:@"tableView"];
+        [tableView reloadData];
+        [tableView layoutIfNeeded];
+        self.param.wCustomTableView(tableView);
+    }
     if (self.param.wCustomMainView) self.param.wCustomMainView(self.mainView);
+
 }
 
 /// 开始
@@ -533,7 +574,7 @@ WMZDialog * Dialog(void){
             view.frame = CGRectMake(frame.origin.x, frame.size.height - DialogSafeBottomHeight, frame.size.width, DialogSafeBottomHeight);
             [self.mainView addSubview:view];
         }
-        self.mainView.frame =frame;
+        self.mainView.frame = frame;
         center = CGPointMake(self.center.x, self.mainView.center.y);
     }else{
         center = self.center;
@@ -575,19 +616,6 @@ WMZDialog * Dialog(void){
             }
         }
     });
-}
-
-- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
-    [super traitCollectionDidChange:previousTraitCollection];
-    // trait发生了改变
-    if (@available(iOS 13.0, *)) {
-        if ([self.traitCollection hasDifferentColorAppearanceComparedToTraitCollection:previousTraitCollection]) {
-            // 执行操作
-            
-        }
-    } else {
-        
-    }
 }
 
 @end

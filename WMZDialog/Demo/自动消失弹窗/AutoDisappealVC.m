@@ -16,7 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-     self.dataArr = @[@"文字",@"图文",@"图"];
+     self.dataArr = @[@"文字",@"图文",@"图",@"改变最大宽度"];
 }
 
 -(void)action:(UIButton*)sender{
@@ -49,6 +49,14 @@
             .wWidthSet(100)
             .wMessageSet(@"")
             .wImageNameSet(@"down_tyx")
+            .wStart();
+        }
+            break;
+        case 3:{
+            Dialog().wTypeSet(DialogTypeAuto)
+            .wAutoMaxWidthSet(DialogScreenW - 60)
+            .wWidthSet(100)
+            .wMessageSet(@"DialogTypeAutoDialogTypeAutoDialogTypeAutoDialogTypeAutoDialogTypeAutoDialogTypeAutoDialogTypeAutoDialogTypeAutoDialogTypeAutoDialogTypeAutoDialogTypeAutoDialogTypeAutoDialogTypeAutoDialogTypeAutoDialogTypeAutoDialogTypeAutoDialogTypeAutoDialogTypeAutoDialogTypeAutoDialogTypeAutoDialogTypeAutoDialogTypeAutoDialogTypeAutoDialogTypeAutoDialogTypeAuto")
             .wStart();
         }
             break;

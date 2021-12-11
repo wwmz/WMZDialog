@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 转化为树形数据
 @property (nonatomic, strong) WMZDialogTree *tree;
 /// 嵌套
-@property (nonatomic, assign) BOOL nest;
+@property (nonatomic, assign, getter=isNest) BOOL nest;
 /// 树形数据深度
 @property (nonatomic, assign) NSInteger depth;
 

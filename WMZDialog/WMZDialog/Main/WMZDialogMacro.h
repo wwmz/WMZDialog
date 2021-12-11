@@ -296,4 +296,5 @@ typedef void (^DialogCustomImageView)(UIImageView * imageView);
 
 typedef void (^DialogCustomTableView)(UITableView * tableView);
 
+typedef void (^DialogCustomMainShadomLayer)(CALayer *shadom);
 #endif /* WMZDialogMacro_h */

@@ -15,6 +15,7 @@
 @synthesize pickView = _pickView;
 
 - (void)setParam:(WMZDialogParam *)param{
+
     if (DialogIsArray(param.wListDefaultValue)) {
         self.tempArr = [NSMutableArray arrayWithArray:param.wListDefaultValue];
         if (self.tempArr.count>1 &&
@@ -25,17 +26,10 @@
     }
     self.tableView.wOpenScrollClose = param.wOpenScrollClose;
     self.tableView.wCardPresent = (param.wType == DialogTypeCardPresent);
-    if (DialogIsArray(param.wData)) {
-        if ([(NSArray*)param.wData count]>param.wListScrollCount) {
-            self.tableView.scrollEnabled = YES;
-        }else{
-            self.tableView.scrollEnabled = NO;
-        }
-    }
     
-    
-    if (self.param.wCustomTableView) self.param.wCustomTableView(self.tableView);
-    
+    if (DialogIsArray(param.wData))
+        self.tableView.scrollEnabled = [(NSArray*)param.wData count] > param.wListScrollCount;
+                                        
     [super setParam:param];
 }
 
@@ -91,7 +85,10 @@
             cell = [DialogCell getTextCell];
         }
     }
-    cell.contentView.backgroundColor = DialogDarkOpenColor(DialogColor(0xffffff),        WMZDialogManage.shareInstance.darkColorInfo[DialogDarkMainColor],self.param.wOpenDark);
+    UIColor *normalColor = DialogColor(0xffffff);
+    if (DialogArrayNotEmpty(self.param.wTableViewColor))
+        normalColor = self.param.wTableViewColor.firstObject;
+    cell.contentView.backgroundColor = DialogDarkOpenColor(normalColor,        WMZDialogManage.shareInstance.darkColorInfo[DialogDarkMainColor],self.param.wOpenDark);
     cell.textLa.textAlignment = self.param.wTextAlignment;
     cell.textLa.font = [UIFont systemFontOfSize:self.param.wMessageFont];
     cell.selectionStyle = UITableViewCellSelectionStyleDefault;
@@ -243,45 +240,60 @@
 
 # pragma  mark pickView 代理
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
-    return self.tree?self.depth:
-                     (!self.nest?[(NSArray*)self.param.wData count]:1);
+    NSInteger num = 1;
+    if (self.tree) {
+        num = self.depth;
+    }else{
+        if (self.nest)
+            num = [(NSArray*)self.param.wData count];
+    }
+    return num;
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
+    NSInteger count = 0;
     if (self.tree) {
-        return [(NSArray*)[self getMyDataArr:component+100 withType:0] count]*(self.param.wPickRepeat?pickViewCount:1);
-    }
-    if (!self.nest) {
-        return [(NSArray*)self.param.wData[component] count]*(self.param.wPickRepeat?pickViewCount:1);
+        count = [(NSArray*)[self getMyDataArr:component+100 withType:0] count] * (self.param.wPickRepeat?pickViewCount:1);
     }else{
-        return [(NSArray*)self.param.wData count]*(self.param.wPickRepeat?pickViewCount:1);
+        if (!self.nest) {
+            count = [(NSArray*)self.param.wData count] * (self.param.wPickRepeat ? pickViewCount : 1 );
+        }else{
+            count = [(NSArray*)self.param.wData[component] count] * (self.param.wPickRepeat ? pickViewCount : 1);
+        }
     }
+    return count;
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
-    NSArray *arr = self.tree?
-                   [self getMyDataArr:component+100 withType:0]:
-                   (!self.nest?self.param.wData[component]:self.param.wData);
-    if (!DialogIsArray(arr)) return @"";
-    id data = arr[row%arr.count];
+    NSArray *arr = nil;
+    if (self.tree) {
+        arr = [self getMyDataArr:component+100 withType:0];
+    }else{
+        arr = self.nest?self.param.wData[component]:self.param.wData;
+    }
+    if (!DialogArrayNotEmpty(arr)) return @"";
+    id data = arr[row % arr.count];
+    NSString *name = @"";
     if ([data isKindOfClass:[WMZDialogTree class]]) {
         WMZDialogTree *selectDic = (WMZDialogTree*)data;
-        return selectDic.name;
-    }else if ([data isKindOfClass:[NSDictionary class]]) {
-        return data[@"name"];
-    }else if ([data isKindOfClass:[NSString class]]) {
-        return data;
+        name = selectDic.name;
     }
-    return @"";
+    else if ([data isKindOfClass:[NSDictionary class]]) {
+        name = data[@"name"] ? : @"";
+    }
+    else if ([data isKindOfClass:[NSString class]]) {
+        name = data;
+    }
+    return name;
 }
 
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
     UILabel* pickerLabel = (UILabel*)view;
     if (!pickerLabel){
-        pickerLabel = [[UILabel alloc] init];
+        pickerLabel = UILabel.new;
         pickerLabel.adjustsFontSizeToFitWidth = YES;
         [pickerLabel setTextAlignment:NSTextAlignmentCenter];
-        pickerLabel.font = [UIFont systemFontOfSize:self.param.wMessageFont];
+        pickerLabel.font = [UIFont boldSystemFontOfSize:self.param.wMessageFont];
     }
     pickerLabel.textColor = self.param.wMessageColor;
     pickerLabel.text = [self pickerView:pickerView titleForRow:row forComponent:component];

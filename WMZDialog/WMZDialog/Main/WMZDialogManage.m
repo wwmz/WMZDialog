@@ -100,7 +100,11 @@ static WMZDialogManage* dialogManage = nil;
 }
 
 - (id)currentDialog:(UIView*)normalView{
-    if ([normalView.superview isKindOfClass:NSClassFromString(@"WMZDialog")]) return normalView.superview;
+    UIView *currentView = normalView;
+    while (![currentView.superview isKindOfClass:NSClassFromString(@"WMZDialog")]) {
+        currentView = currentView.superview;
+    }
+    if ([currentView.superview isKindOfClass:NSClassFromString(@"WMZDialog")]) return currentView.superview;
     return nil;
 }
 

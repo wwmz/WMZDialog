@@ -87,6 +87,12 @@
         case 4:{
             Dialog()
             .wTypeSet(DialogTypeSheet)
+//            ///如果有底部 也需要改变颜色的话
+//            .wCustomCancelBtnSet(^(WMZDialogButton *cancelBtn) {
+//                cancelBtn.backgroundColor = UIColor.orangeColor;
+//            })
+//            ///改变tableViewCell背景颜色
+//            .wTableViewColorSet(@[UIColor.orangeColor])
             .wShowAnimationSet(AninatonShowTop)
             .wHideAnimationSet(AninatonHideTop)
             .wAnimationDurtionSet(0.3)

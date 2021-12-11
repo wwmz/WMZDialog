@@ -118,6 +118,8 @@ FOUNDATION_EXPORT DialogDarkColorKey const DialogDarkC3;
 @property (nonatomic, assign) BOOL wAddBottomView;
 /// 隐藏已经存在的头部确定视图
 @property (nonatomic, assign) BOOL wHideExistTop;
+///v1.4.3显示主视图的阴影  default NO
+@property (nonatomic, assign) BOOL wMainShadowShow;
 /// 下划线样式 default UITableViewCellSeparatorStyleNone
 @property (nonatomic, assign) UITableViewCellSeparatorStyle wSeparatorStyle;
 /// 选中打钩图片 default dialog_check
@@ -136,6 +138,8 @@ FOUNDATION_EXPORT DialogDarkColorKey const DialogDarkC3;
 @property (nonatomic, assign) CGFloat wDisappelSecond;
 /// toastPosition
 @property (nonatomic, assign) DialogToastPosition wToastPosition;
+/// v1.4.3 最大宽度 默认等于wWidth
+@property (nonatomic, assign) CGFloat wAutoMaxWidth;
 
 #pragma -mark PayType
 /// 距离弹窗键盘的距离
@@ -332,6 +336,8 @@ FOUNDATION_EXPORT DialogDarkColorKey const DialogDarkC3;
 @property (nonatomic,   copy) DialogCustomImageView wCustomImageView;
 /// 自定义tableview
 @property (nonatomic,   copy) DialogCustomTableView wCustomTableView;
+/// v1.4.3 自定义修改主视图阴影 非底部阴影
+@property (nonatomic,   copy) DialogCustomMainShadomLayer wCustomMainShadom;
 
 + (void)setDefaultPropertiess:(WMZDialogParam*)param;
 
