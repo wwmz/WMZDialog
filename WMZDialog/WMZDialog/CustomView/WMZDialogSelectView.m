@@ -78,7 +78,7 @@
 #pragma -mark DialogTypePop
         case DialogTypePop:{
             NSArray *dataArr = (NSArray*)self.param.wData;
-            if (!DialogIsArray(dataArr)) {
+            if (!DialogIsArray(dataArr) && self.param.wPopStyleType != DialogPopTypeCustom) {
                 NSLog(@"Please Input Array"); return;
             }
             [self.param.wTapView setNeedsLayout];
@@ -185,12 +185,71 @@
             if(!CGRectEqualToRect(self.param.wTapRect, CGRectZero)) {// 两个区域不相等
                 self.tapRect = self.param.wTapRect;
             }
-            self.tableView.frame = CGRectMake(0, 0, self.param.wWidth, self.param.wCellHeight * MIN(self.param.wListScrollCount, dataArr.count));
-            CGRect tableViewRect = self.tableView.frame;
-            if (self.tableView.frame.size.height == 0 &&[(NSArray*)self.param.wData count]) {
+            
+            
+            UIView *contenView = nil;
+            if (self.param.wPopStyleType == DialogPopTypeTable) {
+                self.tableView.frame = CGRectMake(0, 0, self.param.wWidth, self.param.wCellHeight * MIN(self.param.wListScrollCount, dataArr.count));
+                contenView = self.tableView;
+            }else if (self.param.wPopStyleType == DialogPopTypeShare) {
+                self.shareView.scrollEnabled = NO;
+                self.shareView.backgroundColor = UIColor.clearColor;
+                @DialogWeakify(self)
+                CGFloat itemWidth = self.param.wCellHeight;
+                CGFloat itemHeight = self.param.wCellHeight;
+                for (int i = 0; i< dataArr.count; i++) {
+                    NSDictionary *dic = dataArr[i];
+                    NSInteger row = i / self.param.wColumnCount % self.param.wRowCount;
+                    NSInteger loc = i % self.param.wColumnCount ;
+                    if ([dic isKindOfClass:[NSDictionary class]]){
+                        WMZDialogShareView *iconView = [[WMZDialogShareView alloc] initWithText:dic[@"name"] image:dic[@"image"]  block:^(NSInteger index,id anyId) {
+                            @DialogStrongify(self)
+                            if (!anyId) return;
+                            @DialogWeakify(self)
+                            [[WMZDialogManage.shareInstance currentDialog:self] closeView:^{
+                                @DialogStrongify(self)
+                                if (self.param.wEventFinish)
+                                    self.param.wEventFinish(anyId,[NSIndexPath indexPathForRow:index inSection:0], self.param.wType);
+                            }];
+                            
+                        } tag: i + 1000];
+                        iconView.model = dic;
+                        iconView.changeFrame = YES;
+                        iconView.titleLB.textColor = self.param.wMessageColor;
+                        iconView.titleLB.font = [UIFont systemFontOfSize:self.param.wMessageFont];
+                        iconView.frame = CGRectMake(loc * itemWidth, row * itemHeight, itemWidth, itemHeight);
+                        CGFloat percentImage = 0.4;
+                        iconView.imageIV.frame = CGRectMake((itemWidth - itemWidth * percentImage)/2, 5, itemWidth * percentImage,itemHeight * percentImage);
+                        iconView.titleLB.frame = CGRectMake(2, CGRectGetMaxY(iconView.imageIV.frame) + 2, itemWidth - 4,20);
+                        [self.shareView addSubview:iconView];
+                        self.shareView.frame = CGRectMake(0, 0, MIN(dataArr.count, self.param.wColumnCount) * itemWidth ,  ceil(dataArr.count/(self.param.wColumnCount * 1.0)) * itemHeight );
+                    }else if ([dic isKindOfClass:NSString.class]){
+                        UILabel *label = UILabel.new;
+                        label.textColor = self.param.wMessageColor;
+                        label.font = [UIFont systemFontOfSize:self.param.wMessageFont];
+                        label.text = (NSString*)dic;
+                        label.textAlignment = NSTextAlignmentCenter;
+                        label.frame = CGRectMake(loc * itemWidth , row * itemHeight * 0.7, itemWidth , itemHeight * 0.7);
+                        label.tag = i;
+                        label.userInteractionEnabled = YES;
+                        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAction:)];
+                        [label addGestureRecognizer:tap];
+                        [self.shareView addSubview:label];
+                        self.shareView.frame = CGRectMake(0, 0, MIN(dataArr.count, self.param.wColumnCount) * itemWidth ,  ceil(dataArr.count/(self.param.wColumnCount * 1.0)) * itemHeight * 0.7);
+                    }
+                }
+                contenView = self.shareView;
+            }else if (self.param.wPopStyleType == DialogPopTypeCustom) {
+                contenView = self.param.wPopCustomView();
+            }
+            if (!contenView) {
+                NSLog(@"请传入内容视图"); return;
+            }
+            CGRect tableViewRect = contenView.frame;
+            if (contenView.frame.size.height == 0 &&[(NSArray*)self.param.wData count]) {
                 tableViewRect.size.height = self.param.wHeight;
             }
-            [self addSubview:self.tableView];
+            [self addSubview:contenView];
             CGFloat offsetY =  self.param.wAngleSize.height;
             DiaDirection direction = self.param.wDirection;
             CGRect rect = CGRectZero;
@@ -296,7 +355,7 @@
                 if (CGRectGetMinY(rect) < DialogStatusH) rect.origin.y = DialogStatusH;
             }
             self.frame = rect;
-            self.tableView.frame = tableViewRect;
+            contenView.frame = tableViewRect;
             [self addArrowBorderAt:headType offset:offset rectCorner:self.param.wPopViewRectCorner width:self.param.wAngleSize.width height:self.param.wAngleSize.height cornerRadius:self.param.wMainRadius borderWidth:self.param.wPopViewBorderWidth borderColor:self.param.wPopViewBorderColor angleRadio:self.param.wAngleRadio];
         }
             break;
@@ -604,6 +663,17 @@
                 self.param.wEventOKFinish(self.selectArr, self.pathArr);
         }];
     }
+}
+
+- (void)tapAction:(UITapGestureRecognizer*)tap{
+    UIView *view = tap.view;
+    id anyId = self.param.wData[view.tag];
+    @DialogWeakify(self)
+    [[WMZDialogManage.shareInstance currentDialog:self] closeView:^{
+        @DialogStrongify(self)
+        if (self.param.wEventFinish)
+            self.param.wEventFinish(anyId,[NSIndexPath indexPathForRow:view.tag inSection:0], self.param.wType);
+    }];
 }
 
 /// 处理嵌套问题

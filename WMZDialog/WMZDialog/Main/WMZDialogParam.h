@@ -200,6 +200,11 @@ FOUNDATION_EXPORT DialogDarkColorKey const DialogDarkC3;
 @property (nonatomic, assign) CGSize wAngleSize;
 /// 三角形的顶部圆角 default 0
 @property (nonatomic, assign) CGFloat wAngleRadio;
+/// v1.4.4 pop弹窗内容视图类型 default DialogPopTypeTable tableView列表样式
+@property (nonatomic, assign) DialogPopType wPopStyleType;
+/// v1.4.4 pop弹窗自定义内容视图
+@property (nonatomic,   copy) DialogPopCustomBlock wPopCustomView;
+
 /// 可设置wMainOffsetY 调整弹出视图的y default 0
 
 #pragma -mark downType

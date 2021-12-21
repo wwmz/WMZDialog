@@ -159,37 +159,66 @@ isPhoneX;\
     #endif
 #endif
 
+///弹窗类型
 typedef enum : NSUInteger{
-    DialogTypeNornal = 1,           /// 默认弹窗
-    DialogTypeSheet,                /// 底部弹窗
-    DialogTypeAuto,                 /// 默认弹窗自动消失
-    DialogTypePay,                  /// 支付密码框
-    DialogTypeShare,                /// 带分享的弹窗
-    DialogTypeWrite,                /// 带编辑框的弹窗
-    DialogTypeSelect,               /// 带选择的弹窗
-    DialogTypePickSelect,           /// 拾取器弹窗无嵌套
-    DialogTypePop,                  /// 下拉列表选择弹窗
-    DialogTypeDown,                 /// 带下载的弹窗
-    DialogTypeMenusSelect,          /// 下拉无限级菜单弹窗
-    DialogTypeAdvertisement,        /// 广告弹窗
-    DialogTypeLocation,             /// 地区选择
-    DialogTypeDatePicker,           /// 日期选择
-    DialogTypeTabbarMenu,           /// 闲鱼 微博+号底部弹窗
-    DialogTypeNaviMenu,             /// QQ顶部弹窗
-    DialogTypeLoading,              /// 加载框
-    DialogTypeCardPresent ,         /// ios13 present效果
-    DialogTypeCalander,             /// 日历弹窗
-    DialogTypeToast,                /// 吐司
-    DialogTypeMyView,               /// 自定义弹窗
+    /// 默认弹窗
+    DialogTypeNornal = 1,
+    ///底部弹窗
+    DialogTypeSheet,
+    /// 默认弹窗自动消失
+    DialogTypeAuto,
+    /// 支付密码框
+    DialogTypePay,
+    /// 带分享的弹窗
+    DialogTypeShare,
+    /// 带编辑框的弹窗
+    DialogTypeWrite,
+    /// 带选择的弹窗
+    DialogTypeSelect,
+    /// 拾取器弹窗无嵌套
+    DialogTypePickSelect,
+    /// 下拉列表选择弹窗
+    DialogTypePop,
+    /// 带下载的弹窗
+    DialogTypeDown,
+    /// 下拉无限级菜单弹窗
+    DialogTypeMenusSelect,
+    /// 广告弹窗
+    DialogTypeAdvertisement,
+    /// 地区选择
+    DialogTypeLocation,
+    /// 日期选择
+    DialogTypeDatePicker,
+    /// 底部弹窗
+    DialogTypeTabbarMenu,
+    /// 顶部弹窗
+    DialogTypeNaviMenu,
+    /// 加载框
+    DialogTypeLoading,
+    /// ios13 present效果
+    DialogTypeCardPresent ,
+    /// 日历弹窗
+    DialogTypeCalander,
+    /// 吐司
+    DialogTypeToast,
+    /// 自定义弹窗
+    DialogTypeMyView,
 }DialogType;
+
 /// pop的视图
 typedef enum : NSUInteger{
-    DiaPopInViewNormal,              /// 普通视图 默认
-    DiaPopInViewNavi,                /// 导航栏上
-    DiaPopInViewTableView,           /// tableview上
-    DiaPopInViewCollectionView,      /// collectionView上
-    DiaPopInViewScrollView,          /// scrollview上
+    /// 普通视图 默认
+    DiaPopInViewNormal,
+    /// 导航栏上
+    DiaPopInViewNavi,
+    /// tableview上
+    DiaPopInViewTableView,
+    /// collectionView上
+    DiaPopInViewCollectionView,
+    /// scrollview上
+    DiaPopInViewScrollView,
 }DiaPopInView;
+
 /// pop的视图 圆角 和UIRectCorner用法一致
 typedef NS_OPTIONS(NSUInteger, DialogRectCorner) {
     DialogRectCornerNone        = 0,
@@ -199,66 +228,122 @@ typedef NS_OPTIONS(NSUInteger, DialogRectCorner) {
     DialogRectCornerBottomRight = 1 << 3,
     DialogRectCornerAllCorners  = DialogRectCornerTopLeft | DialogRectCornerTopRight | DialogRectCornerBottomLeft | DialogRectCornerBottomRight
 };
+
 ///  箭头位置
 typedef NS_ENUM(NSInteger, DiaDirection) {
-    directionUp = 0  ,      /// 上
-    directionLeft  ,        /// 左
-    directionDowm  ,        /// 下
-    directionright  ,       /// 右
+    /// 上
+    directionUp = 0  ,
+    /// 左
+    directionLeft  ,
+    /// 下
+    directionDowm  ,
+    /// 右
+    directionright  ,
 };
+
 /// 树状数据联动的样式
 typedef enum : NSUInteger{
-    ChainPickView,          /// pickview
-    ChainTableView,         /// tableview
+    /// pickview
+    ChainPickView,
+    /// tableview
+    ChainTableView,
 }ChainType;
+
 /// 显示动画
 typedef enum : NSUInteger{
-    AninatonShowNone = 0 ,         /// 无
-    AninatonCurverOn,              /// 淡入
-    AninatonZoomIn,                /// 由小变大
-    AninatonZoomInCombin,          /// 由大变小-小到大
-    AninatonCounterclockwise,      /// 逆时针旋转
-    AninatonShowTop,               /// 由下往上
-    AninatonShowBottom,            /// 由上往下
-    AninatonShowLeft,              /// 由右往左
-    AninatonShowRight,             /// 由左往右
-    AninatonShowScaleFade,         /// 先放大后恢复+透明度变化
-    AninationCombineOne,           /// 组合动画缩小变大
-    AninationCombineTwo,           /// 组合动画旋转
+    /// 无
+    AninatonShowNone = 0 ,
+    /// 淡入
+    AninatonCurverOn,
+    /// 由大变小-小到大
+    AninatonZoomIn,
+    /// 由大变小-小到大
+    AninatonZoomInCombin,
+    /// 逆时针旋转
+    AninatonCounterclockwise,
+    /// 由下往上
+    AninatonShowTop,
+    /// 由上往下
+    AninatonShowBottom,
+    /// 由右往左
+    AninatonShowLeft,
+    /// 由左往右
+    AninatonShowRight,
+    /// 先放大后恢复+透明度变化
+    AninatonShowScaleFade,
+    /// 组合动画缩小变大
+    AninationCombineOne,
+    /// 组合动画旋转
+    AninationCombineTwo,
     
 }DialogShowAnination;
+
 /// 消失动画
 typedef enum : NSUInteger{
-    AninatonHideNone = 0 ,         /// 无
-    AninatonCurverOff,             /// 淡出
-    AninatonZoomOut,               /// 由大变小
-    AninatonClockwise,             /// 顺时针旋转
-    AninatonHideTop,               /// 由往上
-    AninatonHideBottom,            /// 由往下
-    AninatonHideLeft,              /// 往左
-    AninatonHideRight,             /// 往右
-    AninatonHideScaleFade,         /// 先放大后消失+透明度变化
-    AninationHideCombineOne        /// 组合动画旋转变小
+    /// 无
+    AninatonHideNone = 0 ,
+    /// 淡出
+    AninatonCurverOff,
+    /// 由大变小
+    AninatonZoomOut,
+    /// 顺时针旋转
+    AninatonClockwise,
+    /// 由往上
+    AninatonHideTop,
+    /// 由往下
+    AninatonHideBottom,
+    /// 往左
+    AninatonHideLeft,
+    /// 往右
+    AninatonHideRight,
+    /// 先放大后消失+透明度变化
+    AninatonHideScaleFade,
+    /// 组合动画旋转变小
+    AninationHideCombineOne
 }DialogHideAnination;
+
 /// 加载框样式
 typedef enum : NSUInteger{
-    LoadingStyleWait = 0,      /// 等待
-    LoadingStyleRight,         /// 正确
-    LoadingStyleError,         /// 错误
-    LoadingStyleInfo,          /// 信息
-    LoadingStyleSystem,        /// 系统
+    /// 错误
+    LoadingStyleWait = 0,
+    /// 正确
+    LoadingStyleRight,
+    /// 错误
+    LoadingStyleError,
+    /// 信息
+    LoadingStyleInfo,
+    /// 系统
+    LoadingStyleSystem,
 }LoadingStyle;
+
 /// 优先级
 typedef enum : NSUInteger{
-    DialogLevelHigh = 999,      /// 高级
-    DialogLevelMiddle = 500,    /// 中级
-    DialogLevelLow = 0,         /// 低级
+    /// 高级
+    DialogLevelHigh = 999,
+    /// 中级
+    DialogLevelMiddle = 500,
+    /// 低级
+    DialogLevelLow = 0,
 }DialogLevel;
+
 /// Toast弹出位置
 typedef enum : NSUInteger{
-    DialogToastTop = 0,        /// 顶部
-    DialogToastBottom,         /// 底部
+    /// 顶部
+    DialogToastTop = 0,
+    /// 底部
+    DialogToastBottom,
  }DialogToastPosition;
+
+/// Pop弹出视图样式
+typedef enum : NSUInteger{
+    /// 默认tableView列表样式
+    DialogPopTypeTable = 0,
+    /// 行列样式
+    DialogPopTypeShare,
+    /// 自定义样式
+    DialogPopTypeCustom,
+ }DialogPopType;
+
 /// 点击
 typedef void (^DialogClickBlock)(id anyID,id otherData);
 /// 多列表点击
@@ -275,6 +360,8 @@ typedef UICollectionViewCell* (^DiaLogCollectionCellBlock)(NSIndexPath *indexPat
 typedef void (^DiaLogCollectionClickBlock)(NSIndexPath *indexPath,UICollectionView* collection,id model);
 /// 自定义弹窗
 typedef UIView* (^DiaLogMyViewCallBlock)(UIView* mainView);
+/// 自定义pop内容
+typedef UIView* (^DialogPopCustomBlock)(void);
 /// 自定义presrnt
 typedef UIView* (^DiaLogPresentCallBlock)(UIView* mainView,UITableView *tableView);
 /// 自定义View
@@ -297,4 +384,5 @@ typedef void (^DialogCustomImageView)(UIImageView * imageView);
 typedef void (^DialogCustomTableView)(UITableView * tableView);
 
 typedef void (^DialogCustomMainShadomLayer)(CALayer *shadom);
+
 #endif /* WMZDialogMacro_h */

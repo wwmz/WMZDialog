@@ -88,6 +88,7 @@ DialogDarkColorKey const DialogDarkC4 = @"WMZDialogDarkC4";
     param.wLevel = DialogLevelHigh;
     param.wLimitAlpha = 1;
     param.wPoint = CGPointMake(-999, -999);
+    param.wPopStyleType = DialogPopTypeShare;
     [self setDefaultColorPropertiess:param];
 }
 
@@ -141,18 +142,23 @@ DialogDarkColorKey const DialogDarkC4 = @"WMZDialogDarkC4";
         }
         break;
         case DialogTypePop:{
-             if (self.wWidth == DialogRealW(500)) self.wWidth = DialogRealW(300);
-             if (self.wMainOffsetY == DialogRealW(20)) self.wMainOffsetY = 0;
-             if (self.wData &&
-                [self.wData isKindOfClass:[NSArray class]]) {
-                 for (id data in self.wData) {
-                     if ([data isKindOfClass:[NSDictionary class]]) {
-                         if (data[@"image"]) {
-                             self.wTextAlignment = NSTextAlignmentLeft;
-                         }
-                     }
-                 }
-             }
+            if (self.wMainOffsetY == DialogRealW(20)) self.wMainOffsetY = 0;
+            if (self.wPopStyleType == DialogPopTypeTable) {
+                if (self.wWidth == DialogRealW(500)) self.wWidth = DialogRealW(300);
+                if (DialogArrayNotEmpty(self.wData)) {
+                    for (id data in self.wData) {
+                        if ([data isKindOfClass:[NSDictionary class]]) {
+                            if (data[@"image"]) {
+                                self.wTextAlignment = NSTextAlignmentLeft;
+                            }
+                        }
+                    }
+                }
+            }else if(self.wPopStyleType == DialogPopTypeShare){
+                self.wTextAlignment = NSTextAlignmentCenter;
+                if (self.wCellHeight == DialogRealW(80)) self.wCellHeight = DialogRealW(100);
+            }
+            
         }
             break;
         case DialogTypeMenusSelect:{

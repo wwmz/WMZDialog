@@ -28,13 +28,21 @@
     self.navigationItem.rightBarButtonItem = barItem;
     
 
-    self.dataArr = @[@"上",@"左",@"下",@"tableview",@"右",@"collectionView",@"scrollView",@"嵌套视图"];
+    self.dataArr = @[@"上",@"左",@"下",@"tableview",@"右",@"collectionView",@"scrollView",@"嵌套视图",@"行列内容",@"自定义内容"];
 }
 
 - (void)action:(UIButton*)sender{
+    if(sender.tag == 8){
+        [self rowView:sender];
+        return;
+    }
     
+    if(sender.tag == 9){
+        [self customView:sender];
+        return;
+    }
     
-    if (sender.tag == 3) {
+    else if (sender.tag == 3) {
         [self.navigationController pushViewController:[NSClassFromString(@"TableViewPopDemo") new] animated:YES];
         return;
     }else if(sender.tag == 5){
@@ -102,13 +110,57 @@
                 @{@"name":@"微信",@"image":@"wallet"},
                 @{@"name":@"支付宝",@"image":@"aaa"},
                 @{@"name":@"米聊",@"image":@"bbb"},
-                @{@"name":@"微信1",@"image":@"wallet"},                
+                @{@"name":@"微信1",@"image":@"wallet"},
                 ])
     //弹出视图
     .wTapViewSet(sender)
     .wStart();
 }
 
+///行列视图
+- (void)rowView:(UIButton*)sender{
+    Dialog().wTypeSet(DialogTypePop)
+    ///分享类型内容
+    .wPopStyleTypeSet(DialogPopTypeShare)
+    ///多少列 此处必须设置正确
+    .wColumnCountSet(3)
+    ///多少行  此处必须设置正确
+    .wRowCountSet(2)
+    ///item高度宽度
+    .wCellHeightSet(60)
+    .wTapViewSet(sender)
+    .wEventFinishSet(^(id anyID, NSIndexPath *path, DialogType type) {
+        NSLog(@"%@ %@",anyID,path);
+    })
+    .wDirectionSet(0)
+    .wDataSet(@[@"微信",@"支付宝",@"米聊",@"微信1",@"微信2"])
+//    .wDataSet(@[
+//        @{@"name":@"微信",@"image":@"wallet"},
+//        @{@"name":@"支付宝",@"image":@"aaa"},
+//        @{@"name":@"米聊",@"image":@"bbb"},
+//        @{@"name":@"微信1",@"image":@"wallet"},
+//        @{@"name":@"微信1",@"image":@"wallet"},
+//        ])
+    .wStart();
+}
+
+///自定义视图
+- (void)customView:(UIButton*)sender{
+    Dialog()
+    .wTypeSet(DialogTypePop)
+    ///自定义类型内容
+    .wPopStyleTypeSet(DialogPopTypeCustom)
+    ///自定义内容
+    .wPopCustomViewSet(^UIView *{
+        UIView *mainView = UIView.new;
+        mainView.frame = CGRectMake(0, 0, 100, 100);
+        mainView.backgroundColor = UIColor.redColor;
+        return mainView;
+    })
+    .wTapViewSet(sender)
+    .wDirectionSet(0)
+    .wStart();
+}
 
 //自定义微信例子
 - (void)customWX:(UIButton*)sender{

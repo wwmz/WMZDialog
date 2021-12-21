@@ -218,8 +218,11 @@ WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, DialogRectCorner,  
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGSize,                   wAngleSize)
 /// 三角形的顶部圆角 default 0
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGFloat,                  wAngleRadio)
+/// v1.4.4 pop弹窗内容视图类型 default DialogPopTypeTable tableView列表样式
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, DialogPopType,            wPopStyleType)
 /// 可设置wMainOffsetY 调整弹出视图的y default 0
 /// wMainOffsetY
+
 /*=========================================dowm=======================================================================*/
 /// 图片的size
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGSize,                   wImageSize)
@@ -262,9 +265,9 @@ WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, NSDate*,           
 WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, NSDate*,                  wMinDate)
 
 /*=========================================Share/tabbarMenu/NaviMENU==================================================*/
-/// WMZDialogShareView显示多少列
+/// WMZDialogShareView显示多少列 default 4
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, NSInteger,                wColumnCount)
-/// WMZDialogShareView显示多少行
+/// WMZDialogShareView显示多少行 default 1
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, NSInteger,                wRowCount)
 
 /*=========================================load=======================================================================*/
@@ -338,7 +341,8 @@ WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogMenuClickBloc
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DiaLogCollectionCellBlock,wCalanderCell)
 /// 自定义日历点击事件
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DiaLogCollectionClickBlock,wCalanderCellClick)
-
+///v1.4.4 pop弹窗自定义内容视图
+WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogPopCustomBlock,      wPopCustomView)
 /*=========================================Event================================================*/
 
 /*=========================================CustomView================================================*/

@@ -17,6 +17,7 @@
 @synthesize bottomView = _bottomView;
 @synthesize headView = _headView;
 @synthesize iconIV = _iconIV;
+@synthesize shareView = _shareView;
 
 - (void)setParam:(WMZDialogParam *)param{
     if (param) {
@@ -214,6 +215,20 @@
         _iconIV = UIImageView.new;
     }
     return _iconIV;
+}
+
+- (UIScrollView *)shareView{
+    if (!_shareView) {
+        UIScrollView *shareView = [UIScrollView new];
+        shareView.tag = 10086;
+        shareView.showsVerticalScrollIndicator = NO;
+        shareView.showsHorizontalScrollIndicator = NO;
+        shareView.pagingEnabled = YES;
+        shareView.bounces = NO;
+        shareView.backgroundColor = DialogDarkOpenColor(UIColor.whiteColor, WMZDialogManage.shareInstance.darkColorInfo[DialogDarkMainColor],self.param.wOpenDark);
+        _shareView =  shareView;
+    }
+    return _shareView;
 }
 
 @end

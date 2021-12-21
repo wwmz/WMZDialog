@@ -12,8 +12,6 @@
 @interface WMZDialogNormalView()
 /// 进度条
 @property (nonatomic, strong) UIProgressView *progressView;
-/// 分享视图
-@property (nonatomic, strong) UIScrollView *shareView;
 /// 线条1
 @property (nonatomic, strong) UIView *upLine;
 /// 线条2
@@ -348,20 +346,6 @@
         _progressView = progressView;
     }
     return _progressView;
-}
-
-- (UIScrollView *)shareView{
-    if (!_shareView) {
-        UIScrollView *shareView = [UIScrollView new];
-        shareView.tag = 10086;
-        shareView.showsVerticalScrollIndicator = NO;
-        shareView.showsHorizontalScrollIndicator = NO;
-        shareView.pagingEnabled = YES;
-        shareView.bounces = NO;
-        shareView.backgroundColor = DialogDarkOpenColor(UIColor.whiteColor, WMZDialogManage.shareInstance.darkColorInfo[DialogDarkMainColor],self.param.wOpenDark);
-        _shareView =  shareView;
-    }
-    return _shareView;
 }
 
 - (UIView *)upLine{

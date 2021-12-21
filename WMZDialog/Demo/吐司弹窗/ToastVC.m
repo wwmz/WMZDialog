@@ -32,6 +32,7 @@
             //位置
             .wToastPositionSet(DialogToastBottom)
             .wTypeSet(DialogTypeToast)
+            .wMessageSet(@"Toast")
             //调整宽度
             .wMainOffsetXSet(30)
             .wStart();
@@ -40,6 +41,7 @@
         case 2:
         {
             Dialog()
+            .wMessageSet(@"Toast")
             //自定义位置
             .wCustomMainViewSet(^(UIView *mainView) {
                 CGRect rect = mainView.frame;
@@ -65,6 +67,7 @@
         case 4:
         {
             Dialog()
+            .wMessageSet(@"Toast")
             .wMainRadiusSet(0)
             .wMessageColorSet(UIColor.whiteColor)
             .wMainBackColorSet(UIColor.orangeColor)

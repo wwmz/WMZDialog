@@ -284,22 +284,24 @@ static NSString *WMZDialogPopMaskName = @"WMZDialogPopMaskName";
     if (!_titleLB) {
         _titleLB = [UILabel new];
         _titleLB.textAlignment = NSTextAlignmentCenter;
-        _titleLB.font = [UIFont systemFontOfSize:15.0f];
+        _titleLB.font = [UIFont systemFontOfSize:13.0f];
         _titleLB.userInteractionEnabled = NO;
     }
     return _titleLB;
 }
 
 - (void)imageAction:(UITapGestureRecognizer*)tap{
-    if (self.block) self.block(self.tag,self.titleLB.text);
+    if (self.block) self.block(self.tag,self.model?:self.titleLB.text);
 }
 
 - (void)layoutSubviews{
     [super layoutSubviews];
-    CGFloat percentImage = 0.5;
-    self.imageIV.frame = CGRectMake((self.frame.size.width - self.frame.size.height * percentImage) / 2,5, self.frame.size.height * percentImage, self.frame.size.height * percentImage);
-    self.imageIV.layer.cornerRadius = (self.frame.size.height * 0.5) / 2;
-    self.titleLB.frame = CGRectMake(10 * 0.5, CGRectGetMaxY(self.imageIV.frame) + 5, self.frame.size.width - 10, self.frame.size.height * (1 - percentImage) - 10 * 2);
+    if (!self.changeFrame) {
+        CGFloat percentImage = 0.5;
+        self.imageIV.frame = CGRectMake((self.frame.size.width - self.frame.size.height * percentImage) / 2,5, self.frame.size.height * percentImage, self.frame.size.height * percentImage);
+        self.imageIV.layer.cornerRadius = (self.frame.size.height * 0.5) / 2;
+        self.titleLB.frame = CGRectMake(10 * 0.5, CGRectGetMaxY(self.imageIV.frame) + 5, self.frame.size.width - 10, self.frame.size.height * (1 - percentImage) - 10 * 2);
+    }
 }
 
 @end

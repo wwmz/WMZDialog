@@ -72,8 +72,15 @@ typedef void (^ShareViewSelect)(NSInteger index,id anyId);
 
 @interface WMZDialogShareView : UIView
 @property (nonatomic,   copy) ShareViewSelect block;
+
 @property (nonatomic, strong) UIImageView *imageIV;
+
 @property (nonatomic, strong) UILabel *titleLB;
+
+@property (nonatomic, strong) id model;
+
+@property (nonatomic, assign) BOOL changeFrame;
+
 - (instancetype)initWithText:(NSString*)text
                        image:(NSString*)image
                        block:(ShareViewSelect)block
