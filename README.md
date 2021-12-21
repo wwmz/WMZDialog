@@ -352,7 +352,7 @@ typedef enum : NSUInteger{
 
 更新日记
 ==============
-- 20211220 v1.4.4 新增wPopStyleType，wPopCustomView 支持Pop弹窗内容视图自定义
+- 20211220 v1.4.5 新增wPopStyleType，wPopCustomView 支持Pop弹窗内容视图自定义
 - 20211118 v1.4.3 新增自定义阴影
 - 20211018 v1.4.2 新增wPoint自定义位置
 - 20210929 v1.4.0 新增暗黑模式 适配ios15 底层修改 

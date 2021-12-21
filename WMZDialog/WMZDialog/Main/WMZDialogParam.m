@@ -88,7 +88,7 @@ DialogDarkColorKey const DialogDarkC4 = @"WMZDialogDarkC4";
     param.wLevel = DialogLevelHigh;
     param.wLimitAlpha = 1;
     param.wPoint = CGPointMake(-999, -999);
-    param.wPopStyleType = DialogPopTypeShare;
+    param.wPopStyleType = DialogPopTypeTable;
     [self setDefaultColorPropertiess:param];
 }
 

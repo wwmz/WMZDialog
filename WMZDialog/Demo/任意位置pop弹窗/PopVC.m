@@ -133,14 +133,14 @@
         NSLog(@"%@ %@",anyID,path);
     })
     .wDirectionSet(0)
-    .wDataSet(@[@"微信",@"支付宝",@"米聊",@"微信1",@"微信2"])
-//    .wDataSet(@[
-//        @{@"name":@"微信",@"image":@"wallet"},
-//        @{@"name":@"支付宝",@"image":@"aaa"},
-//        @{@"name":@"米聊",@"image":@"bbb"},
-//        @{@"name":@"微信1",@"image":@"wallet"},
-//        @{@"name":@"微信1",@"image":@"wallet"},
-//        ])
+//    .wDataSet(@[@"微信",@"支付宝",@"米聊",@"微信1",@"微信2"])
+    .wDataSet(@[
+        @{@"name":@"微信",@"image":@"wallet"},
+        @{@"name":@"支付宝",@"image":@"aaa"},
+        @{@"name":@"米聊",@"image":@"bbb"},
+        @{@"name":@"微信1",@"image":@"wallet"},
+        @{@"name":@"微信1",@"image":@"wallet"},
+        ])
     .wStart();
 }
 
