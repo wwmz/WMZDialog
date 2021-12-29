@@ -352,38 +352,37 @@ typedef enum : NSUInteger{
 
 更新日记
 ==============
-- 20211220 v1.4.5 新增wPopStyleType，wPopCustomView 支持Pop弹窗内容视图自定义
-- 20211118 v1.4.3 新增自定义阴影
+- 20211229 v1.4.6 修复崩溃 删除1.4.5 1.4.3有问题版本
 - 20211018 v1.4.2 新增wPoint自定义位置
 - 20210929 v1.4.0 新增暗黑模式 适配ios15 底层修改 
 - 20210514 v1.3.2 修改wDidChange和wLevel默认值
 - 20210513 v1.3.1 
 (1)新增通用wAutoClose属性 响应库内的自动关闭 default YES 如果设为NO则需要自己调用手动关闭的类方法 closeWithshowView 
 (2) writeType新增 wRegular属性  正则校验规则 default nil  例如 可传入 @{@"reguler":@"^1+[3578]+\\d{9}",@"reguletTip":@"请输入正确的手机号"}
-- 20210501 cocopod v1.3.0 新增DialogTypeToast类型 修复若干问题（消除警告 建议更新至此）
-- 20210412 cocopod v1.2.6 新增wLevel属性可管理多个弹窗的层级, 加入WMZDialogManage管理类
-- 20210202 cocopod v1.2.5 优化LoadingType 又是一年过年了 真快
-- 20210113 cocopod v1.2.4 优化静态库xib问题 LoadingType优化 可作为项目的loading框使用
-- 20210107 cocopod v1.2.3 优化选择弹窗 解决pod里没有xib文件导致报错的问题
-- 20210105 cocopod v1.2.1 日历弹窗新增多个连续区域 支持横开启屏监听wDeviceDidChange 优化列表选项
-- 20201221 cocopod v1.2.0 日历弹窗新增连续区域 pop弹窗修复bug+新增自定义三角形size
-- 20201218 cocopod v1.1.10 修复ios14无法弹出的问题
-- 20201118 cocopod v1.1.9 新增阴影点击回调 新增自定义地区数据
-- 20201009 cocopod v1.1.8 修复bug
-- 20200929 cocopod v1.1.7 时间好快又国庆了,国庆放假前更新一波 支持地区/拾取器/多级菜单 除了关于时间的默认选中用wDefaultDate,其他使用wListDefaultValue
-- 20200920 cocopod v1.1.6 适配ios14 
-- 20200828 cocopod v1.1.5 新增列表默认选中的属性
-- 20200606 cocopod v1.1.3 新增wTag可防止重复点击 新增自定义frame的方法
-- 20200519 cocopod v1.1.2 优化一些地方
-- 20200117 cocopod v1.1.0 过年更新一波bug
-- 20200107 cocopod v1.0.7 修复日期选择的bug  修复pop弹窗的bug   修复presentCard弹窗的bug
+- 20210501 v1.3.0 新增DialogTypeToast类型 修复若干问题（消除警告 建议更新至此）
+- 20210412 v1.2.6 新增wLevel属性可管理多个弹窗的层级, 加入WMZDialogManage管理类
+- 20210202 v1.2.5 优化LoadingType 又是一年过年了 真快
+- 20210113 v1.2.4 优化静态库xib问题 LoadingType优化 可作为项目的loading框使用
+- 20210107 v1.2.3 优化选择弹窗 解决pod里没有xib文件导致报错的问题
+- 20210105 v1.2.1 日历弹窗新增多个连续区域 支持横开启屏监听wDeviceDidChange 优化列表选项
+- 20201221 v1.2.0 日历弹窗新增连续区域 pop弹窗修复bug+新增自定义三角形size
+- 20201218 v1.1.10 修复ios14无法弹出的问题
+- 20201118 v1.1.9 新增阴影点击回调 新增自定义地区数据
+- 20201009 v1.1.8 修复bug
+- 20200929 v1.1.7 时间好快又国庆了,国庆放假前更新一波 支持地区/拾取器/多级菜单 除了关于时间的默认选中用wDefaultDate,其他使用wListDefaultValue
+- 20200920 v1.1.6 适配ios14 
+- 20200828 v1.1.5 新增列表默认选中的属性
+- 20200606 v1.1.3 新增wTag可防止重复点击 新增自定义frame的方法
+- 20200519 v1.1.2 优化一些地方
+- 20200117 v1.1.0 过年更新一波bug
+- 20200107 v1.0.7 修复日期选择的bug  修复pop弹窗的bug   修复presentCard弹窗的bug
 - 20191225 优化日期选择弹窗类型   1 新增最大和最小时间支持超出隐藏         2 新增日期选择格式化输出           3 修复弹窗嵌套的bug          4 cocopod更新至1.0.6(建议更新)
 - 20191223 优化pop弹窗类型 支持圆角的定制 支持tableview等滚动视图的弹出
-- 20191216 cocopod v1.0.5 修复ios10崩溃问题
-- 20191214 cocopod v1.0.4 修复ios9.0某个type闪退问题和增加normalType确定或取消文字过多自动换行
-- 20191124 cocopod v1.0.3 修复pod 版本过低导致出现weak的问题
-- 20191113 cocopod v1.0.2 修复pod指定ios版本的问题
-- 20191109 cocopod v1.0.1
+- 20191216 v1.0.5 修复ios10崩溃问题
+- 20191214 v1.0.4 修复ios9.0某个type闪退问题和增加normalType确定或取消文字过多自动换行
+- 20191124 v1.0.3 修复pod 版本过低导致出现weak的问题
+- 20191113 v1.0.2 修复pod指定ios版本的问题
+- 20191109 v1.0.1
 - 20191112 新增wDefaultDate属性  表示默认选中时间 default 当前时间
 - 20191108 新增ios13 present弹窗
 - 20191107 新增日历弹窗

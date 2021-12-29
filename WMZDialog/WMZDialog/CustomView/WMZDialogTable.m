@@ -244,9 +244,9 @@
     if (self.tree) {
         num = self.depth;
     }else{
-        if (self.nest)
-            num = [(NSArray*)self.param.wData count];
+        if (!self.nest) num = [(NSArray*)self.param.wData count];
     }
+    
     return num;
 }
 
@@ -255,12 +255,13 @@
     if (self.tree) {
         count = [(NSArray*)[self getMyDataArr:component+100 withType:0] count] * (self.param.wPickRepeat?pickViewCount:1);
     }else{
-        if (!self.nest) {
+        if (self.nest) {
             count = [(NSArray*)self.param.wData count] * (self.param.wPickRepeat ? pickViewCount : 1 );
         }else{
             count = [(NSArray*)self.param.wData[component] count] * (self.param.wPickRepeat ? pickViewCount : 1);
         }
     }
+    
     return count;
 }
 
@@ -269,7 +270,7 @@
     if (self.tree) {
         arr = [self getMyDataArr:component+100 withType:0];
     }else{
-        arr = self.nest?self.param.wData[component]:self.param.wData;
+        arr = !self.nest?self.param.wData[component]:self.param.wData;
     }
     if (!DialogArrayNotEmpty(arr)) return @"";
     id data = arr[row % arr.count];
