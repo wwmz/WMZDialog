@@ -212,9 +212,11 @@ static NSString *WMZDialogPopMaskName = @"WMZDialogPopMaskName";
             self.estimatedSectionFooterHeight = 0.01;
             self.estimatedSectionHeaderHeight = 0.01;
         }
-        if (@available(iOS 15.0, *)) {
-            self.sectionHeaderTopPadding = 0;
-        }
+        #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 150000
+         if (@available(iOS 15.0, *)) {
+             self.sectionHeaderTopPadding = 0;
+         }
+        #endif
         self.scrollsToTop = NO;
     }
     return self;

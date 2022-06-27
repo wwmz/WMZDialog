@@ -134,6 +134,9 @@
             label.textColor = [UIColor lightGrayColor];
             [self.writeView addSubview:label];
             label.hidden = !DialogStrIsNotEmpty(self.param.wPlaceholder);
+            if (DialogStrIsNotEmpty(self.param.wWriteDefaultText)) {
+                label.hidden = YES;
+            }
         }
         lastView.backgroundColor = self.param.wInputBackGroundColor;
         [self addBottomView:CGRectGetMaxY(lastView.frame) + self.param.wMainOffsetY];
