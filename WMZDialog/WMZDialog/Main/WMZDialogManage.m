@@ -123,7 +123,6 @@ static WMZDialogManage* dialogManage = nil;
     param.wPopStyleType = DialogPopTypeTable;
     param.wCalanderWeekTitleArr = @[@"周日",@"周一",@"周二",@"周三",@"周四",@"周五",@"周六"];
     param.wMinMaxResultArr = @[DialogCalanderLimitCloseClick];
-    param.wDeviceDidChange = YES;
     [self setDefaultColorPropertiess:param];
 }
 
