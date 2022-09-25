@@ -7,6 +7,7 @@
 //
 
 #import "WMZDialogTree.h"
+#import "WMZDialogUntils.h"
 
 @implementation WMZDialogTree
 
@@ -32,20 +33,7 @@
 
 
 @implementation WMZCalanderModel
-WMZDialogSetFuncImplementation(WMZCalanderModel, NSInteger, wYear)
-WMZDialogSetFuncImplementation(WMZCalanderModel, NSInteger, wMonth)
-WMZDialogSetFuncImplementation(WMZCalanderModel, NSInteger, wDay)
-WMZDialogSetFuncImplementation(WMZCalanderModel, NSInteger, wWeek)
-WMZDialogSetFuncImplementation(WMZCalanderModel, NSInteger, wIndex)
-WMZDialogSetFuncImplementation(WMZCalanderModel, BOOL, wLastMonth)
-WMZDialogSetFuncImplementation(WMZCalanderModel, BOOL, wNextMonth)
-WMZDialogSetFuncImplementation(WMZCalanderModel, NSString*, wChineseDate)
-WMZDialogSetFuncImplementation(WMZCalanderModel, NSDate*, wDate)
-WMZDialogSetFuncImplementation(WMZCalanderModel, BOOL, wHadHolday)
-WMZDialogSetFuncImplementation(WMZCalanderModel, BOOL, wSelected)
-WMZDialogSetFuncImplementation(WMZCalanderModel, NSString*, wDetailChineseDate)
-WMZDialogSetFuncImplementation(WMZCalanderModel, BOOL, wShowCircle)
-WMZDialogSetFuncImplementation(WMZCalanderModel, UIColor*, wCircleColor)
+
 - (NSTimeInterval)dateTime{
     if (!_dateTime) {
         _dateTime = [self.wDate timeIntervalSince1970];
@@ -58,5 +46,21 @@ WMZDialogSetFuncImplementation(WMZCalanderModel, UIColor*, wCircleColor)
     return _dateStr;
 }
 
+- (BOOL)checkModelWithMaxDate:(NSDate*)maxDate minDate:(NSDate*)minDate{
+    int result = YES;
+    if (maxDate) {
+       int maxResult = [NSDate compareOneDay:self.wDate withAnotherDay:maxDate];
+        if (maxResult == 1) {
+            result = NO;
+        }
+    }
+     if (minDate) {
+        int minResult = [NSDate compareOneDay:self.wDate withAnotherDay:minDate];
+        if (minResult == -1) {
+            result = NO;
+        }
+    }
+    return result;
+}
 @end
 

@@ -107,6 +107,9 @@
     .wShowAnimationSet(AninatonZoomIn)
     .wHideAnimationSet(AninatonZoomOut)
     .wTapViewSet(sender)
+    ///如果是自定义的tableView或者collectionView或scrollView
+//    .wPopNestStopViewSet(@"GNTableView")
+    
 //    .wMainBackColorSet([UIColor redColor])
     .wDataSet(@[
        @{@"name":@"微信",@"image":@"wallet"},
@@ -185,3 +188,4 @@
 }
 
 @end
+

@@ -16,7 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-     self.dataArr = @[@"文字",@"图文",@"图",@"改变最大宽度"];
+     self.dataArr = @[@"文字",@"图文",@"图",@"改变最大宽度",@"关闭交互"];
 }
 
 -(void)action:(UIButton*)sender{
@@ -31,6 +31,8 @@
             .wMainOffsetYSet(15)
             .wShowAnimationSet(AninatonShowScaleFade)
             .wHideAnimationSet(AninatonHideScaleFade)
+            ///关闭交互
+            .wUserInteractionEnabledSet(NO)
             .wStart();
         }
             break;
@@ -58,6 +60,14 @@
             .wWidthSet(100)
             .wMessageSet(@"DialogTypeAutoDialogTypeAutoDialogTypeAutoDialogTypeAutoDialogTypeAutoDialogTypeAutoDialogTypeAutoDialogTypeAutoDialogTypeAutoDialogTypeAutoDialogTypeAutoDialogTypeAutoDialogTypeAutoDialogTypeAutoDialogTypeAutoDialogTypeAutoDialogTypeAutoDialogTypeAutoDialogTypeAutoDialogTypeAutoDialogTypeAutoDialogTypeAutoDialogTypeAutoDialogTypeAutoDialogTypeAuto")
             .wStart();
+        }
+            break;
+        case 4:{
+            Dialog().wTypeSet(DialogTypeAuto)
+            .wTagSet(random()%1000)
+            .wMessageSet(@"可点击其他视图")
+            .wUserInteractionEnabledSet(NO)
+            .wStartView(self.view);
         }
             break;
             

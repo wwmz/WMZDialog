@@ -26,10 +26,13 @@
     switch (sender.tag) {
         case 0:{
             Dialog().wTypeSet(DialogTypeWrite)
+            .wDisappelSecondSet(2)
             .wEventOKFinishSet(^(id anyID, id otherData) {
                 NSLog(@"%@",anyID);
             })
             .wMessageSet(@"最多输入10个字符")
+            ///输入框文字颜色
+            .wInputTextColorSet(UIColor.redColor)
             .wTitleSet(@"请输入文本")
             //默认内容
             .wWriteDefaultTextSet(@"默认内容")

@@ -189,6 +189,7 @@
                 iconView.titleLB.textColor = DialogDarkOpenColor(UIColor.blackColor, UIColor.whiteColor,self.param.wOpenDark);
                 [self.shareView addSubview:iconView];
             }
+            if(self.param.wCustomShareView) self.param.wCustomShareView(self.shareView);
             [self addSubview:self.cancelBtn];
             self.cancelBtn.frame = CGRectMake(0, CGRectGetMaxY(self.shareView.frame), self.param.wWidth, self.param.wMainBtnHeight);
             self.cancelBtn.backgroundColor = DialogDarkOpenColor(DialogColor(0xf7f7f7), WMZDialogManage.shareInstance.darkColorInfo[DialogDarkC3],self.param.wOpenDark);
@@ -221,6 +222,7 @@
                 iconView.titleLB.textColor = DialogDarkOpenColor(UIColor.blackColor, UIColor.whiteColor,self.param.wOpenDark);
                 [self.shareView addSubview:iconView];
             }
+            if(self.param.wCustomShareView) self.param.wCustomShareView(self.shareView);
             springShowAnimation(self.shareView, self.param.wAnimationDurtion , [self.shareView subviews], self.param.wColumnCount, self.param.wRowCount, 0, 0, 0, 0, YES,  ^{});
             self.frame = CGRectMake(0, 0, self.param.wWidth, CGRectGetMaxY(self.shareView.frame));
         }
@@ -248,6 +250,7 @@
                 iconView.titleLB.textColor = DialogDarkOpenColor(UIColor.blackColor, UIColor.whiteColor,self.param.wOpenDark);
                 [self.shareView addSubview:iconView];
             }
+            if(self.param.wCustomShareView) self.param.wCustomShareView(self.shareView);
             self.closeBtn.layer.borderWidth = 0;
             [self addSubview:self.closeBtn];
             self.closeBtn.frame = CGRectMake((self.param.wWidth - 60) / 2, CGRectGetMaxY(self.shareView.frame) + 100, 60, self.param.wMainBtnHeight);
@@ -283,6 +286,7 @@
     if (self.param.wType == DialogTypeAuto ||
         self.param.wType == DialogTypeToast ||
         self.param.wType == DialogTypeLoading) return self.param.wDisappelSecond;
+    
     return -1;
 }
 

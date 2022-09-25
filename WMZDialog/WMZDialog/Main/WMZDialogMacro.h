@@ -9,9 +9,8 @@
 #ifndef WMZDialogMacro_h
 #define WMZDialogMacro_h
 
-#import <UIKit/UIKit.h>
 #import "WMZDialogManage.h"
-@class WMZDialogButton;
+@class WMZDialogButton,WMZDialogParam;
 
 #define WMZDialogStatementAndPropSetFuncStatement(propertyModifier,className, propertyPointerType, propertyName)           \
 @property(nonatomic,propertyModifier)propertyPointerType  propertyName;                                                 \
@@ -119,10 +118,14 @@ isPhoneX;\
 #define DialogNaviH (([[UIApplication sharedApplication] statusBarFrame].size.height) + 44)
 #define DialogStatusH [[UIApplication sharedApplication] statusBarFrame].size.height
 #define DialogTabBarHeight (DialogIsIphoneX ? (49.f+34.f) : 49.f)
-#define DialogSafeBottomHeight (DialogIsIphoneX ? 20.0f : 0)
+#define DialogSafeBottomHeight (DialogIsIphoneX ? 34.0f : 0)
 #define DialogRealW(A) (A)/2.0*((DialogScreenW)/ (([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft || [UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight)?667:375))
 #define DialogColor(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 #define DialogK1px (1 / UIScreen.mainScreen.scale)
+#define DialogDisappealTime 1.4444444f
+
+#define DialogSize CGSizeMake(DialogRealW(500),DialogRealW(400))
+
 #define DialogIsArray(array)  (array != nil && [array isKindOfClass:[NSArray class]])
 #define DialogArrayNotEmpty(array)  (array != nil && [array isKindOfClass:[NSArray class]] && [array count] > 0)
 #define DialogStrIsEmpty(text) (text == nil || ([text isKindOfClass:NSString.class] && [text length] == 0))
@@ -345,44 +348,49 @@ typedef enum : NSUInteger{
  }DialogPopType;
 
 /// 点击
-typedef void (^DialogClickBlock)(id anyID,id otherData);
+typedef void (^DialogClickBlock)(id _Nullable anyID,id _Nullable otherData);
 /// 多列表点击
-typedef void (^DialogMenuClickBlock)(id anyID,NSInteger section,NSInteger row);
+typedef void (^DialogMenuClickBlock)(id _Nullable anyID,NSInteger section,NSInteger row);
 /// 带tableview的点击
-typedef void (^DialogTableClickBlock)(id anyID,NSIndexPath *path,DialogType type);
+typedef void (^DialogTableClickBlock)(id _Nullable anyID,NSIndexPath* _Nullable path,DialogType type);
 /// UITableViewCell点击的block
-typedef void (^DiaLogCellSelectlock)(NSIndexPath *indexPath,UITableView* tableView,id model);
+typedef void (^DiaLogCellSelectlock)(NSIndexPath* _Nullable indexPath,UITableView* _Nullable tableView,id _Nullable model);
 /// UITableViewCell的block
-typedef UITableViewCell* (^DiaLogCustomCellBlock)(NSIndexPath *indexPath,UITableView* tableView,id model,BOOL isSelected);
+typedef UITableViewCell* _Nullable(^DiaLogCustomCellBlock)(NSIndexPath* _Nullable indexPath,UITableView* _Nullable tableView,id _Nullable model,BOOL isSelected);
 /// collectionCell的block
-typedef UICollectionViewCell* (^DiaLogCollectionCellBlock)(NSIndexPath *indexPath,UICollectionView* collection,id model);
+typedef UICollectionViewCell* _Nullable (^DiaLogCollectionCellBlock)(NSIndexPath* _Nullable indexPath,UICollectionView* _Nullable collection,id _Nullable model);
 /// collectionCell的点击方法
-typedef void (^DiaLogCollectionClickBlock)(NSIndexPath *indexPath,UICollectionView* collection,id model);
+typedef void (^DiaLogCollectionClickBlock)(NSIndexPath* _Nullable indexPath,UICollectionView* _Nullable collection,id _Nullable model);
 /// 自定义弹窗
-typedef UIView* (^DiaLogMyViewCallBlock)(UIView* mainView);
+typedef UIView* _Nullable (^DiaLogMyViewCallBlock)(UIView* _Nullable mainView);
 /// 自定义pop内容
-typedef UIView* (^DialogPopCustomBlock)(void);
+typedef UIView* _Nullable (^DialogPopCustomBlock)(void);
 /// 自定义presrnt
-typedef UIView* (^DiaLogPresentCallBlock)(UIView* mainView,UITableView *tableView);
+typedef UIView* _Nullable (^DiaLogPresentCallBlock)(UIView* _Nullable mainView,UITableView* _Nullable tableView);
 /// 自定义View
-typedef void (^DialogCustomMainViewBlock)(UIView * mainView);
+typedef void (^DialogCustomMainViewBlock)(UIView* _Nullable mainView);
 
-typedef void (^DialogCustomTitle)(UILabel * titleLa);
+typedef void (^DialogCustomTitle)(UILabel* _Nullable titleLa);
 
-typedef void (^DialogCustomMessage)(UILabel * messageLa);
+typedef void (^DialogCustomMessage)(UILabel* _Nullable messageLa);
 
-typedef void (^DialogCustomOKBtn)(WMZDialogButton * okBtn);
+typedef void (^DialogCustomOKBtn)(WMZDialogButton* _Nullable okBtn);
 
-typedef void (^DialogCustomCancelBtn)(WMZDialogButton * cancelBtn);
+typedef void (^DialogCustomCancelBtn)(WMZDialogButton* _Nullable cancelBtn);
 
-typedef void (^DialogCustomCloseBtn)(WMZDialogButton * closeBtn);
+typedef void (^DialogCustomCloseBtn)(WMZDialogButton* _Nullable closeBtn);
 
-typedef void (^DialogCustomTextView)(UITextView * textView);
+typedef void (^DialogCustomTextView)(UITextView* _Nullable textView);
 
-typedef void (^DialogCustomImageView)(UIImageView * imageView);
+typedef void (^DialogCustomImageView)(UIImageView* _Nullable imageView);
 
-typedef void (^DialogCustomTableView)(UITableView * tableView);
+typedef void (^DialogCustomTableView)(UITableView* _Nullable tableView);
 
-typedef void (^DialogCustomMainShadomLayer)(CALayer *shadom);
+typedef void (^DialogCustomMainShadomLayer)(CALayer* _Nullable shadom);
 
+typedef void (^AnimalBlock)(void);
+
+typedef void (^DialogCustomAnimal)(UIView* _Nullable mainView,AnimalBlock _Nullable showBlock);
+
+typedef void (^DialogCustomShareView)(UIScrollView* _Nullable shareView);
 #endif /* WMZDialogMacro_h */

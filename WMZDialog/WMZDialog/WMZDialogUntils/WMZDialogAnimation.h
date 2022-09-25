@@ -6,10 +6,9 @@
 //  Copyright © 2019 wmz. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "WMZDialogMacro.h"
+
 NS_ASSUME_NONNULL_BEGIN
-///动画完成
-typedef void (^AnimalBlock)(void);
 
 @interface WMZDialogAnimation : NSObject
 

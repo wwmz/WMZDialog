@@ -33,34 +33,35 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WMZCalanderModel : NSObject
 /// 节假日
-WMZDialogStatementAndPropSetFuncStatement(assign, WMZCalanderModel, BOOL, wHadHolday)
+@property (nonatomic, assign) BOOL wHadHolday;
 /// 显示圆点
-WMZDialogStatementAndPropSetFuncStatement(assign, WMZCalanderModel, BOOL, wShowCircle)
+@property (nonatomic, assign) BOOL wShowCircle;
 /// 圆点颜色
-WMZDialogStatementAndPropSetFuncStatement(strong, WMZCalanderModel, UIColor*,wCircleColor)
+@property (nonatomic, strong) UIColor* wCircleColor;
 /// 是当前月份 上个月的数据
-WMZDialogStatementAndPropSetFuncStatement(assign, WMZCalanderModel, BOOL, wLastMonth)
+@property (nonatomic, assign) BOOL wLastMonth;
 /// 是当前月份 下个月的数据
-WMZDialogStatementAndPropSetFuncStatement(assign, WMZCalanderModel, BOOL, wNextMonth)
+@property (nonatomic, assign) BOOL wNextMonth;
 /// 选中
-WMZDialogStatementAndPropSetFuncStatement(assign, WMZCalanderModel, BOOL, wSelected)
+@property (nonatomic, assign) BOOL wSelected;
 /// 坐标
-WMZDialogStatementAndPropSetFuncStatement(assign, WMZCalanderModel, NSInteger, wIndex)
+@property (nonatomic, assign) NSInteger wIndex;
 /// 日期
-WMZDialogStatementAndPropSetFuncStatement(strong, WMZCalanderModel, NSDate*, wDate)
+@property (nonatomic, strong) NSDate* wDate;
 /// 年
-WMZDialogStatementAndPropSetFuncStatement(assign, WMZCalanderModel, NSInteger, wYear)
+@property (nonatomic, assign) NSInteger wYear;
 /// 月
-WMZDialogStatementAndPropSetFuncStatement(assign, WMZCalanderModel, NSInteger, wMonth)
+@property (nonatomic, assign) NSInteger wMonth;
 /// 日
-WMZDialogStatementAndPropSetFuncStatement(assign, WMZCalanderModel, NSInteger, wDay)
+@property (nonatomic, assign) NSInteger wDay;
 /// 周
-WMZDialogStatementAndPropSetFuncStatement(assign, WMZCalanderModel, NSInteger, wWeek)
+@property (nonatomic, assign) NSInteger wWeek;
 /// 农历日
-WMZDialogStatementAndPropSetFuncStatement(strong, WMZCalanderModel, NSString*, wChineseDate)
+@property (nonatomic, copy) NSString* wChineseDate;
 /// 农历详情
-WMZDialogStatementAndPropSetFuncStatement(strong, WMZCalanderModel, NSString*, wDetailChineseDate)
-
+@property (nonatomic, copy) NSString* wDetailChineseDate;
+/// 在最大最小范围内
+@property (nonatomic, assign) BOOL wInRange;
 /// 内部属性
 @property (nonatomic, assign) BOOL firstModel;
 
@@ -70,6 +71,7 @@ WMZDialogStatementAndPropSetFuncStatement(strong, WMZCalanderModel, NSString*, w
 
 @property (nonatomic, assign) BOOL lastModel;
 
+- (BOOL)checkModelWithMaxDate:(NSDate*)maxDate minDate:(NSDate*)minDate;
 @end
 
 NS_ASSUME_NONNULL_END

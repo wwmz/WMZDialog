@@ -46,6 +46,8 @@
       [self selectMenu:section withRow:row];
       NSLog(@"菜单点击方法 当前选中值:%@ 当前选中列:%ld 当前选中行:%ld",anyID,(long)section,(long)row);
     })
+//    .wTitleSet(@"11")
+//    .wMessageSet(@"22")
     .wTypeSet(DialogTypeMenusSelect)
     .wDataSet(data);
     

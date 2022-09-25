@@ -8,8 +8,16 @@
 
 #import "WMZDialogManage.h"
 #import "WMZDialogParam.h"
+#import <objc/runtime.h>
 
 static WMZDialogManage* dialogManage = nil;
+
+@interface WMZDialogManage()
+/// 全局
+@property (nonatomic, strong, readwrite) WMZDialogParentParam *globalParam;
+
+@end
+
 @implementation WMZDialogManage
 
 + (instancetype)shareInstance{
@@ -17,8 +25,127 @@ static WMZDialogManage* dialogManage = nil;
     dispatch_once(&onceToken, ^{
         dialogManage = [[super allocWithZone:NULL] init];
         dialogManage.dialogInfo = [NSMutableDictionary new];
+        dialogManage.globalParam = WMZDialogParentParam.new;
+        [WMZDialogManage setDefaultPropertiess:dialogManage.globalParam];
     }) ;
     return dialogManage ;
+}
+
+/// 全局配置
++ (void)settingGlobalConfig:(DialogCustomParam)block{
+    if(block) block((id)WMZDialogManage.shareInstance.globalParam);
+}
+
+- (void)setUpManageDefaultParam:(WMZDialogParentParam*)param{
+    if(self.globalParam){
+        u_int count = 0;
+        objc_property_t *properties = class_copyPropertyList([WMZDialogParentParam class], &count);
+        for (int i = 0; i < count; i++) {
+            const char *propertyName = property_getName(properties[i]);
+            NSString *proper = [NSString stringWithUTF8String:propertyName];
+            if (![proper isEqualToString:@"wOpenDark"]) {
+                id object = [self.globalParam valueForKey:proper];
+                if(object){
+                    [param setValue:object forKey:proper];
+                }
+            }
+        }
+        free(properties);
+    }
+}
+
++ (void)setDefaultPropertiess:(WMZDialogParentParam*)param{
+    BOOL left = ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft ||
+                 [UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight);
+    param.wType = DialogTypeNornal;
+    param.wWidth = DialogSize.width;
+    param.wHeight = DialogSize.height;
+    param.wAnimationDurtion = 0.3f;
+    param.wDisappelSecond = DialogDisappealTime;
+    param.wMainBtnHeight = DialogRealW(60);
+    param.wCellHeight =  DialogRealW(80);
+    param.wOKTitle = @"确定";
+    param.wCancelTitle = @"取消";
+    param.wMainRadius = 8.0f;
+    param.wMainOffsetY = DialogRealW(20);
+    param.wMainOffsetX = DialogRealW(15);
+    param.wLineAlpha = 0.9f;
+    param.wTitleFont = 14.0f;
+    param.wMessageFont = 16.0f;
+    param.wOKFont = 16.0f;
+    param.wCancelFont = 16.0f;
+    param.wShadowAlpha = 0.3f;
+    param.wKeyBoardMarginY = DialogRealW(40);
+    param.wPayNum = 5;
+    param.wDefaultSelectPayStr = @"农业银行";
+    param.wShadowCanTap = YES;
+    param.wShadowShow = YES;
+    param.wWirteTextMaxNum  = -1;
+    param.wWirteTextMaxLine = 7;
+    param.wPercentAngle =  0.5f;
+    param.wPercentOrginX = 1.0f;
+    param.wColumnCount = 4;
+    param.wRowCount = 1;
+    param.wDirection = directionDowm;
+    param.wImageSize = CGSizeMake(DialogRealW(110), DialogRealW(110));
+    param.wTextAlignment = NSTextAlignmentCenter;
+    param.wLocationType = 3;
+    param.wChainType = ChainPickView;
+    param.wDateTimeType = @"yyyy-MM-dd HH:mm:ss";
+    param.wPlaceholder = @"请输入";
+    param.wLoadingSize = CGSizeMake(DialogRealW(90),  DialogRealW(90));
+    param.wSeparator = @",";
+    param.wLeftScrollClose = YES;
+    param.wOpenScrollClose = YES;
+    param.wOpenDragging = YES;
+    param.wScaleParentVC = YES;
+    param.wCalanderCanScroll = YES;
+    param.wOpenChineseDate = YES;
+    param.wHideCalanderBtn = YES;
+    param.wDefaultDate = [NSDate date];
+    param.wCanSelectPay = YES;
+    param.wPopViewBorderColor = param.wMainBackColor;
+    param.wTapRect = CGRectZero;
+    param.wPopViewRectCorner = DialogRectCornerNone;
+    param.wTag = 12345;
+    param.wUserInteractionEnabled = YES;
+    param.wListScrollCount = left ? 5 : 8;
+    param.wSeparatorStyle = UITableViewCellSeparatorStyleNone;
+    param.wAngleSize = CGSizeMake(DialogRealW(24), DialogRealW(16));
+    param.wOpenMultiZone = YES;
+    param.wXMLPathName = [[NSBundle bundleWithPath:[[NSBundle bundleForClass:[WMZDialogParam class]] pathForResource:@"WMZDialog" ofType:@"bundle"]] pathForResource:@"province_data" ofType:@"xml"];
+    param.wCheckImage = [[UIImage imageNamed:[[NSBundle bundleWithPath:[[NSBundle bundleForClass:[WMZDialogParam class]] pathForResource:@"WMZDialog" ofType:@"bundle"]] pathForResource:@"dialog_check" ofType:@"png"]] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    param.wLoadingWidth = 2.5f;
+    param.wAutoClose = YES;
+    param.wLevel = DialogLevelHigh;
+    param.wLimitAlpha = 1;
+    param.wPoint = CGPointMake(-999, -999);
+    param.wPopStyleType = DialogPopTypeTable;
+    param.wCalanderWeekTitleArr = @[@"周日",@"周一",@"周二",@"周三",@"周四",@"周五",@"周六"];
+    param.wMinMaxResultArr = @[DialogCalanderLimitCloseClick];
+    param.wDeviceDidChange = YES;
+    [self setDefaultColorPropertiess:param];
+}
+
++ (void)setDefaultColorPropertiess:(WMZDialogParentParam*)param{
+    param.wShadowColor = DialogColor(0x333333);
+    param.wOKColor = DialogColor(0xFF9900);
+    param.wThemeColor = param.wOKColor;
+    param.wProgressTintColor = DialogColor(0xFF9900);
+    param.wTrackTintColor = DialogColor(0xF3F4F6);
+    param.wLoadingColor = DialogColor(0x108ee9);
+    param.wTableViewColor = @[
+        DialogDarkOpenColor(DialogColor(0xffffff), WMZDialogManage.shareInstance.darkColorInfo[DialogDarkMainColor], param.wOpenDark),
+        DialogDarkOpenColor(DialogColor(0xF6F7FA), WMZDialogManage.shareInstance.darkColorInfo[DialogDarkMainColor], param.wOpenDark),
+        DialogDarkOpenColor(DialogColor(0xEBECF0), WMZDialogManage.shareInstance.darkColorInfo[DialogDarkMainColor], param.wOpenDark),
+        DialogDarkOpenColor(DialogColor(0xffffff), WMZDialogManage.shareInstance.darkColorInfo[DialogDarkMainColor], param.wOpenDark)];
+    param.wCancelColor = DialogDarkOpenColor(DialogColor(0x666666), DialogColor(0xffffff), param.wOpenDark);
+    param.wMainBackColor = DialogDarkOpenColor(DialogColor(0xffffff), WMZDialogManage.shareInstance.darkColorInfo[DialogDarkMainColor], param.wOpenDark);
+    param.wLineColor =  DialogDarkOpenColor([[UIColor lightGrayColor] colorWithAlphaComponent:0.4], [[UIColor whiteColor] colorWithAlphaComponent:0.4],param.wOpenDark);
+    param.wTitleColor =  DialogDarkOpenColor(DialogColor(0x333333), DialogColor(0xffffff), param.wOpenDark);
+    param.wMessageColor = DialogDarkOpenColor(DialogColor(0x333333), DialogColor(0xffffff), param.wOpenDark);
+    param.wInputTextColor = DialogDarkOpenColor(DialogColor(0x333333), DialogColor(0xffffff), param.wOpenDark);
+    param.wInputBackGroundColor =  DialogDarkOpenColor(DialogColor(0xffffff), WMZDialogManage.shareInstance.darkColorInfo[DialogDarkMainColor], param.wOpenDark);
 }
 
 - (void)addDialog:(id)dialog cover:(BOOL)cover superView:(UIView*)superView{

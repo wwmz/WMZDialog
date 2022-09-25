@@ -63,7 +63,6 @@
 		F3B145662702C0A000D33B82 /* DialogCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F3B1455D2702C0A000D33B82 /* DialogCell.m */; };
 		F3B145672702C0A000D33B82 /* WMZDialogTree.m in Sources */ = {isa = PBXBuildFile; fileRef = F3B1455F2702C0A000D33B82 /* WMZDialogTree.m */; };
 		F3B145682702C0A000D33B82 /* WMZDialogUntils.m in Sources */ = {isa = PBXBuildFile; fileRef = F3B145612702C0A000D33B82 /* WMZDialogUntils.m */; };
-		F3B145692702C0A000D33B82 /* NSDate+WMZCalendarDate.m in Sources */ = {isa = PBXBuildFile; fileRef = F3B145632702C0A000D33B82 /* NSDate+WMZCalendarDate.m */; };
 		F3B1456A2702C0A000D33B82 /* WMZDialogAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = F3B145652702C0A000D33B82 /* WMZDialogAnimation.m */; };
 		F3B1456E2702C3CE00D33B82 /* NewCustomVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F3B1456D2702C3CE00D33B82 /* NewCustomVC.m */; };
 		F3B145712702C58600D33B82 /* DemoOneView.m in Sources */ = {isa = PBXBuildFile; fileRef = F3B145702702C58600D33B82 /* DemoOneView.m */; };
@@ -213,12 +212,10 @@
 		F3B145592702C02100D33B82 /* WMZDialogParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMZDialogParam.m; sourceTree = "<group>"; };
 		F3B1455C2702C0A000D33B82 /* WMZDialogUntils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMZDialogUntils.h; sourceTree = "<group>"; };
 		F3B1455D2702C0A000D33B82 /* DialogCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogCell.m; sourceTree = "<group>"; };
-		F3B1455E2702C0A000D33B82 /* NSDate+WMZCalendarDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+WMZCalendarDate.h"; sourceTree = "<group>"; };
 		F3B1455F2702C0A000D33B82 /* WMZDialogTree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMZDialogTree.m; sourceTree = "<group>"; };
 		F3B145602702C0A000D33B82 /* WMZDialogAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMZDialogAnimation.h; sourceTree = "<group>"; };
 		F3B145612702C0A000D33B82 /* WMZDialogUntils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMZDialogUntils.m; sourceTree = "<group>"; };
 		F3B145622702C0A000D33B82 /* WMZDialogTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMZDialogTree.h; sourceTree = "<group>"; };
-		F3B145632702C0A000D33B82 /* NSDate+WMZCalendarDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+WMZCalendarDate.m"; sourceTree = "<group>"; };
 		F3B145642702C0A000D33B82 /* DialogCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogCell.h; sourceTree = "<group>"; };
 		F3B145652702C0A000D33B82 /* WMZDialogAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMZDialogAnimation.m; sourceTree = "<group>"; };
 		F3B1456C2702C3CE00D33B82 /* NewCustomVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewCustomVC.h; sourceTree = "<group>"; };
@@ -653,8 +650,6 @@
 			children = (
 				F3B145642702C0A000D33B82 /* DialogCell.h */,
 				F3B1455D2702C0A000D33B82 /* DialogCell.m */,
-				F3B1455E2702C0A000D33B82 /* NSDate+WMZCalendarDate.h */,
-				F3B145632702C0A000D33B82 /* NSDate+WMZCalendarDate.m */,
 				F3B145602702C0A000D33B82 /* WMZDialogAnimation.h */,
 				F3B145652702C0A000D33B82 /* WMZDialogAnimation.m */,
 				F3B145622702C0A000D33B82 /* WMZDialogTree.h */,
@@ -880,7 +875,6 @@
 				F3B145712702C58600D33B82 /* DemoOneView.m in Sources */,
 				F3120DD624406A0400CF7CB7 /* PickVC.m in Sources */,
 				F3120DC624405D4700CF7CB7 /* AutoDisappealVC.m in Sources */,
-				F3B145692702C0A000D33B82 /* NSDate+WMZCalendarDate.m in Sources */,
 				F3120DAE2440581C00CF7CB7 /* CalanderVC.m in Sources */,
 				F395FE26232ABC020020CFB5 /* MASConstraint.m in Sources */,
 				F39B73EA2624323D0000B91F /* MuchVC.m in Sources */,

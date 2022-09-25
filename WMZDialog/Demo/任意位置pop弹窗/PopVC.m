@@ -119,7 +119,12 @@
 
 ///行列视图
 - (void)rowView:(UIButton*)sender{
-    Dialog().wTypeSet(DialogTypePop)
+    Dialog()
+    ///自定义修改默认内容
+    .wCustomShareViewSet(^(UIScrollView * _Nullable shareView) {
+        NSLog(@"%@",shareView.subviews);
+    })
+    .wTypeSet(DialogTypePop)
     ///分享类型内容
     .wPopStyleTypeSet(DialogPopTypeShare)
     ///多少列 此处必须设置正确

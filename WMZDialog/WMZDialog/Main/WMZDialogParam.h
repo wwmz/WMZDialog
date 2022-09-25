@@ -28,8 +28,18 @@ FOUNDATION_EXPORT DialogDarkColorKey const DialogDarkC2;
 /// 三级颜色
 FOUNDATION_EXPORT DialogDarkColorKey const DialogDarkC3;
 
+///日历设置最大最小值的效果Key
+typedef NSString * DialogCalanderLimitTypeKey NS_STRING_ENUM;
+/// 不可点击
+FOUNDATION_EXPORT DialogCalanderLimitTypeKey const DialogCalanderLimitCloseClick;
+/// 隐藏视图
+FOUNDATION_EXPORT DialogCalanderLimitTypeKey const DialogCalanderLimitHide;
+/// 置灰
+FOUNDATION_EXPORT DialogCalanderLimitTypeKey const DialogCalanderLimitGray;
+/// 关闭滑动
+FOUNDATION_EXPORT DialogCalanderLimitTypeKey const DialogCalanderLimitCloseScroll;
 
-@interface WMZDialogParam : NSObject
+@interface WMZDialogParentParam : NSObject
 
 #pragma -mark 通用
 /// 数据源
@@ -82,6 +92,8 @@ FOUNDATION_EXPORT DialogDarkColorKey const DialogDarkC3;
 @property (nonatomic,   copy) NSString *wCancelTitle;
 /// 确定按钮的颜色
 @property (nonatomic, strong) UIColor *wOKColor;
+/// 主题颜色
+@property (nonatomic, strong) UIColor *wThemeColor;
 /// 取消按钮的颜色
 @property (nonatomic, strong) UIColor *wCancelColor;
 /// 弹窗背景颜色
@@ -132,10 +144,12 @@ FOUNDATION_EXPORT DialogDarkColorKey const DialogDarkC3;
 @property (nonatomic, assign) BOOL wAutoClose;
 /// 自定义位置 default使用系统
 @property (nonatomic, assign) CGPoint wPoint;
-
-#pragma -mark Toast/Auto
 /// 自动消失时间
 @property (nonatomic, assign) CGFloat wDisappelSecond;
+/// 是否可交互 default YES
+@property (nonatomic, assign) BOOL wUserInteractionEnabled;
+
+#pragma -mark Toast/Auto
 /// toastPosition
 @property (nonatomic, assign) DialogToastPosition wToastPosition;
 /// v1.4.3 最大宽度 默认等于wWidth
@@ -170,6 +184,8 @@ FOUNDATION_EXPORT DialogDarkColorKey const DialogDarkC3;
 @property (nonatomic,   copy) NSDictionary *wRegular;
 /// 输入框背景颜色 default  .white
 @property (nonatomic, strong) UIColor *wInputBackGroundColor;
+/// 输入框文字颜色 default black
+@property (nonatomic, strong) UIColor *wInputTextColor;
 
 #pragma -mark popType
 /// 弹出的气泡位置
@@ -204,23 +220,24 @@ FOUNDATION_EXPORT DialogDarkColorKey const DialogDarkC3;
 @property (nonatomic, assign) DialogPopType wPopStyleType;
 /// v1.4.4 pop弹窗自定义内容视图
 @property (nonatomic,   copy) DialogPopCustomBlock wPopCustomView;
-
+/// 如果弹出视图的位置不对 设置此属性 例如继承了tableView则传入 继承的类名 default nil
+@property (nonatomic,   copy) NSString* wPopNestStopView;
 /// 可设置wMainOffsetY 调整弹出视图的y default 0
 
 #pragma -mark downType
 /// 图片的size
 @property (nonatomic, assign) CGSize wImageSize;
 /// 图片的路径
-@property (nonatomic,   copy) NSString *wImageName;
+@property (nonatomic,   copy) NSString* wImageName;
 /// 进度条颜色
-@property (nonatomic, strong) UIColor *wProgressTintColor;
+@property (nonatomic, strong) UIColor* wProgressTintColor;
 /// 进度条运动的颜色
-@property (nonatomic, strong) UIColor *wTrackTintColor;
+@property (nonatomic, strong) UIColor* wTrackTintColor;
 
 
 #pragma -mark muchMenuType
 /// tableview的颜色
-@property (nonatomic,   copy) NSArray *wTableViewColor;
+@property (nonatomic,   copy) NSArray* wTableViewColor;
 /// cell文本居中样式
 @property (nonatomic, assign) NSTextAlignment wTextAlignment;
 
@@ -297,6 +314,10 @@ FOUNDATION_EXPORT DialogDarkColorKey const DialogDarkC3;
 @property (nonatomic, assign) CGSize wCalanderCellSize;
 /// 多选中间部分透明度 default 1 不透明
 @property (nonatomic, assign) CGFloat wLimitAlpha;
+/// 日历顶部标题数组 必须为数量 = 7 的数组
+@property (nonatomic,   copy) NSArray<NSString*>* wCalanderWeekTitleArr;
+/// 设置日历设置最大最小值的效果 default @[DialogCalanderLimitCloseClick]
+@property (nonatomic,   copy) NSArray<DialogCalanderLimitTypeKey>* wMinMaxResultArr;
 
 #pragma -mark Event
 /// 自定义tableviewCell 
@@ -321,6 +342,10 @@ FOUNDATION_EXPORT DialogDarkColorKey const DialogDarkC3;
 @property (nonatomic,   copy) DiaLogCollectionCellBlock wCalanderCell;
 /// 自定义日历点击事件
 @property (nonatomic,   copy) DiaLogCollectionClickBlock wCalanderCellClick;
+/// 自定义出现动画
+@property (nonatomic,   copy) DialogCustomAnimal wEventCustomShowAmimal;
+/// 自定义消失动画
+@property (nonatomic,   copy) DialogCustomAnimal wEventCustomHideAmimal;
 
 #pragma -mark CustomView
 /// 自定义mainView 可改变frame
@@ -344,14 +369,16 @@ FOUNDATION_EXPORT DialogDarkColorKey const DialogDarkC3;
 /// v1.4.3 自定义修改主视图阴影 非底部阴影
 @property (nonatomic,   copy) DialogCustomMainShadomLayer wCustomMainShadom;
 
-+ (void)setDefaultPropertiess:(WMZDialogParam*)param;
-
-+ (void)setDefaultColorPropertiess:(WMZDialogParam*)param;
+@property (nonatomic,   copy) DialogCustomShareView wCustomShareView;
 
 - (void)setUpDefaultParam;
 
 /// 是否开启暗黑模式  外部不可调用
 @property (nonatomic, assign) BOOL wOpenDark;
+
+@end
+
+@interface WMZDialogParam : WMZDialogParentParam
 
 @end
 

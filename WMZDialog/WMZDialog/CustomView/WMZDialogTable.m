@@ -92,6 +92,7 @@
     cell.textLa.textAlignment = self.param.wTextAlignment;
     cell.textLa.font = [UIFont systemFontOfSize:self.param.wMessageFont];
     cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+    [cell.button setTintColor:self.param.wThemeColor];
     cell.button.image = self.param.wCheckImage;
     if (indexPath.row == [(NSArray*)self.param.wData count] - 1) {
         cell.lineView.hidden = YES;
@@ -105,7 +106,7 @@
         WMZDialogTree *selectDic = (WMZDialogTree*)data;
         cell.textLa.text = selectDic.name;
         cell.contentView.backgroundColor = self.param.wTableViewColor[MIN(selectDic.depth-1, self.param.wTableViewColor.count - 1)];
-        cell.textLa.textColor = selectDic.isSelected?self.param.wOKColor:self.param.wMessageColor;
+        cell.textLa.textColor = selectDic.isSelected?self.param.wThemeColor:self.param.wMessageColor;
         cell.button.hidden = !selectDic.isSelected;
     }else{
         if([data isKindOfClass:[NSDictionary class]]){
@@ -117,11 +118,11 @@
             cell.iconImage.image = [UIImage imageNamed:iconStr?:@" "];
             cell.iconImage.hidden = !hasImage;
             cell.textLa.text = data[@"name"]?:@"";
-            cell.textLa.textColor =  isSelect?self.param.wOKColor:self.param.wMessageColor;
+            cell.textLa.textColor =  isSelect?self.param.wThemeColor:self.param.wMessageColor;
             cell.button.hidden = !isSelect;
         }else if([data isKindOfClass:[NSString class]]){
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.textLa.textColor = isSelect?self.param.wOKColor:self.param.wMessageColor;
+            cell.textLa.textColor = isSelect?self.param.wThemeColor:self.param.wMessageColor;
             cell.textLa.text = data;
             cell.button.hidden = !isSelect;
         }

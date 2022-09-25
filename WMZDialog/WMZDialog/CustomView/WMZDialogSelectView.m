@@ -201,7 +201,7 @@
                     NSDictionary *dic = dataArr[i];
                     NSInteger row = i / self.param.wColumnCount % self.param.wRowCount;
                     NSInteger loc = i % self.param.wColumnCount ;
-                    if ([dic isKindOfClass:[NSDictionary class]]){
+                    if ([dic isKindOfClass:[NSDictionary class]] ){
                         WMZDialogShareView *iconView = [[WMZDialogShareView alloc] initWithText:dic[@"name"] image:dic[@"image"]  block:^(NSInteger index,id anyId) {
                             @DialogStrongify(self)
                             if (!anyId) return;
@@ -219,8 +219,14 @@
                         iconView.titleLB.font = [UIFont systemFontOfSize:self.param.wMessageFont];
                         iconView.frame = CGRectMake(loc * itemWidth, row * itemHeight, itemWidth, itemHeight);
                         CGFloat percentImage = 0.4;
-                        iconView.imageIV.frame = CGRectMake((itemWidth - itemWidth * percentImage)/2, 5, itemWidth * percentImage,itemHeight * percentImage);
-                        iconView.titleLB.frame = CGRectMake(2, CGRectGetMaxY(iconView.imageIV.frame) + 2, itemWidth - 4,20);
+                        if(DialogStrIsEmpty(dic[@"name"])){
+                            iconView.imageIV.frame = CGRectMake(iconView.bounds.size.width * 0.15, iconView.bounds.size.height * 0.15, iconView.bounds.size.width * 0.7, iconView.bounds.size.height * 0.7);
+                        }else if(DialogStrIsEmpty(dic[@"image"])){
+                            iconView.titleLB.frame =  CGRectMake(5, 0, iconView.bounds.size.width - 10, iconView.bounds.size.height);
+                        }else if (!DialogStrIsEmpty(dic[@"name"]) && !DialogStrIsEmpty(dic[@"image"])){
+                            iconView.imageIV.frame = CGRectMake((itemWidth - itemWidth * percentImage)/2, 5, itemWidth * percentImage,itemHeight * percentImage);
+                            iconView.titleLB.frame = CGRectMake(2, CGRectGetMaxY(iconView.imageIV.frame) + 2, itemWidth - 4,20);
+                        }
                         [self.shareView addSubview:iconView];
                         self.shareView.frame = CGRectMake(0, 0, MIN(dataArr.count, self.param.wColumnCount) * itemWidth ,  ceil(dataArr.count/(self.param.wColumnCount * 1.0)) * itemHeight );
                     }else if ([dic isKindOfClass:NSString.class]){
@@ -238,6 +244,7 @@
                         self.shareView.frame = CGRectMake(0, 0, MIN(dataArr.count, self.param.wColumnCount) * itemWidth ,  ceil(dataArr.count/(self.param.wColumnCount * 1.0)) * itemHeight * 0.7);
                     }
                 }
+                if(self.param.wCustomShareView) self.param.wCustomShareView(self.shareView);
                 contenView = self.shareView;
             }else if (self.param.wPopStyleType == DialogPopTypeCustom) {
                 contenView = self.param.wPopCustomView();
@@ -408,8 +415,9 @@
             }
             //添加UI
             if (self.param.wChainType == ChainTableView) {
+                CGFloat y = [self addTopTitleView];
                 for (int i = 0; i<self.depth; i++) {
-                    WMZDialogTableView *tableView = [[WMZDialogTableView alloc]initWithFrame:CGRectMake((i == 0)?0:CGRectGetMaxX(self.tableView.frame), 0, self.param.wWidth/self.depth, self.param.wHeight) style:UITableViewStyleGrouped];
+                    WMZDialogTableView *tableView = [[WMZDialogTableView alloc]initWithFrame:CGRectMake((i == 0)?0:CGRectGetMaxX(self.tableView.frame), y ? (y + self.param.wMainOffsetY) : 0, self.param.wWidth/self.depth, self.param.wHeight) style:UITableViewStyleGrouped];
                     if (self.param.wTableViewColor && i < self.param.wTableViewColor.count) {
                         tableView.backgroundColor = self.param.wTableViewColor[i];
                     }
@@ -523,6 +531,7 @@
             if (!DialogIsArray(dataArr)) {
                 NSLog(@"Please Input Array"); return;
             }
+            CGFloat y = [self addTopTitleView];
             /// 递归计算深度
             self.depth = 0;
             if (dataArr.count) {
@@ -538,9 +547,9 @@
             }
             /// 添加UI
             WMZDialogTableView *temp = nil;
-            for (int i = 0; i<self.depth; i++) {
-                WMZDialogTableView *ta = [[WMZDialogTableView alloc]initWithFrame:CGRectMake(!temp?0:CGRectGetMaxX(temp.frame), 0, self.param.wWidth/self.depth, self.param.wHeight) style:UITableViewStyleGrouped];
-                if (self.param.wTableViewColor&&i<self.param.wTableViewColor.count) {
+            for (int i = 0; i < self.depth; i++) {
+                WMZDialogTableView *ta = [[WMZDialogTableView alloc]initWithFrame:CGRectMake(!temp?0:CGRectGetMaxX(temp.frame), y ? (y + self.param.wMainOffsetY) : 0, self.param.wWidth / self.depth, self.param.wHeight) style:UITableViewStyleGrouped];
+                if (self.param.wTableViewColor &&i <self.param.wTableViewColor.count) {
                     ta.backgroundColor = self.param.wTableViewColor[i];
                 }
                 ta.delegate = self;
@@ -549,6 +558,7 @@
                 ta.tag = 100 + i;
                 temp = ta;
                 [self addSubview:ta];
+                self.tableView = ta;
                 if (!self.param.wListDefaultValue) {
                     if (i > 0) ta.hidden = YES;
                 }
@@ -566,8 +576,8 @@
         @(DialogTypeSelect):[NSValue valueWithCGRect:CGRectMake(0, 0, self.param.wWidth, (self.param.wAddBottomView || self.param.wMultipleSelection) ? CGRectGetMaxY(self.bottomView.frame) : CGRectGetMaxY(self.tableView.frame))],
         @(DialogTypeSheet):[NSValue valueWithCGRect: CGRectMake(0, 0, self.param.wWidth, ((!self.param.wMultipleSelection || self.param.wEventCancelFinish) && DialogStrIsNotEmpty(self.param.wCancelTitle)) ? CGRectGetMaxY(self.cancelBtn.frame) : CGRectGetMaxY(self.tableView.frame))],
         @(DialogTypePickSelect):[NSValue valueWithCGRect: CGRectMake(0, 0, self.param.wWidth, CGRectGetMaxY(self.pickView.frame))],
-        @(DialogTypeLocation):[NSValue valueWithCGRect: CGRectMake(0, self.param.wChainType == ChainTableView ? (self.param.wTapView?CGRectGetMaxY(self.param.wTapView.frame):0):0, self.param.wWidth, self.param.wChainType == ChainTableView ? CGRectGetMaxY(self.tableView.frame) : CGRectGetMaxY(self.pickView.frame))],
-        @(DialogTypeMenusSelect):[NSValue valueWithCGRect: CGRectMake(0, 0, self.param.wWidth, self.param.wHeight)],
+        @(DialogTypeLocation):[NSValue valueWithCGRect: CGRectMake(0, self.param.wChainType == ChainTableView ? (self.param.wTapView? CGRectGetMaxY(self.param.wTapView.frame):0):0, self.param.wWidth, self.param.wChainType == ChainTableView ? CGRectGetMaxY(self.tableView.frame) : CGRectGetMaxY(self.pickView.frame))],
+        @(DialogTypeMenusSelect):[NSValue valueWithCGRect: CGRectMake(0, 0, self.param.wWidth, CGRectGetMaxY(self.tableView.frame))],
         @(DialogTypeCardPresent):[NSValue valueWithCGRect: self.finalRect],
     };
     NSValue *value = rectInfo[@(self.param.wType)];
@@ -685,7 +695,7 @@
     while (arr.count) {
         UIView *view = arr.lastObject;
         [arr removeLastObject];
-        if ([NSStringFromClass([view class]) isEqualToString:stopView]) {
+        if ([NSStringFromClass([view class]) isEqualToString:self.param.wPopNestStopView ? : stopView]) {
             /// 取消最后一个
             [superViewArr removeLastObject];
             break;
@@ -824,7 +834,7 @@
                     scale = 0;
                     alpha = 0;
                     center = self.normalPoint;
-                    }
+                }
                 if (center.x >= self.normalPoint.x + pan.view.frame.size.width / 2) {
                      self.param.wHideAnimation = AninatonHideRight;
                     [[WMZDialogManage.shareInstance currentDialog:self] closeView]; return;

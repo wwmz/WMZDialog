@@ -17,7 +17,6 @@ WMZDialog * Dialog(void);
 @property (nonatomic, copy, readonly) WMZDialog *(^wCustomView)(UIView <WMZCustomPrototol>*customView);
 /// 开启暗黑模式 字典传nIl使用默认的暗黑颜色 传对应key则改变颜色 此处为全局配置 
 @property (nonatomic, copy, readonly) WMZDialog *(^wDarkMode)(NSDictionary <DialogDarkColorKey, UIColor*>* _Nullable darkinfo);
-
 /// 开始 必传
 @property (nonatomic, copy, readonly) WMZDialog *(^wStart)(void);
 /// 开始 带父视图 必传
@@ -26,7 +25,8 @@ WMZDialog * Dialog(void);
 @property (nonatomic, copy, readonly) WMZDialog *(^wStartParam)(WMZDialogParam *param);
 /// 开始 带配置和父视图 必传
 @property (nonatomic, copy, readonly) WMZDialog *(^wStartParamView)(WMZDialogParam *param,UIView *parentView);
-
+/// 开始 必传
+@property (nonatomic, copy, readonly) WMZDialog *(^wStartConfig)(DialogCustomParam param);
 /// 手动弹出视图
 /// @param showView 父视图 nil 则为默认window
 - (void)showView:(nullable UIView*)showView;
@@ -48,6 +48,10 @@ WMZDialog * Dialog(void);
 /// @param showView 父视图 nil 则为window
 /// @param block 动画结束回调
 + (void)closeWithshowView:(nullable UIView*)showView tag:(NSInteger)tag block:(nullable AnimalBlock)block;
+
+/// 重新设置frame
+/// @param frame frame
+- (void)reSetMainViewFrame:(CGRect)frame;
 
 /// 数据源
 WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, id,                       wData)
@@ -93,6 +97,8 @@ WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, UIColor*,          
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, NSString*,                wTitle)
 /// 内容文本
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, NSString*,                wMessage)
+/// 主题色 default =  OKColor
+WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, UIColor*,                 wThemeColor)
 /// 确定按钮的文本
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, NSString*,                wOKTitle)
 /// 取消按钮的文本
@@ -149,16 +155,17 @@ WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,              
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wAutoClose)
 /// 自定义位置 default使用系统
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGPoint,                  wPoint)
-
-/*=========================================aoto=======================================================================*/
 /// 自动消失时间
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGFloat,                  wDisappelSecond)
-/// v1.4.3 最大宽度 默认等于wWidth
-WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGFloat,                  wAutoMaxWidth)
+/// 是否可交互 default YES
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wUserInteractionEnabled)
 
 /*=========================================aoto=======================================================================*/
+/// v1.4.3 最大宽度 默认等于wWidth
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGFloat,                  wAutoMaxWidth)
 /// toastPosition
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, DialogToastPosition,      wToastPosition)
+
 /*=========================================Pay=======================================================================*/
 /// 距离弹窗键盘的距离
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGFloat,                  wKeyBoardMarginY)
@@ -188,6 +195,8 @@ WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, NSDictionary*,     
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGFloat,                  wInputAreaHeight)
 /// 输入框背景颜色 default  .white
 WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, UIColor* ,                wInputBackGroundColor)
+/// 编辑框颜色 default black
+WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, UIColor*,                 wInputTextColor)
 
 /*=========================================Pop=======================================================================*/
 /// 弹出的气泡位置
@@ -220,6 +229,9 @@ WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGSize,            
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGFloat,                  wAngleRadio)
 /// v1.4.4 pop弹窗内容视图类型 default DialogPopTypeTable tableView列表样式
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, DialogPopType,            wPopStyleType)
+/// 如果弹出视图的位置不对 设置此属性 例如继承了tableView则传入 继承的类名 default nil
+WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, NSString*,                wPopNestStopView)
+
 /// 可设置wMainOffsetY 调整弹出视图的y default 0
 /// wMainOffsetY
 
@@ -232,7 +244,6 @@ WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, NSString*,         
 WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, UIColor*,                 wProgressTintColor)
 /// 进度条运动的颜色
 WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, UIColor*,                 wTrackTintColor)
-
 
 
 /*=========================================menu=======================================================================*/
@@ -313,8 +324,12 @@ WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, NSString*,         
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wOpenMultiZone)
 /// 多选中间部分透明度 default 1 不透明
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGFloat,                  wLimitAlpha)
-/// cellSize default(屏幕宽度/7,屏幕宽度/7)
+/// cellSize default(屏幕宽度/7,屏幕宽度/7) 如果设置了那么 wWidth为 wCalanderCellSize.width * 7
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGSize,                   wCalanderCellSize)
+/// 日历顶部标题数组 必须为数量 = 7 的数组
+WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, NSArray<NSString*>*,      wCalanderWeekTitleArr)
+/// 设置日历设置最大最小值的效果 default @[DialogCalanderLimitCloseClick]
+WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, NSArray<DialogCalanderLimitTypeKey>*,wMinMaxResultArr)
 /*=========================================Attributes==========================================*/
 
 
@@ -343,6 +358,11 @@ WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DiaLogCollectionCel
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DiaLogCollectionClickBlock,wCalanderCellClick)
 ///v1.4.4 pop弹窗自定义内容视图
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogPopCustomBlock,      wPopCustomView)
+/// 自定义出现动画
+WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogCustomAnimal,        wEventCustomShowAmimal)
+/// 自定义消失动画
+WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogCustomAnimal,        wEventCustomHideAmimal)
+
 /*=========================================Event================================================*/
 
 /*=========================================CustomView================================================*/
@@ -366,6 +386,8 @@ WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogCustomImageVi
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogCustomTableView,wCustomTableView)
 /// v1.4.3 自定义修改主视图阴影 非底部阴影
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogCustomMainShadomLayer,wCustomMainShadom)
+/// 自定义shareView
+WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, DialogCustomShareView,wCustomShareView)
 /*=========================================CustomView================================================*/
 @end
 

@@ -396,7 +396,7 @@ void newLoadingAnimation(UIView* view,CAShapeLayer *lineLayer,NSTimeInterval dur
 - (void)verticalMoveShowAnimationWithView:(UIView*)view duration:(NSTimeInterval)duration top:(BOOL)top{
     CGRect rect = view.frame;
     view.frame = CGRectMake(rect.origin.x, top?[UIScreen mainScreen].bounds.size.height:(-rect.size.height) , rect.size.width, rect.size.height);
-    [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+    [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
         view.frame = rect;
     } completion:^(BOOL finished) {
         if (self.block) self.block();
@@ -405,7 +405,7 @@ void newLoadingAnimation(UIView* view,CAShapeLayer *lineLayer,NSTimeInterval dur
 
 - (void)verticalMoveHideAnimationWithView:(UIView*)view duration:(NSTimeInterval)duration top:(BOOL)top{
     CGRect rect = view.frame;
-    [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+    [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
         view.frame = CGRectMake(rect.origin.x, top?[UIScreen mainScreen].bounds.size.height:(-rect.size.height) , rect.size.width, rect.size.height);
     } completion:^(BOOL finished) {
         if (self.block) self.block();
@@ -415,7 +415,7 @@ void newLoadingAnimation(UIView* view,CAShapeLayer *lineLayer,NSTimeInterval dur
 - (void)landscapeMoveShowAnimationWithView:(UIView*)view duration:(NSTimeInterval)duration right:(BOOL)right{
     CGRect rect = view.frame;
     view.frame = CGRectMake( right?[UIScreen mainScreen].bounds.size.width:-(rect.size.width),rect.origin.y , rect.size.width, rect.size.height);
-    [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+    [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
         view.frame = rect;
     } completion:^(BOOL finished) {
         if (self.block) self.block();
@@ -424,15 +424,14 @@ void newLoadingAnimation(UIView* view,CAShapeLayer *lineLayer,NSTimeInterval dur
 
 - (void)landscapeMoveHideAnimationWithView:(UIView*)view duration:(NSTimeInterval)duration right:(BOOL)right{
     CGRect rect = view.frame;
-    [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+    [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
         view.frame = CGRectMake(right?[UIScreen mainScreen].bounds.size.width:-(rect.size.width), rect.origin.y , rect.size.width, rect.size.height);
     } completion:^(BOOL finished) {
         if (self.block) self.block();
     }];
 }
 
-- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
-{
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag{
     if (self.block) self.block();
 }
 

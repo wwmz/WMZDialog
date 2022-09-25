@@ -34,14 +34,17 @@ WMZDialogSetFuncImplementation(WMZDialog, BOOL,                         wHideExi
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                            wShowClose)
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                       wFillBottomLine)
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                       wMainShadowShow)
+WMZDialogSetFuncImplementation(WMZDialog, BOOL,               wUserInteractionEnabled)
 WMZDialogSetFuncImplementation(WMZDialog, DiaPopInView,                  wTapViewType)
 WMZDialogSetFuncImplementation(WMZDialog, DialogPopType,                wPopStyleType)
 WMZDialogSetFuncImplementation(WMZDialog, DialogLevel,                         wLevel)
 WMZDialogSetFuncImplementation(WMZDialog, DialogToastPosition,         wToastPosition)
+WMZDialogSetFuncImplementation(WMZDialog, UIColor*,                       wThemeColor)
 WMZDialogSetFuncImplementation(WMZDialog, CGPoint,                             wPoint)
 WMZDialogSetFuncImplementation(WMZDialog, NSInteger,                 wListScrollCount)
 WMZDialogSetFuncImplementation(WMZDialog, NSInteger,            wTableViewSectionHead)
 WMZDialogSetFuncImplementation(WMZDialog, NSArray*,                   wDateShowCircle)
+WMZDialogSetFuncImplementation(WMZDialog, NSArray<DialogCalanderLimitTypeKey>*,wMinMaxResultArr)
 WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                        wAngleRadio)
 WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                   wInputAreaHeight)
 WMZDialogSetFuncImplementation(WMZDialog, UIView* ,                          wTapView)
@@ -94,10 +97,12 @@ WMZDialogSetFuncImplementation(WMZDialog, NSInteger,                     wColumn
 WMZDialogSetFuncImplementation(WMZDialog, NSString*,                wWriteDefaultText)
 WMZDialogSetFuncImplementation(WMZDialog, NSInteger,                        wRowCount)
 WMZDialogSetFuncImplementation(WMZDialog, NSString*,                       wImageName)
+WMZDialogSetFuncImplementation(WMZDialog, NSString*,                 wPopNestStopView)
 WMZDialogSetFuncImplementation(WMZDialog, NSString*,           wReginerCollectionCell)
 WMZDialogSetFuncImplementation(WMZDialog, NSInteger,                    wLocationType)
 WMZDialogSetFuncImplementation(WMZDialog, UIColor*,                wProgressTintColor)
 WMZDialogSetFuncImplementation(WMZDialog, UIColor*,                   wTrackTintColor)
+WMZDialogSetFuncImplementation(WMZDialog, UIColor*,                   wInputTextColor)
 WMZDialogSetFuncImplementation(WMZDialog, NSArray* ,                  wTableViewColor)
 WMZDialogSetFuncImplementation(WMZDialog, NSString*,                    wDateTimeType)
 WMZDialogSetFuncImplementation(WMZDialog, NSTextAlignment,             wTextAlignment)
@@ -116,6 +121,7 @@ WMZDialogSetFuncImplementation(WMZDialog, CGFloat,                wPopViewBorder
 WMZDialogSetFuncImplementation(WMZDialog, UIColor*,               wPopViewBorderColor)
 WMZDialogSetFuncImplementation(WMZDialog, UITableViewCellSeparatorStyle,wSeparatorStyle)
 WMZDialogSetFuncImplementation(WMZDialog, UIImage*,                       wCheckImage)
+WMZDialogSetFuncImplementation(WMZDialog, NSArray<NSString*>*,  wCalanderWeekTitleArr)
 WMZDialogSetFuncImplementation(WMZDialog, DialogPopCustomBlock,        wPopCustomView)
 WMZDialogSetFuncImplementation(WMZDialog, DialogRectCorner,        wPopViewRectCorner)
 WMZDialogSetFuncImplementation(WMZDialog, DialogType,                           wType)
@@ -147,7 +153,9 @@ WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTextView,       wCustomTex
 WMZDialogSetFuncImplementation(WMZDialog, DialogCustomImageView,     wCustomImageView)
 WMZDialogSetFuncImplementation(WMZDialog, DialogCustomTableView,     wCustomTableView)
 WMZDialogSetFuncImplementation(WMZDialog, DialogCustomMainShadomLayer,wCustomMainShadom)
-
+WMZDialogSetFuncImplementation(WMZDialog, DialogCustomAnimal,  wEventCustomShowAmimal)
+WMZDialogSetFuncImplementation(WMZDialog, DialogCustomAnimal,  wEventCustomHideAmimal)
+WMZDialogSetFuncImplementation(WMZDialog, DialogCustomShareView,     wCustomShareView)
 WMZDialog * Dialog(void){
     return  [WMZDialog  new];
 }
@@ -163,7 +171,7 @@ WMZDialog * Dialog(void){
                 }
             }
         }
-        [WMZDialogParam setDefaultColorPropertiess:(WMZDialogParam*)self];
+        [WMZDialogManage setDefaultColorPropertiess:(WMZDialogParam*)self];
         return self;
     };
 }
@@ -184,9 +192,7 @@ WMZDialog * Dialog(void){
 
 - (WMZDialog * _Nonnull (^)(WMZDialogParam * _Nonnull))wStartParam{
     return ^WMZDialog*(WMZDialogParam *param){
-        if (param) {
-             self.param = param;
-         }
+        if (param) self.param = param;
         [self setUpUI:nil useConfig:param ? NO : YES];
         return self;
     };
@@ -194,9 +200,7 @@ WMZDialog * Dialog(void){
 
 - (WMZDialog * _Nonnull (^)(WMZDialogParam * _Nonnull, UIView * _Nonnull))wStartParamView{
     return ^WMZDialog*(WMZDialogParam *param,UIView *startView){
-        if (param) {
-            self.param = param;
-        }
+        if (param) self.param = param;
         [self setUpUI:startView useConfig:param ? NO : YES];
         return self;
     };
@@ -212,7 +216,7 @@ WMZDialog * Dialog(void){
 
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
-        [WMZDialogParam setDefaultPropertiess:(WMZDialogParam*)self];
+        [WMZDialogManage.shareInstance setUpManageDefaultParam:(WMZDialogParam*)self];
     }
     return self;
 }
@@ -229,7 +233,7 @@ WMZDialog * Dialog(void){
 
 - (void)setPropertiesToParam{
     u_int count = 0;
-    objc_property_t *properties = class_copyPropertyList([WMZDialogParam class], &count);
+    objc_property_t *properties = class_copyPropertyList([WMZDialogParentParam class], &count);
     for (int i = 0; i < count; i++) {
         const char *propertyName = property_getName(properties[i]);
         NSString *proper = [NSString stringWithUTF8String:propertyName];
@@ -249,7 +253,6 @@ WMZDialog * Dialog(void){
     if (self.param.wType == DialogTypeWrite ||
         self.param.wType == DialogTypePay ||
         self.param.wOpenKeyBoard) {
-        /// 监听键盘
         [[NSNotificationCenter defaultCenter] addObserver:self selector:NSSelectorFromString(@"keyboardWillShow:") name:UIKeyboardWillShowNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:NSSelectorFromString(@"keyboardWillHide:") name:UIKeyboardWillHideNotification object:nil];
     }
@@ -282,12 +285,16 @@ WMZDialog * Dialog(void){
         [self.mainView layoutIfNeeded];
         [bottomView layoutIfNeeded];
         self.param.wWidth = MAX(bottomView.frame.size.width, self.param.wWidth);
-        BOOL customHeight = (self.param.wHeight>0);
+        BOOL customHeight = (self.param.wHeight > 0);
         if (self.param.wAddBottomView) {
             UIView *addBottomView  = [self.mainView addBottomView:CGRectGetMaxY(bottomView.frame) + self.param.wMainOffsetY];
             [self reSetMainViewFrame:CGRectMake(0, 0, self.param.wWidth, customHeight?self.param.wHeight:(CGRectGetMaxY(addBottomView.frame)+self.param.wMainOffsetY))];
         }else{
             [self reSetMainViewFrame:CGRectMake(0, 0, self.param.wWidth, customHeight?self.param.wHeight:CGRectGetMaxY(bottomView.frame))];
+        }
+        
+        if (self.param.wDisappelSecond != DialogDisappealTime && self.param.wDisappelSecond) {
+            [self performSelector:@selector(closeView) withObject:nil afterDelay:self.param.wDisappelSecond];
         }
         [self showView:showView];
     }else {
@@ -339,11 +346,20 @@ WMZDialog * Dialog(void){
             [self.mainView respondsToSelector:@selector(mz_autoDisappeal)]) {
             CGFloat disappealTime = [self.mainView mz_autoDisappeal];
             
-            if (disappealTime > 0)
+            if (disappealTime > 0){
                 [self performSelector:@selector(closeView) withObject:nil afterDelay:disappealTime];
+            }else{
+                if (self.param.wDisappelSecond != DialogDisappealTime && self.param.wDisappelSecond) {
+                    [self performSelector:@selector(closeView) withObject:nil afterDelay:self.param.wDisappelSecond];
+                }
+            }
             
             if ([self.mainView respondsToSelector:@selector(mz_changeValue:)])
                 [self.mainView mz_changeValue:self.param.wData];
+        }else{
+            if (self.param.wDisappelSecond != DialogDisappealTime && self.param.wDisappelSecond) {
+                [self performSelector:@selector(closeView) withObject:nil afterDelay:self.param.wDisappelSecond];
+            }
         }
     }
     
@@ -389,7 +405,6 @@ WMZDialog * Dialog(void){
         self.param.wCustomTableView(tableView);
     }
     if (self.param.wCustomMainView) self.param.wCustomMainView(self.mainView);
-
 }
 
 /// 开始
@@ -399,11 +414,12 @@ WMZDialog * Dialog(void){
     if (self.param.wTag) {
         self.tag = self.param.wTag;
         WMZDialog *existView = [view viewWithTag:self.param.wTag];
-        if (existView &&
-            [existView isKindOfClass:WMZDialog.class] &&
+        if ([existView isKindOfClass:WMZDialog.class] &&
             existView.wType == self.param.wType) return;
     }
-    self.userInteractionEnabled = YES;
+    NSAssert(view != nil, @"检查传入的StartView或者当前的UIWindow");
+    
+    self.userInteractionEnabled = self.param.wUserInteractionEnabled;
     [WMZDialogManage.shareInstance addDialog:self cover:NO superView:view];
     if (self.param.wShowAnimation != AninatonShowNone ) {
         self.mainView.userInteractionEnabled = NO;
@@ -425,11 +441,20 @@ WMZDialog * Dialog(void){
     }
     [self bringSubviewToFront:self.mainView];
     [self setParentVCView:0.9];
-    [self dealAnamtionShowWithView:self.mainView withType:self.param.wShowAnimation withTime:self.param.wAnimationDurtion block:^{
-        @DialogStrongify(self)
-        self.mainView.userInteractionEnabled = YES;
-        self.shadowView.userInteractionEnabled = self.param.wShadowCanTap;
-    }];
+ 
+    if(self.param.wEventCustomShowAmimal){
+        self.param.wEventCustomShowAmimal(self.mainView, ^{
+            @DialogStrongify(self)
+            self.mainView.userInteractionEnabled = YES;
+            self.shadowView.userInteractionEnabled = self.param.wShadowCanTap;
+        });
+    }else{
+        [self dealAnamtionShowWithView:self.mainView withType:self.param.wShowAnimation withTime:self.param.wAnimationDurtion block:^{
+            @DialogStrongify(self)
+            self.mainView.userInteractionEnabled = YES;
+            self.shadowView.userInteractionEnabled = self.param.wShadowCanTap;
+        }];
+    }
 }
 
 /// 关闭
@@ -488,34 +513,47 @@ WMZDialog * Dialog(void){
     [self setParentVCView:1.0];
 }
 
-/// 关闭
 - (void)closeView{
     [self closeView:nil];
 }
 
 - (void)closeAction:(AnimalBlock)block{
     @DialogWeakify(self)
-    self.userInteractionEnabled = NO;
-    if (self.param.wHideAnimation) {
-         if (self.param.wShadowShow) {
-             [UIView animateWithDuration:self.param.wAnimationDurtion animations:^{
-                 self.shadowView.alpha = 0;
-             }];
+    if(self.isUserInteractionEnabled) self.userInteractionEnabled = NO;
+    if(self.param.wEventCustomHideAmimal){
+        if (self.param.wShadowShow) {
+            [UIView animateWithDuration:self.param.wAnimationDurtion animations:^{
+                self.shadowView.alpha = 0;
+            }];
         }
-        [self dealAnamtionHideWithView:self.mainView withType:self.param.wHideAnimation withTime:self.param.wAnimationDurtion block:^{
+        self.param.wEventCustomHideAmimal(self.mainView, ^{
             @DialogStrongify(self)
             [self closeBlock];
             if (block) block();
             [self removeFromSuperview];
-        }];
+        });
     }else{
-        if (block) block();
-        [self closeBlock];
-        [self removeFromSuperview];
+        if (self.param.wHideAnimation) {
+             if (self.param.wShadowShow) {
+                 [UIView animateWithDuration:self.param.wAnimationDurtion animations:^{
+                     self.shadowView.alpha = 0;
+                 }];
+            }
+            [self dealAnamtionHideWithView:self.mainView withType:self.param.wHideAnimation withTime:self.param.wAnimationDurtion block:^{
+                @DialogStrongify(self)
+                [self closeBlock];
+                if (block) block();
+                [self removeFromSuperview];
+            }];
+        }else{
+            if (block) block();
+            [self closeBlock];
+            [self removeFromSuperview];
+        }
     }
 }
 - (void)closeBlock{
-    if (self.param.wEventClose) self.param.wEventClose(@"关闭", nil);
+    if (self.param.wEventClose) self.param.wEventClose(self, self);
     [WMZDialogManage.shareInstance deleteDialog:self];
 }
 
@@ -591,7 +629,7 @@ WMZDialog * Dialog(void){
 /// 阴影点击
 - (void)shadomClick{
     [self closeView];
-    if (self.param.wEventShadomClose) self.param.wEventShadomClose(@"阴影点击", self.shadowView);
+    if (self.param.wEventShadomClose) self.param.wEventShadomClose(self, self.shadowView);
 }
 
 /// 横竖屏通知

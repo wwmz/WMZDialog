@@ -5,8 +5,6 @@
 //  Created by wmz on 2019/6/5.
 //  Copyright © 2019年 wmz. All rights reserved.
 //
-
-#import <UIKit/UIKit.h>
 #import <objc/runtime.h>
 #import "WMZDialogMacro.h"
 
@@ -33,6 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 获取bundle
 + (NSBundle*)getMainBundle;
+
 @end
 
 
@@ -61,7 +60,9 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface WMZDialogTableView : UITableView
+///wOpenScrollClose
 @property (nonatomic, assign) BOOL wOpenScrollClose;
+///wCardPresent
 @property (nonatomic, assign) BOOL wCardPresent;
 @end
 
@@ -71,20 +72,41 @@ NS_ASSUME_NONNULL_BEGIN
 typedef void (^ShareViewSelect)(NSInteger index,id anyId);
 
 @interface WMZDialogShareView : UIView
+///block
 @property (nonatomic,   copy) ShareViewSelect block;
-
+///imageIV
 @property (nonatomic, strong) UIImageView *imageIV;
-
+///titleLB
 @property (nonatomic, strong) UILabel *titleLB;
-
+///model
 @property (nonatomic, strong) id model;
-
+///changeFrame
 @property (nonatomic, assign) BOOL changeFrame;
-
+///初始化方法
 - (instancetype)initWithText:(NSString*)text
                        image:(NSString*)image
                        block:(ShareViewSelect)block
                          tag:(NSInteger)tag;
+
+@end
+
+@interface NSDate (WMZCalendarDate)
+///  获取日
++ (NSInteger)day:(NSDate *)date;
+/// 获取月
++ (NSInteger)month:(NSDate *)date;
+/// 获取年
++ (NSInteger)year:(NSDate *)date;
+/// 获取当月第一天周几
++ (NSInteger)firstWeekdayInThisMonth:(NSDate *)date;
+///获取当前月有多少天
++ (NSInteger)totaldaysInMonth:(NSDate *)date;
+/// 获取date农历信息
++ (NSDictionary*)getChineseCalendarWithDate:(NSDate*)dateTemp Year:(NSInteger)myYear Month:(NSInteger)myMonth Day:(NSInteger)myDay;
+/// 是否属于同一天判断
++ (BOOL)isInSameDay:(NSDate*)date1 time2:(NSDate*)date2;
+/// 比较两个时间的大小
++ (int)compareOneDay:(NSDate *)oneDay withAnotherDay:(NSDate *)anotherDay;
 
 @end
 

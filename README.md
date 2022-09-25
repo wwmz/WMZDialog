@@ -318,6 +318,11 @@ typedef enum : NSUInteger{
     2 默认是开启横竖屏监听的如果有问题可以把wDeviceDidChange设为NO
     3 多个弹窗优先级可以设置wLevel(同个父级有效)
     4 默认弹窗wStart是在window层 如果要设置不同层可以用wStartView(传入父view)
+    
+     (3)///设置全局默认配置 主题色字体等 
+     [WMZDialogManage settingGlobalConfig:^(WMZDialogParam * _Nullable param) {
+         param.wOKColor = UIColor.redColor;
+     }];
 
 
 
@@ -352,6 +357,7 @@ typedef enum : NSUInteger{
 
 更新日记
 ==============
+- 20220925 v1.4.7 fix #68 #66 #60 #58 新增全局配置使用 新增多个属性
 - 20211229 v1.4.6 修复崩溃 删除1.4.5 1.4.3有问题版本
 - 20211018 v1.4.2 新增wPoint自定义位置
 - 20210929 v1.4.0 新增暗黑模式 适配ios15 底层修改 

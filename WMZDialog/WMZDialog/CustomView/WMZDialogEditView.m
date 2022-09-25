@@ -108,6 +108,7 @@
             self.textField.delegate = self;
             self.textField.layer.borderWidth = 1.0f;
             self.textField.layer.cornerRadius = 5;
+            self.textField.textColor = self.param.wInputTextColor;
             self.textField.leftViewMode = UITextFieldViewModeAlways ;
             self.textField.leftView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 5, 5)];
             self.textField.returnKeyType = UIReturnKeyDone;
@@ -216,8 +217,6 @@
         self.frame = rect;
     } completion:nil];
 }
-
-
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
     if ([text isEqualToString:@""])  self.canInput = YES;
@@ -350,6 +349,7 @@
         _writeView.delegate = self;
         _writeView.layer.borderWidth = 1.0f;
         _writeView.layer.cornerRadius = 5;
+        _writeView.textColor = self.param.wInputTextColor;
         _writeView.keyboardType = self.param.wWirteKeyBoardType;
         _writeView.returnKeyType = UIReturnKeyDefault;
         _writeView.layer.masksToBounds = YES;

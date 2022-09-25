@@ -36,6 +36,10 @@
             break;
         case 2:{
             Dialog()
+            ///自定义周期
+            .wCalanderWeekTitleArrSet(@[@"日",@"一",@"二",@"三",@"四",@"五",@"六"])
+            ///自定义Size
+            .wCalanderCellSizeSet(CGSizeMake(45 , 45))
             /// 显示操作
             .wHideCalanderBtnSet(NO)
             .wTypeSet(DialogTypeCalander)
@@ -126,7 +130,7 @@
             .wCalanderCellSet(^UICollectionViewCell *(NSIndexPath *indexPath, UICollectionView *collection, WMZCalanderModel* model) {
                 MyCalanderCell *cell = [collection dequeueReusableCellWithReuseIdentifier:@"MyCalanderCell" forIndexPath:indexPath];
                 cell.dateLable.text = [NSString stringWithFormat:@"%ld",(long)model.wDay];
-//                cell.dateLable.backgroundColor = [UIColor whiteColor];
+                cell.dateLable.backgroundColor = [UIColor clearColor];
                 //上个月和下个月的数据
                 if (model.wLastMonth||model.wNextMonth) {
                     cell.dateLable.textColor = DialogDarkColor(DialogColor(0x999999), DialogColor(0x333333));
@@ -148,13 +152,15 @@
         case 9:{   ///使用param 例子
             NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
             NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
-            [dateComponents setMonth:-1];
-            NSDate *minDate = [gregorian dateByAddingComponents:dateComponents toDate:[NSDate date] options:0];
+            [dateComponents setMonth:+1];
+            NSDate *maxDate = [gregorian dateByAddingComponents:dateComponents toDate:[NSDate date] options:0];
             
             WMZDialogParam *param = WMZDialogParam.new;
-            param.wDefaultDate = minDate;
-            param.wMaxDate = [NSDate date];
-            param.wMinDate = minDate;
+            param.wDefaultDate = [NSDate date];
+            param.wMaxDate = maxDate;
+            param.wMinDate = [NSDate date];
+            ///最大最小值效果 默认为不可点击
+            param.wMinMaxResultArr = @[DialogCalanderLimitCloseClick,DialogCalanderLimitGray,DialogCalanderLimitCloseScroll];
             param.wType = DialogTypeCalander;
             param.wHideCalanderBtn = NO;
             Dialog().wStartParam(param);

@@ -13,6 +13,7 @@
 @end
 
 @implementation WMZDiaLogBase
+
 - (void)dealAnamtionShowWithView:(UIView*)view withType:(DialogShowAnination)type withTime:(NSTimeInterval)time block:(AnimalBlock)block{
     WMZDialogAnimation *animal = [WMZDialogAnimation new];
     if (type == AninatonCurverOn) {
@@ -174,6 +175,14 @@
 
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)setValue:(id)value forUndefinedKey:(NSString *)key{
+    
+}
+
+- (id)valueForUndefinedKey:(NSString *)key{
+    return nil;
 }
 
 @end

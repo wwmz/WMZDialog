@@ -29,6 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, nullable) UIView *headView;
 /// 分享视图
 @property (nonatomic, strong) UIScrollView *shareView;
+
 @end
 
 NS_ASSUME_NONNULL_END
