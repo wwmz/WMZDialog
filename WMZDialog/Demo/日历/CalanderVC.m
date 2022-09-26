@@ -153,6 +153,7 @@
             NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
             NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
             [dateComponents setMonth:+1];
+            [dateComponents setYear:+1];
             NSDate *maxDate = [gregorian dateByAddingComponents:dateComponents toDate:[NSDate date] options:0];
             
             WMZDialogParam *param = WMZDialogParam.new;

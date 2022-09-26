@@ -5,7 +5,7 @@
 //  Created by wmz on 2021/7/28.
 //  Copyright © 2021 wmz. All rights reserved.
 //
-#define NumberMounthes 4
+#define NumberMounthes 3
 #define allCount 42
 #import "WMZDialogDateView.h"
 #import "WMZDialog.h"
@@ -261,7 +261,7 @@
           if (@available(iOS 11.0, *)) {
               self.collectionView.contentInsetAdjustmentBehavior = NO;
           }
-          [self setUpDays];
+        [self setUpDays:NO];
           self.selectDate = YES;
     }
 }
@@ -582,14 +582,17 @@
 }
 
 #pragma -mark 日历
-- (void)setUpDays{
+- (void)setUpDays:(BOOL)changeDate{
+    NSInteger lastTotalNum = 0;
+    NSInteger nextTotalNum = 0;
     NSInteger index = 0;
     self.dataArr = [NSMutableArray new];
     for (int i = 0; i < NumberMounthes ; i++ ) {
         index = i;
         NSMutableArray *array = [NSMutableArray new];
         [self.dataArr addObject:array];
-        [self updateDateYear:self.currentYear Month:self.currentMonth-i-1 index:self.dataArr.count - 1];
+        BOOL resultLast =  [self updateDateYear:self.currentYear Month:self.currentMonth-i-1 index:self.dataArr.count - 1];
+        if(resultLast) lastTotalNum += 1;
     }
     [self.dataArr  sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
         return NSOrderedDescending;
@@ -597,36 +600,45 @@
     
     NSMutableArray *array = [NSMutableArray new];
     [self.dataArr addObject:array];
-    [self updateDateYear:self.currentYear Month:self.currentMonth index:self.dataArr.count - 1];
+    BOOL resultCurrent = [self updateDateYear:self.currentYear Month:self.currentMonth index:self.dataArr.count - 1];
     
     for (int i = 0; i < NumberMounthes ; i++ ) {
         index += i;
         NSMutableArray *array = [NSMutableArray new];
         [self.dataArr addObject:array];
-        [self updateDateYear:self.currentYear Month:self.currentMonth+i+1 index:self.dataArr.count - 1];
+        BOOL resultNext = [self updateDateYear:self.currentYear Month:self.currentMonth+i+1 index:self.dataArr.count - 1];
+        if(resultNext) nextTotalNum += 1;
     }
-    self.currentIndex = self.dataArr.count > 1 ? (self.dataArr.count % 2 == 0 ? (self.dataArr.count /2 - 1) : (self.dataArr.count - 1)/2 ) : self.dataArr.count;
-    [self checkIndex];
-    [self scrollIndexPath:self.currentIndex shouldReloadData:YES animal:NO first:YES];
-}
-
-- (void)checkIndex{
-    if(self.param.wMinDate){
-        NSArray <WMZCalanderModel*>* arr = self.dataArr[self.currentIndex];
-        for (WMZCalanderModel *obj in arr) {
-            if(!obj.wNextMonth && !obj.wLastMonth){
-                self.currentYear = obj.wYear;
-                self.currentMonth = obj.wMonth;
-                self.currentDay = obj.wDay;
-                int num = [NSDate compareOneDay:obj.wDate withAnotherDay:self.param.wMinDate];
-                if(num == 1){
-                   self.currentIndex = MAX(0, self.currentIndex - 1);
-                   [self checkIndex];
+    self.currentIndex = NumberMounthes;
+    if(lastTotalNum < NumberMounthes || nextTotalNum < NumberMounthes || !resultCurrent){
+        WMZCalanderModel *firstModel = nil;
+        if(!changeDate){
+            self.currentIndex = 0;
+            if(self.dataArr.count){
+                for (WMZCalanderModel *tmpModel in self.dataArr.firstObject) {
+                    if(!tmpModel.wLastMonth && !tmpModel.wNextMonth){
+                        firstModel = tmpModel;
+                        self.currentYear = tmpModel.wYear;
+                        self.currentMonth = tmpModel.wMonth;
+                        self.currentDay = tmpModel.wDay;
+                        break;;
+                    }
                 }
-                break;;
+            }
+        }else{
+            for (NSArray <WMZCalanderModel*>* tmpArr in self.dataArr) {
+                for (WMZCalanderModel *tmpModel in tmpArr) {
+                    if(!tmpModel.wLastMonth && !tmpModel.wNextMonth){
+                        if(tmpModel.wYear == self.currentYear && tmpModel.wMonth == self.currentMonth){
+                            self.currentIndex = [self.dataArr indexOfObject:tmpArr];
+                            break;
+                        }
+                    }
+                }
             }
         }
     }
+    [self scrollIndexPath:self.currentIndex shouldReloadData:YES animal:NO first:YES];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
@@ -878,6 +890,7 @@
             self.currentYear = model.wYear;
             self.currentMonth = model.wMonth;
             self.currentDay = model.wDay;
+            break;
         }
     }
     /// 首个或者最后一个 预加载上个和下个
@@ -889,9 +902,17 @@
             [self.dataArr addObject:arr];
         }
         [self updateDateYear:self.currentYear Month:self.currentIndex  == 0?(self.currentMonth-1):(self.currentMonth+1) index: (self.currentIndex == 0)?  0: (self.dataArr.count-1)];
-        
-        if (self.currentIndex == 0) {
-            [self scrollIndexPath:1 shouldReloadData:NO animal:NO first:NO];
+        if([self.param.wMinMaxResultArr indexOfObject:DialogCalanderLimitCloseScroll] != NSNotFound){
+            if(self.currentYear == [NSDate year:self.param.wMinDate] && self.currentMonth == [NSDate month:self.param.wMinDate] ){
+                return;
+            }
+            if (self.currentIndex == 0) {
+                [self scrollIndexPath:1 shouldReloadData:NO animal:NO first:NO];
+            }
+        }else{
+            if (self.currentIndex == 0) {
+                [self scrollIndexPath:1 shouldReloadData:NO animal:NO first:NO];
+            }
         }
         [UIView performWithoutAnimation:^{
             [self.collectionView reloadData];
@@ -919,8 +940,9 @@
 
 }
 /// 更新数据
-- (void)updateDateYear:(NSInteger)year Month:(NSInteger)month index:(NSInteger)index{
-    if (self.dataArr.count <= index) return;
+- (BOOL)updateDateYear:(NSInteger)year Month:(NSInteger)month index:(NSInteger)index{
+    BOOL result = YES;
+    if (self.dataArr.count <= index) return NO;
     [[self.dataArr objectAtIndex:index] removeAllObjects];
     if (month > 12) {
         int num = (month / 12.0);
@@ -1015,6 +1037,9 @@
             inRangeCount += 1;
         }
         NSArray *compareArr = self.selectDate ? self.selectArr : self.param.wListDefaultValue;
+        if(!DialogArrayNotEmpty(compareArr) && self.selecctWMZCalanderModel && !self.param.wMultipleSelection){
+            compareArr = @[self.selecctWMZCalanderModel];
+        }
         if (DialogArrayNotEmpty(compareArr)) {
             __block NSInteger count = 0;
             if (!model.wLastMonth && !model.wNextMonth) {
@@ -1066,12 +1091,10 @@
         }
         [[self.dataArr objectAtIndex:index] insertObject:model atIndex:j];
     }
-    
     if(inRangeCount == allCount && [self.param.wMinMaxResultArr indexOfObject:DialogCalanderLimitCloseScroll] != NSNotFound){
-        [self.dataArr removeObjectAtIndex:index];
-        self.currentIndex -= 1;
+       [self.dataArr removeObjectAtIndex:index];
+        result = NO;
     }
-    
     if (!self.param.wDirectionVertical) {
         if(self.dataArr.count > index){
             NSMutableArray *arr = [self.dataArr objectAtIndex:index];
@@ -1081,6 +1104,7 @@
         }
     }
     
+    return result;
 }
 
 /// 刷新后滚动
@@ -1113,7 +1137,7 @@
                  self.currentYear = year;
                  self.currentMonth = month;
                  self.currentDay = 1;
-                 [self setUpDays];
+                 [self setUpDays:YES];
                  [self.collectionView reloadData];
              }
          }
