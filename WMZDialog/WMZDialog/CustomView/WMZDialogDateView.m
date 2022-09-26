@@ -1102,6 +1102,8 @@
      .wOKColorSet(self.param.wOKColor)
      .wCancelColorSet(self.param.wCancelColor)
      .wTitleSet(@"选择日期")
+     .wMinDateSet(self.param.wMinDate)
+     .wMaxDateSet(self.param.wMaxDate)
      .wTypeSet(DialogTypeDatePicker)
      .wDateTimeTypeSet(@"yyyy年MM月")
      .wStartView(self.superview);
