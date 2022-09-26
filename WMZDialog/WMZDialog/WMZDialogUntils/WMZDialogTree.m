@@ -62,5 +62,10 @@
     }
     return result;
 }
+
+- (NSString *)description{
+    return self.dateStr;
+}
+
 @end
 

@@ -606,7 +606,27 @@
         [self updateDateYear:self.currentYear Month:self.currentMonth+i+1 index:self.dataArr.count - 1];
     }
     self.currentIndex = self.dataArr.count > 1 ? (self.dataArr.count % 2 == 0 ? (self.dataArr.count /2 - 1) : (self.dataArr.count - 1)/2 ) : self.dataArr.count;
+    [self checkIndex];
     [self scrollIndexPath:self.currentIndex shouldReloadData:YES animal:NO first:YES];
+}
+
+- (void)checkIndex{
+    if(self.param.wMinDate){
+        NSArray <WMZCalanderModel*>* arr = self.dataArr[self.currentIndex];
+        for (WMZCalanderModel *obj in arr) {
+            if(!obj.wNextMonth && !obj.wLastMonth){
+                self.currentYear = obj.wYear;
+                self.currentMonth = obj.wMonth;
+                self.currentDay = obj.wDay;
+                int num = [NSDate compareOneDay:obj.wDate withAnotherDay:self.param.wMinDate];
+                if(num == 1){
+                   self.currentIndex = MAX(0, self.currentIndex - 1);
+                   [self checkIndex];
+                }
+                break;;
+            }
+        }
+    }
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{

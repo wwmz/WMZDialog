@@ -649,12 +649,13 @@ static int32_t gLunarHolDay[]={
 
 + (int)compareOneDay:(NSDate *)oneDay withAnotherDay:(NSDate *)anotherDay{
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"dd-MM-yyyy"];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     NSString *oneDayStr = [dateFormatter stringFromDate:oneDay];
     NSString *anotherDayStr = [dateFormatter stringFromDate:anotherDay];
     NSDate *dateA = [dateFormatter dateFromString:oneDayStr];
     NSDate *dateB = [dateFormatter dateFromString:anotherDayStr];
     NSComparisonResult result = [dateA compare:dateB];
+    
     if (result == NSOrderedDescending) {
         return 1;
     }
