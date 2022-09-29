@@ -21,23 +21,45 @@
 
 - (void)setParam:(WMZDialogParam *)param{
     if (param) {
-        self.titleLabel.text = param.wTitle;
-        self.titleLabel.font = [UIFont systemFontOfSize:param.wTitleFont];
         self.titleLabel.textColor =  param.wTitleColor;
+        self.titleLabel.font = [UIFont systemFontOfSize:param.wTitleFont];
+        if([param.wTitle isKindOfClass:NSAttributedString.class]){
+            self.titleLabel.attributedText = (NSAttributedString*)param.wTitle;
+        }else{
+            self.titleLabel.text = param.wTitle;
+        }
+        self.titleLabel.textAlignment = param.wTextAlignment;
 
-        self.textLabel.text = param.wMessage;
         self.textLabel.font = [UIFont systemFontOfSize:param.wMessageFont];
         self.textLabel.textColor = param.wMessageColor;
+        if([param.wMessage isKindOfClass:NSAttributedString.class]){
+            self.textLabel.attributedText = (NSAttributedString*)param.wMessage;
+        }else{
+            self.textLabel.text = param.wMessage;
+        }
+        self.textLabel.textAlignment = param.wTextAlignment;
            
-        [self.cancelBtn addTarget:self action:@selector(cancelAction:)forControlEvents:UIControlEventTouchUpInside];
-        [self.cancelBtn setTitle:param.wCancelTitle forState:UIControlStateNormal];
         self.cancelBtn.titleLabel.font = [UIFont systemFontOfSize:param.wCancelFont];
         [self.cancelBtn setTitleColor:param.wCancelColor forState:UIControlStateNormal];
+        [self.cancelBtn addTarget:self action:@selector(cancelAction:)forControlEvents:UIControlEventTouchUpInside];
+        self.cancelBtn.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        self.cancelBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+        if([param.wCancelTitle isKindOfClass:NSAttributedString.class]){
+            [self.cancelBtn setAttributedTitle:param.wCancelTitle forState:UIControlStateNormal];
+        }else{
+            [self.cancelBtn setTitle:param.wCancelTitle forState:UIControlStateNormal];
+        }
         self.cancelBtn.backgroundColor = param.wMainBackColor;
-           
-        [self.OKBtn setTitle:param.wOKTitle forState:UIControlStateNormal];
+        
         [self.OKBtn setTitleColor:param.wOKColor forState:UIControlStateNormal];
         self.OKBtn.titleLabel.font = [UIFont systemFontOfSize:param.wOKFont];
+        self.OKBtn.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        self.OKBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+        if([param.wOKTitle isKindOfClass:NSAttributedString.class]){
+            [self.OKBtn setAttributedTitle:param.wOKTitle forState:UIControlStateNormal];
+        }else{
+            [self.OKBtn setTitle:param.wOKTitle forState:UIControlStateNormal];
+        }
         self.OKBtn.backgroundColor = param.wMainBackColor;
         [self.OKBtn addTarget:self action:@selector(confirmAction:) forControlEvents:UIControlEventTouchUpInside];
            
@@ -63,6 +85,11 @@
     self.bottomView = [UIView new];
     [self addSubview:self.bottomView];
     
+    CGSize OKSize = [WMZDialogUntils sizeForTextView:CGSizeMake(self.param.wWidth, CGFLOAT_MAX) text:self.param.wOKTitle font:[UIFont systemFontOfSize:self.param.wOKFont]];
+    CGSize cancelSize ;
+    if (self.param.wEventCancelFinish)
+        cancelSize = [WMZDialogUntils sizeForTextView:CGSizeMake(self.param.wWidth, CGFLOAT_MAX) text:self.param.wCancelTitle font:[UIFont systemFontOfSize:self.param.wCancelFont]];
+    
     UIView *upLine = [UIView new];
     upLine.alpha = self.param.wLineAlpha;
     [self.bottomView addSubview:upLine];
@@ -70,41 +97,32 @@
     upLine.frame = CGRectMake(0, 0, self.param.wWidth, DialogK1px);
     if (self.param.wEventCancelFinish) {
         [self.bottomView addSubview:self.cancelBtn];
-        self.cancelBtn.frame = CGRectMake(0, CGRectGetMaxY(upLine.frame)+self.param.wMainOffsetX, self.param.wWidth/2-DialogK1px/2, self.param.wMainBtnHeight);
+        self.cancelBtn.frame = CGRectMake(0, CGRectGetMaxY(upLine.frame)+self.param.wMainOffsetX, self.param.wWidth/2-DialogK1px/2, MAX(self.param.wMainBtnHeight, cancelSize.height));
         
         UIView *Line = [UIView new];
         Line.alpha = self.param.wLineAlpha;
         Line.tag = 11111;
         [self.bottomView addSubview:Line];
         Line.backgroundColor = self.param.wLineColor;
-        Line.frame = CGRectMake(CGRectGetMaxX(self.cancelBtn.frame),  self.param.wFillBottomLine?CGRectGetMaxY(upLine.frame): self.cancelBtn.frame.origin.y, DialogK1px, self.param.wMainBtnHeight + (self.param.wFillBottomLine?self.param.wMainOffsetX * 2:0));
+        Line.frame = CGRectMake(CGRectGetMaxX(self.cancelBtn.frame),  self.param.wFillBottomLine?CGRectGetMaxY(upLine.frame): self.cancelBtn.frame.origin.y, DialogK1px, MAX(CGRectGetHeight(self.OKBtn.frame), CGRectGetHeight(self.cancelBtn.frame)) + (self.param.wFillBottomLine?self.param.wMainOffsetX * 2:0));
     }
     
     [self.bottomView addSubview:self.OKBtn];
-    self.OKBtn.frame = CGRectMake(self.param.wEventCancelFinish?CGRectGetMaxX(self.cancelBtn.frame)+DialogK1px:0, CGRectGetMaxY(upLine.frame)+self.param.wMainOffsetX,self.param.wEventCancelFinish?self.param.wWidth/2-DialogK1px/2:self.param.wWidth, self.param.wMainBtnHeight);
-    
-    CGSize OKSize = [WMZDialogUntils sizeForTextView:CGSizeMake(self.param.wWidth, CGFLOAT_MAX) text:self.param.wOKTitle font:[UIFont systemFontOfSize:self.param.wOKFont]];
-    CGSize cancelSize ;
-    if (self.param.wEventCancelFinish)
-        cancelSize = [WMZDialogUntils sizeForTextView:CGSizeMake(self.param.wWidth, CGFLOAT_MAX) text:self.param.wCancelTitle font:[UIFont systemFontOfSize:self.param.wCancelFont]];
+    self.OKBtn.frame = CGRectMake(self.param.wEventCancelFinish? CGRectGetMaxX(self.cancelBtn.frame) + DialogK1px:0, CGRectGetMaxY(upLine.frame)+self.param.wMainOffsetX,self.param.wEventCancelFinish?self.param.wWidth/2-DialogK1px/2:self.param.wWidth, MAX(self.param.wMainBtnHeight, OKSize.height));
 
     if (OKSize.width > (self.OKBtn.frame.size.width - self.param.wMainOffsetX * 2) ||
         cancelSize.width > (self.OKBtn.frame.size.width - self.param.wMainOffsetX * 2)) {
         UIView *line = [self.bottomView viewWithTag:11111];
         if (self.param.wEventCancelFinish) {
-            self.cancelBtn.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
-            self.cancelBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
             self.cancelBtn.frame = CGRectMake(self.param.wMainOffsetX, CGRectGetMaxY(upLine.frame)+self.param.wMainOffsetX, self.param.wWidth  - self.param.wMainOffsetX*2, cancelSize.height);
             if (line) {
                 line.frame = CGRectMake(0, CGRectGetMaxY(self.cancelBtn.frame) + (self.param.wFillBottomLine?0:self.param.wMainOffsetX), self.param.wWidth, DialogK1px);
             }
         }
-        self.OKBtn.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        self.OKBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
         self.OKBtn.frame = CGRectMake(self.param.wMainOffsetX, self.param.wEventCancelFinish?(CGRectGetMaxY(line.frame) + self.param.wMainOffsetX): (CGRectGetMaxY(upLine.frame)+self.param.wMainOffsetX),self.param.wWidth - self.param.wMainOffsetX*2, OKSize.height);
     }
-    
-    self.bottomView.frame = CGRectMake(0, maxY, self.param.wWidth, CGRectGetMaxY(self.OKBtn.frame)+self.param.wMainOffsetX);
+
+    self.bottomView.frame = CGRectMake(0, maxY, self.param.wWidth, MAX(CGRectGetMaxY(self.OKBtn.frame), CGRectGetMaxY(self.cancelBtn.frame)) + self.param.wMainOffsetX);
     
     return self.bottomView;
 }
@@ -140,9 +158,9 @@
 
 - (CGFloat)addTopTitleView{
     [self addSubview:self.titleLabel];
-    self.titleLabel.frame = CGRectMake(self.param.wMainOffsetX, DialogStrIsNotEmpty(self.param.wTitle) ? self.param.wMainOffsetY:0, self.param.wWidth - self.param.wMainOffsetX * 2, [WMZDialogUntils sizeForTextView:CGSizeMake(self.param.wWidth - self.param.wMainOffsetX * 2, CGFLOAT_MAX) text:self.titleLabel.text font:self.titleLabel.font].height);
+    self.titleLabel.frame = CGRectMake(self.param.wMainOffsetX, self.param.wTitle ? self.param.wMainOffsetY:0, self.param.wWidth - self.param.wMainOffsetX * 2, [WMZDialogUntils sizeForTextView:CGSizeMake(self.param.wWidth - self.param.wMainOffsetX * 2, CGFLOAT_MAX) text:self.param.wTitle font:self.titleLabel.font].height);
     [self addSubview:self.textLabel];
-    self.textLabel.frame = CGRectMake(self.param.wMainOffsetX, CGRectGetMaxY(self.titleLabel.frame) +   (DialogStrIsNotEmpty(self.param.wMessage) ? self.param.wMainOffsetY : 0), self.param.wWidth - self.param.wMainOffsetX * 2, [WMZDialogUntils sizeForTextView:CGSizeMake(self.param.wWidth-self.param.wMainOffsetX * 2, CGFLOAT_MAX) text:self.textLabel.text font:self.textLabel.font].height);
+    self.textLabel.frame = CGRectMake(self.param.wMainOffsetX, CGRectGetMaxY(self.titleLabel.frame) + (self.param.wMessage ? self.param.wMainOffsetY : 0), self.param.wWidth - self.param.wMainOffsetX * 2, [WMZDialogUntils sizeForTextView:CGSizeMake(self.param.wWidth-self.param.wMainOffsetX * 2, CGFLOAT_MAX) text:self.param.wMessage font:self.textLabel.font].height);
     return CGRectGetMaxY(self.textLabel.frame);
 }
 

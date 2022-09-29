@@ -83,13 +83,13 @@ FOUNDATION_EXPORT DialogCalanderLimitTypeKey const DialogCalanderLimitCloseScrol
 /// sheet底部颜色
 @property (nonatomic, strong) UIColor *wBottomLineColor;
 /// 标题文本
-@property (nonatomic,   copy) NSString *wTitle;
+@property (nonatomic, strong) id wTitle;
 /// 内容文本
-@property (nonatomic  , copy) NSString *wMessage;
+@property (nonatomic, strong) id wMessage;
 /// 确定按钮的文本
-@property (nonatomic,   copy) NSString *wOKTitle;
+@property (nonatomic, strong) id wOKTitle;
 /// 取消按钮的文本
-@property (nonatomic,   copy) NSString *wCancelTitle;
+@property (nonatomic, strong) id wCancelTitle;
 /// 确定按钮的颜色
 @property (nonatomic, strong) UIColor *wOKColor;
 /// 主题颜色
@@ -242,8 +242,8 @@ FOUNDATION_EXPORT DialogCalanderLimitTypeKey const DialogCalanderLimitCloseScrol
 @property (nonatomic, assign) NSTextAlignment wTextAlignment;
 
 #pragma -mark locationType
-/// 地区的类型 1省 2省市 3省市区
-@property (nonatomic, assign) NSInteger wLocationType;
+/// 地区的类型
+@property (nonatomic, assign) DialogLocationType wLocationType;
 /// 弹出的地区选择类型 pickview/tableview
 @property (nonatomic, assign) ChainType wChainType;
 /// 选中数据的分割符 默认‘，’

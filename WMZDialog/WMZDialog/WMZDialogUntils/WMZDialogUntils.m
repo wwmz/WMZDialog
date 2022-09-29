@@ -36,14 +36,15 @@
 + (CGSize)sizeForTextView:(CGSize)constraint
                      text:(NSString *)text
                      font:(UIFont*)font{
-    if (!text||
-        ![text isKindOfClass:NSString.class]||
-        !text.length) return CGSizeZero;
-    CGRect rect = [text boundingRectWithSize:constraint
-                    options:(NSStringDrawingUsesLineFragmentOrigin|
-                             NSStringDrawingUsesFontLeading)
-                        attributes:@{NSFontAttributeName: font}
-                                        context:nil];
+    CGRect rect = CGRectZero;
+    if([text isKindOfClass:NSAttributedString.class]){
+        rect = [(NSAttributedString*)text boundingRectWithSize:constraint options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil];
+    }else if([text isKindOfClass:NSString.class] && text.length){
+        rect = [text boundingRectWithSize:constraint
+                                  options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading)
+                               attributes:@{NSFontAttributeName: font}
+                                  context:nil];
+    }
     return rect.size;
 }
 

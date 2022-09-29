@@ -54,7 +54,7 @@
             }else{
                 if (DialogStrIsNotEmpty(self.param.wTitle)) {
                     [self addSubview:self.titleLabel];
-                    self.titleLabel.frame = CGRectMake(self.param.wMainOffsetX,self.param.wTitle.length?self.param.wMainOffsetY:0, self.param.wWidth-self.param.wMainOffsetX * 2, [WMZDialogUntils sizeForTextView:CGSizeMake(self.param.wWidth - self.param.wMainOffsetX * 2, CGFLOAT_MAX) text:self.titleLabel.text font:self.titleLabel.font].height);
+                    self.titleLabel.frame = CGRectMake(self.param.wMainOffsetX,self.param.wTitle ? self.param.wMainOffsetY:0, self.param.wWidth-self.param.wMainOffsetX * 2, [WMZDialogUntils sizeForTextView:CGSizeMake(self.param.wWidth - self.param.wMainOffsetX * 2, CGFLOAT_MAX) text:self.param.wTitle font:self.titleLabel.font].height);
                 }
             }
             self.tableView.frame = CGRectMake(0, self.param.wMultipleSelection?CGRectGetMaxY(self.headView.frame) : (DialogStrIsNotEmpty(self.param.wTitle) ? (CGRectGetMaxY(self.titleLabel.frame) + self.param.wMainOffsetY) : 0), self.param.wWidth, self.param.wCellHeight * MIN(self.param.wListScrollCount, dataArr.count));

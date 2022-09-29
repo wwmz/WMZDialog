@@ -204,7 +204,7 @@
           UITapGestureRecognizer *textTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(textAction)];
           self.textLabel.userInteractionEnabled = YES;
           [self.textLabel addGestureRecognizer:textTap];
-          titleView.frame = CGRectMake(0, 0, self.param.wWidth, self.param.wMessage.length?self.textLabel.frame.size.height:40);
+          titleView.frame = CGRectMake(0, 0, self.param.wWidth, self.param.wMessage ? self.textLabel.frame.size.height:40);
           
           NSString *left = [[WMZDialogUntils getMainBundle] pathForResource:@"dia_right" ofType:@"png"];
           NSString *right = [[WMZDialogUntils getMainBundle] pathForResource:@"dia_left" ofType:@"png"];

@@ -34,8 +34,8 @@
     .wListDefaultValueSet(sender.tag<4?@[@"广东省",@(4),@"440514"]:nil) //可传地区 名字/id/index (此处4是汕头市 440514是潮南区的编号)
     //分隔符
     .wSeparatorSet(@",")
-    .wChainTypeSet(sender.tag<4?ChainPickView:ChainTableView)
-    .wLocationTypeSet(sender.tag<3?sender.tag+1:3)
+    .wChainTypeSet(sender.tag < 4 ?ChainPickView:ChainTableView)
+    .wLocationTypeSet(sender.tag < 3 ? sender.tag+1 : DialogLocationProAndCityAndDis)
     .wTypeSet(DialogTypeLocation)
     .wStart();
 }
@@ -47,7 +47,7 @@
             NSLog(@"选中 %@ %@",anyID,otherData);
         })
     //三列
-    .wLocationTypeSet(3)
+    .wLocationTypeSet(DialogLocationProAndCityAndDis)
     .wDataSet([self customTree])
     .wTypeSet(DialogTypeLocation)
     .wStart();

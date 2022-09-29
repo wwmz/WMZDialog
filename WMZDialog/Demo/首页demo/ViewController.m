@@ -205,8 +205,8 @@
     .wTrackTintColorSet(DialogColor(0xF3F4F6))
     //自定义弹窗时是否添加底部的确定取消按钮
     .wAddBottomViewSet(YES)
-    //地区联动 显示的层级 支持只显示1 2 3层
-    .wLocationTypeSet(3)
+    //地区联动 显示的层级
+    .wLocationTypeSet(DialogLocationProAndCityAndDis)
     //联动的样式  tableview列表或者pickview显示
     .wChainTypeSet(ChainPickView)
     //日期时间

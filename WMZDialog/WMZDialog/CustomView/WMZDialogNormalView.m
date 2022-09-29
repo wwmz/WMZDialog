@@ -44,7 +44,7 @@
                 [self addSubview:self.iconIV];
             }
             [self addSubview:self.textLabel];
-            CGSize size = [WMZDialogUntils sizeForTextView:CGSizeMake(self.param.wAutoMaxWidth - self.param.wMainOffsetX * 2, CGFLOAT_MAX) text:self.textLabel.text font:self.textLabel.font];
+            CGSize size = [WMZDialogUntils sizeForTextView:CGSizeMake(self.param.wAutoMaxWidth - self.param.wMainOffsetX * 2, CGFLOAT_MAX) text:self.param.wMessage font:self.textLabel.font];
             if (DialogStrIsNotEmpty(self.param.wImageName)) size.width = self.param.wAutoMaxWidth - self.param.wMainOffsetX * 2;
             self.textLabel.frame =  CGRectMake(self.param.wMainOffsetX,(DialogStrIsNotEmpty(self.param.wImageName)? CGRectGetMaxY(self.iconIV.frame):0) + (self.textLabel.text.length?self.param.wMainOffsetY : 0), size.width, size.height);
         }
@@ -54,7 +54,7 @@
         case DialogTypeToast:{
             self.textLabel.textAlignment = NSTextAlignmentCenter;
             [self addSubview:self.textLabel];
-            CGSize size = [WMZDialogUntils sizeForTextView:CGSizeMake(self.param.wWidth - 20, CGFLOAT_MAX) text:self.textLabel.text font:self.textLabel.font];
+            CGSize size = [WMZDialogUntils sizeForTextView:CGSizeMake(self.param.wWidth - 20, CGFLOAT_MAX) text:self.param.wMessage font:self.textLabel.font];
             self.textLabel.frame =  CGRectMake(10 , self.param.wMainOffsetY, self.param.wWidth - 20 , (self.param.wHeight != DialogRealW(400)) ? (self.param.wHeight - self.param.wMainOffsetY * 2) : (size.height + 10));
             CGRect rect = CGRectMake(0, 0, self.param.wWidth, (self.param.wHeight != DialogRealW(400))? self.param.wHeight:(CGRectGetMaxY(self.textLabel.frame) + self.param.wMainOffsetY));
             if (self.param.wToastPosition == DialogToastTop) {
@@ -108,7 +108,7 @@
              }
             if (DialogStrIsNotEmpty(self.param.wTitle)){
                [self addSubview:self.titleLabel];
-               self.titleLabel.frame = CGRectMake(self.param.wMainOffsetX, CGRectGetMaxY(self.iconIV.frame) + self.param.wMainOffsetY, self.param.wWidth-self.param.wMainOffsetX * 2, [WMZDialogUntils sizeForTextView:CGSizeMake(self.param.wWidth-self.param.wMainOffsetX * 2, CGFLOAT_MAX) text:self.titleLabel.text font:self.titleLabel.font].height);
+               self.titleLabel.frame = CGRectMake(self.param.wMainOffsetX, CGRectGetMaxY(self.iconIV.frame) + self.param.wMainOffsetY, self.param.wWidth-self.param.wMainOffsetX * 2, [WMZDialogUntils sizeForTextView:CGSizeMake(self.param.wWidth-self.param.wMainOffsetX * 2, CGFLOAT_MAX) text:self.param.wTitle font:self.titleLabel.font].height);
 
             }
             if (self.param.wShowClose) {
@@ -148,7 +148,7 @@
             [self addSubview:self.iconIV];
             
             [self addSubview:self.titleLabel];
-            self.titleLabel.frame = CGRectMake(self.param.wMainOffsetX, CGRectGetMaxY(self.iconIV.frame)+ (self.param.wTitle.length?self.param.wMainOffsetY : 0), self.param.wWidth - self.param.wMainOffsetX * 2, [WMZDialogUntils sizeForTextView:CGSizeMake(self.param.wWidth - self.param.wMainOffsetX * 2, CGFLOAT_MAX) text:self.titleLabel.text font:self.titleLabel.font].height);
+            self.titleLabel.frame = CGRectMake(self.param.wMainOffsetX, CGRectGetMaxY(self.iconIV.frame)+ (self.param.wTitle?self.param.wMainOffsetY : 0), self.param.wWidth - self.param.wMainOffsetX * 2, [WMZDialogUntils sizeForTextView:CGSizeMake(self.param.wWidth - self.param.wMainOffsetX * 2, CGFLOAT_MAX) text:self.param.wTitle font:self.titleLabel.font].height);
             
             [self addSubview:self.progressView];
             self.progressView.frame = CGRectMake(self.param.wMainOffsetX, CGRectGetMaxY(self.titleLabel.frame) + self.param.wMainOffsetY, self.param.wWidth*0.75, DialogRealW(20));
@@ -168,7 +168,7 @@
             }
             
             [self addSubview:self.titleLabel];
-            self.titleLabel.frame = CGRectMake(self.param.wMainOffsetX, self.param.wMainOffsetY, self.param.wWidth - self.param.wMainOffsetX * 2, [WMZDialogUntils sizeForTextView:CGSizeMake(self.param.wWidth-self.param.wMainOffsetX*2, CGFLOAT_MAX) text:self.titleLabel.text font:self.titleLabel.font].height);
+            self.titleLabel.frame = CGRectMake(self.param.wMainOffsetX, self.param.wMainOffsetY, self.param.wWidth - self.param.wMainOffsetX * 2, [WMZDialogUntils sizeForTextView:CGSizeMake(self.param.wWidth-self.param.wMainOffsetX*2, CGFLOAT_MAX) text:self.param.wTitle font:self.titleLabel.font].height);
             
             [self addSubview:self.upLine];
             self.upLine.frame = CGRectMake(self.param.wMainOffsetX,  DialogStrIsNotEmpty(self.param.wTitle) ? (CGRectGetMaxY(self.titleLabel.frame) + self.param.wMainOffsetY) : 0, self.param.wWidth - self.param.wMainOffsetX * 2, DialogK1px);

@@ -17,11 +17,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.dataArr = @[@"普通弹窗",@"取消按钮",@"文字过多换行",@"自定义位置",@"背景阴影",@"自定义动画"];
+    self.dataArr = @[@"普通弹窗",@"取消按钮",@"文字过多换行",@"自定义位置",@"背景阴影",@"自定义动画",@"富文本"];
     
     ///设置全局默认配置 主题色字体等 
     [WMZDialogManage settingGlobalConfig:^(WMZDialogParam * _Nullable param) {
         param.wOKColor = UIColor.redColor;
+        param.wThemeColor = UIColor.redColor;
     }];
 }
 
@@ -121,6 +122,42 @@
             .wMessageSet(@"自定义消失动画")
             .wTypeSet(DialogTypeNornal)
             .wStartView(self.view);
+        }
+            break;
+        case 6:{
+            
+            NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
+            paragraphStyle.lineSpacing = 10;
+            NSMutableAttributedString *titleStr = [[NSMutableAttributedString alloc]initWithString:@"这是一个标题\n这是一个标题\n这是一个标题" attributes:@{
+                NSParagraphStyleAttributeName:paragraphStyle,
+                NSForegroundColorAttributeName:UIColor.redColor,
+                NSFontAttributeName:[UIFont systemFontOfSize:14 weight:UIFontWeightMedium]
+            }];
+            NSMutableAttributedString *messageStr = [[NSMutableAttributedString alloc]initWithString:@"这是一个内容\n这是一个内容\n这是一个内容这是一个内容这是一个内容这是一个内容" attributes:@{
+                NSParagraphStyleAttributeName:paragraphStyle,
+                NSForegroundColorAttributeName:UIColor.blueColor,
+                NSFontAttributeName:[UIFont systemFontOfSize:13 weight:UIFontWeightRegular]
+            }];
+            
+            NSMutableAttributedString *OKStr = [[NSMutableAttributedString alloc]initWithString:@"这是确定的富文本\n这是确定的富文本\n这是确定的富文本" attributes:@{
+                NSParagraphStyleAttributeName:paragraphStyle,
+                NSForegroundColorAttributeName:UIColor.orangeColor,
+                NSFontAttributeName:[UIFont systemFontOfSize:12 weight:UIFontWeightBold]
+            }];
+            
+            NSMutableAttributedString *cancelStr = [[NSMutableAttributedString alloc]initWithString:@"这是取消的富文本\n这是取消的富文本\n这是取消的富文本\n这是取消的富文本" attributes:@{
+                NSParagraphStyleAttributeName:paragraphStyle,
+                NSForegroundColorAttributeName:UIColor.systemPinkColor,
+                NSFontAttributeName:[UIFont systemFontOfSize:12 weight:UIFontWeightBold]
+            }];
+            Dialog()
+            .wTitleSet(titleStr)
+            .wMessageSet(messageStr)
+            .wOKTitleSet(OKStr)
+            .wCancelTitleSet(cancelStr)
+            .wTypeSet(DialogTypeNornal)
+            .wEventCancelFinishSet(^(id anyID, id otherData) {})
+            .wStart();
         }
             break;
             

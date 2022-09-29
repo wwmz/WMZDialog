@@ -347,6 +347,16 @@ typedef enum : NSUInteger{
     DialogPopTypeCustom,
  }DialogPopType;
 
+/// 地区选择格式
+typedef enum : NSUInteger{
+    /// 省
+    DialogLocationPro = 1,
+    /// 省市
+    DialogLocationProAndCity = 2,
+    /// 省市区
+    DialogLocationProAndCityAndDis = 3,
+ }DialogLocationType;
+
 /// 点击
 typedef void (^DialogClickBlock)(id _Nullable anyID,id _Nullable otherData);
 /// 多列表点击

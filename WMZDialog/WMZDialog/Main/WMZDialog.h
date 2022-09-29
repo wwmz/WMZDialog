@@ -94,15 +94,15 @@ WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, UIColor*,          
 /// sheet底部颜色
 WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, UIColor*,                 wBottomLineColor)
 /// 标题文本
-WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, NSString*,                wTitle)
+WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, id,                       wTitle)
 /// 内容文本
-WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, NSString*,                wMessage)
+WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, id,                       wMessage)
 /// 主题色 default =  OKColor
 WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, UIColor*,                 wThemeColor)
 /// 确定按钮的文本
-WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, NSString*,                wOKTitle)
+WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, id,                       wOKTitle)
 /// 取消按钮的文本
-WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, NSString*,                wCancelTitle)
+WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, id,                       wCancelTitle)
 /// 确定按钮的颜色
 WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, UIColor*,                 wOKColor)
 /// 取消按钮的颜色
@@ -255,7 +255,7 @@ WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, NSTextAlignment,   
 
 /*=========================================location=======================================================================*/
 /// 地区的类型 1省 2省市 3省市区
-WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, NSInteger,                wLocationType)
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, DialogLocationType,       wLocationType)
 /// 弹出的地区选择类型 pickview/tableview
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, ChainType,                wChainType)
 /// 选中数据的分割符 默认‘，’
