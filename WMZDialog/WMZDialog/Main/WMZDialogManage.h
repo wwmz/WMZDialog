@@ -7,6 +7,7 @@
 //
 #import <UIKit/UIKit.h>
 @class WMZDialogParam,WMZDialogParentParam;
+
 typedef void (^DialogCustomParam)(WMZDialogParam* _Nullable param);
 
 NS_ASSUME_NONNULL_BEGIN
@@ -24,10 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setUpManageDefaultParam:(WMZDialogParentParam*)param;
 
 + (void)setDefaultColorPropertiess:(WMZDialogParentParam*)param;
-
 /// 当前正在显示的弹窗
 - (id)currentDialog:(UIView*)normalView;
-
 /// 添加弹窗
 /// @param dialog 弹窗视图
 /// @param cover 是否覆盖内存缓存
@@ -35,7 +34,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)addDialog:(id)dialog
             cover:(BOOL)cover
         superView:(UIView*)superView;
-
 /// 删除弹窗
 /// @param dialog 弹窗视图
 - (void)deleteDialog:(id)dialog;

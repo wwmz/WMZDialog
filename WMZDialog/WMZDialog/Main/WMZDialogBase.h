@@ -1,5 +1,5 @@
 //
-//  WMZDiaLogBase.h
+//  WMZDialogBase.h
 //  WMZDialog
 //
 //  Created by wmz on 2019/6/21.
@@ -15,7 +15,7 @@
 #import "WMZDialogTree.h"
 
 NS_ASSUME_NONNULL_BEGIN
-@interface WMZDiaLogBase : UIView
+@interface WMZDialogBase : UIView
 /// 配置
 @property (nonatomic, copy, readonly) NSDictionary <NSNumber* , NSString*> *configDic;
 /// 属性

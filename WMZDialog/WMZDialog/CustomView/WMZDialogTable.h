@@ -30,7 +30,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger depth;
 
 - (NSArray*)getTreeSelectDataArr:(BOOL)first;
-
 ///数据处理  type 1返回tree对象
 - (id)getMyDataArr:(NSInteger )tableViewTag withType:(NSInteger)type;
 @end

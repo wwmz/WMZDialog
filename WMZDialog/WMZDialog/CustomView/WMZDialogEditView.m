@@ -279,17 +279,17 @@
     return YES;
 }
 
--(void)textField1TextChange:(UITextField *)textField{
+- (void)textField1TextChange:(UITextField *)textField{
     @DialogWeakify(self)
-    for (int i = 0; i<[self.passView subviews].count; i++) {
+    for (int i = 0; i < [self.passView subviews].count; i++) {
         UILabel *la = [self.passView subviews][i];
         la.text = @"";
     }
-    for (int i = 0; i<textField.text.length; i++) {
+    for (int i = 0; i < textField.text.length; i++) {
         UILabel *la = [self.passView viewWithTag:100+i];
         la.text = @"●";
     }
-    if (textField.text.length==self.param.wPayNum) {
+    if (textField.text.length == self.param.wPayNum) {
         [self.textField resignFirstResponder];
         [[WMZDialogManage.shareInstance currentDialog:self]  closeView:^{
             @DialogStrongify(self)

@@ -309,7 +309,6 @@ WMZDialog * Dialog(void){
         if ([self.mainView conformsToProtocol:@protocol(WMZCustomPrototol)]) {
             if ([self.mainView respondsToSelector:@selector(mz_setupView)])
                 [self.mainView mz_setupView];
-            
             if ([self.mainView respondsToSelector:@selector(mz_setupRect)]) {
                 BOOL center = YES;
                 if ([self.mainView respondsToSelector:@selector(mz_centerView)])
@@ -600,6 +599,8 @@ WMZDialog * Dialog(void){
 /// 重新设置frame
 - (void)reSetMainViewFrame:(CGRect)frame{
     CGPoint center = CGPointZero;
+    frame.size.width = MIN(DialogScreenW, frame.size.width);
+    frame.size.height = MIN(DialogScreenH - DialogStatusH - DialogSafeBottomHeight, frame.size.height);
     if (self.param.wMainToBottom) {
         frame.origin.y = DialogScreenH - CGRectGetMaxY(frame);
         if (DialogIsIphoneX) {

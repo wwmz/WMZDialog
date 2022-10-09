@@ -12,13 +12,13 @@
 
 @interface WMZDialogDateView()<UICollectionViewDelegate,UICollectionViewDataSource>
 /// 最小时间
-@property (nonatomic, strong) NSMutableDictionary *minDate;
+@property (nonatomic, strong) NSMutableDictionary <NSString*,NSNumber*>*minDate;
 /// 最大时间
-@property (nonatomic, strong) NSMutableDictionary *maxDate;
+@property (nonatomic, strong) NSMutableDictionary <NSString*,NSNumber*>*maxDate;
 /// 时间配置数组
-@property (nonatomic, strong) NSArray *dateConfigArr;
+@property (nonatomic, strong) NSArray <NSString*>*dateConfigArr;
 /// 时间配置字典
-@property (nonatomic, strong) NSDictionary *dateConfigInfo;
+@property (nonatomic, strong) NSDictionary <NSString*,NSString*>*dateConfigInfo;
 
 @property (nonatomic, assign) NSInteger currentYear;
 
@@ -38,7 +38,7 @@
 /// 数据数组
 @property (nonatomic, strong) NSMutableArray *dataArr;
 /// 数据数组
-@property (nonatomic, strong) NSMutableArray *selectTimeArr;
+@property (nonatomic, strong) NSMutableArray <NSString*>*selectTimeArr;
 ///
 @property (nonatomic, assign) BOOL selectDate;
 @end
@@ -110,10 +110,10 @@
                 NSArray *data = nil;
                 NSMutableDictionary *mdic = [NSMutableDictionary new];
                 if ([obj isEqualToString:@"yyyy"]) {
-                    if (self.minDate&&self.minDate[@"yyyy"]) {
+                    if (self.minDate && self.minDate[@"yyyy"]) {
                         [mdic setObject:self.minDate[@"yyyy"] forKey:@"min"];
                     }
-                    if (self.maxDate&&self.maxDate[@"yyyy"]) {
+                    if (self.maxDate && self.maxDate[@"yyyy"]) {
                         [mdic setObject:self.maxDate[@"yyyy"] forKey:@"max"];
                     }
                 }
@@ -286,10 +286,10 @@
     NSString *name = [self.param.wDateTimeType containsString:@"年"]?@"年":@"";
     int min = 1;
     int max = 3000;
-    if (limitDic&&limitDic[@"min"]) {
+    if (limitDic && limitDic[@"min"]) {
         min = [limitDic[@"min"] intValue];
     }
-    if (limitDic&&limitDic[@"max"]) {
+    if (limitDic && limitDic[@"max"]) {
         max = [limitDic[@"max"] intValue];
     }
     NSMutableArray *year = [NSMutableArray new];
@@ -303,16 +303,16 @@
     NSString *name = [self.param.wDateTimeType containsString:@"月"]?@"月":@"";
     int min = 1;
     int max = 12;
-    if (limitDic&&limitDic[@"min"]) {
+    if (limitDic && limitDic[@"min"]) {
         min = [limitDic[@"min"] intValue];
     }
-    if (limitDic&&limitDic[@"max"]) {
+    if (limitDic && limitDic[@"max"]) {
         max = [limitDic[@"max"] intValue];
     }
     
     NSMutableArray *month = [NSMutableArray new];
     for (int i = min; i<= max;i++ ) {
-        [month addObject:i<10?[NSString stringWithFormat:@"0%d%@",i,name]:[NSString stringWithFormat:@"%d%@",i,name]];
+        [month addObject:[NSString stringWithFormat:@"%02d%@",i,name]];
     }
     return [NSArray arrayWithArray:month];
 }
@@ -321,10 +321,10 @@
     NSString *name = [self.param.wDateTimeType containsString:@"时"]?@"时":@"";
     int min = 0;
     int max = 23;
-    if (limitDic&&limitDic[@"min"]) {
+    if (limitDic && limitDic[@"min"]) {
         min = [limitDic[@"min"] intValue];
     }
-    if (limitDic&&limitDic[@"max"]) {
+    if (limitDic && limitDic[@"max"]) {
         max = [limitDic[@"max"] intValue];
     }
     NSMutableArray *hour = [NSMutableArray new];
@@ -346,7 +346,7 @@
      }
     NSMutableArray *minArr = [NSMutableArray new];
     for (int i = min; i<= max ;i++ ) {
-        [minArr addObject:i<10?[NSString stringWithFormat:@"0%d%@",i,name]:[NSString stringWithFormat:@"%d%@",i,name]];
+        [minArr addObject:[NSString stringWithFormat:@"%02d%@",i,name]];
     }
     return [NSArray arrayWithArray:minArr];
 }
@@ -363,7 +363,7 @@
     }
     NSMutableArray *second = [NSMutableArray new];
     for (int i = min; i<= max; i++) {
-        [second addObject:i<10?[NSString stringWithFormat:@"0%d%@",i,name]:[NSString stringWithFormat:@"%d%@",i,name]];
+        [second addObject:[NSString stringWithFormat:@"%02d%@",i,name]];
     }
     return [NSArray arrayWithArray:second];
 }
@@ -373,7 +373,7 @@
     int day = 0 ;
     NSMutableArray *dayArr = [NSMutableArray new];
     if (!arr || arr.count<1) {
-        //数据不规范的当做30天处理
+        ///数据不规范的当做30天处理
         day = 30;
     }else{
         NSString *year = arr[0];
@@ -383,21 +383,21 @@
         if((yearInfo % 400 == 0) || ((yearInfo % 4 == 0) && (yearInfo % 100 != 0))){
             isLeapYear = true ;
         }
-        NSArray *dayCountArr = @[@"31",isLeapYear?@"29":@"28",@"31",@"30",@"31",@"30",@"31",@"31",@"30",@"31",@"30",@"31"];
+        NSArray *dayCountArr = @[@"31",isLeapYear? @"29":@"28",@"31",@"30",@"31",@"30",@"31",@"31",@"30",@"31",@"30",@"31"];
         day = [dayCountArr[month.integerValue-1] intValue];
     }
     
     int min = 1;
     int max = day;
-    if (limitDic&&limitDic[@"min"]) {
+    if (limitDic && limitDic[@"min"]) {
         min = [limitDic[@"min"] intValue];
     }
-    if (limitDic&&limitDic[@"max"]) {
+    if (limitDic && limitDic[@"max"]) {
         max = [limitDic[@"max"] intValue];
     }
     
     for (int i = min; i <= max ; i++ ) {
-        [dayArr addObject: i<10? [NSString stringWithFormat:@"0%d%@",i,name]:[NSString stringWithFormat:@"%d%@",i,name]];
+        [dayArr addObject:[NSString stringWithFormat:@"%02d%@",i,name]];
     }
     
     return [NSArray arrayWithArray:dayArr];
@@ -405,16 +405,15 @@
 
 /// 更新时间
 - (void)updateTime:(NSNumber*)rowNum component:(NSNumber*)componentNum{
-    
     if (self.maxDate||self.minDate) {
         NSInteger component = [componentNum integerValue];
-        //包含正确参数
+        ///包含正确参数
         BOOL trueCongig = YES;
-        //防止越界
+        ///防止越界
         if (component +1 >= [(NSArray*)self.param.wData count]) {
             trueCongig = NO;
         }
-        //判断date的typeConfig时候全面
+        ///判断date的typeConfig时候全面
         if (trueCongig) {
             for (int i = 0; i<=(component+1); i++) {
                 NSString *type = self.dateConfigArr[i];
@@ -438,27 +437,21 @@
                     int tmpDateConfig = 0;
                     NSArray *tmpDateConfigArr = self.param.wData[i];
                     NSInteger yearIndex = [self.pickView selectedRowInComponent:i];
-                    
                     NSInteger index = MIN((self.param.wPickRepeat?yearIndex%tmpDateConfigArr.count:yearIndex), (self.param.wPickRepeat?(tmpDateConfigArr.count-1)%tmpDateConfigArr.count:(tmpDateConfigArr.count-1)));
-                    
                     tmpDateConfig =[[tmpDateConfigArr[index] stringByTrimmingCharactersInSet:nonDigits] intValue];
-                    
                     [compareDateArr addObject:@(tmpDateConfig)];
                     [dateTypeArr addObject:self.dateConfigArr[i]];
-                    
                 }
-                
                 NSMutableArray *yearMontharr = [NSMutableArray new];
                 for (int i = 0; i<compareDateArr.count; i++) {
                     int dateConfig = [compareDateArr[i] intValue];
                     NSString *dateType = dateTypeArr[i];
-                    
-                    if (self.minDate&&self.minDate[dateType]) {
+                    if (self.minDate && self.minDate[dateType]) {
                         if (dateConfig >[self.minDate[dateType] intValue]) {
                             minLimit = NO;
                         }
                     }
-                    if (self.maxDate&&self.maxDate[dateType]) {
+                    if (self.maxDate && self.maxDate[dateType]) {
                         if (dateConfig <[self.maxDate[dateType] intValue]) {
                             maxLimit = NO;
                         }
@@ -467,14 +460,12 @@
                         [yearMontharr addObject:compareDateArr[i]];
                     }
                 }
-                
                 if (self.minDate&&self.minDate[nextType]&&minLimit) {
                     [mdic setObject:self.minDate[nextType] forKey:@"min"];
                 }
                 if (self.maxDate&&self.maxDate[nextType]&&maxLimit) {
                     [mdic setObject:self.maxDate[nextType] forKey:@"max"];
                 }
-                
                 if(k == 2){
                     SuppressPerformSelectorLeakWarning(
                         self.param.wData[k] = [self performSelector:NSSelectorFromString(self.dateConfigInfo[nextType])  withObject:[NSArray arrayWithArray:yearMontharr] withObject:[NSDictionary dictionaryWithDictionary:mdic]];
@@ -621,7 +612,7 @@
                         self.currentYear = tmpModel.wYear;
                         self.currentMonth = tmpModel.wMonth;
                         self.currentDay = tmpModel.wDay;
-                        break;;
+                        break;
                     }
                 }
             }
@@ -659,13 +650,11 @@
        !model.wInRange){
         hidden = YES;
     }
-    
     BOOL gray = NO;
     if([self.param.wMinMaxResultArr indexOfObject:DialogCalanderLimitGray] != NSNotFound &&
        !model.wInRange){
         gray = YES;
     }
-    
     WMZDialogCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:self.param.wOpenChineseDate?@"WMZDialogCollectionCell":@"WMZDialogCalanderCell"  forIndexPath:indexPath];
     cell.dateLable.text = [NSString stringWithFormat:@"%ld",(long)model.wDay];
     cell.chineseLable.text = model.wChineseDate;
@@ -716,7 +705,6 @@
                 cell.chineseLable.textColor = model.wHadHolday?[UIColor redColor]:DialogDarkOpenColor(DialogColor(0x666666), DialogColor(0xffffff),self.param.wOpenDark);;
             }
         }
-        
         if(gray){
             color =  DialogDarkOpenColor(DialogColor(0xffffff), WMZDialogManage.shareInstance.darkColorInfo[DialogDarkMainColor],self.param.wOpenDark);
             cell.dateLable.textColor = DialogDarkOpenColor(DialogColor(0xD9D9D9), DialogColor(0x666666),self.param.wOpenDark);
@@ -1006,13 +994,12 @@
         }else{
             tmpDay = j - firstDayInThisMounth + 1;
         }
-        NSString *detaMonth = tmpMonth<10?[NSString stringWithFormat:@"0%ld",(long)tmpMonth]:[NSString stringWithFormat:@"%ld",(long)tmpMonth];
-        NSString *detaDay = tmpDay <10 ?[NSString stringWithFormat:@"0%ld",(long)tmpDay]:[NSString stringWithFormat:@"%ld",(long)tmpDay];
+        NSString *detaMonth = [NSString stringWithFormat:@"%02ld",(long)tmpMonth];
+        NSString *detaDay = [NSString stringWithFormat:@"%02ld",(long)tmpDay];
         NSString *dateStr = [NSString stringWithFormat:@"%ld-%@-%@",(long)tmpYear,detaMonth,detaDay];
         NSDate *myDate = [dateFormatter dateFromString:dateStr];
         NSDictionary *dic = [NSDate getChineseCalendarWithDate:myDate Year:tmpYear Month:tmpMonth Day:tmpDay];
-        
-        //判断是否显示圆点
+        ///判断是否显示圆点
         if (self.param.wDateShowCircle&&!model.wLastMonth&&!model.wLastMonth) {
             NSUInteger index = [self.tempArr indexOfObject:dateStr];
             if (index!=NSNotFound) {
@@ -1103,7 +1090,6 @@
             }];
         }
     }
-    
     return result;
 }
 
@@ -1163,14 +1149,14 @@
     self.textLabel.text = [NSString stringWithFormat:@"%ld年%ld月",(long)self.currentYear,(long)currentMonth];
 }
 
-- (NSArray *)dateConfigArr{
+- (NSArray<NSString *> *)dateConfigArr{
     if (!_dateConfigArr) {
         _dateConfigArr = @[@"yyyy",@"MM",@"dd",@"HH",@"mm",@"ss"];
     }
     return _dateConfigArr;
 }
 
-- (NSDictionary *)dateConfigInfo{
+- (NSDictionary<NSString *,NSString *> *)dateConfigInfo{
     if (!_dateConfigInfo) {
         _dateConfigInfo = @{
         @"yyyy":@"timeYearData:",
@@ -1183,7 +1169,7 @@
     return _dateConfigInfo;
 }
 
-- (NSMutableArray *)selectTimeArr{
+- (NSMutableArray<NSString *> *)selectTimeArr{
     _selectTimeArr = NSMutableArray.new;
     [self.selectArr enumerateObjectsUsingBlock:^(WMZCalanderModel*  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [_selectTimeArr addObject:obj.dateStr];

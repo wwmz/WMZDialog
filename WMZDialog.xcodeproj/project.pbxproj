@@ -43,7 +43,7 @@
 		F31E1EE626B1AE7700D9092B /* WMZDialogDateView.m in Sources */ = {isa = PBXBuildFile; fileRef = F31E1EE526B1AE7700D9092B /* WMZDialogDateView.m */; };
 		F32F6BFE253FF2E2002DE0C8 /* SwiftVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32F6BFD253FF2E2002DE0C8 /* SwiftVC.swift */; };
 		F335AAE523B09508001BBC87 /* WMZDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = F335AAE023B09508001BBC87 /* WMZDialog.m */; };
-		F335AAE623B09508001BBC87 /* WMZDiaLogBase.m in Sources */ = {isa = PBXBuildFile; fileRef = F335AAE423B09508001BBC87 /* WMZDiaLogBase.m */; };
+		F335AAE623B09508001BBC87 /* WMZDialogBase.m in Sources */ = {isa = PBXBuildFile; fileRef = F335AAE423B09508001BBC87 /* WMZDialogBase.m */; };
 		F36B038026A86660002901DB /* WMZDialogSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = F36B037F26A86660002901DB /* WMZDialogSelectView.m */; };
 		F373A87D2770741500B68565 /* ToastVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F373A87C2770741500B68565 /* ToastVC.m */; };
 		F384F62C270414DD007ECEC8 /* DarkVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F384F62B270414DD007ECEC8 /* DarkVC.m */; };
@@ -168,10 +168,10 @@
 		F32F6BFC253FF2E2002DE0C8 /* WMZDialog-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WMZDialog-Bridging-Header.h"; sourceTree = "<group>"; };
 		F32F6BFD253FF2E2002DE0C8 /* SwiftVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftVC.swift; sourceTree = "<group>"; };
 		F335AAE023B09508001BBC87 /* WMZDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMZDialog.m; sourceTree = "<group>"; };
-		F335AAE123B09508001BBC87 /* WMZDiaLogBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMZDiaLogBase.h; sourceTree = "<group>"; };
+		F335AAE123B09508001BBC87 /* WMZDialogBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMZDialogBase.h; sourceTree = "<group>"; };
 		F335AAE223B09508001BBC87 /* WMZDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMZDialog.h; sourceTree = "<group>"; };
 		F335AAE323B09508001BBC87 /* WMZDialogMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMZDialogMacro.h; sourceTree = "<group>"; };
-		F335AAE423B09508001BBC87 /* WMZDiaLogBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMZDiaLogBase.m; sourceTree = "<group>"; };
+		F335AAE423B09508001BBC87 /* WMZDialogBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMZDialogBase.m; sourceTree = "<group>"; };
 		F36B037E26A86660002901DB /* WMZDialogSelectView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMZDialogSelectView.h; sourceTree = "<group>"; };
 		F36B037F26A86660002901DB /* WMZDialogSelectView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMZDialogSelectView.m; sourceTree = "<group>"; };
 		F36B038126A86DB1002901DB /* WMZCustomPrototol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMZCustomPrototol.h; sourceTree = "<group>"; };
@@ -528,8 +528,8 @@
 		F3120DA32440581C00CF7CB7 /* 日期时间弹窗 */ = {
 			isa = PBXGroup;
 			children = (
-				F3120DA42440581C00CF7CB7 /* DateTimeVC.m */,
 				F3120DA52440581C00CF7CB7 /* DateTimeVC.h */,
+				F3120DA42440581C00CF7CB7 /* DateTimeVC.m */,
 			);
 			path = "日期时间弹窗";
 			sourceTree = "<group>";
@@ -575,8 +575,8 @@
 			children = (
 				F335AAE223B09508001BBC87 /* WMZDialog.h */,
 				F335AAE023B09508001BBC87 /* WMZDialog.m */,
-				F335AAE123B09508001BBC87 /* WMZDiaLogBase.h */,
-				F335AAE423B09508001BBC87 /* WMZDiaLogBase.m */,
+				F335AAE123B09508001BBC87 /* WMZDialogBase.h */,
+				F335AAE423B09508001BBC87 /* WMZDialogBase.m */,
 				F335AAE323B09508001BBC87 /* WMZDialogMacro.h */,
 				F3BF0A91262043D900FE5F9C /* WMZDialogManage.h */,
 				F3BF0A92262043D900FE5F9C /* WMZDialogManage.m */,
@@ -896,7 +896,7 @@
 				F3120DAD2440581C00CF7CB7 /* NestedPopDemo.m in Sources */,
 				F3D5CEAB26A43F4700CF7CDF /* WMZDialogTable.m in Sources */,
 				F3120DD0244065CB00CF7CB7 /* WriteVC.m in Sources */,
-				F335AAE623B09508001BBC87 /* WMZDiaLogBase.m in Sources */,
+				F335AAE623B09508001BBC87 /* WMZDialogBase.m in Sources */,
 				F395FE27232ABC020020CFB5 /* MASViewConstraint.m in Sources */,
 				F3BF0A93262043D900FE5F9C /* WMZDialogManage.m in Sources */,
 				F3120DDC24406DF500CF7CB7 /* DownVC.m in Sources */,

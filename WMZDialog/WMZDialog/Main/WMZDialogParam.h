@@ -368,13 +368,11 @@ FOUNDATION_EXPORT DialogCalanderLimitTypeKey const DialogCalanderLimitCloseScrol
 @property (nonatomic,   copy) DialogCustomTableView wCustomTableView;
 /// v1.4.3 自定义修改主视图阴影 非底部阴影
 @property (nonatomic,   copy) DialogCustomMainShadomLayer wCustomMainShadom;
-
+/// 自定义shareView
 @property (nonatomic,   copy) DialogCustomShareView wCustomShareView;
-
-- (void)setUpDefaultParam;
-
 /// 是否开启暗黑模式  外部不可调用
 @property (nonatomic, assign) BOOL wOpenDark;
+- (void)setUpDefaultParam;
 
 @end
 

@@ -6,11 +6,11 @@
 //  Copyright © 2019年 wmz. All rights reserved.
 //
 
-#import "WMZDiaLogBase.h"
+#import "WMZDialogBase.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface WMZDialog : WMZDiaLogBase
+@interface WMZDialog : WMZDialogBase
 /// 初始化
 WMZDialog * Dialog(void);
 /// 使用自定义弹窗 （实现WMZCustomPrototol协议的视图）

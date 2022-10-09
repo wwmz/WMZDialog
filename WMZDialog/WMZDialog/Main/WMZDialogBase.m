@@ -1,18 +1,18 @@
 //
-//  WMZDiaLogBase.m
+//  WMZDialogBase.m
 //  WMZDialog
 //
 //  Created by wmz on 2019/6/21.
 //  Copyright © 2019年 wmz. All rights reserved.
 //
 
-#import "WMZDiaLogBase.h"
+#import "WMZDialogBase.h"
 
-@interface WMZDiaLogBase ()<CAAnimationDelegate>
+@interface WMZDialogBase ()<CAAnimationDelegate>
 @property (nonatomic, copy, readwrite) NSDictionary <NSNumber* , NSString*> *configDic;
 @end
 
-@implementation WMZDiaLogBase
+@implementation WMZDialogBase
 
 - (void)dealAnamtionShowWithView:(UIView*)view withType:(DialogShowAnination)type withTime:(NSTimeInterval)time block:(AnimalBlock)block{
     WMZDialogAnimation *animal = [WMZDialogAnimation new];
