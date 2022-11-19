@@ -148,6 +148,12 @@ FOUNDATION_EXPORT DialogCalanderLimitTypeKey const DialogCalanderLimitCloseScrol
 @property (nonatomic, assign) CGFloat wDisappelSecond;
 /// 是否可交互 default YES
 @property (nonatomic, assign) BOOL wUserInteractionEnabled;
+/// cell背景颜色 default white
+@property (nonatomic, strong) UIColor *wCellBackgroundColor;
+/// cell所带图片的size default {30,30}
+@property (nonatomic, assign) CGSize wCellIconSize;
+/// cell内容对齐位置(图文有效) 传入字符串的时候使用wTextAlignment default 左对齐
+@property (nonatomic, assign) DialogCellAlignType wCellAlignType;
 
 #pragma -mark Toast/Auto
 /// toastPosition
@@ -222,6 +228,7 @@ FOUNDATION_EXPORT DialogCalanderLimitTypeKey const DialogCalanderLimitCloseScrol
 @property (nonatomic,   copy) DialogPopCustomBlock wPopCustomView;
 /// 如果弹出视图的位置不对 设置此属性 例如继承了tableView则传入 继承的类名 default nil
 @property (nonatomic,   copy) NSString* wPopNestStopView;
+
 /// 可设置wMainOffsetY 调整弹出视图的y default 0
 
 #pragma -mark downType

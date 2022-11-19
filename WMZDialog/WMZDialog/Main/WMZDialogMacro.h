@@ -347,6 +347,16 @@ typedef enum : NSUInteger{
     DialogPopTypeCustom,
  }DialogPopType;
 
+///cell视图内容对齐方向
+typedef enum : NSUInteger{
+    /// 左对其
+    DialogCellAlignLeft = 0,
+    /// 居中对齐
+    DialogCellAlignCenter,
+    /// 右对齐
+    DialogCellAlignRight,
+ }DialogCellAlignType;
+
 /// 地区选择格式
 typedef enum : NSUInteger{
     /// 省

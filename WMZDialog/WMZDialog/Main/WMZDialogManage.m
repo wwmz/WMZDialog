@@ -123,6 +123,9 @@ static WMZDialogManage* dialogManage = nil;
     param.wPopStyleType = DialogPopTypeTable;
     param.wCalanderWeekTitleArr = @[@"周日",@"周一",@"周二",@"周三",@"周四",@"周五",@"周六"];
     param.wMinMaxResultArr = @[DialogCalanderLimitCloseClick];
+    param.wCellBackgroundColor = DialogColor(0xffffff);
+    param.wCellIconSize = CGSizeMake(DialogRealW(60), DialogRealW(60));
+    param.wCellAlignType = DialogCellAlignLeft;
     [self setDefaultColorPropertiess:param];
 }
 
@@ -225,12 +228,12 @@ static WMZDialogManage* dialogManage = nil;
     }
 }
 
-- (id)currentDialog:(UIView*)normalView{
+- (WMZDialog*)currentDialog:(UIView*)normalView{
     UIView *currentView = normalView;
     while (![currentView.superview isKindOfClass:NSClassFromString(@"WMZDialog")]) {
         currentView = currentView.superview;
     }
-    if ([currentView.superview isKindOfClass:NSClassFromString(@"WMZDialog")]) return currentView.superview;
+    if ([currentView.superview isKindOfClass:NSClassFromString(@"WMZDialog")]) return (WMZDialog*)currentView.superview;
     return nil;
 }
 

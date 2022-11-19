@@ -14,6 +14,7 @@
 		1871672222A76B03001C6B41 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1871672122A76B03001C6B41 /* main.m */; };
 		1871672C22A76B03001C6B41 /* WMZDialogTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1871672B22A76B03001C6B41 /* WMZDialogTests.m */; };
 		1871673722A76B03001C6B41 /* WMZDialogUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1871673622A76B03001C6B41 /* WMZDialogUITests.m */; };
+		F3116AEF2928656800140743 /* WMZDialogCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F3116AEE2928656800140743 /* WMZDialogCell.m */; };
 		F3120DA72440581C00CF7CB7 /* LocationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F3120D8A2440581B00CF7CB7 /* LocationVC.m */; };
 		F3120DA82440581C00CF7CB7 /* MenusSelectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F3120D912440581C00CF7CB7 /* MenusSelectVC.m */; };
 		F3120DA92440581C00CF7CB7 /* CollectionViewPopDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = F3120D932440581C00CF7CB7 /* CollectionViewPopDemo.m */; };
@@ -60,7 +61,6 @@
 		F39B73EA2624323D0000B91F /* MuchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F39B73E92624323D0000B91F /* MuchVC.m */; };
 		F39B73F3262435C70000B91F /* CustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = F39B73F2262435C70000B91F /* CustomView.m */; };
 		F3B1455A2702C02100D33B82 /* WMZDialogParam.m in Sources */ = {isa = PBXBuildFile; fileRef = F3B145592702C02100D33B82 /* WMZDialogParam.m */; };
-		F3B145662702C0A000D33B82 /* DialogCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F3B1455D2702C0A000D33B82 /* DialogCell.m */; };
 		F3B145672702C0A000D33B82 /* WMZDialogTree.m in Sources */ = {isa = PBXBuildFile; fileRef = F3B1455F2702C0A000D33B82 /* WMZDialogTree.m */; };
 		F3B145682702C0A000D33B82 /* WMZDialogUntils.m in Sources */ = {isa = PBXBuildFile; fileRef = F3B145612702C0A000D33B82 /* WMZDialogUntils.m */; };
 		F3B1456A2702C0A000D33B82 /* WMZDialogAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = F3B145652702C0A000D33B82 /* WMZDialogAnimation.m */; };
@@ -111,6 +111,8 @@
 		1871673222A76B03001C6B41 /* WMZDialogUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WMZDialogUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1871673622A76B03001C6B41 /* WMZDialogUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMZDialogUITests.m; sourceTree = "<group>"; };
 		1871673822A76B03001C6B41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F3116AED2928656800140743 /* WMZDialogCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMZDialogCell.h; sourceTree = "<group>"; };
+		F3116AEE2928656800140743 /* WMZDialogCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMZDialogCell.m; sourceTree = "<group>"; };
 		F3120D892440581B00CF7CB7 /* LocationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationVC.h; sourceTree = "<group>"; };
 		F3120D8A2440581B00CF7CB7 /* LocationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationVC.m; sourceTree = "<group>"; };
 		F3120D902440581C00CF7CB7 /* MenusSelectVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenusSelectVC.h; sourceTree = "<group>"; };
@@ -211,12 +213,10 @@
 		F3B145582702C02100D33B82 /* WMZDialogParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMZDialogParam.h; sourceTree = "<group>"; };
 		F3B145592702C02100D33B82 /* WMZDialogParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMZDialogParam.m; sourceTree = "<group>"; };
 		F3B1455C2702C0A000D33B82 /* WMZDialogUntils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMZDialogUntils.h; sourceTree = "<group>"; };
-		F3B1455D2702C0A000D33B82 /* DialogCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogCell.m; sourceTree = "<group>"; };
 		F3B1455F2702C0A000D33B82 /* WMZDialogTree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMZDialogTree.m; sourceTree = "<group>"; };
 		F3B145602702C0A000D33B82 /* WMZDialogAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMZDialogAnimation.h; sourceTree = "<group>"; };
 		F3B145612702C0A000D33B82 /* WMZDialogUntils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMZDialogUntils.m; sourceTree = "<group>"; };
 		F3B145622702C0A000D33B82 /* WMZDialogTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMZDialogTree.h; sourceTree = "<group>"; };
-		F3B145642702C0A000D33B82 /* DialogCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogCell.h; sourceTree = "<group>"; };
 		F3B145652702C0A000D33B82 /* WMZDialogAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMZDialogAnimation.m; sourceTree = "<group>"; };
 		F3B1456C2702C3CE00D33B82 /* NewCustomVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewCustomVC.h; sourceTree = "<group>"; };
 		F3B1456D2702C3CE00D33B82 /* NewCustomVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewCustomVC.m; sourceTree = "<group>"; };
@@ -648,14 +648,14 @@
 		F3B1455B2702C0A000D33B82 /* WMZDialogUntils */ = {
 			isa = PBXGroup;
 			children = (
-				F3B145642702C0A000D33B82 /* DialogCell.h */,
-				F3B1455D2702C0A000D33B82 /* DialogCell.m */,
 				F3B145602702C0A000D33B82 /* WMZDialogAnimation.h */,
 				F3B145652702C0A000D33B82 /* WMZDialogAnimation.m */,
 				F3B145622702C0A000D33B82 /* WMZDialogTree.h */,
 				F3B1455F2702C0A000D33B82 /* WMZDialogTree.m */,
 				F3B1455C2702C0A000D33B82 /* WMZDialogUntils.h */,
 				F3B145612702C0A000D33B82 /* WMZDialogUntils.m */,
+				F3116AED2928656800140743 /* WMZDialogCell.h */,
+				F3116AEE2928656800140743 /* WMZDialogCell.m */,
 			);
 			path = WMZDialogUntils;
 			sourceTree = "<group>";
@@ -906,7 +906,6 @@
 				F395FE24232ABC020020CFB5 /* NSArray+MASAdditions.m in Sources */,
 				F3D5CE8426A2C40500CF7CDF /* WMZDialogView.m in Sources */,
 				F3120DC924405DF600CF7CB7 /* PayVC.m in Sources */,
-				F3B145662702C0A000D33B82 /* DialogCell.m in Sources */,
 				F3120DAC2440581C00CF7CB7 /* PopVC.m in Sources */,
 				F36B038026A86660002901DB /* WMZDialogSelectView.m in Sources */,
 				F3120DE82440717500CF7CB7 /* LoadingVC.m in Sources */,
@@ -917,6 +916,7 @@
 				F3B145792702EEF500D33B82 /* DemoThreeView.m in Sources */,
 				1871671422A76AFB001C6B41 /* AppDelegate.m in Sources */,
 				F395FE20232ABC020020CFB5 /* ViewController+MASAdditions.m in Sources */,
+				F3116AEF2928656800140743 /* WMZDialogCell.m in Sources */,
 				F3120DE5244070FE00CF7CB7 /* TabbarMenuVC.m in Sources */,
 				F3D5CE8A26A2C56800CF7CDF /* WMZDialogNormal.m in Sources */,
 				F3120DAB2440581C00CF7CB7 /* TableViewPopDemo.m in Sources */,

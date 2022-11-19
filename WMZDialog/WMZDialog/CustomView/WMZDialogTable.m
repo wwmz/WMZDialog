@@ -15,7 +15,6 @@
 @synthesize pickView = _pickView;
 
 - (void)setParam:(WMZDialogParam *)param{
-
     if (DialogIsArray(param.wListDefaultValue)) {
         self.tempArr = [NSMutableArray arrayWithArray:param.wListDefaultValue];
         if (self.tempArr.count>1 &&
@@ -71,23 +70,15 @@
     if (self.param.wCustomCell) {
         return self.param.wCustomCell(indexPath,self.tableView,data,isSelect);
     }
-    NSString *cellID = @"DialogCell";
+    NSString *cellID = DialogCellTextReuseIdentifier;
     if ([data isKindOfClass:[NSDictionary class]] && data[@"image"]) {
-        cellID = (self.param.wTextAlignment == NSTextAlignmentCenter? @"DialogCenterCell" : @"DialogCell");
-    }else{
-        cellID = @"DialogTextCell";
+        cellID = DialogCellImageTextReuseIdentifier;
     }
-    DialogCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    WMZDialogCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DialogCell"];
     if (!cell) {
-        if ([data isKindOfClass:[NSDictionary class]]&&data[@"image"]) {
-            cell = (self.param.wTextAlignment == NSTextAlignmentCenter ? [DialogCell getImageCenterCell] : [DialogCell getCell]);
-        }else{
-            cell = [DialogCell getTextCell];
-        }
+        cell = [[WMZDialogCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID param:self.param];
     }
-    UIColor *normalColor = DialogColor(0xffffff);
-    if (DialogArrayNotEmpty(self.param.wTableViewColor))
-        normalColor = self.param.wTableViewColor.firstObject;
+    UIColor *normalColor = self.param.wCellBackgroundColor;
     cell.contentView.backgroundColor = DialogDarkOpenColor(normalColor,        WMZDialogManage.shareInstance.darkColorInfo[DialogDarkMainColor],self.param.wOpenDark);
     cell.textLa.textAlignment = self.param.wTextAlignment;
     cell.textLa.font = [UIFont systemFontOfSize:self.param.wMessageFont];
@@ -104,39 +95,50 @@
     if ([data isKindOfClass:[WMZDialogTree class]]) {
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         WMZDialogTree *selectDic = (WMZDialogTree*)data;
-        cell.textLa.text = selectDic.name;
         cell.contentView.backgroundColor = self.param.wTableViewColor[MIN(selectDic.depth-1, self.param.wTableViewColor.count - 1)];
         cell.textLa.textColor = selectDic.isSelected?self.param.wThemeColor:self.param.wMessageColor;
         cell.button.hidden = !selectDic.isSelected;
+        if([selectDic.name isKindOfClass:NSAttributedString.class]){
+            cell.textLa.attributedText = (NSAttributedString*)selectDic.name;
+        }else{
+            cell.textLa.text = selectDic.name;
+        }
     }else{
         if([data isKindOfClass:[NSDictionary class]]){
             NSString *iconStr = data[@"image"];
+            NSString *nameStr = data[@"name"];
             BOOL hasImage = NO;
-            if (iconStr&&[iconStr isKindOfClass:[NSString class]]&&iconStr.length) {
-                hasImage = YES;
-            }
+            if (iconStr && [iconStr isKindOfClass:[NSString class]] && iconStr.length) hasImage = YES;
+            BOOL hasText = NO;
+            if (nameStr && [nameStr isKindOfClass:[NSString class]] && nameStr.length) hasText = YES;
             cell.iconImage.image = [UIImage imageNamed:iconStr?:@" "];
             cell.iconImage.hidden = !hasImage;
-            cell.textLa.text = data[@"name"]?:@"";
-            cell.textLa.textColor =  isSelect?self.param.wThemeColor:self.param.wMessageColor;
+            cell.textLa.hidden = !hasText;
+            cell.textLa.textColor =  isSelect ? self.param.wThemeColor : self.param.wMessageColor;
             cell.button.hidden = !isSelect;
-        }else if([data isKindOfClass:[NSString class]]){
+            if([data[@"name"] isKindOfClass:NSAttributedString.class]){
+                cell.textLa.attributedText = data[@"name"];
+            }else{
+                cell.textLa.text = data[@"name"] ? : @" ";
+            }
+        }else if([data isKindOfClass:[NSString class]] || [data isKindOfClass:[NSAttributedString class]]){
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.textLa.textColor = isSelect?self.param.wThemeColor:self.param.wMessageColor;
-            cell.textLa.text = data;
+            cell.textLa.textColor = isSelect ? self.param.wThemeColor : self.param.wMessageColor;
             cell.button.hidden = !isSelect;
+            if([data isKindOfClass:NSAttributedString.class]){
+                cell.textLa.attributedText = data;
+            }else{
+                cell.textLa.text = data;
+            }
         }
     }
     if (!self.param.wSelectShowChecked) cell.button.hidden = YES;
-    cell.tempWidth.constant = [cell.button isHidden] ? 0 : 20;
-    if (cell.leftOffset && self.param.wTextAlignment == NSTextAlignmentCenter)
-        cell.leftOffset.constant = [cell.button isHidden] ? 10 : 30;
+    [cell setNeedsUpdateConstraints];
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    /// 为0则自动计算高度
-    return self.param.wCellHeight? : UITableViewAutomaticDimension;
+    return self.param.wCellHeight;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -158,10 +160,15 @@
             break;
          }
     }
-    if (isSelect && self.param.wMultipleSelection) {
-        [self.tempArr removeObjectAtIndex:index];
-        [self.selectArr removeObjectAtIndex:index];
-        [self.pathArr removeObjectAtIndex:index];
+    if (isSelect &&
+        self.param.wMultipleSelection &&
+        index != NSNotFound ) {
+        if(self.tempArr.count > index)
+          [self.tempArr removeObjectAtIndex:index];
+        if(self.selectArr.count > index)
+          [self.selectArr removeObjectAtIndex:index];
+        if(self.pathArr.count > index)
+          [self.pathArr removeObjectAtIndex:index];
     }
     if (!isSelect) {
         if (!self.param.wMultipleSelection) {
@@ -430,7 +437,7 @@
 
 - (WMZDialogTableView *)tableView{
     if (!_tableView) {
-        _tableView =  [[WMZDialogTableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+        _tableView =  [[WMZDialogTableView alloc]initWithFrame:self.bounds style:UITableViewStyleGrouped];
         [_tableView setSeparatorColor:self.param.wLineColor];
         _tableView.delegate = self;
         _tableView.dataSource = self;
@@ -440,7 +447,7 @@
 
 - (UIPickerView *)pickView{
     if (!_pickView) {
-        _pickView = [UIPickerView new];
+        _pickView = [[UIPickerView alloc]initWithFrame:self.bounds];
         _pickView.delegate = self;
         _pickView.dataSource = self;
         _pickView.showsSelectionIndicator = YES;

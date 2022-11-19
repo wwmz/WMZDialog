@@ -68,15 +68,6 @@ DialogCalanderLimitTypeKey const DialogCalanderLimitCloseScroll = @"WMZDialogCal
             if (self.wMainOffsetY == DialogRealW(20)) self.wMainOffsetY = 0;
             if (self.wPopStyleType == DialogPopTypeTable) {
                 if (self.wWidth == DialogSize.width) self.wWidth = DialogRealW(300);
-                if (DialogArrayNotEmpty(self.wData)) {
-                    for (id data in self.wData) {
-                        if ([data isKindOfClass:[NSDictionary class]]) {
-                            if (data[@"image"]) {
-                                self.wTextAlignment = NSTextAlignmentLeft;
-                            }
-                        }
-                    }
-                }
             }else if(self.wPopStyleType == DialogPopTypeShare){
                 self.wTextAlignment = NSTextAlignmentCenter;
                 if (self.wCellHeight == DialogRealW(80)) self.wCellHeight = DialogRealW(100);
@@ -96,7 +87,6 @@ DialogCalanderLimitTypeKey const DialogCalanderLimitCloseScroll = @"WMZDialogCal
         }
             break;
         case DialogTypeLocation:{
-            self.wTextAlignment = NSTextAlignmentLeft;
             if (self.wHeight == DialogSize.height && self.wChainType == ChainTableView) self.wHeight = self.wCellHeight * 3;
             self.wMainToBottom = YES;
             if (self.wWidth == DialogSize.width) self.wWidth = left ? DialogScreenH : DialogScreenW;

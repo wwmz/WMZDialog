@@ -105,6 +105,8 @@
     .wPopViewRectCornerSet(DialogRectCornerAllCorners)
     //弹窗位置
     .wDirectionSet(type)
+    ///改变对齐方向
+    .wCellAlignTypeSet(DialogCellAlignRight)
     //数据
     .wDataSet(@[
                 @{@"name":@"微信",@"image":@"wallet"},

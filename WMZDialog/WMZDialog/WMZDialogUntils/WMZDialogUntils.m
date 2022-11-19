@@ -210,8 +210,8 @@ static NSString *WMZDialogPopMaskName = @"WMZDialogPopMaskName";
         self.estimatedRowHeight = 100;
         if (@available(iOS 11.0, *)) {
             self.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-            self.estimatedSectionFooterHeight = 0.01;
-            self.estimatedSectionHeaderHeight = 0.01;
+            self.estimatedSectionFooterHeight = 0;
+            self.estimatedSectionHeaderHeight = 0;
         }
         #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 150000
          if (@available(iOS 15.0, *)) {

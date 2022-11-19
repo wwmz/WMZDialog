@@ -159,6 +159,12 @@ WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGPoint,           
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGFloat,                  wDisappelSecond)
 /// 是否可交互 default YES
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wUserInteractionEnabled)
+/// cell背景颜色 defalult white
+WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, UIColor*,                 wCellBackgroundColor)
+/// cell所带图片的size default {30,30}
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGSize,                   wCellIconSize)
+/// cell文本居中样式
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, NSTextAlignment,          wTextAlignment)
 
 /*=========================================aoto=======================================================================*/
 /// v1.4.3 最大宽度 默认等于wWidth
@@ -231,6 +237,8 @@ WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGFloat,           
 WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, DialogPopType,            wPopStyleType)
 /// 如果弹出视图的位置不对 设置此属性 例如继承了tableView则传入 继承的类名 default nil
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, NSString*,                wPopNestStopView)
+/// cell内容对齐位置(图文有效) 传入字符串的时候使用wTextAlignment default 左对齐
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, DialogCellAlignType,       wCellAlignType)
 
 /// 可设置wMainOffsetY 调整弹出视图的y default 0
 /// wMainOffsetY
@@ -249,9 +257,6 @@ WMZDialogStatementAndPropSetFuncStatement(strong, WMZDialog, UIColor*,          
 /*=========================================menu=======================================================================*/
 /// tableview的颜色 有tableViewCell的时候取数组的第一个 可改变背景颜色
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, NSArray* ,                wTableViewColor)
-/// cell文本居中样式
-WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, NSTextAlignment,          wTextAlignment)
-
 
 /*=========================================location=======================================================================*/
 /// 地区的类型 1省 2省市 3省市区

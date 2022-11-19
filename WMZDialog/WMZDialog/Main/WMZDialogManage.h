@@ -6,9 +6,20 @@
 //  Copyright © 2021 wmz. All rights reserved.
 //
 #import <UIKit/UIKit.h>
-@class WMZDialogParam,WMZDialogParentParam;
+@class WMZDialogParam,WMZDialogParentParam,WMZDialog;
 
 typedef void (^DialogCustomParam)(WMZDialogParam* _Nullable param);
+/// 弹窗展示状态
+typedef enum : NSUInteger{
+    /// 将要展示
+    DialogWillShow = 0,
+    /// 正在展示
+    DialogShowIng = 1,
+    /// 将要结束
+    DialogWillHide = 2,
+    /// 已经结束
+    DialogHided = 3,
+ }DialogShowType;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -19,6 +30,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSMutableDictionary <NSString* , UIColor*> *darkColorInfo;
 /// 全局
 @property (nonatomic, strong, readonly) WMZDialogParentParam *globalParam;
+/// 当前展示的弹窗的状态
+//@property (nonatomic, assign) DialogShowType status;
+
 /// 设置全局配置
 + (void)settingGlobalConfig:(DialogCustomParam)block;
 
@@ -26,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void)setDefaultColorPropertiess:(WMZDialogParentParam*)param;
 /// 当前正在显示的弹窗
-- (id)currentDialog:(UIView*)normalView;
+- (WMZDialog*)currentDialog:(UIView*)normalView;
 /// 添加弹窗
 /// @param dialog 弹窗视图
 /// @param cover 是否覆盖内存缓存

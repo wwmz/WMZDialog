@@ -8,11 +8,11 @@
 
 #import "WMZDialogNormal.h"
 #import "WMZDialogTableProtocol.h"
-#import "DialogCell.h"
 #import "WMZDialogTree.h"
 #import "WMZDialogManage.h"
-
+#import "WMZDialogCell.h"
 #define pickViewCount 200
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface WMZDialogTable : WMZDialogNormal<WMZDialogTableProtocol,UITableViewDelegate,UITableViewDataSource,UIPickerViewDelegate,UIPickerViewDataSource>

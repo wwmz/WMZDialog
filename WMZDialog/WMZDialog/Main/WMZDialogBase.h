@@ -9,7 +9,6 @@
 #import "WMZDialogMacro.h"
 #import "WMZDialogUntils.h"
 #import "WMZDialogAnimation.h"
-#import "DialogCell.h"
 #import "WMZDialogManage.h"
 #import "WMZDialogNormal.h"
 #import "WMZDialogTree.h"
