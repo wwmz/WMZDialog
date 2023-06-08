@@ -255,6 +255,7 @@
           self.collectionView.showsHorizontalScrollIndicator = NO;
           self.collectionView.showsVerticalScrollIndicator = NO;
           self.collectionView.dataSource = self;
+          self.collectionView.bounces = self.param.wBounces;
           self.collectionView.pagingEnabled = YES;
           self.collectionView.scrollEnabled = self.param.wCalanderCanScroll;
           [self addSubview:self.collectionView];
@@ -1022,6 +1023,10 @@
         model.wInRange = [model checkModelWithMaxDate:self.param.wMaxDate minDate:self.param.wMinDate];
         if(!model.wInRange){
             inRangeCount += 1;
+        }else{
+            if(model.wNextMonth || model.wLastMonth){
+                inRangeCount += 1;
+            }
         }
         NSArray *compareArr = self.selectDate ? self.selectArr : self.param.wListDefaultValue;
         if(!DialogArrayNotEmpty(compareArr) && self.selecctWMZCalanderModel && !self.param.wMultipleSelection){
@@ -1104,6 +1109,7 @@
     }else{
         [self.collectionView setContentOffset:CGPointMake(self.collectionView.frame.size.width*section, 0) animated:animal];
     }
+    [self scrollViewDidEndDecelerating:self.collectionView];
 }
 
 /// 选择年份

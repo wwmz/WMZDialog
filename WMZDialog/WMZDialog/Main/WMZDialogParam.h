@@ -325,6 +325,9 @@ FOUNDATION_EXPORT DialogCalanderLimitTypeKey const DialogCalanderLimitCloseScrol
 @property (nonatomic,   copy) NSArray<NSString*>* wCalanderWeekTitleArr;
 /// 设置日历设置最大最小值的效果 default @[DialogCalanderLimitCloseClick]
 @property (nonatomic,   copy) NSArray<DialogCalanderLimitTypeKey>* wMinMaxResultArr;
+/// 是否开启wBounces 默认NO
+@property (nonatomic, assign) BOOL wBounces;
+
 
 #pragma -mark Event
 /// 自定义tableviewCell 

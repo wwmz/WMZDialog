@@ -119,7 +119,7 @@ isPhoneX;\
 #define DialogStatusH [[UIApplication sharedApplication] statusBarFrame].size.height
 #define DialogTabBarHeight (DialogIsIphoneX ? (49.f+34.f) : 49.f)
 #define DialogSafeBottomHeight (DialogIsIphoneX ? 34.0f : 0)
-#define DialogRealW(A) (A)/2.0*((DialogScreenW)/ (([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft || [UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight)?667:375))
+#define DialogRealW(A) (A/2.0)
 #define DialogColor(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 #define DialogK1px (1 / UIScreen.mainScreen.scale)
 #define DialogDisappealTime 1.4444444f

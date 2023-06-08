@@ -335,6 +335,9 @@ WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, CGSize,            
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, NSArray<NSString*>*,      wCalanderWeekTitleArr)
 /// 设置日历设置最大最小值的效果 default @[DialogCalanderLimitCloseClick]
 WMZDialogStatementAndPropSetFuncStatement(copy,   WMZDialog, NSArray<DialogCalanderLimitTypeKey>*,wMinMaxResultArr)
+/// 是否开启wBounces 默认NO
+WMZDialogStatementAndPropSetFuncStatement(assign, WMZDialog, BOOL,                     wBounces)
+
 /*=========================================Attributes==========================================*/
 
 

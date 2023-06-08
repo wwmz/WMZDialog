@@ -126,6 +126,7 @@ static WMZDialogManage* dialogManage = nil;
     param.wCellBackgroundColor = DialogColor(0xffffff);
     param.wCellIconSize = CGSizeMake(DialogRealW(60), DialogRealW(60));
     param.wCellAlignType = DialogCellAlignLeft;
+    param.wDeviceDidChange = NO;
     [self setDefaultColorPropertiess:param];
 }
 

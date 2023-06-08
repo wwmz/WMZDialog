@@ -170,7 +170,7 @@
     [[WMZDialogManage.shareInstance currentDialog:self]  closeView:^{
         @DialogStrongify(self)
         if (self.param.wEventCancelFinish)
-            self.param.wEventCancelFinish(@"取消",sender);
+            self.param.wEventCancelFinish([WMZDialogManage.shareInstance currentDialog:self],sender);
     }];
 }
 
@@ -180,7 +180,7 @@
     [[WMZDialogManage.shareInstance currentDialog:self] closeView:^{
         @DialogStrongify(self)
         if (self.param.wEventOKFinish)
-            self.param.wEventOKFinish(@"确定",sender);
+            self.param.wEventOKFinish([WMZDialogManage.shareInstance currentDialog:self],sender);
     }];
 }
 

@@ -35,6 +35,7 @@ WMZDialogSetFuncImplementation(WMZDialog, BOOL,                            wShow
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                       wFillBottomLine)
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,                       wMainShadowShow)
 WMZDialogSetFuncImplementation(WMZDialog, BOOL,               wUserInteractionEnabled)
+WMZDialogSetFuncImplementation(WMZDialog, BOOL,                              wBounces)
 WMZDialogSetFuncImplementation(WMZDialog, DiaPopInView,                  wTapViewType)
 WMZDialogSetFuncImplementation(WMZDialog, DialogPopType,                wPopStyleType)
 WMZDialogSetFuncImplementation(WMZDialog, DialogLevel,                         wLevel)
@@ -225,13 +226,18 @@ WMZDialog * Dialog(void){
 }
 
 - (void)setUpUI:(nullable UIView*)startView useConfig:(BOOL)useeConfig{
-    self.frame = CGRectMake(0, 0, startView?startView.bounds.size.width:DialogScreenW, startView?startView.bounds.size.height:DialogScreenH);
-    self.normalRect = self.frame;
-    self.beforeRect = CGRectZero;
-    if (useeConfig) [self setPropertiesToParam];
-    [self.param setUpDefaultParam];
-    [self setUpUI];
-    [self setUIdelagate:startView];
+    UIView *parentView = startView ? : DialogWindow;
+    NSAssert(parentView != nil, @"检查传入的StartView或者当前的UIWindow");
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [parentView layoutIfNeeded];
+        self.frame = parentView.bounds;
+        self.normalRect = self.frame;
+        self.beforeRect = CGRectZero;
+        if (useeConfig) [self setPropertiesToParam];
+        [self.param setUpDefaultParam];
+        [self setUpUI];
+        [self setUIdelagate:startView];
+    });
 }
 
 - (void)setPropertiesToParam{
@@ -638,28 +644,19 @@ WMZDialog * Dialog(void){
 
 /// 横竖屏通知
 - (void)change:(NSNotification*)notification{
-    ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft ||
-     [UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight)?
-    [self changeLeft:YES]:[self changeLeft:NO];
-}
-
-/// 横竖屏改变frame
-- (void)changeLeft:(BOOL)left{
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        self.frame = CGRectMake(0, 0, left?self.normalRect.size.height:self.normalRect.size.width, left?self.normalRect.size.width:self.normalRect.size.height);
-        self.shadowView.frame = self.bounds;
-        CGRect frame = self.mainView.frame;
-        if (self.param.wMainToBottom) {
-            frame.origin.y = DialogScreenH - frame.size.height;
-            self.mainView.frame = frame;
-            self.mainView.center = CGPointMake(self.center.x, self.mainView.center.y);
-        }else{
-            self.mainView.center = self.center;
-            if (self.param.wType == DialogTypePay || self.param.wType == DialogTypeWrite) {
-                [self becomeFirstResponder];
-            }
+    self.frame = self.superview.bounds;
+    self.shadowView.frame = self.bounds;
+    CGRect frame = self.mainView.frame;
+    if (self.param.wMainToBottom) {
+        frame.origin.y = DialogScreenH - frame.size.height;
+        self.mainView.frame = frame;
+        self.mainView.center = CGPointMake(self.center.x, self.mainView.center.y);
+    }else{
+        self.mainView.center = self.center;
+        if (self.param.wType == DialogTypePay || self.param.wType == DialogTypeWrite) {
+            [self becomeFirstResponder];
         }
-    });
+    }
 }
 
 @end
